@@ -7,7 +7,7 @@ public class PlayerInputController : MonoBehaviour
     [SerializeField] private float movementSpeed;
     [SerializeField] private Animator animator;
     [SerializeField] private Quaternion referenceRotation;
-    [SerializeField] [Range(0, 1f)] private float rotationLerpFactor;
+    [SerializeField] private float rotationLerpFactor;
     private CharacterController cc;
 
     private Vector3 movementVector;
@@ -20,14 +20,17 @@ public class PlayerInputController : MonoBehaviour
     private void Update()
     {
         animator.SetBool("moving", movementVector.sqrMagnitude > 0);
-        transform.forward = Vector3.Lerp(transform.forward, movementVector, rotationLerpFactor * Time.deltaTime);
-        cc.SimpleMove(movementVector);
+        if (movementVector.sqrMagnitude > 0)
+        {
+            transform.Rotate(Vector3.up, movementVector.x * rotationLerpFactor * Time.deltaTime);
+            cc.SimpleMove(transform.forward * (movementVector.z * movementSpeed));
+        }
     }
 
     private void OnMove(InputValue inputValue)
     {
         var inputVector = inputValue.Get<Vector2>();
-
-        movementVector = referenceRotation * new Vector3(inputVector.x, 0, inputVector.y) * movementSpeed;
+        movementVector = new Vector3(inputVector.x, 0, inputVector.y);
+        print(movementVector);
     }
 }
