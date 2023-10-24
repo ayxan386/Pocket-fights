@@ -6,7 +6,6 @@ public class PlayerInputController : MonoBehaviour
 {
     [SerializeField] private float movementSpeed;
     [SerializeField] private Animator animator;
-    [SerializeField] private Quaternion referenceRotation;
     [SerializeField] private float rotationLerpFactor;
     private CharacterController cc;
 
@@ -31,6 +30,5 @@ public class PlayerInputController : MonoBehaviour
     {
         var inputVector = inputValue.Get<Vector2>();
         movementVector = new Vector3(inputVector.x, 0, inputVector.y);
-        print(movementVector);
     }
 }
