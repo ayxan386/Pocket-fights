@@ -26,4 +26,12 @@ public class ActionDetails
 {
     public string animationName;
     public float attackMult;
+    public ActionType type;
+}
+
+[Serializable]
+public enum ActionType
+{
+   Attack,
+   ReceiveAttack
 }
