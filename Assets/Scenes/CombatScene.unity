@@ -748,17 +748,20 @@ MonoBehaviour:
   actions:
   - animationName: action1
     attackMult: 1
+    manaConsumption: 0
     type: 0
   - animationName: action2
     attackMult: 2.2
+    manaConsumption: 0
     type: 0
   - animationName: action2
     attackMult: 2.2
+    manaConsumption: 0
     type: 0
   - animationName: action2
     attackMult: 2.2
+    manaConsumption: 0
     type: 0
-  selectedEnemy: {fileID: 1931297695826128}
 --- !u!114 &356217490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -771,6 +774,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c4b00d5411d4cd4d9df1885de3ac0cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthBarIndicator: {fileID: 0}
+  manaBarIndicator: {fileID: 0}
 --- !u!1 &382803915
 GameObject:
   m_ObjectHideFlags: 0
@@ -2073,6 +2078,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 51443049420896145, guid: 9903153025cebd64d82db2065549fe87,
+        type: 3}
+      propertyPath: statController
+      value: 
+      objectReference: {fileID: 356217490}
     - target: {fileID: 51443049420896151, guid: 9903153025cebd64d82db2065549fe87,
         type: 3}
       propertyPath: m_RootOrder
@@ -2766,13 +2776,17 @@ MonoBehaviour:
   actions:
   - animationName: attack01
     attackMult: 1
+    manaConsumption: 0
     type: 0
   - animationName: attack02
     attackMult: 1.3
+    manaConsumption: 0
     type: 0
   - animationName: receiveAttack
     attackMult: 1.3
+    manaConsumption: 0
     type: 1
+  statController: {fileID: 95457532174904525}
 --- !u!1001 &1683948748
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4431,6 +4445,7 @@ GameObject:
   - component: {fileID: 4047971306915220}
   - component: {fileID: 95457532174904524}
   - component: {fileID: 1677640186}
+  - component: {fileID: 95457532174904525}
   m_Layer: 0
   m_Name: SlimePBR
   m_TagString: Untagged
@@ -4651,6 +4666,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &95457532174904525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1931297695826128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c4b00d5411d4cd4d9df1885de3ac0cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBarIndicator: {fileID: 1897981421}
+  manaBarIndicator: {fileID: 1897981421}
 --- !u!137 &137218115936379280
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0

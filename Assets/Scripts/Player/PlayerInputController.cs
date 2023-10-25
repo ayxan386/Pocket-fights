@@ -9,13 +9,19 @@ public class PlayerInputController : MonoBehaviour
     [SerializeField] private float movementSpeed;
     [SerializeField] private Animator animator;
     [SerializeField] private float rotationLerpFactor;
+    [SerializeField] private StatController statController;
+
     private CharacterController cc;
     private PlayerInput playerInput;
-
     private Vector3 movementVector;
+
+    public StatController Stats => statController;
+
+    public static PlayerInputController Instance { get; private set; }
 
     private void Awake()
     {
+        Instance = this;
         cc = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
     }
@@ -69,6 +75,7 @@ public class PlayerInputController : MonoBehaviour
     {
         var actionDetails = PlayerActionManager.Instance.GetAction(index);
         animator.SetTrigger(actionDetails.animationName);
-        PlayerActionManager.Instance.SelectedEnemy.name += " " + actionDetails.attackMult;
+        CombatModeGameManager.Instance.SelectedEnemy.ReceiveAttack(
+            statController.GetStat(StatTypes.Strength).currentValue * actionDetails.attackMult);
     }
 }

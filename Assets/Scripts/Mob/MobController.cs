@@ -6,6 +6,7 @@ public class MobController : MonoBehaviour
     [SerializeField] private StatBarIndicator healthIndicator;
     [SerializeField] private Animator animator;
     [SerializeField] private List<ActionDetails> actions;
+    [SerializeField] private StatController statController;
     public bool IsDoneAttack { get; private set; }
 
 
@@ -13,6 +14,7 @@ public class MobController : MonoBehaviour
     {
         var actionDetails = actions.Find(action => action.type == ActionType.ReceiveAttack);
         animator.SetTrigger(actionDetails.animationName);
+        statController.ReceiveAttack(baseDamage);
     }
 
     private void OnDestroy()
@@ -42,7 +44,7 @@ public class MobController : MonoBehaviour
 
         var actionDetails = actions[randomAction];
         animator.SetTrigger(actionDetails.animationName);
-        PlayerStatController.Instance.ReceiveAttack(new StatData());
+        PlayerInputController.Instance.Stats.ReceiveAttack(statController.GetStat(StatTypes.Strength).currentValue);
         IsDoneAttack = true;
     }
 }
