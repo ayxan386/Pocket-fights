@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class MobController : MonoBehaviour
 {
-    [SerializeField] private StatBarIndicator healthIndicator;
     [SerializeField] private Animator animator;
     [SerializeField] private List<ActionDetails> actions;
     [SerializeField] private StatController statController;
@@ -24,11 +23,18 @@ public class MobController : MonoBehaviour
 
     public void ActivateCombatMode()
     {
-        // EventManager.OnPlayerTurnEnd += OnPlayerTurnEnd;
+        EventManager.OnPlayerTurnEnd += OnPlayerTurnEnd;
     }
+
 
     public void DeactivateCombatMode()
     {
+        EventManager.OnPlayerTurnEnd -= OnPlayerTurnEnd;
+    }
+
+    private void OnPlayerTurnEnd(bool obj)
+    {
+        statController.RegenMana();
     }
 
     public void AttackPlayer()
@@ -41,8 +47,14 @@ public class MobController : MonoBehaviour
 
 
         var actionDetails = actions[randomAction];
-        animator.SetTrigger(actionDetails.animationName);
-        PlayerInputController.Instance.Stats.ReceiveAttack(statController.GetStat(StatValue.BaseAttack).currentValue);
+        var usedAction = statController.UsedAction(actionDetails.manaConsumption);
+        if (usedAction)
+        {
+            animator.SetTrigger(actionDetails.animationName);
+            PlayerInputController.Instance.Stats.ReceiveAttack(
+                statController.GetStat(StatValue.BaseAttack).currentValue);
+        }
+
         IsDoneAttack = true;
     }
 }

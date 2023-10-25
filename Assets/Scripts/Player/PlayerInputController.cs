@@ -24,6 +24,12 @@ public class PlayerInputController : MonoBehaviour
         Instance = this;
         cc = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
+        EventManager.OnPlayerTurnEnd += OnPlayerTurnEnd;
+    }
+
+    private void OnPlayerTurnEnd(bool obj)
+    {
+        statController.RegenMana();
     }
 
     private void Start()
@@ -71,11 +77,23 @@ public class PlayerInputController : MonoBehaviour
         OnActionUsed(3);
     }
 
+    private void OnEndTurn()
+    {
+        if (CombatModeGameManager.Instance.IsCombatMode)
+        {
+            CombatModeGameManager.Instance.EndPlayerTurn();
+        }
+    }
+
     private void OnActionUsed(int index)
     {
         var actionDetails = PlayerActionManager.Instance.GetAction(index);
-        animator.SetTrigger(actionDetails.animationName);
-        CombatModeGameManager.Instance.SelectedEnemy.ReceiveAttack(
-            statController.GetStat(StatValue.BaseAttack).currentValue * actionDetails.attackMult);
+        var usedAction = statController.UsedAction(actionDetails.manaConsumption);
+        if (usedAction)
+        {
+            animator.SetTrigger(actionDetails.animationName);
+            CombatModeGameManager.Instance.SelectedEnemy.ReceiveAttack(
+                statController.GetStat(StatValue.BaseAttack).currentValue * actionDetails.attackMult);
+        }
     }
 }

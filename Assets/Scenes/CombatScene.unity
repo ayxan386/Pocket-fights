@@ -748,19 +748,19 @@ MonoBehaviour:
   actions:
   - animationName: action1
     attackMult: 1
-    manaConsumption: 0
+    manaConsumption: 10
     type: 0
   - animationName: action2
     attackMult: 2.2
-    manaConsumption: 0
+    manaConsumption: 30
     type: 0
   - animationName: action2
     attackMult: 2.2
-    manaConsumption: 0
+    manaConsumption: 30
     type: 0
   - animationName: action2
     attackMult: 2.2
-    manaConsumption: 0
+    manaConsumption: 30
     type: 0
 --- !u!114 &356217490
 MonoBehaviour:
@@ -781,6 +781,7 @@ MonoBehaviour:
   startingStrength: 4
   startingMana: 4
   startingDefense: 4
+  statDebug: 
 --- !u!1 &382803915
 GameObject:
   m_ObjectHideFlags: 0
@@ -1269,6 +1270,168 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 577211763}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &598480186
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1809492819}
+    m_Modifications:
+    - target: {fileID: 4311140442093050332, guid: f6c194e7dcad32940abbc783f11a36a9,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4311140442093050332, guid: f6c194e7dcad32940abbc783f11a36a9,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 279
+      objectReference: {fileID: 0}
+    - target: {fileID: 4311140442574687644, guid: f6c194e7dcad32940abbc783f11a36a9,
+        type: 3}
+      propertyPath: m_Name
+      value: ManaBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 4311140442574687647, guid: f6c194e7dcad32940abbc783f11a36a9,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4311140442574687647, guid: f6c194e7dcad32940abbc783f11a36a9,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4311140442574687647, guid: f6c194e7dcad32940abbc783f11a36a9,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4311140442574687647, guid: f6c194e7dcad32940abbc783f11a36a9,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4311140442574687647, guid: f6c194e7dcad32940abbc783f11a36a9,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4311140442574687647, guid: f6c194e7dcad32940abbc783f11a36a9,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4311140442574687647, guid: f6c194e7dcad32940abbc783f11a36a9,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4311140442574687647, guid: f6c194e7dcad32940abbc783f11a36a9,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 470.7065
+      objectReference: {fileID: 0}
+    - target: {fileID: 4311140442574687647, guid: f6c194e7dcad32940abbc783f11a36a9,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 90.2094
+      objectReference: {fileID: 0}
+    - target: {fileID: 4311140442574687647, guid: f6c194e7dcad32940abbc783f11a36a9,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4311140442574687647, guid: f6c194e7dcad32940abbc783f11a36a9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4311140442574687647, guid: f6c194e7dcad32940abbc783f11a36a9,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4311140442574687647, guid: f6c194e7dcad32940abbc783f11a36a9,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4311140442574687647, guid: f6c194e7dcad32940abbc783f11a36a9,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4311140442574687647, guid: f6c194e7dcad32940abbc783f11a36a9,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4311140442574687647, guid: f6c194e7dcad32940abbc783f11a36a9,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4311140442574687647, guid: f6c194e7dcad32940abbc783f11a36a9,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 611
+      objectReference: {fileID: 0}
+    - target: {fileID: 4311140442574687647, guid: f6c194e7dcad32940abbc783f11a36a9,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 336
+      objectReference: {fileID: 0}
+    - target: {fileID: 4311140442574687647, guid: f6c194e7dcad32940abbc783f11a36a9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4311140442574687647, guid: f6c194e7dcad32940abbc783f11a36a9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4311140442574687647, guid: f6c194e7dcad32940abbc783f11a36a9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4311140442725821674, guid: f6c194e7dcad32940abbc783f11a36a9,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4311140442725821674, guid: f6c194e7dcad32940abbc783f11a36a9,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4311140442725821674, guid: f6c194e7dcad32940abbc783f11a36a9,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f6c194e7dcad32940abbc783f11a36a9, type: 3}
+--- !u!224 &598480187 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4311140442574687647, guid: f6c194e7dcad32940abbc783f11a36a9,
+    type: 3}
+  m_PrefabInstance: {fileID: 598480186}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &598480188 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4311140442574687640, guid: f6c194e7dcad32940abbc783f11a36a9,
+    type: 3}
+  m_PrefabInstance: {fileID: 598480186}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bab105ccbfd723941babc46d22ae6f95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &716561505
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2776,16 +2939,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3db996cfc8e6fd4bbf6d18ec5cfd321, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthIndicator: {fileID: 1897981421}
   animator: {fileID: 95457532174904524}
   actions:
   - animationName: attack01
     attackMult: 1
-    manaConsumption: 0
+    manaConsumption: 10
     type: 0
   - animationName: attack02
     attackMult: 1.3
-    manaConsumption: 0
+    manaConsumption: 15
     type: 0
   - animationName: receiveAttack
     attackMult: 1.3
@@ -3214,6 +3376,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1897981420}
+  - {fileID: 598480187}
   m_Father: {fileID: 4047971306915220}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4452,7 +4615,7 @@ GameObject:
   - component: {fileID: 1677640186}
   - component: {fileID: 95457532174904525}
   m_Layer: 0
-  m_Name: SlimePBR
+  m_Name: Slime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4684,12 +4847,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarIndicator: {fileID: 1897981421}
-  manaBarIndicator: {fileID: 1897981421}
+  manaBarIndicator: {fileID: 598480188}
   level: 1
   startingVitality: 1
   startingStrength: 2
   startingMana: 2
   startingDefense: 1
+  statDebug: 
 --- !u!137 &137218115936379280
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0

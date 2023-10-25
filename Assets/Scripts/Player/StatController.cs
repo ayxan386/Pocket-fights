@@ -12,6 +12,8 @@ public class StatController : MonoBehaviour
     [SerializeField] private int startingMana = 4;
     [SerializeField] private int startingDefense = 4;
 
+    [SerializeField] [TextArea] private string statDebug;
+
     private Dictionary<StatTypes, StatData> baseStats;
     private Dictionary<StatValue, StatData> statValues;
     private float Lsf => Mathf.Pow(1.03f, level);
@@ -36,6 +38,7 @@ public class StatController : MonoBehaviour
                 baseStats[StatTypes.Strength].currentValue * 5 * Lsf),
             [StatValue.DamageReduction] = new(baseStats[StatTypes.Defense].currentValue * 2 * Lsf,
                 baseStats[StatTypes.Defense].currentValue * 2 * Lsf),
+            [StatValue.ManaRegen] = new(10, 10)
         };
     }
 
@@ -55,6 +58,38 @@ public class StatController : MonoBehaviour
         statValues[StatValue.Health].currentValue -= baseDmg - statValues[StatValue.DamageReduction].currentValue;
         healthBarIndicator.UpdateDisplay(statValues[StatValue.Health]);
     }
+
+    public bool UsedAction(float manaConsumption)
+    {
+        if (statValues[StatValue.Mana].currentValue < manaConsumption) return false;
+        statValues[StatValue.Mana].currentValue -= manaConsumption;
+        manaBarIndicator.UpdateDisplay(statValues[StatValue.Mana]);
+        return true;
+    }
+
+    [ContextMenu("Update values")]
+    public void UpdateDebugValues()
+    {
+        statDebug = "";
+        foreach (var baseStat in baseStats)
+        {
+            statDebug += $"{baseStat.Key} -> {baseStat.Value.currentValue}\n";
+        }
+
+        statDebug += "-------------\n";
+        foreach (var statValue in statValues)
+        {
+            statDebug += $"{statValue.Key} -> {statValue.Value.currentValue}/{statValue.Value.maxValue}\n";
+        }
+    }
+
+    public void RegenMana()
+    {
+        statValues[StatValue.Mana].currentValue = Mathf.Clamp(
+            statValues[StatValue.Mana].currentValue + statValues[StatValue.ManaRegen].currentValue,
+            0, statValues[StatValue.Mana].maxValue);
+        manaBarIndicator.UpdateDisplay(statValues[StatValue.Mana]);
+    }
 }
 
 public enum StatTypes
@@ -70,7 +105,8 @@ public enum StatValue
     Health,
     Mana,
     BaseAttack,
-    DamageReduction
+    DamageReduction,
+    ManaRegen
 }
 
 [Serializable]

@@ -29,11 +29,13 @@ public class CombatModeGameManager : MonoBehaviour
     public void EndPlayerTurn()
     {
         IsPlayerTurn = false;
+        EventManager.OnPlayerTurnEnd?.Invoke(true);
         StartCoroutine(AttackPlayer());
     }
 
     private IEnumerator AttackPlayer()
     {
+        yield return new WaitForSeconds(1.5f);
         foreach (var mobController in mobsInCombat)
         {
             mobController.AttackPlayer();
