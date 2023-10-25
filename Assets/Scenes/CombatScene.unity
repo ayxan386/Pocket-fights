@@ -776,6 +776,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBarIndicator: {fileID: 0}
   manaBarIndicator: {fileID: 0}
+  level: 0
+  startingVitality: 4
+  startingStrength: 4
+  startingMana: 4
+  startingDefense: 4
 --- !u!1 &382803915
 GameObject:
   m_ObjectHideFlags: 0
@@ -4680,6 +4685,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBarIndicator: {fileID: 1897981421}
   manaBarIndicator: {fileID: 1897981421}
+  level: 1
+  startingVitality: 1
+  startingStrength: 2
+  startingMana: 2
+  startingDefense: 1
 --- !u!137 &137218115936379280
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0

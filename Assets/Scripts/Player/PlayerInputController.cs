@@ -76,6 +76,6 @@ public class PlayerInputController : MonoBehaviour
         var actionDetails = PlayerActionManager.Instance.GetAction(index);
         animator.SetTrigger(actionDetails.animationName);
         CombatModeGameManager.Instance.SelectedEnemy.ReceiveAttack(
-            statController.GetStat(StatTypes.Strength).currentValue * actionDetails.attackMult);
+            statController.GetStat(StatValue.BaseAttack).currentValue * actionDetails.attackMult);
     }
 }

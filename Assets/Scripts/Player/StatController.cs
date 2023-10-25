@@ -4,18 +4,38 @@ using UnityEngine;
 
 public class StatController : MonoBehaviour
 {
-    private Dictionary<StatTypes, StatData> stats;
     [SerializeField] private StatBarIndicator healthBarIndicator;
     [SerializeField] private StatBarIndicator manaBarIndicator;
+    [SerializeField] private int level;
+    [SerializeField] private int startingVitality = 4;
+    [SerializeField] private int startingStrength = 4;
+    [SerializeField] private int startingMana = 4;
+    [SerializeField] private int startingDefense = 4;
+
+    private Dictionary<StatTypes, StatData> baseStats;
+    private Dictionary<StatValue, StatData> statValues;
+    private float Lsf => Mathf.Pow(1.03f, level);
 
     private void Awake()
     {
-        stats = new Dictionary<StatTypes, StatData>
+        baseStats = new Dictionary<StatTypes, StatData>
         {
-            [StatTypes.Vitality] = new(4, 4),
-            [StatTypes.Strength] = new(4, 4),
-            [StatTypes.Mana] = new(3, 3),
-            [StatTypes.Defense] = new(4, 4)
+            [StatTypes.Vitality] = new(startingVitality),
+            [StatTypes.Strength] = new(startingStrength),
+            [StatTypes.Mana] = new(startingMana),
+            [StatTypes.Defense] = new(startingDefense)
+        };
+
+        statValues = new Dictionary<StatValue, StatData>
+        {
+            [StatValue.Health] = new(baseStats[StatTypes.Vitality].currentValue * 10 * Lsf,
+                baseStats[StatTypes.Vitality].currentValue * 10 * Lsf),
+            [StatValue.Mana] = new(baseStats[StatTypes.Mana].currentValue * 10 * Lsf,
+                baseStats[StatTypes.Mana].currentValue * 10 * Lsf),
+            [StatValue.BaseAttack] = new(baseStats[StatTypes.Strength].currentValue * 5 * Lsf,
+                baseStats[StatTypes.Strength].currentValue * 5 * Lsf),
+            [StatValue.DamageReduction] = new(baseStats[StatTypes.Defense].currentValue * 2 * Lsf,
+                baseStats[StatTypes.Defense].currentValue * 2 * Lsf),
         };
     }
 
@@ -25,15 +45,15 @@ public class StatController : MonoBehaviour
         manaBarIndicator ??= GameObject.FindGameObjectWithTag("PlayerManaBar").GetComponent<StatBarIndicator>();
     }
 
-    public StatData GetStat(StatTypes statTypesType)
+    public StatData GetStat(StatValue statValue)
     {
-        return stats[statTypesType];
+        return statValues[statValue];
     }
 
     public void ReceiveAttack(float baseDmg)
     {
-        stats[StatTypes.Vitality].currentValue -= baseDmg;
-        healthBarIndicator.UpdateDisplay(stats[StatTypes.Vitality]);
+        statValues[StatValue.Health].currentValue -= baseDmg - statValues[StatValue.DamageReduction].currentValue;
+        healthBarIndicator.UpdateDisplay(statValues[StatValue.Health]);
     }
 }
 
@@ -43,6 +63,14 @@ public enum StatTypes
     Strength,
     Mana,
     Defense
+}
+
+public enum StatValue
+{
+    Health,
+    Mana,
+    BaseAttack,
+    DamageReduction
 }
 
 [Serializable]
@@ -59,5 +87,9 @@ public class StatData
     {
         this.maxValue = maxValue;
         this.currentValue = currentValue;
+    }
+
+    public StatData(float maxValue) : this(maxValue, maxValue)
+    {
     }
 }

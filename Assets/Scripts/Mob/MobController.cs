@@ -33,18 +33,16 @@ public class MobController : MonoBehaviour
 
     public void AttackPlayer()
     {
-        print("Player turn ended trying to attack");
         var randomAction = Random.Range(0, actions.Count);
         while (actions[randomAction].type != ActionType.Attack)
         {
             randomAction = Random.Range(0, actions.Count);
         }
 
-        print("Attacking using " + randomAction);
 
         var actionDetails = actions[randomAction];
         animator.SetTrigger(actionDetails.animationName);
-        PlayerInputController.Instance.Stats.ReceiveAttack(statController.GetStat(StatTypes.Strength).currentValue);
+        PlayerInputController.Instance.Stats.ReceiveAttack(statController.GetStat(StatValue.BaseAttack).currentValue);
         IsDoneAttack = true;
     }
 }
