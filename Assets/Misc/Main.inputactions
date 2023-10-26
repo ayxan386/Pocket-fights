@@ -13,6 +13,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "CombatInitiate",
+                    "type": "Button",
+                    "id": "80585662-0e18-4849-8766-8ea79d3365f2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -81,6 +90,17 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "454d0f70-71c9-45f1-95a9-0dddbf03ed74",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CombatInitiate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

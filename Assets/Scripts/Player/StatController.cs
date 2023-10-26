@@ -53,9 +53,14 @@ public class StatController : MonoBehaviour
         return statValues[statValue];
     }
 
-    public void ReceiveAttack(float baseDmg)
+    public void ReceiveAttack(float baseDmg, Action onDeathCallback)
     {
         statValues[StatValue.Health].currentValue -= baseDmg - statValues[StatValue.DamageReduction].currentValue;
+        if (statValues[StatValue.Health].currentValue <= 0)
+        {
+            onDeathCallback.Invoke();
+        }
+
         healthBarIndicator.UpdateDisplay(statValues[StatValue.Health]);
     }
 

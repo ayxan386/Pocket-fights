@@ -50,4 +50,23 @@ public class CombatModeGameManager : MonoBehaviour
     {
         mobsInCombat.ForEach(mob => mob.DeactivateCombatMode());
     }
+
+    public void MobDefeated(MobController deadMob)
+    {
+        foreach (var mobController in mobsInCombat)
+        {
+            if (mobController.Id == deadMob.Id)
+            {
+                mobsInCombat.Remove(deadMob);
+                StartCoroutine(MobDeath(deadMob));
+                break;
+            }
+        }
+    }
+
+    private IEnumerator MobDeath(MobController deadMob)
+    {
+        yield return new WaitForSeconds(1);
+        Destroy(deadMob.gameObject);
+    }
 }

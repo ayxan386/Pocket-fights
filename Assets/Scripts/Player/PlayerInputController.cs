@@ -10,6 +10,7 @@ public class PlayerInputController : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private float rotationLerpFactor;
     [SerializeField] private StatController statController;
+    [SerializeField] private PlayerCombatInitiation combatInitiation;
 
     private CharacterController cc;
     private PlayerInput playerInput;
@@ -51,6 +52,15 @@ public class PlayerInputController : MonoBehaviour
         }
     }
 
+    public void ReceiveAttack(float baseDamage)
+    {
+        Stats.ReceiveAttack(baseDamage, OnDeathCallback);
+    }
+
+    private void OnDeathCallback()
+    {
+    }
+
     private void OnMove(InputValue inputValue)
     {
         var inputVector = inputValue.Get<Vector2>();
@@ -84,6 +94,12 @@ public class PlayerInputController : MonoBehaviour
             CombatModeGameManager.Instance.EndPlayerTurn();
         }
     }
+
+    private void OnCombatInitiate()
+    {
+       combatInitiation.StartInitiation(3); 
+    }
+    
 
     private void OnActionUsed(int index)
     {
