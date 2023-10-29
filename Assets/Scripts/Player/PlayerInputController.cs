@@ -97,12 +97,14 @@ public class PlayerInputController : MonoBehaviour
 
     private void OnCombatInitiate()
     {
-       combatInitiation.StartInitiation(3); 
+        combatInitiation.StartInitiation(3);
     }
-    
+
 
     private void OnActionUsed(int index)
     {
+        if (CombatModeGameManager.Instance != null
+            && !CombatModeGameManager.Instance.IsPlayerTurn) return;
         var actionDetails = PlayerActionManager.Instance.GetAction(index);
         var usedAction = statController.UsedAction(actionDetails.manaConsumption);
         if (usedAction)

@@ -54,12 +54,14 @@ public class MobController : MonoBehaviour
     public void ActivateCombatMode()
     {
         Id = Guid.NewGuid();
+        isCombatModeActive = true;
         EventManager.OnPlayerTurnEnd += OnPlayerTurnEnd;
     }
 
 
     public void DeactivateCombatMode()
     {
+        isCombatModeActive = true;
         EventManager.OnPlayerTurnEnd -= OnPlayerTurnEnd;
     }
 

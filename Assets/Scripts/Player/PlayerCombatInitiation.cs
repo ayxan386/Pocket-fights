@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerCombatInitiation : MonoBehaviour
 {
@@ -34,5 +35,6 @@ public class PlayerCombatInitiation : MonoBehaviour
         color = colorSource.color;
         color.a = 0;
         colorSource.color = color;
+        SceneManager.LoadScene("CombatScene");
     }
 }
