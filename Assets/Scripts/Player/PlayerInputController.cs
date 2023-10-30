@@ -8,7 +8,7 @@ public class PlayerInputController : MonoBehaviour
 {
     [SerializeField] private float movementSpeed;
     [SerializeField] private Animator animator;
-    [SerializeField] private float rotationLerpFactor;
+    [SerializeField] private Transform cameraRotation;
     [SerializeField] private StatController statController;
     [SerializeField] private PlayerCombatInitiation combatInitiation;
 
@@ -47,8 +47,13 @@ public class PlayerInputController : MonoBehaviour
         animator.SetBool("moving", movementVector.sqrMagnitude > 0);
         if (movementVector.sqrMagnitude > 0)
         {
-            transform.Rotate(Vector3.up, movementVector.x * rotationLerpFactor * Time.deltaTime);
-            cc.SimpleMove(transform.forward * (movementVector.z * movementSpeed));
+            var tempEuler = cameraRotation.rotation.eulerAngles;
+            tempEuler.x = 0;
+            var temp = Quaternion.Euler(tempEuler);
+            print(tempEuler);
+            var dir = temp * movementVector;
+            transform.forward = dir;
+            cc.SimpleMove(dir * movementSpeed);
         }
     }
 
