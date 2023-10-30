@@ -361,6 +361,7 @@ GameObject:
   - component: {fileID: 7633647602626555120}
   - component: {fileID: 7633647602626555134}
   - component: {fileID: 7633647602626555135}
+  - component: {fileID: 6445888719011105918}
   m_Layer: 5
   m_Name: InfoBlock
   m_TagString: Untagged
@@ -427,3 +428,17 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6445888719011105918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7633647602626555121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 867669b6108a0b344b08dace3519d592, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: {fileID: 7633647602055223447}
+  value: {fileID: 7633647602460236871}

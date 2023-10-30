@@ -8,6 +8,7 @@ public class StatController : MonoBehaviour
     [SerializeField] private StatBarIndicator manaBarIndicator;
     [SerializeField] private int level;
     [SerializeField] private int freePoints;
+    [SerializeField] private int skillPoints;
 
     [Header("Starting stats")] [SerializeField]
     private int startingVitality = 4;
@@ -20,7 +21,11 @@ public class StatController : MonoBehaviour
 
     private Dictionary<StatTypes, StatData> baseStats;
     private Dictionary<StatValue, StatData> statValues;
-    private float Lsf => Mathf.Pow(1.03f, level);
+    
+    public float Lsf => Mathf.Pow(1.03f, level);
+    public int Level => level;
+    public int FreePoints => freePoints;
+    public int SkillPoints => skillPoints;
 
     private void Awake()
     {
