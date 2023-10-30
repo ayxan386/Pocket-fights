@@ -85,7 +85,7 @@ public class MobController : MonoBehaviour
         {
             animator.SetTrigger(actionDetails.animationName);
             PlayerInputController.Instance.ReceiveAttack(
-                statController.GetStat(StatValue.BaseAttack).currentValue);
+                statController.GetStatValue(StatValue.BaseAttack).currentValue);
         }
 
         IsDoneAttack = true;

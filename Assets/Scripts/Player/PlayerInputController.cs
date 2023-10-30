@@ -11,6 +11,7 @@ public class PlayerInputController : MonoBehaviour
     [SerializeField] private Transform cameraRotation;
     [SerializeField] private StatController statController;
     [SerializeField] private PlayerCombatInitiation combatInitiation;
+    [SerializeField] private GameObject pauseMenu;
 
     private CharacterController cc;
     private PlayerInput playerInput;
@@ -23,6 +24,7 @@ public class PlayerInputController : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        print("Assigned");
         cc = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
         EventManager.OnPlayerTurnEnd += OnPlayerTurnEnd;
@@ -50,7 +52,6 @@ public class PlayerInputController : MonoBehaviour
             var tempEuler = cameraRotation.rotation.eulerAngles;
             tempEuler.x = 0;
             var temp = Quaternion.Euler(tempEuler);
-            print(tempEuler);
             var dir = temp * movementVector;
             transform.forward = dir;
             cc.SimpleMove(dir * movementSpeed);
@@ -105,6 +106,12 @@ public class PlayerInputController : MonoBehaviour
         combatInitiation.StartInitiation(3);
     }
 
+    private void OnPause()
+    {
+        pauseMenu.SetActive(!pauseMenu.activeSelf);
+        
+    }
+
 
     private void OnActionUsed(int index)
     {
@@ -116,7 +123,7 @@ public class PlayerInputController : MonoBehaviour
         {
             animator.SetTrigger(actionDetails.animationName);
             CombatModeGameManager.Instance.SelectedEnemy.ReceiveAttack(
-                statController.GetStat(StatValue.BaseAttack).currentValue * actionDetails.attackMult);
+                statController.GetStatValue(StatValue.BaseAttack).currentValue * actionDetails.attackMult);
         }
     }
 }

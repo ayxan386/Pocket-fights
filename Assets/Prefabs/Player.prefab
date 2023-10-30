@@ -112,7 +112,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colorSource: {fileID: 2100000, guid: 6c84ace517908ce46aad1b6fad08992e, type: 2}
-  alphaChangeTemp: 2
 --- !u!1 &51443049420896171
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,7 +265,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 3.4
   animator: {fileID: 135805482738935641}
-  rotationLerpFactor: 135
+  cameraRotation: {fileID: 0}
   statController: {fileID: 356217490}
   combatInitiation: {fileID: 1663934350}
 --- !u!114 &356217483
@@ -312,7 +311,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBarIndicator: {fileID: 0}
   manaBarIndicator: {fileID: 0}
-  level: 0
+  level: 1
   startingVitality: 4
   startingStrength: 4
   startingMana: 4

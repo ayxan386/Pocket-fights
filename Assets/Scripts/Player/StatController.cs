@@ -7,7 +7,11 @@ public class StatController : MonoBehaviour
     [SerializeField] private StatBarIndicator healthBarIndicator;
     [SerializeField] private StatBarIndicator manaBarIndicator;
     [SerializeField] private int level;
-    [SerializeField] private int startingVitality = 4;
+    [SerializeField] private int freePoints;
+
+    [Header("Starting stats")] [SerializeField]
+    private int startingVitality = 4;
+
     [SerializeField] private int startingStrength = 4;
     [SerializeField] private int startingMana = 4;
     [SerializeField] private int startingDefense = 4;
@@ -48,9 +52,14 @@ public class StatController : MonoBehaviour
         manaBarIndicator ??= GameObject.FindGameObjectWithTag("PlayerManaBar").GetComponent<StatBarIndicator>();
     }
 
-    public StatData GetStat(StatValue statValue)
+    public StatData GetStatValue(StatValue statValue)
     {
         return statValues[statValue];
+    }
+
+    public StatData GetBaseStat(StatTypes stat)
+    {
+        return baseStats[stat];
     }
 
     public void ReceiveAttack(float baseDmg, Action onDeathCallback)
@@ -94,6 +103,28 @@ public class StatController : MonoBehaviour
             statValues[StatValue.Mana].currentValue + statValues[StatValue.ManaRegen].currentValue,
             0, statValues[StatValue.Mana].maxValue);
         manaBarIndicator.UpdateDisplay(statValues[StatValue.Mana]);
+    }
+
+    public void UpgradeStat(StatTypes statType)
+    {
+        if (freePoints > 0)
+        {
+            UpdateFreePoints(-1);
+            UpdateBaseStat(statType, 1);
+        }
+    }
+
+    private void UpdateBaseStat(StatTypes statType, int diff)
+    {
+        baseStats[statType].maxValue += diff;
+        baseStats[statType].currentValue += diff;
+        EventManager.OnBaseStatUpdate?.Invoke(baseStats[statType].maxValue);
+    }
+
+    private void UpdateFreePoints(int diff)
+    {
+        freePoints += diff;
+        EventManager.OnPlayerCoreUpdate?.Invoke(freePoints);
     }
 }
 

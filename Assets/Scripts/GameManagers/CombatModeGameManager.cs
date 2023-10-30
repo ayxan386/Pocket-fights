@@ -57,7 +57,7 @@ public class CombatModeGameManager : MonoBehaviour
 
     private void CheckPlayerHealth()
     {
-        var currentHealth = PlayerInputController.Instance.Stats.GetStat(StatValue.Health).currentValue;
+        var currentHealth = PlayerInputController.Instance.Stats.GetStatValue(StatValue.Health).currentValue;
 
         if (currentHealth <= 0)
         {
