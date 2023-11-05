@@ -94,6 +94,7 @@ public class CombatModeGameManager : MonoBehaviour
 
         if (mobsInCombat.Count == 0)
         {
+            PlayerInputController.Instance.AddXp(100);
             Time.timeScale = 0;
             endingMenu.SetActive(true);
             endText.text = "You won!!!";

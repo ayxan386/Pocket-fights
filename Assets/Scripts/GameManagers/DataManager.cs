@@ -26,13 +26,14 @@ public class DataManager : MonoBehaviour
     {
         var basePath = Application.persistentDataPath;
         basePath += pathName;
-        if (Directory.Exists(basePath))
+        if (!Directory.Exists(basePath))
         {
             Directory.CreateDirectory(basePath);
         }
+        
 
         basePath += filename;
-        if (File.Exists(basePath))
+        if (!File.Exists(basePath))
         {
             File.Create(basePath);
         }
@@ -54,7 +55,7 @@ public class DataManager : MonoBehaviour
 
         var json = JsonUtility.ToJson(statSaveData);
 
-        print(json);
+        File.WriteAllText(basePath, json);
     }
 
     [ContextMenu("Load from string")]

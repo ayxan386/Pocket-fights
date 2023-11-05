@@ -19,7 +19,6 @@ public class StatInfoManager : MonoBehaviour
         foreach (var statType in Enum.GetValues(typeof(StatTypes)).Cast<StatTypes>())
         {
             var playerInputController = PlayerInputController.Instance;
-            print(playerInputController);
             var baseStat = playerInputController.Stats.GetBaseStat(statType);
             statBlocks[k].UpdateDisplay(statType.ToString(), baseStat.currentValue + "");
             statBlocks[k++].StatType = statType;

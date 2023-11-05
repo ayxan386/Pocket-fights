@@ -6,12 +6,21 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(PlayerInput))]
 public class PlayerInputController : MonoBehaviour
 {
+    [Header("Movement")]
     [SerializeField] private float movementSpeed;
     [SerializeField] private Animator animator;
     [SerializeField] private Transform cameraRotation;
-    [SerializeField] private StatController statController;
+    [Header("Misc")]
     [SerializeField] private PlayerCombatInitiation combatInitiation;
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private StatController statController;
+    
+    [Header("Leveling")]
+    [SerializeField] private float currentXp;
+    [SerializeField] private AnimationCurve xpRequirements;
+    [SerializeField] private float xpMultiplier;
+    [SerializeField] private int maxLevel;
+
 
     private CharacterController cc;
     private PlayerInput playerInput;
@@ -138,5 +147,24 @@ public class PlayerInputController : MonoBehaviour
     public void SaveEventTrigger()
     {
         EventManager.OnSaveStarted?.Invoke(1);
+    }
+    
+
+    private float CalculateXpRequirements()
+    {
+        return xpRequirements.Evaluate(1f * Stats.Level / maxLevel) * xpMultiplier;
+    }
+
+    public void AddXp(float xpAmount)
+    {
+        currentXp += xpAmount;
+        var xpRequired = CalculateXpRequirements();
+        print("Xp required: " + xpRequired );
+        while (currentXp >= xpRequired)
+        {
+            currentXp -= xpRequired;
+            xpRequired = CalculateXpRequirements();
+            Stats.UpdateLevel(1);
+        }
     }
 }
