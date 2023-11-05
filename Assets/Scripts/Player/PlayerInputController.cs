@@ -37,11 +37,19 @@ public class PlayerInputController : MonoBehaviour
 
     private void Start()
     {
+        EventManager.OnSaveStarted += OnSaveStarted;
         var isCombatScene = SceneManager.GetActiveScene().name.Contains("Combat");
+        DataManager.Instance.LoadPlayerStats();
         if (isCombatScene)
         {
             playerInput.SwitchCurrentActionMap("CombatMode");
         }
+    }
+
+
+    private void OnSaveStarted(int obj)
+    {
+        EventManager.OnStatSave?.Invoke(Stats);
     }
 
     private void Update()
@@ -109,7 +117,6 @@ public class PlayerInputController : MonoBehaviour
     private void OnPause()
     {
         pauseMenu.SetActive(!pauseMenu.activeSelf);
-        
     }
 
 
@@ -125,5 +132,11 @@ public class PlayerInputController : MonoBehaviour
             CombatModeGameManager.Instance.SelectedEnemy.ReceiveAttack(
                 statController.GetStatValue(StatValue.BaseAttack).currentValue * actionDetails.attackMult);
         }
+    }
+
+    [ContextMenu("Save trigger")]
+    public void SaveEventTrigger()
+    {
+        EventManager.OnSaveStarted?.Invoke(1);
     }
 }

@@ -9,6 +9,7 @@ public class StatController : MonoBehaviour
     [SerializeField] private int level;
     [SerializeField] private int freePoints;
     [SerializeField] private int skillPoints;
+    [SerializeField] private string sourceName;
 
     [Header("Starting stats")] [SerializeField]
     private int startingVitality = 4;
@@ -27,6 +28,8 @@ public class StatController : MonoBehaviour
     public int FreePoints => freePoints;
     public int SkillPoints => skillPoints;
 
+    public string SourceName => sourceName;
+
     private void Awake()
     {
         baseStats = new Dictionary<StatTypes, StatData>
@@ -37,18 +40,21 @@ public class StatController : MonoBehaviour
             [StatTypes.Defense] = new(startingDefense)
         };
 
-        statValues = new Dictionary<StatValue, StatData>
-        {
-            [StatValue.Health] = new(baseStats[StatTypes.Vitality].currentValue * 10 * Lsf,
-                baseStats[StatTypes.Vitality].currentValue * 10 * Lsf),
-            [StatValue.Mana] = new(baseStats[StatTypes.Mana].currentValue * 10 * Lsf,
-                baseStats[StatTypes.Mana].currentValue * 10 * Lsf),
-            [StatValue.BaseAttack] = new(baseStats[StatTypes.Strength].currentValue * 5 * Lsf,
-                baseStats[StatTypes.Strength].currentValue * 5 * Lsf),
-            [StatValue.DamageReduction] = new(baseStats[StatTypes.Defense].currentValue * 2 * Lsf,
-                baseStats[StatTypes.Defense].currentValue * 2 * Lsf),
-            [StatValue.ManaRegen] = new(10, 10)
-        };
+        statValues = new Dictionary<StatValue, StatData>();
+        CalculateStatBasedValues();
+    }
+
+    private void CalculateStatBasedValues()
+    {
+        statValues[StatValue.Health] = new(baseStats[StatTypes.Vitality].currentValue * 10 * Lsf,
+            baseStats[StatTypes.Vitality].currentValue * 10 * Lsf);
+        statValues[StatValue.Mana] = new(baseStats[StatTypes.Mana].currentValue * 10 * Lsf,
+            baseStats[StatTypes.Mana].currentValue * 10 * Lsf);
+        statValues[StatValue.BaseAttack] = new(baseStats[StatTypes.Strength].currentValue * 5 * Lsf,
+            baseStats[StatTypes.Strength].currentValue * 5 * Lsf);
+        statValues[StatValue.DamageReduction] = new(baseStats[StatTypes.Defense].currentValue * 2 * Lsf,
+            baseStats[StatTypes.Defense].currentValue * 2 * Lsf);
+        statValues[StatValue.ManaRegen] = new(10, 10);
     }
 
     private void Start()
@@ -56,6 +62,7 @@ public class StatController : MonoBehaviour
         healthBarIndicator ??= GameObject.FindGameObjectWithTag("PlayerHealthBar").GetComponent<StatBarIndicator>();
         manaBarIndicator ??= GameObject.FindGameObjectWithTag("PlayerManaBar").GetComponent<StatBarIndicator>();
     }
+
 
     public StatData GetStatValue(StatValue statValue)
     {
@@ -129,6 +136,16 @@ public class StatController : MonoBehaviour
     private void UpdateFreePoints(int diff)
     {
         freePoints += diff;
+        EventManager.OnPlayerCoreUpdate?.Invoke(freePoints);
+    }
+
+    public void LoadData(StatSaveData savedData)
+    {
+        baseStats = savedData.baseStats;
+        statValues = savedData.statValues;
+        CalculateStatBasedValues();
+        
+        EventManager.OnBaseStatUpdate?.Invoke(baseStats[StatTypes.Vitality].maxValue);
         EventManager.OnPlayerCoreUpdate?.Invoke(freePoints);
     }
 }
