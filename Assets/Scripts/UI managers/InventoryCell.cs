@@ -16,7 +16,7 @@ public class InventoryCell : MonoBehaviour
         SetNoItemState();
     }
 
-    private void SetNoItemState()
+    public void SetNoItemState()
     {
         var itemIconColor = itemIcon.color;
         itemIconColor.a = 0;
@@ -34,5 +34,16 @@ public class InventoryCell : MonoBehaviour
             var index = (int.Parse(substring.Remove(substring.Length - 1, 1)) % 9 / 3);
             innerPart.color = innerColors[index];
         }
+    }
+
+    public void UpdateDisplay(InventoryItem item)
+    {
+        var itemIconColor = itemIcon.color;
+        itemIconColor.a = 1;
+        itemIcon.color = itemIconColor;
+        itemIcon.sprite = item.icon;
+        countText.text = "x" + item.count;
+        // descGm.SetActive(false);
+        countText.alpha = 1;
     }
 }
