@@ -10,6 +10,7 @@ public class InventoryCell : MonoBehaviour
     [SerializeField] private TextMeshProUGUI countText;
     [SerializeField] private Image innerPart;
     [SerializeField] private Color[] innerColors;
+    private int id;
 
     private void Start()
     {
@@ -36,8 +37,9 @@ public class InventoryCell : MonoBehaviour
         }
     }
 
-    public void UpdateDisplay(InventoryItem item)
+    public void UpdateDisplay(InventoryItem item, int id)
     {
+        this.id = id;
         var itemIconColor = itemIcon.color;
         itemIconColor.a = 1;
         itemIcon.color = itemIconColor;

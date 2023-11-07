@@ -10,7 +10,7 @@ public class InventoryController : MonoBehaviour
     [SerializeField] private InventoryItem randomItem;
 
     private List<InventoryCell> itemCells;
-    
+
     public static InventoryController Instance { get; private set; }
 
     private void Awake()
@@ -24,7 +24,9 @@ public class InventoryController : MonoBehaviour
         itemCells = itemCellHolder.GetComponentsInChildren<InventoryCell>().ToList();
         UpdateDisplay();
         EventManager.OnItemAdd += OnItemAdd;
+        EventManager.OnItemRemove += OnItemRemove;
     }
+
 
     public void UpdateDisplay()
     {
@@ -32,7 +34,7 @@ public class InventoryController : MonoBehaviour
         {
             if (i < ownedItems.Count)
             {
-                itemCells[i].UpdateDisplay(ownedItems[i]);
+                itemCells[i].UpdateDisplay(ownedItems[i], i);
             }
             else
             {
@@ -43,25 +45,28 @@ public class InventoryController : MonoBehaviour
 
     private void OnItemAdd(InventoryItem addedItem)
     {
-        print("Event received: " + addedItem.name);
-        InventoryItem inventoryItem = null;
-        foreach (var ownedItem in ownedItems)
-        {
-            if (ownedItem.name == addedItem.name)
-            {
-                inventoryItem = ownedItem;
-                break;
-            }
-        }
+        var inventoryItem = ownedItems.FirstOrDefault(ownedItem => ownedItem.name == addedItem.name);
 
         if (inventoryItem != null)
         {
-            print("Inventory item found: " + inventoryItem.name);
             inventoryItem.count += addedItem.count;
         }
         else
         {
             ownedItems.Add(addedItem);
+        }
+
+        UpdateDisplay();
+    }
+
+
+    private void OnItemRemove(InventoryItem removedItem)
+    {
+        var removedCount = ownedItems.RemoveAll(ownedItem => ownedItem.name == removedItem.name);
+
+        if (removedCount <= 0)
+        {
+            print("Item not found");
         }
 
         UpdateDisplay();
@@ -79,7 +84,12 @@ public class InventoryController : MonoBehaviour
             description = randomItem.description
         };
         EventManager.OnItemAdd?.Invoke(inventoryItem);
-        print("Event sent");
+    }
+
+    [ContextMenu("Remove random item")]
+    public void RemoveRandomItem()
+    {
+        EventManager.OnItemRemove?.Invoke(randomItem);
     }
 }
 
