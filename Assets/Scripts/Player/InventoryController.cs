@@ -22,6 +22,11 @@ public class InventoryController : MonoBehaviour
     {
         ownedItems = new List<InventoryItem>();
         itemCells = itemCellHolder.GetComponentsInChildren<InventoryCell>().ToList();
+        for (var index = 0; index < itemCells.Count; index++)
+        {
+            itemCells[index].SetId(index);
+        }
+
         UpdateDisplay();
         EventManager.OnItemAdd += OnItemAdd;
         EventManager.OnItemRemove += OnItemRemove;
@@ -34,7 +39,7 @@ public class InventoryController : MonoBehaviour
         {
             if (i < ownedItems.Count)
             {
-                itemCells[i].UpdateDisplay(ownedItems[i], i);
+                itemCells[i].UpdateDisplay(ownedItems[i]);
             }
             else
             {
@@ -62,9 +67,19 @@ public class InventoryController : MonoBehaviour
 
     private void OnItemRemove(InventoryItem removedItem)
     {
-        var removedCount = ownedItems.RemoveAll(ownedItem => ownedItem.name == removedItem.name);
+        print("Removed event received");
+        var inventoryItem = ownedItems.FirstOrDefault(ownedItem => ownedItem.name == removedItem.name);
 
-        if (removedCount <= 0)
+        if (inventoryItem != null)
+        {
+            inventoryItem.count -= 1;
+
+            if (inventoryItem.count <= 0)
+            {
+                ownedItems.Remove(inventoryItem);
+            }
+        }
+        else
         {
             print("Item not found");
         }
@@ -90,6 +105,12 @@ public class InventoryController : MonoBehaviour
     public void RemoveRandomItem()
     {
         EventManager.OnItemRemove?.Invoke(randomItem);
+    }
+
+    public void ItemCellClicked(InventoryItem clickedItem)
+    {
+        //TODO change this
+        EventManager.OnItemRemove?.Invoke(clickedItem);
     }
 }
 

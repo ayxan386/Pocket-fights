@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,7 +11,9 @@ public class InventoryCell : MonoBehaviour
     [SerializeField] private TextMeshProUGUI countText;
     [SerializeField] private Image innerPart;
     [SerializeField] private Color[] innerColors;
-    private int id;
+    public int id;
+    private InventoryItem storedItem;
+    private Coroutine clickCoro;
 
     private void Start()
     {
@@ -19,6 +22,7 @@ public class InventoryCell : MonoBehaviour
 
     public void SetNoItemState()
     {
+        storedItem = null;
         var itemIconColor = itemIcon.color;
         itemIconColor.a = 0;
         itemIcon.color = itemIconColor;
@@ -37,15 +41,56 @@ public class InventoryCell : MonoBehaviour
         }
     }
 
-    public void UpdateDisplay(InventoryItem item, int id)
+    public void UpdateDisplay(InventoryItem item)
     {
-        this.id = id;
+        storedItem = item;
         var itemIconColor = itemIcon.color;
         itemIconColor.a = 1;
         itemIcon.color = itemIconColor;
         itemIcon.sprite = item.icon;
         countText.text = "x" + item.count;
-        // descGm.SetActive(false);
         countText.alpha = 1;
+    }
+
+    public void SetId(int newId)
+    {
+        id = newId;
+    }
+
+    public void ClickStarted()
+    {
+        if (clickCoro == null)
+        {
+            SendClick();
+            clickCoro = StartCoroutine(ClickRegular());
+        }
+    }
+
+    public void ClickStopped()
+    {
+        if (clickCoro != null)
+        {
+            StopCoroutine(clickCoro);
+            clickCoro = null;
+        }
+    }
+
+    private IEnumerator ClickRegular()
+    {
+        while (storedItem != null)
+        {
+            yield return new WaitForSeconds(0.3f);
+            SendClick();
+        }
+
+        clickCoro = null;
+    }
+
+    private void SendClick()
+    {
+        if (storedItem != null)
+        {
+            InventoryController.Instance.ItemCellClicked(storedItem);
+        }
     }
 }

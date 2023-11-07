@@ -5,7 +5,7 @@ public class PlayerCoreDisplayManager : MonoBehaviour
 {
     [SerializeField] private List<StatInfoDisplayController> displayControllers;
 
-    private void OnEnable()
+    private void Start()
     {
         EventManager.OnPlayerCoreUpdate += OnPlayerCoreUpdate;
         OnPlayerCoreUpdate(0);

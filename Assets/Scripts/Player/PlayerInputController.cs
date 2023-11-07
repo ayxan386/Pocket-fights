@@ -6,17 +6,14 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(PlayerInput))]
 public class PlayerInputController : MonoBehaviour
 {
-    [Header("Movement")]
-    [SerializeField] private float movementSpeed;
+    [Header("Movement")] [SerializeField] private float movementSpeed;
     [SerializeField] private Animator animator;
     [SerializeField] private Transform cameraRotation;
-    [Header("Misc")]
-    [SerializeField] private PlayerCombatInitiation combatInitiation;
-    [SerializeField] private GameObject pauseMenu;
+    [Header("Misc")] [SerializeField] private PlayerCombatInitiation combatInitiation;
+    [SerializeField] private Animator pauseMenu;
     [SerializeField] private StatController statController;
-    
-    [Header("Leveling")]
-    [SerializeField] private float currentXp;
+
+    [Header("Leveling")] [SerializeField] private float currentXp;
     [SerializeField] private AnimationCurve xpRequirements;
     [SerializeField] private float xpMultiplier;
     [SerializeField] private int maxLevel;
@@ -25,6 +22,7 @@ public class PlayerInputController : MonoBehaviour
     private CharacterController cc;
     private PlayerInput playerInput;
     private Vector3 movementVector;
+    private bool isPaused;
 
     public StatController Stats => statController;
 
@@ -125,7 +123,16 @@ public class PlayerInputController : MonoBehaviour
 
     private void OnPause()
     {
-        pauseMenu.SetActive(!pauseMenu.activeSelf);
+        if (isPaused)
+        {
+            isPaused = false;
+            pauseMenu.SetTrigger("close");
+        }
+        else
+        {
+            isPaused = true;
+            pauseMenu.SetTrigger("open");
+        }
     }
 
 
@@ -148,7 +155,7 @@ public class PlayerInputController : MonoBehaviour
     {
         EventManager.OnSaveStarted?.Invoke(1);
     }
-    
+
 
     private float CalculateXpRequirements()
     {
@@ -159,7 +166,7 @@ public class PlayerInputController : MonoBehaviour
     {
         currentXp += xpAmount;
         var xpRequired = CalculateXpRequirements();
-        print("Xp required: " + xpRequired );
+        print("Xp required: " + xpRequired);
         while (currentXp >= xpRequired)
         {
             currentXp -= xpRequired;

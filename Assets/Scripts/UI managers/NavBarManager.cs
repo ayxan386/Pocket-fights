@@ -10,9 +10,4 @@ public class NavBarManager : MonoBehaviour
         tabs.ForEach(tab => tab.SetActive(false));
         tabs.Find(tab => tab.name == tabName).SetActive(true);
     }
-
-    private void OnEnable()
-    {
-        InventoryController.Instance.UpdateDisplay();
-    }
 }
