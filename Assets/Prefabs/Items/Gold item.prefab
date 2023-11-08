@@ -47,4 +47,5 @@ MonoBehaviour:
   icon: {fileID: 1020037480, guid: 7bb12e1a1363c514bb9ee72a9acafce2, type: 3}
   name: Gold coin
   count: 2
+  stackSize: 2
   description: Gives player gold

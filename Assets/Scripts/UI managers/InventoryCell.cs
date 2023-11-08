@@ -12,7 +12,7 @@ public class InventoryCell : MonoBehaviour
     [SerializeField] private Image innerPart;
     [SerializeField] private Color[] innerColors;
     public int id;
-    private InventoryItem storedItem;
+    public InventoryItem storedItem;
     private Coroutine clickCoro;
 
     private void Start()

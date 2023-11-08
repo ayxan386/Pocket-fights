@@ -52,13 +52,18 @@ public class InventoryController : MonoBehaviour
     {
         var inventoryItem = ownedItems.FirstOrDefault(ownedItem => ownedItem.name == addedItem.name);
 
-        if (inventoryItem != null)
+        while (addedItem.count > 0)
         {
-            inventoryItem.count += addedItem.count;
-        }
-        else
-        {
-            ownedItems.Add(addedItem);
+            if (inventoryItem == null || inventoryItem.count == inventoryItem.stackSize)
+            {
+                inventoryItem = Instantiate(addedItem, transform);
+                inventoryItem.count = 0;
+                ownedItems.Add(inventoryItem);
+            }
+
+            var canAccept = Mathf.Min(inventoryItem.stackSize - inventoryItem.count, addedItem.count);
+            inventoryItem.count += canAccept;
+            addedItem.count -= canAccept;
         }
 
         UpdateDisplay();
@@ -74,21 +79,11 @@ public class InventoryController : MonoBehaviour
 
     private void OnItemRemove(InventoryItem removedItem)
     {
-        print("Removed event received");
-        var inventoryItem = ownedItems.FirstOrDefault(ownedItem => ownedItem.name == removedItem.name);
+        removedItem.count -= 1;
 
-        if (inventoryItem != null)
+        if (removedItem.count <= 0)
         {
-            inventoryItem.count -= 1;
-
-            if (inventoryItem.count <= 0)
-            {
-                ownedItems.Remove(inventoryItem);
-            }
-        }
-        else
-        {
-            print("Item not found");
+            ownedItems.Remove(removedItem);
         }
 
         UpdateDisplay();
