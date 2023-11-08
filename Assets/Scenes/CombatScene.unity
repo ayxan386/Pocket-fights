@@ -2755,6 +2755,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4353078236695066315, guid: 9903153025cebd64d82db2065549fe87,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4353078236695066315, guid: 9903153025cebd64d82db2065549fe87,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4353078236695066315, guid: 9903153025cebd64d82db2065549fe87,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4353078236695066315, guid: 9903153025cebd64d82db2065549fe87,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4355846248479476669, guid: 9903153025cebd64d82db2065549fe87,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -4143,6 +4163,8 @@ MonoBehaviour:
   endTurnButton: {fileID: 1407913595}
   endingMenu: {fileID: 873338713}
   endText: {fileID: 719958275}
+  lootItemPanelPrefab: {fileID: 8450918073623782735, guid: ce3eefdfdb17f6d44a4c5d0a7fef45d2,
+    type: 3}
 --- !u!114 &1799696660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5240,6 +5262,53 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7622900003042665912, guid: 627262a31811c094f92d65ef57ba3c47,
+        type: 3}
+      propertyPath: possibleDrops.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7622900003042665912, guid: 627262a31811c094f92d65ef57ba3c47,
+        type: 3}
+      propertyPath: possibleDrops.Array.data[0].chance
+      value: 0.905
+      objectReference: {fileID: 0}
+    - target: {fileID: 7622900003042665912, guid: 627262a31811c094f92d65ef57ba3c47,
+        type: 3}
+      propertyPath: possibleDrops.Array.data[1].chance
+      value: 0.905
+      objectReference: {fileID: 0}
+    - target: {fileID: 7622900003042665912, guid: 627262a31811c094f92d65ef57ba3c47,
+        type: 3}
+      propertyPath: possibleDrops.Array.data[0].count.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7622900003042665912, guid: 627262a31811c094f92d65ef57ba3c47,
+        type: 3}
+      propertyPath: possibleDrops.Array.data[0].count.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7622900003042665912, guid: 627262a31811c094f92d65ef57ba3c47,
+        type: 3}
+      propertyPath: possibleDrops.Array.data[1].count.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7622900003042665912, guid: 627262a31811c094f92d65ef57ba3c47,
+        type: 3}
+      propertyPath: possibleDrops.Array.data[1].count.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7622900003042665912, guid: 627262a31811c094f92d65ef57ba3c47,
+        type: 3}
+      propertyPath: possibleDrops.Array.data[0].itemPrefab
+      value: 
+      objectReference: {fileID: 3337002340432959719, guid: 407cd09bed077b2439addf797101809b,
+        type: 3}
+    - target: {fileID: 7622900003042665912, guid: 627262a31811c094f92d65ef57ba3c47,
+        type: 3}
+      propertyPath: possibleDrops.Array.data[1].itemPrefab
+      value: 
+      objectReference: {fileID: 3337002340432959719, guid: fd7389eff2aaccb488d74264e9423df1,
+        type: 3}
     - target: {fileID: 7624356310046074002, guid: 627262a31811c094f92d65ef57ba3c47,
         type: 3}
       propertyPath: m_Name

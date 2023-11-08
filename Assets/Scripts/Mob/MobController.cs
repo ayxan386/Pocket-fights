@@ -10,6 +10,7 @@ public class MobController : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private List<ActionDetails> actions;
     [SerializeField] private StatController statController;
+    [SerializeField] private List<PossibleLoot> possibleDrops;
 
     [Header("AI parameters")] [SerializeField]
     private NavMeshAgent agent;
@@ -17,6 +18,7 @@ public class MobController : MonoBehaviour
     [SerializeField] private Transform[] patrolPoints;
 
     public Guid Id { get; private set; }
+    public List<PossibleLoot> PossibleLoots => possibleDrops;
     public bool IsDoneAttack { get; private set; }
     private bool isCombatModeActive = false;
     private int patrolPointIndex = 0;

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -91,13 +90,7 @@ public class InventoryController : MonoBehaviour
     [ContextMenu("Add random item")]
     public void AddRandomItem()
     {
-        var inventoryItem = new InventoryItem
-        {
-            name = randomItem.name,
-            icon = randomItem.icon,
-            count = randomItem.count,
-            description = randomItem.description
-        };
+        var inventoryItem = Instantiate(randomItem);
         EventManager.OnItemAdd?.Invoke(inventoryItem);
     }
 
@@ -112,13 +105,4 @@ public class InventoryController : MonoBehaviour
         //TODO change this
         EventManager.OnItemRemove?.Invoke(clickedItem);
     }
-}
-
-[Serializable]
-public class InventoryItem
-{
-    public Sprite icon;
-    public string name;
-    public int count;
-    public string description;
 }

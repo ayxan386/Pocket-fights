@@ -14,6 +14,10 @@ public class CombatModeGameManager : MonoBehaviour
     private GameObject endingMenu;
 
     [SerializeField] private TextMeshProUGUI endText;
+
+    [Header("Loot stuff")] [SerializeField]
+    private LootItemPanel lootItemPanelPrefab;
+
     public static CombatModeGameManager Instance { get; private set; }
     public MobController SelectedEnemy { get; private set; }
     public bool IsCombatMode { get; private set; }
@@ -90,15 +94,35 @@ public class CombatModeGameManager : MonoBehaviour
     private IEnumerator MobDeath(MobController deadMob)
     {
         yield return new WaitForSeconds(0.5f);
-        Destroy(deadMob.gameObject);
+        deadMob.gameObject.SetActive(false);
+        // Destroy(deadMob.gameObject);
 
         if (mobsInCombat.Count == 0)
         {
-            PlayerInputController.Instance.AddXp(100);
-            Time.timeScale = 0;
-            endingMenu.SetActive(true);
-            endText.text = "You won!!!";
-            EndOfCombat();
+            PlayerVictory();
         }
+    }
+
+    [ContextMenu("Player victory")]
+    public void PlayerVictory()
+    {
+        var allDrops = mobsInCombat.ConvertAll(mob => mob.PossibleLoots);
+        var generatedLoot = LootManager.GenerateLoot(allDrops);
+        var lootUiParent = PlayerInputController.Instance.LootUI;
+        foreach (var valueTuple in generatedLoot)
+        {
+            var newDrop = Instantiate(valueTuple.Item1);
+            newDrop.count = valueTuple.Item2;
+            var lootItemPanel = Instantiate(lootItemPanelPrefab, lootUiParent.transform);
+            lootItemPanel.UpdateDisplay(newDrop);
+        }
+
+        lootUiParent.SetTrigger("open");
+
+        // PlayerInputController.Instance.AddXp(100);
+        // Time.timeScale = 0;
+        // endingMenu.SetActive(true);
+        // endText.text = "You won!!!";
+        // EndOfCombat();
     }
 }
