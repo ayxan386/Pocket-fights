@@ -28,6 +28,7 @@ public class InventoryController : MonoBehaviour
 
         UpdateDisplay();
         EventManager.OnItemAdd += OnItemAdd;
+        EventManager.OnItemAddAsLoot += OnItemAddAsLoot;
         EventManager.OnItemRemove += OnItemRemove;
     }
 
@@ -61,6 +62,13 @@ public class InventoryController : MonoBehaviour
         }
 
         UpdateDisplay();
+    }
+
+
+    private void OnItemAddAsLoot(InventoryItem item, LootItemPanel panel)
+    {
+        OnItemAdd(item);
+        Destroy(panel.gameObject);
     }
 
 
