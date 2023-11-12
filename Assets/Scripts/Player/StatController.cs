@@ -22,6 +22,7 @@ public class StatController : MonoBehaviour
 
     private Dictionary<StatTypes, StatData> baseStats;
     private Dictionary<StatValue, StatData> statValues;
+    private List<StatEffect> statusEffects;
 
     public float Lsf => Mathf.Pow(1.03f, level);
     public int Level => level;
@@ -41,6 +42,7 @@ public class StatController : MonoBehaviour
         };
 
         statValues = new Dictionary<StatValue, StatData>();
+        statusEffects = new List<StatEffect>();
         InitiateStatValues();
     }
 
@@ -81,6 +83,63 @@ public class StatController : MonoBehaviour
     {
         healthBarIndicator ??= GameObject.FindGameObjectWithTag("PlayerHealthBar").GetComponent<StatBarIndicator>();
         manaBarIndicator ??= GameObject.FindGameObjectWithTag("PlayerManaBar").GetComponent<StatBarIndicator>();
+        EventManager.OnPlayerTurnEnd += OnPlayerTurnEnd;
+    }
+
+    private void OnPlayerTurnEnd(bool obj)
+    {
+        foreach (var statusEffect in statusEffects)
+        {
+            statusEffect.numberOfTurns--;
+
+            if (statusEffect.numberOfTurns <= 0)
+            {
+                RemoveStatusEffect(statusEffect);
+            }
+        }
+    }
+
+    public void AddStatusEffect(StatEffect effect)
+    {
+        switch (effect.type)
+        {
+            case StatEffectType.BaseStat:
+                UpdateBaseStat(effect.baseStat, 
+                    (int)effect.GetAmount(GetBaseStat(effect.baseStat).maxValue));
+                effect.gameObject.transform.parent = transform;
+                statusEffects.Add(effect);
+                break;
+            case StatEffectType.StatValue:
+                statValues[effect.statValue].currentValue += effect.GetAmount(statValues[effect.statValue].currentValue);
+                effect.gameObject.transform.parent = transform;
+                statusEffects.Add(effect);
+                break;
+            default:
+                print("No such type found");
+                break;
+        }
+        UpdateOverallDisplay();
+    }
+    
+    public void RemoveStatusEffect(StatEffect effect)
+    {
+        switch (effect.type)
+        {
+            case StatEffectType.StatValue:
+                statValues[effect.statValue].currentValue -= effect.GetFinalAmount();
+                Destroy(effect.gameObject, 0.5f);
+                statusEffects.Remove(effect);
+                break;
+            case StatEffectType.BaseStat:
+                UpdateBaseStat(effect.baseStat, (int)effect.GetFinalAmount()); 
+                Destroy(effect.gameObject, 0.5f);
+                statusEffects.Remove(effect);
+                break;
+            default:
+                print("No such type found");
+                break;
+        }
+        UpdateOverallDisplay();
     }
 
 
