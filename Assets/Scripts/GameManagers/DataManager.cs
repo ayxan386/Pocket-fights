@@ -24,19 +24,7 @@ public class DataManager : MonoBehaviour
 
     private void OnStatSave(StatController toSave)
     {
-        var basePath = Application.persistentDataPath;
-        basePath += pathName;
-        if (!Directory.Exists(basePath))
-        {
-            Directory.CreateDirectory(basePath);
-        }
-        
-
-        basePath += filename;
-        if (!File.Exists(basePath))
-        {
-            File.Create(basePath);
-        }
+        var basePath = PreSaveProcess("player_stats__");
 
         var statSaveData = new StatSaveData();
         statSaveData.sourceName = toSave.SourceName;
@@ -56,6 +44,46 @@ public class DataManager : MonoBehaviour
         var json = JsonUtility.ToJson(statSaveData);
 
         File.WriteAllText(basePath, json);
+    }
+
+    private string PreSaveProcess(string filePrefix)
+    {
+        var basePath = Application.persistentDataPath;
+        basePath += pathName;
+        if (!Directory.Exists(basePath))
+        {
+            Directory.CreateDirectory(basePath);
+        }
+
+        basePath = Path.Join(basePath, filePrefix + filename);
+        if (!File.Exists(basePath))
+        {
+            File.Create(basePath);
+        }
+
+        return basePath;
+    }
+
+    [ContextMenu("Save inventory")]
+    public void SaveInventory()
+    {
+        var instanceOwnedItem = InventoryController.Instance.OwnedItem;
+
+        var basePath = PreSaveProcess("inventory");
+        
+        var json = JsonUtility.ToJson(instanceOwnedItem);
+
+        File.WriteAllText(basePath, json);
+    }
+    
+
+    [ContextMenu("Load inventory")]
+    public void LoadInventory()
+    {
+        var basePath = PreSaveProcess("inventory");
+        var allJson = File.ReadAllText(basePath);
+        var inventoryData = JsonUtility.FromJson<InventoryData>(allJson);
+        InventoryController.Instance.LoadData(inventoryData);
     }
 
     [ContextMenu("Load from string")]

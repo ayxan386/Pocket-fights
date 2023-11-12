@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class InventoryController : MonoBehaviour
     private List<InventoryCell> itemCells;
 
     public static InventoryController Instance { get; private set; }
+    public InventoryData OwnedItem => new InventoryData(ownedItems);
 
     private void Awake()
     {
@@ -106,6 +108,26 @@ public class InventoryController : MonoBehaviour
     public void ItemCellClicked(InventoryItem clickedItem)
     {
         //TODO change this
+        clickedItem.Use();
         EventManager.OnItemRemove?.Invoke(clickedItem);
+    }
+
+    public void LoadData(InventoryData inventoryData)
+    {
+        this.ownedItems = inventoryData.ownedItems;
+        UpdateDisplay();
+    }
+}
+
+
+[Serializable]
+public class InventoryData
+{
+
+    public List<InventoryItem> ownedItems;
+
+    public InventoryData(List<InventoryItem> ownedItems)
+    {
+        this.ownedItems = ownedItems;
     }
 }

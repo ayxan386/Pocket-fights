@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 [Serializable]
 public class InventoryItem : MonoBehaviour
@@ -9,6 +10,12 @@ public class InventoryItem : MonoBehaviour
     public int count;
     public int stackSize;
     public string description;
+    public UnityEvent onUseAction;
+
+    public void Use()
+    {
+        onUseAction.Invoke();
+    }
 
     public override string ToString()
     {

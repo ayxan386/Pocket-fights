@@ -4190,7 +4190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathName: /saves
-  filename: stats.json
+  filename: data_v1_test.json
   testJson: '{"baseStats":{"m_Keys":[0,1,2,3],"m_Values":[{"maxValue":4.0,"currentValue":4.0},{"maxValue":4.0,"currentValue":4.0},{"maxValue":4.0,"currentValue":4.0},{"maxValue":4.0,"currentValue":4.0}]}}'
 --- !u!1001 &1800969095
 PrefabInstance:

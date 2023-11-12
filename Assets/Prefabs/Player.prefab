@@ -993,7 +993,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  xpMultiplier: 100000
+  xpMultiplier: 50000
   maxLevel: 100
 --- !u!114 &356217483
 MonoBehaviour:
