@@ -56,10 +56,15 @@ public class StatController : MonoBehaviour
             baseStats[StatTypes.Defense].currentValue * 2 * Lsf);
         statValues[StatValue.ManaRegen] = new(10, 10);
         
+        UpdateOverallDisplay();
+    }
+
+    private void UpdateOverallDisplay()
+    {
         healthBarIndicator.UpdateDisplay(statValues[StatValue.Health]);
         manaBarIndicator.UpdateDisplay(statValues[StatValue.Mana]);
     }
-    
+
     private void CalculateStatValues()
     {
         statValues[StatValue.Health].maxValue = baseStats[StatTypes.Vitality].maxValue * 10 * Lsf;
@@ -148,6 +153,13 @@ public class StatController : MonoBehaviour
         baseStats[statType].currentValue += diff;
         CalculateStatValues();
         EventManager.OnBaseStatUpdate?.Invoke(baseStats[statType].maxValue);
+    }
+    
+    public void UpdateStatValue(StatValue statType, int diff)
+    {
+        var currentValue = statValues[statType].currentValue + diff;
+        statValues[statType].currentValue = Mathf.Clamp(currentValue, 0, statValues[statType].maxValue);
+        UpdateOverallDisplay();
     }
 
     private void UpdateFreePoints(int diff)

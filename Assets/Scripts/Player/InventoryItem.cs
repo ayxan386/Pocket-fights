@@ -11,6 +11,7 @@ public class InventoryItem : MonoBehaviour
     public int stackSize;
     public string description;
     public UnityEvent onUseAction;
+    public ItemType type;
 
     public void Use()
     {
@@ -21,4 +22,10 @@ public class InventoryItem : MonoBehaviour
     {
         return $"Item: {name} {count}";
     }
+}
+
+public enum ItemType
+{
+    Useable,
+    Consumable
 }

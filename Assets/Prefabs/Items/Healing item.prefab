@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3337002340432959712}
   - component: {fileID: 3337002340432959719}
-  - component: {fileID: 6985502362223682020}
+  - component: {fileID: -830563134188924800}
   m_Layer: 0
-  m_Name: XP item
+  m_Name: Healing item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,17 +45,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c452ab8d707fbaf41a9316301bcf37fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 645626868, guid: 7bb12e1a1363c514bb9ee72a9acafce2, type: 3}
-  name: XP star
-  count: 2
-  stackSize: 1
-  description: Gives player xp
+  icon: {fileID: 21300000, guid: 4a39cb4b272639541b7bd5ac0649acf7, type: 3}
+  name: Meat
+  count: 1
+  stackSize: 5
+  description: Restores some health
   onUseAction:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6985502362223682020}
-        m_TargetAssemblyTypeName: XpGivingAction, Assembly-CSharp
-        m_MethodName: GrantXp
+      - m_Target: {fileID: -830563134188924800}
+        m_TargetAssemblyTypeName: HpRestoringAction, Assembly-CSharp
+        m_MethodName: Use
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -66,7 +66,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   type: 0
---- !u!114 &6985502362223682020
+--- !u!114 &-830563134188924800
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -75,7 +75,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3337002340432959713}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd8215ebf72c4508a13d9883946bb0a5, type: 3}
+  m_Script: {fileID: 11500000, guid: f210a61d681b3894d908146dd1ffe9ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amount: 40
+  amount: 10
