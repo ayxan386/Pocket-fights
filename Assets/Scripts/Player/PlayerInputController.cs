@@ -12,7 +12,6 @@ public class PlayerInputController : MonoBehaviour
     [Header("Misc")] [SerializeField] private PlayerCombatInitiation combatInitiation;
     [SerializeField] private Animator pauseMenu;
     [SerializeField] private StatController statController;
-    [SerializeField] private Animator lootUi;
 
     [Header("Leveling")] [SerializeField] private float currentXp;
     [SerializeField] private AnimationCurve xpRequirements;
@@ -26,8 +25,6 @@ public class PlayerInputController : MonoBehaviour
     private bool isPaused;
 
     public StatController Stats => statController;
-
-    public Animator LootUI => lootUi;
 
     public static PlayerInputController Instance { get; private set; }
 

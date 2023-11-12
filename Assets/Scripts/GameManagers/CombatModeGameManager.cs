@@ -18,6 +18,9 @@ public class CombatModeGameManager : MonoBehaviour
     [Header("Loot stuff")] [SerializeField]
     private LootItemPanel lootItemPanelPrefab;
 
+    [SerializeField] private Animator lootPanelAnimation;
+    [SerializeField] private Transform lootHolder;
+
     public static CombatModeGameManager Instance { get; private set; }
     public MobController SelectedEnemy { get; private set; }
     public bool IsCombatMode { get; private set; }
@@ -31,6 +34,7 @@ public class CombatModeGameManager : MonoBehaviour
 
     void Start()
     {
+        Instance = this;
         IsCombatMode = SceneManager.GetActiveScene().name.Contains("Combat");
         mobsInCombat.ForEach(mob => mob.ActivateCombatMode());
         SelectedEnemy = mobsInCombat[0];
@@ -75,7 +79,6 @@ public class CombatModeGameManager : MonoBehaviour
     public void EndOfCombat()
     {
         mobsInCombat.ForEach(mob => mob.DeactivateCombatMode());
-        Instance = null;
     }
 
     public void MobDefeated(MobController deadMob)
@@ -84,7 +87,6 @@ public class CombatModeGameManager : MonoBehaviour
         {
             if (mobController.Id == deadMob.Id)
             {
-                mobsInCombat.Remove(deadMob);
                 StartCoroutine(MobDeath(deadMob));
                 break;
             }
@@ -97,7 +99,7 @@ public class CombatModeGameManager : MonoBehaviour
         deadMob.gameObject.SetActive(false);
         // Destroy(deadMob.gameObject);
 
-        if (mobsInCombat.Count == 0)
+        if (mobsInCombat.TrueForAll(mob => !mob.isActiveAndEnabled))
         {
             PlayerVictory();
         }
@@ -108,21 +110,33 @@ public class CombatModeGameManager : MonoBehaviour
     {
         var allDrops = mobsInCombat.ConvertAll(mob => mob.PossibleLoots);
         var generatedLoot = LootManager.GenerateLoot(allDrops);
-        var lootUiParent = PlayerInputController.Instance.LootUI;
         foreach (var valueTuple in generatedLoot)
         {
             var newDrop = Instantiate(valueTuple.Item1);
             newDrop.count = valueTuple.Item2;
-            var lootItemPanel = Instantiate(lootItemPanelPrefab, lootUiParent.transform);
+            var lootItemPanel = Instantiate(lootItemPanelPrefab, lootHolder);
             lootItemPanel.UpdateDisplay(newDrop);
         }
 
-        lootUiParent.SetTrigger("open");
+        lootPanelAnimation.SetTrigger("open");
 
         // PlayerInputController.Instance.AddXp(100);
         // Time.timeScale = 0;
         // endingMenu.SetActive(true);
         // endText.text = "You won!!!";
-        // EndOfCombat();
+        EndOfCombat();
+    }
+
+    public void CheckLootPanel()
+    {
+        if (lootHolder.childCount == 1)
+        {
+            CloseLootPanel();
+        }
+    }
+
+    public void CloseLootPanel()
+    {
+        lootPanelAnimation.SetTrigger("close");
     }
 }

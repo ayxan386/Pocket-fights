@@ -76,6 +76,7 @@ public class InventoryController : MonoBehaviour
     {
         OnItemAdd(item);
         Destroy(panel.gameObject);
+        CombatModeGameManager.Instance.CheckLootPanel();
     }
 
 
