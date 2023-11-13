@@ -26,7 +26,10 @@ public class MobController : MonoBehaviour
     private IEnumerator Start()
     {
         yield return new WaitForSeconds(2);
-        if (!isCombatModeActive) StartCoroutine(Patrol());
+        if (!isCombatModeActive)
+        {
+            StartCoroutine(Patrol());
+        }
     }
 
     private IEnumerator Patrol()
@@ -53,9 +56,12 @@ public class MobController : MonoBehaviour
         DeactivateCombatMode();
     }
 
-    public void ActivateCombatMode()
+    public void ActivateCombatMode(Transform mobStandPoint)
     {
         Id = Guid.NewGuid();
+        agent.enabled = false;
+        transform.position = mobStandPoint.position;
+        transform.rotation = mobStandPoint.rotation;
         isCombatModeActive = true;
         EventManager.OnPlayerTurnEnd += OnPlayerTurnEnd;
     }
@@ -63,7 +69,8 @@ public class MobController : MonoBehaviour
 
     public void DeactivateCombatMode()
     {
-        isCombatModeActive = true;
+        isCombatModeActive = false;
+        agent.enabled = true;
         EventManager.OnPlayerTurnEnd -= OnPlayerTurnEnd;
     }
 

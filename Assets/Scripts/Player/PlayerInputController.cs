@@ -174,4 +174,12 @@ public class PlayerInputController : MonoBehaviour
             Stats.UpdateLevel(1);
         }
     }
+
+    public void PlacePlayer(Transform playerStandPoint)
+    {
+        cc.enabled = false;
+        transform.position = playerStandPoint.position;
+        transform.rotation = playerStandPoint.rotation;
+        cc.enabled = true;
+    }
 }

@@ -10,6 +10,11 @@ public class CombatModeGameManager : MonoBehaviour
     [SerializeField] private List<MobController> mobsInCombat;
     [SerializeField] private Button endTurnButton;
 
+    [Header("Entity scene placement")] [SerializeField]
+    private Transform playerStandPoint;
+
+    [SerializeField] private List<Transform> mobStandPoints;
+
     [Header("Ending menu")] [SerializeField]
     private GameObject endingMenu;
 
@@ -36,7 +41,14 @@ public class CombatModeGameManager : MonoBehaviour
     {
         Instance = this;
         IsCombatMode = SceneManager.GetActiveScene().name.Contains("Combat");
-        mobsInCombat.ForEach(mob => mob.ActivateCombatMode());
+        if (!IsCombatMode) return;
+        PlayerInputController.Instance.PlacePlayer(playerStandPoint);
+        for (var index = 0; index < mobsInCombat.Count; index++)
+        {
+            var mob = mobsInCombat[index];
+            mob.ActivateCombatMode(mobStandPoints[index]);
+        }
+
         SelectedEnemy = mobsInCombat[0];
     }
 
