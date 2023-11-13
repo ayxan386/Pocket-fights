@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(PlayerInput))]
@@ -23,6 +22,8 @@ public class PlayerInputController : MonoBehaviour
     private PlayerInput playerInput;
     private Vector3 movementVector;
     private bool isPaused;
+    public Vector3 lastPosition;
+    public Quaternion lastRotation;
 
     public StatController Stats => statController;
 
@@ -31,7 +32,6 @@ public class PlayerInputController : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        print("Assigned");
         cc = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
         EventManager.OnPlayerTurnEnd += OnPlayerTurnEnd;
@@ -45,11 +45,18 @@ public class PlayerInputController : MonoBehaviour
     private void Start()
     {
         EventManager.OnSaveStarted += OnSaveStarted;
-        var isCombatScene = SceneManager.GetActiveScene().name.Contains("Combat");
+        EventManager.OnCombatSceneLoading += OnCombatSceneLoading;
         DataManager.Instance.LoadPlayerStats();
+    }
+
+    private void OnCombatSceneLoading(bool isCombatScene)
+    {
         if (isCombatScene)
-        {
             playerInput.SwitchCurrentActionMap("CombatMode");
+        else
+        {
+            playerInput.SwitchCurrentActionMap("Player");
+            PlaceAtLastState();
         }
     }
 
@@ -110,10 +117,7 @@ public class PlayerInputController : MonoBehaviour
 
     private void OnEndTurn()
     {
-        if (CombatModeGameManager.Instance.IsCombatMode)
-        {
-            CombatModeGameManager.Instance.EndPlayerTurn();
-        }
+        CombatModeGameManager.Instance.EndPlayerTurn();
     }
 
     private void OnCombatInitiate()
@@ -175,8 +179,18 @@ public class PlayerInputController : MonoBehaviour
         }
     }
 
+    public void PlaceAtLastState()
+    {
+        cc.enabled = false;
+        transform.position = lastPosition;
+        transform.rotation = lastRotation;
+        cc.enabled = true;
+    }
+
     public void PlacePlayer(Transform playerStandPoint)
     {
+        lastPosition = transform.position;
+        lastRotation = transform.rotation;
         cc.enabled = false;
         transform.position = playerStandPoint.position;
         transform.rotation = playerStandPoint.rotation;

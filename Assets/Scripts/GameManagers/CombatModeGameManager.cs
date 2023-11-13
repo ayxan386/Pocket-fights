@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CombatModeGameManager : MonoBehaviour
@@ -15,8 +14,9 @@ public class CombatModeGameManager : MonoBehaviour
 
     [SerializeField] private List<Transform> mobStandPoints;
 
-    [Header("Ending menu")] [SerializeField]
-    private GameObject endingMenu;
+    [Header("Menus")] [SerializeField] private GameObject endingMenu;
+
+    [SerializeField] private GameObject loadingMenu;
 
     [SerializeField] private TextMeshProUGUI endText;
 
@@ -28,7 +28,6 @@ public class CombatModeGameManager : MonoBehaviour
 
     public static CombatModeGameManager Instance { get; private set; }
     public MobController SelectedEnemy { get; private set; }
-    public bool IsCombatMode { get; private set; }
 
     public bool IsPlayerTurn { get; private set; } = true;
 
@@ -37,12 +36,26 @@ public class CombatModeGameManager : MonoBehaviour
         Instance = this;
     }
 
-    void Start()
+    IEnumerator Start()
     {
-        Instance = this;
-        IsCombatMode = SceneManager.GetActiveScene().name.Contains("Combat");
-        if (!IsCombatMode) return;
+        EventManager.OnCombatSceneLoading += OnCombatSceneLoading;
+
+        // if (PlayerCombatInitiation.Instance.IsCombatScene) OnCombatSceneLoading(true);
+
+        yield return new WaitForSeconds(1.5f);
+        loadingMenu.SetActive(false);
+    }
+
+    private void OnCombatSceneLoading(bool obj)
+    {
+        if (!obj) return;
+
         PlayerInputController.Instance.PlacePlayer(playerStandPoint);
+        if (PlayerCombatInitiation.Instance.mobs != null)
+        {
+            mobsInCombat = PlayerCombatInitiation.Instance.mobs;
+        }
+
         for (var index = 0; index < mobsInCombat.Count; index++)
         {
             var mob = mobsInCombat[index];
@@ -91,6 +104,7 @@ public class CombatModeGameManager : MonoBehaviour
     public void EndOfCombat()
     {
         mobsInCombat.ForEach(mob => mob.DeactivateCombatMode());
+        PlayerCombatInitiation.Instance.UnloadCombatScene();
     }
 
     public void MobDefeated(MobController deadMob)
@@ -109,7 +123,6 @@ public class CombatModeGameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         deadMob.gameObject.SetActive(false);
-        // Destroy(deadMob.gameObject);
 
         if (mobsInCombat.TrueForAll(mob => !mob.isActiveAndEnabled))
         {
@@ -132,23 +145,6 @@ public class CombatModeGameManager : MonoBehaviour
 
         lootPanelAnimation.SetTrigger("open");
 
-        // PlayerInputController.Instance.AddXp(100);
-        // Time.timeScale = 0;
-        // endingMenu.SetActive(true);
-        // endText.text = "You won!!!";
-        EndOfCombat();
     }
 
-    public void CheckLootPanel()
-    {
-        if (lootHolder.childCount == 1)
-        {
-            CloseLootPanel();
-        }
-    }
-
-    public void CloseLootPanel()
-    {
-        lootPanelAnimation.SetTrigger("close");
-    }
 }
