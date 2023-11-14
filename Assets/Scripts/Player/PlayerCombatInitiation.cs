@@ -94,8 +94,8 @@ public class PlayerCombatInitiation : MonoBehaviour
 
     private IEnumerator WaitThenLoad()
     {
-        yield return new WaitForSeconds(0.5f);
         wholeScene.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
         mobsToActivate.ForEach(mob => mob.gameObject.SetActive(true));
         IsCombatScene = false;
         EventManager.OnCombatSceneLoading?.Invoke(false);

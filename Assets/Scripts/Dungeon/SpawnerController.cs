@@ -16,13 +16,14 @@ public class SpawnerController : MonoBehaviour
     private IEnumerator Start()
     {
         var mobParent = GameObject.FindWithTag("MobParent");
-        while (data.numberOfMobsLeft.TrueForAll(number => number > 0))
+        while (CheckIfThereMobsLeft())
         {
             yield return new WaitUntil(() =>
                 gameObject.activeSelf
                 && Vector3.Distance(
                     PlayerInputController.Instance.transform.position, transform.position) <= activationRange
             );
+            print("Trying to spawn");
 
             var count = spawnedMobs.Count(mob => mob.gameObject.activeSelf);
             for (int mobCount = count; mobCount < data.maxNumberOfMobs;)
@@ -30,16 +31,23 @@ public class SpawnerController : MonoBehaviour
                 var index = Random.Range(0, data.mobs.Count);
                 if (data.numberOfMobsLeft[index] > 0)
                 {
+                    mobCount++;
                     var pos = FindRandomPos(0);
                     var newMob = Instantiate(data.mobs[index], pos, Quaternion.identity, mobParent.transform);
                     spawnedMobs.Add(newMob);
                     data.numberOfMobsLeft[index]--;
-                    mobCount++;
                 }
+                
+                if(!CheckIfThereMobsLeft()) yield break;
             }
 
             yield return new WaitForSeconds(data.spawnerRate);
         }
+    }
+
+    private bool CheckIfThereMobsLeft()
+    {
+        return data.numberOfMobsLeft.TrueForAll(number => number > 0);
     }
 
     private Vector3 FindRandomPos(int depth)
