@@ -15,6 +15,7 @@ public class SpawnerController : MonoBehaviour
 
     private IEnumerator Start()
     {
+        var mobParent = GameObject.FindWithTag("MobParent");
         while (data.numberOfMobsLeft.TrueForAll(number => number > 0))
         {
             yield return new WaitUntil(() =>
@@ -24,15 +25,16 @@ public class SpawnerController : MonoBehaviour
             );
 
             var count = spawnedMobs.Count(mob => mob.gameObject.activeSelf);
-            for (int i = count; i < data.maxNumberOfMobs;)
+            for (int mobCount = count; mobCount < data.maxNumberOfMobs;)
             {
                 var index = Random.Range(0, data.mobs.Count);
                 if (data.numberOfMobsLeft[index] > 0)
                 {
-                    i++;
                     var pos = FindRandomPos(0);
-                    var newMob = Instantiate(data.mobs[index], pos, Quaternion.identity, transform);
+                    var newMob = Instantiate(data.mobs[index], pos, Quaternion.identity, mobParent.transform);
                     spawnedMobs.Add(newMob);
+                    data.numberOfMobsLeft[index]--;
+                    mobCount++;
                 }
             }
 

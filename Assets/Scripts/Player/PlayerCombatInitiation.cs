@@ -9,8 +9,10 @@ public class PlayerCombatInitiation : MonoBehaviour
     [SerializeField] private GameObject wholeScene;
     [SerializeField] private float checkRadius;
     [SerializeField] private LayerMask mobLayer;
+    [SerializeField] private List<MobController> mobsToActivate;
 
     public bool IsCombatScene;
+    private GameObject mobParent;
     public List<MobController> mobs { get; private set; }
 
     public static PlayerCombatInitiation Instance { get; private set; }
@@ -25,6 +27,7 @@ public class PlayerCombatInitiation : MonoBehaviour
         var color = colorSource.color;
         color.a = 0;
         colorSource.color = color;
+        mobParent = GameObject.FindWithTag("MobParent");
     }
 
     public void StartInitiation(float duration)
@@ -51,7 +54,7 @@ public class PlayerCombatInitiation : MonoBehaviour
         FindAllMobs();
         yield return new WaitForSeconds(0.2f);
         if (mobs.Count <= 0) yield break;
-        
+
         LoadingCombatScene();
         yield return new WaitForSeconds(0.2f);
         EventManager.OnCombatSceneLoading?.Invoke(true);
@@ -69,13 +72,32 @@ public class PlayerCombatInitiation : MonoBehaviour
                 mobs.Add(controller);
             }
         }
+
+        var allMobsInScene = FindObjectsOfType<MobController>();
+
+        mobsToActivate.Clear();
+        foreach (var mobInScene in allMobsInScene)
+        {
+            if (!mobs.Contains(mobInScene))
+            {
+                mobInScene.gameObject.SetActive(false);
+                mobsToActivate.Add(mobInScene);
+            }
+        }
     }
 
     public void UnloadCombatScene()
     {
-        wholeScene.SetActive(true);
-        IsCombatScene = false;
         SceneManager.UnloadSceneAsync("CombatScene");
+        StartCoroutine(WaitThenLoad());
+    }
+
+    private IEnumerator WaitThenLoad()
+    {
+        yield return new WaitForSeconds(0.5f);
+        wholeScene.SetActive(true);
+        mobsToActivate.ForEach(mob => mob.gameObject.SetActive(true));
+        IsCombatScene = false;
         EventManager.OnCombatSceneLoading?.Invoke(false);
     }
 

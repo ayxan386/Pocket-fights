@@ -84,6 +84,7 @@ public class CombatModeGameManager : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         foreach (var mobController in mobsInCombat)
         {
+            if (!mobController.IsAlive()) continue;
             mobController.AttackPlayer();
             yield return new WaitUntil(() => mobController.IsDoneAttack);
             yield return new WaitForSeconds(1.4f);
@@ -109,7 +110,7 @@ public class CombatModeGameManager : MonoBehaviour
 
     public void EndOfCombat()
     {
-        mobsInCombat.ForEach(mob => mob.DeactivateCombatMode());
+        mobsInCombat.ForEach(mob => { mob.DeactivateCombatMode(); });
         PlayerCombatInitiation.Instance.UnloadCombatScene();
     }
 
@@ -129,10 +130,22 @@ public class CombatModeGameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         deadMob.gameObject.SetActive(false);
-
+        FindNextSelectedMobs();
         if (mobsInCombat.TrueForAll(mob => !mob.isActiveAndEnabled))
         {
             PlayerVictory();
+        }
+    }
+
+    private void FindNextSelectedMobs()
+    {
+        foreach (var mob in mobsInCombat)
+        {
+            if (mob.IsAlive())
+            {
+                SelectedEnemy = mob;
+                break;
+            }
         }
     }
 

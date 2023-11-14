@@ -22,8 +22,9 @@ public class MobController : MonoBehaviour
 
     private IEnumerator Start()
     {
-        while (gameObject.activeSelf)
+        while (true)
         {
+            yield return new WaitUntil(() => gameObject.activeSelf && agent.enabled);
             yield return new WaitForSeconds(2);
             if (!isCombatModeActive)
                 MoveTowardPlayer();
@@ -94,5 +95,10 @@ public class MobController : MonoBehaviour
     private void OnDeathCallback()
     {
         CombatModeGameManager.Instance.MobDefeated(this);
+    }
+
+    public bool IsAlive()
+    {
+        return gameObject.activeSelf && statController.GetStatValue(StatValue.Health).currentValue > 0;
     }
 }

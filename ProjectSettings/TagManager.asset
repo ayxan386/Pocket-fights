@@ -7,6 +7,7 @@ TagManager:
   - MainCanvas
   - PlayerHealthBar
   - PlayerManaBar
+  - MobParent
   layers:
   - Default
   - TransparentFX
