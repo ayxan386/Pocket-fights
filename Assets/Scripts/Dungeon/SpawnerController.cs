@@ -13,6 +13,9 @@ public class SpawnerController : MonoBehaviour
     [SerializeField] private List<MobController> spawnedMobs;
     [SerializeField] private LayerMask obstructionLayer;
 
+    [SerializeField] private Animator boxAnimator;
+    [SerializeField] private GameObject boxMainBody;
+
     private IEnumerator Start()
     {
         var mobParent = GameObject.FindWithTag("MobParent");
@@ -23,7 +26,6 @@ public class SpawnerController : MonoBehaviour
                 && Vector3.Distance(
                     PlayerInputController.Instance.transform.position, transform.position) <= activationRange
             );
-            print("Trying to spawn");
 
             var count = spawnedMobs.Count(mob => mob.gameObject.activeSelf);
             for (int mobCount = count; mobCount < data.maxNumberOfMobs;)
@@ -37,12 +39,24 @@ public class SpawnerController : MonoBehaviour
                     spawnedMobs.Add(newMob);
                     data.numberOfMobsLeft[index]--;
                 }
-                
-                if(!CheckIfThereMobsLeft()) yield break;
+
+                if (!CheckIfThereMobsLeft())
+                {
+                    SpawnerFinished();
+                    yield break;
+                }
             }
 
             yield return new WaitForSeconds(data.spawnerRate);
         }
+
+        SpawnerFinished();
+    }
+
+    private void SpawnerFinished()
+    {
+        boxAnimator.SetTrigger("destroy");
+        boxMainBody.SetActive(false);
     }
 
     private bool CheckIfThereMobsLeft()
