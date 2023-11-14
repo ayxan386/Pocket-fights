@@ -36,12 +36,18 @@ public class CombatModeGameManager : MonoBehaviour
         Instance = this;
     }
 
-    IEnumerator Start()
+    private void OnEnable()
     {
         EventManager.OnCombatSceneLoading += OnCombatSceneLoading;
+    }
 
-        // if (PlayerCombatInitiation.Instance.IsCombatScene) OnCombatSceneLoading(true);
+    private void OnDisable()
+    {
+        EventManager.OnCombatSceneLoading -= OnCombatSceneLoading;
+    }
 
+    IEnumerator Start()
+    {
         yield return new WaitForSeconds(1.5f);
         loadingMenu.SetActive(false);
     }
@@ -144,7 +150,5 @@ public class CombatModeGameManager : MonoBehaviour
         }
 
         lootPanelAnimation.SetTrigger("open");
-
     }
-
 }

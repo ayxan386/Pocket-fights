@@ -15,33 +15,24 @@ public class MobController : MonoBehaviour
     [Header("AI parameters")] [SerializeField]
     private NavMeshAgent agent;
 
-    [SerializeField] private Transform[] patrolPoints;
-
     public Guid Id { get; private set; }
     public List<PossibleLoot> PossibleLoots => possibleDrops;
     public bool IsDoneAttack { get; private set; }
     private bool isCombatModeActive = false;
-    private int patrolPointIndex = 0;
 
     private IEnumerator Start()
     {
-        yield return new WaitForSeconds(2);
-        if (!isCombatModeActive)
+        while (gameObject.activeSelf)
         {
-            StartCoroutine(Patrol());
+            yield return new WaitForSeconds(2);
+            if (!isCombatModeActive)
+                MoveTowardPlayer();
         }
     }
 
-    private IEnumerator Patrol()
+    public void MoveTowardPlayer()
     {
-        while (!isCombatModeActive)
-        {
-            agent.SetDestination(patrolPoints[patrolPointIndex].position);
-            yield return new WaitUntil(() =>
-                Vector3.Distance(transform.position, patrolPoints[patrolPointIndex].position) <= 0.3);
-            yield return new WaitForSeconds(0.4f);
-            patrolPointIndex = (patrolPointIndex + 1) % patrolPoints.Length;
-        }
+        agent.SetDestination(PlayerInputController.Instance.transform.position);
     }
 
     public void ReceiveAttack(float baseDamage)
