@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class InventoryItem : MonoBehaviour
 {
     public Sprite icon;
-    public string name;
+    public new string name;
     public int count;
     public int stackSize;
     public string description;

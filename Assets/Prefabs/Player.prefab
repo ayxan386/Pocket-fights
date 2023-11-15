@@ -634,7 +634,7 @@ GameObject:
   - component: {fileID: 1663934348}
   - component: {fileID: 1663934347}
   - component: {fileID: 1663934350}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -738,6 +738,7 @@ MonoBehaviour:
   mobLayer:
     serializedVersion: 2
     m_Bits: 64
+  mobsToActivate: []
   IsCombatScene: 0
 --- !u!1 &2128657474
 GameObject:
@@ -820,7 +821,7 @@ GameObject:
   - component: {fileID: 51443049420896145}
   - component: {fileID: 356217483}
   - component: {fileID: 356217490}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1000,6 +1001,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   xpMultiplier: 50000
   maxLevel: 100
+  lastPosition: {x: 0, y: 0, z: 0}
+  lastRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &356217483
 MonoBehaviour:
   m_ObjectHideFlags: 0
