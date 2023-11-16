@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Cinemachine;
-using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -9,6 +8,8 @@ public class RoomManager : MonoBehaviour
 {
     [SerializeField] private CinemachineVirtualCamera roomCamera;
     [SerializeField] private List<TeleportPad> pads;
+    [SerializeField] private Transform playerSpawnPoint;
+    [SerializeField] private string comparisonName;
 
     [Header("Floor generation")] [SerializeField]
     private Transform floorGenerationPoint;
@@ -30,6 +31,10 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private int deadCellCount = 1;
     [SerializeField] private string deadCellName;
 
+    public List<TeleportPad> Telepads => pads;
+
+    public string ComparisonName => comparisonName;
+
     private void Start()
     {
         pads.ForEach(pad => pad.LinkedRoom = this);
@@ -43,6 +48,21 @@ public class RoomManager : MonoBehaviour
     public void Deactivate()
     {
         roomCamera.Priority = 5;
+    }
+
+    public void PlacePlayer()
+    {
+        PlayerInputController.Instance.PlacePlayer(playerSpawnPoint);
+    }
+
+    public bool CanConnectToDirection(TelepadColor desiredColor)
+    {
+        return pads.Exists(pad => pad.Color == desiredColor);
+    }
+
+    public bool HasUnlinkedTelepad()
+    {
+        return pads.Exists(pad => !pad.IsLinked);
     }
 
     [ContextMenu("Random bottom floor generation")]
@@ -62,13 +82,13 @@ public class RoomManager : MonoBehaviour
                 pos.z += sizeOfCell.z * y;
                 var block = GetRandomBlock(pos.x, pos.z);
                 // Instantiate(block.block, pos, Quaternion.identity, floorGenerationPoint);
-                
-                var newBlock = PrefabUtility.InstantiatePrefab(block.block) as GameObject;
-                newBlock.transform.position = pos;
-                newBlock.transform.rotation = Quaternion.identity;
-                newBlock.transform.SetParent(floorGenerationPoint);
-                
-                floorBlocks.Add(block.type);
+
+                // var newBlock = PrefabUtility.InstantiatePrefab(block.block) as GameObject;
+                // newBlock.transform.position = pos;
+                // newBlock.transform.rotation = Quaternion.identity;
+                // newBlock.transform.SetParent(floorGenerationPoint);
+                //
+                // floorBlocks.Add(block.type);
             }
         }
     }
@@ -88,11 +108,10 @@ public class RoomManager : MonoBehaviour
                 var bottomLayer = floorBlocks[GetIndex(y, x)];
                 var pair = topBottomPairsList.Find(pair => pair.bottomName == bottomLayer);
 
-                // Instantiate(pair.top, pos, Quaternion.identity, capLayer);
-                var newBlock = PrefabUtility.InstantiatePrefab(pair.top) as GameObject;
-                newBlock.transform.position = pos;
-                newBlock.transform.rotation = Quaternion.identity;
-                newBlock.transform.SetParent(capLayer);
+                // var newBlock = PrefabUtility.InstantiatePrefab(pair.top) as GameObject;
+                // newBlock.transform.position = pos;
+                // newBlock.transform.rotation = Quaternion.identity;
+                // newBlock.transform.SetParent(capLayer);
             }
         }
     }

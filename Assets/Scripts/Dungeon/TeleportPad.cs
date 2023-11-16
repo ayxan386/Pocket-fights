@@ -14,12 +14,17 @@ public class TeleportPad : MonoBehaviour
     [SerializeField] private float duration;
     [SerializeField] private float cooldownPeriod;
     [SerializeField] private Transform teleportPoint;
+    [SerializeField] private TelepadColor color;
 
     [Header("FX")] [SerializeField] private ParticleSystem teleportParticles;
 
     private bool OnCooldown { get; set; }
 
     public RoomManager LinkedRoom { get; set; }
+
+    public bool IsLinked => linkedPad != null;
+
+    public TelepadColor Color => color;
 
     private void FixedUpdate()
     {
@@ -54,7 +59,19 @@ public class TeleportPad : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.blue;
+        Gizmos.color = UnityEngine.Color.blue;
         Gizmos.DrawWireSphere(transform.position, distance);
     }
+
+    public void Link(TeleportPad otherPad)
+    {
+        linkedPad = otherPad;
+        otherPad.linkedPad = this;
+    }
+}
+
+public enum TelepadColor
+{
+    Blue,
+    Red
 }
