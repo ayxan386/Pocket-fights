@@ -71,6 +71,10 @@ public class PlayerCombatInitiation : MonoBehaviour
             {
                 mobs.Add(controller);
             }
+            else if(mob.transform.TryGetComponent(out EntityController entity))
+            {
+                entity.Interact(); 
+            }
         }
 
         var allMobsInScene = FindObjectsOfType<MobController>();
