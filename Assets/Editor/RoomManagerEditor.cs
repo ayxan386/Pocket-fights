@@ -23,5 +23,10 @@ public class RoomManagerEditor : Editor
         {
             myTarget.GameOfLife();
         }
+
+        if (GUILayout.Button("Place decors"))
+        {
+            myTarget.PlaceDecors();
+        }
     }
 }

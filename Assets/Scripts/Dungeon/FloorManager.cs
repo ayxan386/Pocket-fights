@@ -50,14 +50,14 @@ public class FloorManager : MonoBehaviour
 
             if (potentialRoom != null)
             {
-                var pos = currentRoom.transform.position;
+                var pos = transform.position;
                 if (roomInstances.Count % 2 == 0)
                 {
-                    pos.x += distanceBetweenRooms.x;
+                    pos.x += distanceBetweenRooms.x * roomInstances.Count * (roomInstances.Count % 2 == 0 ? 1 : -1);
                 }
                 else
                 {
-                    pos.z += distanceBetweenRooms.y;
+                    pos.z += distanceBetweenRooms.y * roomInstances.Count;
                 }
 
                 potentialRoom = Instantiate(potentialRoom, pos, Quaternion.identity, transform);

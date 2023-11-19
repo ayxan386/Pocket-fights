@@ -298,6 +298,17 @@ MonoBehaviour:
   cellNumberThreshold: 0
   deadCellCount: 1
   deadCellName: 
+  decorPrefabs: []
+  density: 0
+  decorHolder: {fileID: 0}
+  showGizmos: 0
+  forbiddenLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  layerToPlaceDecorOnTop: {fileID: 0}
+  decorPosition: []
+  randomSeed: 0
+  currentSeed: 0
 --- !u!1 &3694069855664822289
 GameObject:
   m_ObjectHideFlags: 0
@@ -750,11 +761,6 @@ PrefabInstance:
         type: 3}
       propertyPath: color
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7527554489393050818, guid: 6a584c9129e38a74c930f30eca4a3986,
-        type: 3}
-      propertyPath: linkedPad
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7527554489393050819, guid: 6a584c9129e38a74c930f30eca4a3986,
         type: 3}

@@ -17,6 +17,7 @@ public class TeleportPad : MonoBehaviour
     [SerializeField] private TelepadColor color;
 
     [Header("FX")] [SerializeField] private ParticleSystem teleportParticles;
+    private Coroutine teleportRoutine;
 
     private bool OnCooldown { get; set; }
 
@@ -31,7 +32,11 @@ public class TeleportPad : MonoBehaviour
         if (linkedPad != null
             && Physics.CheckSphere(transform.position, distance, playerLayer))
         {
-            StartCoroutine(TeleportPlayer());
+            teleportRoutine = StartCoroutine(TeleportPlayer());
+        }
+        else if (teleportRoutine != null)
+        {
+            StopCoroutine(teleportRoutine);
         }
     }
 
@@ -73,5 +78,7 @@ public class TeleportPad : MonoBehaviour
 public enum TelepadColor
 {
     Blue,
-    Red
+    Red,
+    Green,
+    Purple
 }

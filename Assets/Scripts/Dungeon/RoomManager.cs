@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Cinemachine;
+using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -30,6 +31,17 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private int cellNumberThreshold;
     [SerializeField] private int deadCellCount = 1;
     [SerializeField] private string deadCellName;
+
+    [Header("Room decor")] [SerializeField]
+    private List<BlockChance> decorPrefabs;
+    [SerializeField] [Range(0,1f)] private float density;
+    [SerializeField] private Transform decorHolder;
+    [SerializeField] private bool showGizmos;
+    [SerializeField] private LayerMask forbiddenLayers;
+    [SerializeField] private Transform layerToPlaceDecorOnTop;
+    [SerializeField] private List<Vector3> decorPosition;
+    [SerializeField] private bool randomSeed;
+    [SerializeField] private int currentSeed;
 
     public List<TeleportPad> Telepads => pads;
 
@@ -80,15 +92,15 @@ public class RoomManager : MonoBehaviour
                 var pos = floorGenerationPoint.position;
                 pos.x += sizeOfCell.x * x;
                 pos.z += sizeOfCell.z * y;
-                var block = GetRandomBlock(pos.x, pos.z);
+                var block = GetRandomBlock(pos.x, pos.z, blocks);
                 // Instantiate(block.block, pos, Quaternion.identity, floorGenerationPoint);
 
-                // var newBlock = PrefabUtility.InstantiatePrefab(block.block) as GameObject;
-                // newBlock.transform.position = pos;
-                // newBlock.transform.rotation = Quaternion.identity;
-                // newBlock.transform.SetParent(floorGenerationPoint);
-                //
-                // floorBlocks.Add(block.type);
+                var newBlock = PrefabUtility.InstantiatePrefab(block.block) as GameObject;
+                newBlock.transform.position = pos;
+                newBlock.transform.rotation = Quaternion.identity;
+                newBlock.transform.SetParent(floorGenerationPoint);
+                
+                floorBlocks.Add(block.type);
             }
         }
     }
@@ -108,10 +120,10 @@ public class RoomManager : MonoBehaviour
                 var bottomLayer = floorBlocks[GetIndex(y, x)];
                 var pair = topBottomPairsList.Find(pair => pair.bottomName == bottomLayer);
 
-                // var newBlock = PrefabUtility.InstantiatePrefab(pair.top) as GameObject;
-                // newBlock.transform.position = pos;
-                // newBlock.transform.rotation = Quaternion.identity;
-                // newBlock.transform.SetParent(capLayer);
+                var newBlock = PrefabUtility.InstantiatePrefab(pair.top) as GameObject;
+                newBlock.transform.position = pos;
+                newBlock.transform.rotation = Quaternion.identity;
+                newBlock.transform.SetParent(capLayer);
             }
         }
     }
@@ -176,10 +188,10 @@ public class RoomManager : MonoBehaviour
         }
     }
 
-    private BlockChance GetRandomBlock(float x, float y)
+    private BlockChance GetRandomBlock(float x, float y, List<BlockChance> blockCollection)
     {
         var chance = Mathf.PerlinNoise(x + offset.x, y + offset.y);
-        foreach (var tuple in blocks)
+        foreach (var tuple in blockCollection)
         {
             if (chance >= tuple.weight.x && chance <= tuple.weight.y)
             {
@@ -189,11 +201,58 @@ public class RoomManager : MonoBehaviour
 
         return null;
     }
+
+    private void OnDrawGizmosSelected()
+    {
+        if(!showGizmos) return;
+
+        GenerateDecorPositions();
+        
+        Gizmos.color = Color.cyan;
+        foreach (var pos in decorPosition)
+        {
+            Gizmos.DrawSphere(pos, 0.4f);
+        }
+    }
+
+    private void GenerateDecorPositions()
+    {
+        decorPosition = new List<Vector3>();
+        if (randomSeed)
+        {
+            currentSeed = (int)(Random.value * Random.Range(1000, 123456));
+        }
+        
+        Random.InitState(currentSeed);
+        for (int childIndex = 0; childIndex < layerToPlaceDecorOnTop.childCount; childIndex++)
+        {
+            if (Random.value <= density)
+            {
+                var capBlock = layerToPlaceDecorOnTop.GetChild(childIndex);
+                if(( forbiddenLayers & (1 << capBlock.gameObject.layer)) != 0) continue;
+                decorPosition.Add(capBlock.position);
+            }
+        }
+    }
+
+    public void PlaceDecors()
+    {
+        DeleteAllChildren(decorHolder);
+        foreach (var decorPos in decorPosition)
+        {
+            var randomDecor = GetRandomBlock(decorPos.x, decorPos.z, decorPrefabs);
+            var newBlock = PrefabUtility.InstantiatePrefab(randomDecor.block) as GameObject;
+            newBlock.transform.position = decorPos + randomDecor.placementOffset;
+            newBlock.transform.rotation = Quaternion.identity;
+            newBlock.transform.SetParent(decorHolder);
+        } 
+    }
 }
 
 [Serializable]
 public class BlockChance
 {
+    public Vector3 placementOffset;
     public string type;
     public Vector2 weight;
     public GameObject block;
