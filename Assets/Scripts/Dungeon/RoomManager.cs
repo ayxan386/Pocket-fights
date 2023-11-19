@@ -191,6 +191,7 @@ public class RoomManager : MonoBehaviour
     private BlockChance GetRandomBlock(float x, float y, List<BlockChance> blockCollection)
     {
         var chance = Mathf.PerlinNoise(x + offset.x, y + offset.y);
+        print("chance: " +chance);
         foreach (var tuple in blockCollection)
         {
             if (chance >= tuple.weight.x && chance <= tuple.weight.y)

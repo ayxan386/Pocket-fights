@@ -27,6 +27,12 @@ public class TeleportPad : MonoBehaviour
 
     public TelepadColor Color => color;
 
+    private IEnumerator Start()
+    {
+        yield return new WaitForSeconds(5f);
+        if (linkedPad == null) Destroy(gameObject);
+    }
+
     private void FixedUpdate()
     {
         if (linkedPad != null

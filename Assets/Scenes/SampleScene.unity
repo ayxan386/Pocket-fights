@@ -262,7 +262,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   m_LocalRotation: {x: 0.23911765, y: 0.3696438, z: -0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: 430.46, y: 13.81, z: 444.11}
+  m_LocalPosition: {x: -19.54, y: 13.81, z: -5.89}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -806,7 +806,13 @@ MonoBehaviour:
   - {fileID: 3694069855595287759, guid: a256b7c9c1855b341a3a884103d6bc2f, type: 3}
   - {fileID: 6257951923183327996, guid: 627d344e9ce32cd4d8cf1643b8326746, type: 3}
   - {fileID: 4282307684779486102, guid: 61eeb1d735ab21447ab9451411e18e08, type: 3}
+  - {fileID: 1419417744967704818, guid: 1bab13041b8aa194f93c10f9083ada06, type: 3}
   roomInstances:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
