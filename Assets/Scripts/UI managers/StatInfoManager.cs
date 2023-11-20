@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -10,6 +11,11 @@ public class StatInfoManager : MonoBehaviour
     private void OnEnable()
     {
         EventManager.OnBaseStatUpdate += OnBaseStatUpdate;
+    }
+
+    private IEnumerator Start()
+    {
+        yield return new WaitUntil(() => PlayerInputController.Instance != null);
         OnBaseStatUpdate(0);
     }
 

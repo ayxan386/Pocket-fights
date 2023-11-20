@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class InfoDetailsManager : MonoBehaviour
@@ -10,9 +12,14 @@ public class InfoDetailsManager : MonoBehaviour
 
     void OnEnable()
     {
-        UpdateValues();
         EventManager.OnBaseStatUpdate += OnBaseStatUpdate;
         EventManager.OnPlayerCoreUpdate += OnPlayerCoreUpdate;
+    }
+
+    private IEnumerator Start()
+    {
+        yield return new WaitUntil(() => PlayerInputController.Instance != null);
+        UpdateValues();
     }
 
     private void OnDisable()
