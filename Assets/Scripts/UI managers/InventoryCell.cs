@@ -80,7 +80,7 @@ public class InventoryCell : MonoBehaviour
     {
         while (storedItem != null)
         {
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.2f);
             SendClick();
         }
 
