@@ -119,6 +119,12 @@ public class InventoryController : MonoBehaviour
         this.ownedItems = inventoryData.ownedItems;
         UpdateDisplay();
     }
+
+    public void AddGold(int amount)
+    {
+        gold += amount;
+        EventManager.OnPlayerCoreUpdate?.Invoke(gold);
+    }
 }
 
 

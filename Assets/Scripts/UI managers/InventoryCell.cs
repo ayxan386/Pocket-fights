@@ -17,7 +17,8 @@ public class InventoryCell : MonoBehaviour
 
     private void Start()
     {
-        SetNoItemState();
+        if (storedItem == null)
+            SetNoItemState();
     }
 
     public void SetNoItemState()

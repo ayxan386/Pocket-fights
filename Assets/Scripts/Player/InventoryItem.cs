@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -16,6 +17,12 @@ public class InventoryItem : MonoBehaviour
     public void Use()
     {
         onUseAction.Invoke();
+    }
+
+    private IEnumerator Start()
+    {
+        yield return new WaitUntil(() => count <= 0);
+        Destroy(gameObject);
     }
 
     public override string ToString()
