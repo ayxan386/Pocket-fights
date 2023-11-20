@@ -12,4 +12,5 @@ public class EventManager : MonoBehaviour
     public static Action<InventoryItem, LootItemPanel> OnItemAddAsLoot;
     public static Action<InventoryItem> OnItemRemove;
     public static Action<bool> OnCombatSceneLoading;
+    public static Action<bool> OnPauseMenuToggled;
 }

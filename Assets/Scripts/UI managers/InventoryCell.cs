@@ -11,13 +11,14 @@ public class InventoryCell : MonoBehaviour
     [SerializeField] private TextMeshProUGUI countText;
     [SerializeField] private Image innerPart;
     [SerializeField] private Color[] innerColors;
+    [SerializeField] private InventoryCellType type;
     public int id;
     public InventoryItem storedItem;
     private Coroutine clickCoro;
 
     private void Start()
     {
-        if (storedItem == null)
+        if (storedItem == null && type != InventoryCellType.Equipment)
             SetNoItemState();
     }
 
@@ -94,4 +95,11 @@ public class InventoryCell : MonoBehaviour
             InventoryController.Instance.ItemCellClicked(storedItem);
         }
     }
+}
+
+public enum InventoryCellType
+{
+    Bag,
+    Shop,
+    Equipment
 }
