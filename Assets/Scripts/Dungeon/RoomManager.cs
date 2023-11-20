@@ -93,13 +93,12 @@ public class RoomManager : MonoBehaviour
                 pos.x += sizeOfCell.x * x;
                 pos.z += sizeOfCell.z * y;
                 var block = GetRandomBlock(pos.x, pos.z, blocks);
-                // Instantiate(block.block, pos, Quaternion.identity, floorGenerationPoint);
 
-                var newBlock = PrefabUtility.InstantiatePrefab(block.block) as GameObject;
-                newBlock.transform.position = pos;
-                newBlock.transform.rotation = Quaternion.identity;
-                newBlock.transform.SetParent(floorGenerationPoint);
-                
+                // var newBlock = PrefabUtility.InstantiatePrefab(block.block) as GameObject;
+                // newBlock.transform.position = pos;
+                // newBlock.transform.rotation = Quaternion.identity;
+                // newBlock.transform.SetParent(floorGenerationPoint);
+                //
                 floorBlocks.Add(block.type);
             }
         }
@@ -120,10 +119,10 @@ public class RoomManager : MonoBehaviour
                 var bottomLayer = floorBlocks[GetIndex(y, x)];
                 var pair = topBottomPairsList.Find(pair => pair.bottomName == bottomLayer);
 
-                var newBlock = PrefabUtility.InstantiatePrefab(pair.top) as GameObject;
-                newBlock.transform.position = pos;
-                newBlock.transform.rotation = Quaternion.identity;
-                newBlock.transform.SetParent(capLayer);
+                // var newBlock = PrefabUtility.InstantiatePrefab(pair.top) as GameObject;
+                // newBlock.transform.position = pos;
+                // newBlock.transform.rotation = Quaternion.identity;
+                // newBlock.transform.SetParent(capLayer);
             }
         }
     }
@@ -242,10 +241,10 @@ public class RoomManager : MonoBehaviour
         foreach (var decorPos in decorPosition)
         {
             var randomDecor = GetRandomBlock(decorPos.x, decorPos.z, decorPrefabs);
-            var newBlock = PrefabUtility.InstantiatePrefab(randomDecor.block) as GameObject;
-            newBlock.transform.position = decorPos + randomDecor.placementOffset;
-            newBlock.transform.rotation = Quaternion.identity;
-            newBlock.transform.SetParent(decorHolder);
+            // var newBlock = PrefabUtility.InstantiatePrefab(randomDecor.block) as GameObject;
+            // newBlock.transform.position = decorPos + randomDecor.placementOffset;
+            // newBlock.transform.rotation = Quaternion.identity;
+            // newBlock.transform.SetParent(decorHolder);
         } 
     }
 }

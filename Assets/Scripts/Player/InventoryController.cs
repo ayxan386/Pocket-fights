@@ -8,11 +8,13 @@ public class InventoryController : MonoBehaviour
     [SerializeField] private List<InventoryItem> ownedItems;
     [SerializeField] private Transform itemCellHolder;
     [SerializeField] private InventoryItem randomItem;
+    [SerializeField] private int gold;
 
     private List<InventoryCell> itemCells;
 
     public static InventoryController Instance { get; private set; }
     public InventoryData OwnedItem => new InventoryData(ownedItems);
+    public int Gold => gold;
 
     private void Awake()
     {
@@ -123,7 +125,6 @@ public class InventoryController : MonoBehaviour
 [Serializable]
 public class InventoryData
 {
-
     public List<InventoryItem> ownedItems;
 
     public InventoryData(List<InventoryItem> ownedItems)
