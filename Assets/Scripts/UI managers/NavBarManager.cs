@@ -29,7 +29,11 @@ public class NavBarManager : MonoBehaviour
             case "Shop":
                 tabs.Find(tab => tab.name == "Inventory").SetActive(true);
                 if (!isShopOpen)
+                {
                     pauseMenuAnimator.SetTrigger("shopOpen");
+                    EventManager.OnShopOpened?.Invoke(true);
+                }
+
                 isShopOpen = true;
                 break;
             default:

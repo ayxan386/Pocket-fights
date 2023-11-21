@@ -9,6 +9,7 @@ public class InventoryCell : MonoBehaviour
     [SerializeField] private GameObject descGm;
     [SerializeField] private TextMeshProUGUI descText;
     [SerializeField] private TextMeshProUGUI countText;
+    [SerializeField] private TextMeshProUGUI priceText;
     [SerializeField] private Image innerPart;
     [SerializeField] private Color[] innerColors;
     [SerializeField] private InventoryCellType type;
@@ -43,15 +44,24 @@ public class InventoryCell : MonoBehaviour
         }
     }
 
-    public void UpdateDisplay(InventoryItem item)
+    public void UpdateDisplay(InventoryItem item, InventoryCellType inventoryCellType)
     {
         storedItem = item;
+        type = inventoryCellType;
+
         var itemIconColor = itemIcon.color;
         itemIconColor.a = 1;
         itemIcon.color = itemIconColor;
         itemIcon.sprite = item.icon;
+
         countText.text = "x" + item.count;
         countText.alpha = 1;
+
+        if (type == InventoryCellType.Shop)
+        {
+            priceText.text = item.buyPrice + "g";
+            priceText.alpha = 1;
+        }
     }
 
     public void SetId(int newId)

@@ -36,14 +36,13 @@ public class InventoryController : MonoBehaviour
         EventManager.OnItemRemove += OnItemRemove;
     }
 
-
     public void UpdateDisplay()
     {
         for (var i = 0; i < itemCells.Count; i++)
         {
             if (i < ownedItems.Count)
             {
-                itemCells[i].UpdateDisplay(ownedItems[i]);
+                itemCells[i].UpdateDisplay(ownedItems[i], InventoryCellType.Shop);
             }
             else
             {

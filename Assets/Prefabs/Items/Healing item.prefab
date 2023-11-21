@@ -48,6 +48,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 4a39cb4b272639541b7bd5ac0649acf7, type: 3}
   name: Meat
   count: 1
+  buyPrice: 5
   stackSize: 5
   description: Restores some health
   onUseAction:

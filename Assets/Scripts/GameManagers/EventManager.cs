@@ -13,4 +13,5 @@ public class EventManager : MonoBehaviour
     public static Action<InventoryItem> OnItemRemove;
     public static Action<bool> OnCombatSceneLoading;
     public static Action<bool> OnPauseMenuToggled;
+    public static Action<bool> OnShopOpened;
 }
