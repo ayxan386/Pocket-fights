@@ -1627,6 +1627,7 @@ MonoBehaviour:
   randomItem: {fileID: 3337002340432959719, guid: fd7389eff2aaccb488d74264e9423df1,
     type: 3}
   gold: 0
+  inventorySize: 27
 --- !u!1 &8452081535328445231
 GameObject:
   m_ObjectHideFlags: 0

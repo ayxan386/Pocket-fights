@@ -31,9 +31,10 @@ public class MobController : MonoBehaviour
         }
     }
 
-    public void MoveTowardPlayer()
+    private void MoveTowardPlayer()
     {
-        agent.SetDestination(PlayerInputController.Instance.transform.position);
+        if (agent.enabled)
+            agent.SetDestination(PlayerInputController.Instance.transform.position);
     }
 
     public void ReceiveAttack(float baseDamage)

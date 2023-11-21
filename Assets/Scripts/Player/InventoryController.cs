@@ -9,6 +9,7 @@ public class InventoryController : MonoBehaviour
     [SerializeField] private Transform itemCellHolder;
     [SerializeField] private InventoryItem randomItem;
     [SerializeField] private int gold;
+    [SerializeField] private int inventorySize;
 
     private List<InventoryCell> itemCells;
 
@@ -34,7 +35,9 @@ public class InventoryController : MonoBehaviour
         EventManager.OnItemAdd += OnItemAdd;
         EventManager.OnItemAddAsLoot += OnItemAddAsLoot;
         EventManager.OnItemRemove += OnItemRemove;
+        EventManager.OnItemBought += OnItemBought;
     }
+
 
     public void UpdateDisplay()
     {
@@ -42,7 +45,7 @@ public class InventoryController : MonoBehaviour
         {
             if (i < ownedItems.Count)
             {
-                itemCells[i].UpdateDisplay(ownedItems[i], InventoryCellType.Shop);
+                itemCells[i].UpdateDisplay(ownedItems[i], InventoryCellType.Bag);
             }
             else
             {
@@ -55,7 +58,7 @@ public class InventoryController : MonoBehaviour
     {
         var inventoryItem = ownedItems.FirstOrDefault(ownedItem => ownedItem.name == addedItem.name);
 
-        while (addedItem.count > 0)
+        while (addedItem.count > 0 && ownedItems.Count < inventorySize)
         {
             if (inventoryItem == null || inventoryItem.count == inventoryItem.stackSize)
             {
@@ -79,6 +82,23 @@ public class InventoryController : MonoBehaviour
         Destroy(panel.gameObject);
     }
 
+    private void OnItemBought(InventoryItem boughtItem)
+    {
+        if (boughtItem.buyPrice > Gold) return;
+
+        var prevCount = boughtItem.count;
+        boughtItem.count = 1;
+
+        OnItemAdd(boughtItem);
+
+        var boughtItemCount = 1 - boughtItem.count;
+        boughtItem.count = prevCount - boughtItemCount;
+        if (boughtItemCount > 0)
+        {
+            AddGold(-boughtItem.buyPrice * boughtItemCount);
+            ShopManager.Instance.UpdateDisplay();
+        }
+    }
 
     private void OnItemRemove(InventoryItem removedItem)
     {
@@ -91,7 +111,6 @@ public class InventoryController : MonoBehaviour
 
         UpdateDisplay();
     }
-
 
     [ContextMenu("Add random item")]
     public void AddRandomItem()
@@ -106,11 +125,21 @@ public class InventoryController : MonoBehaviour
         EventManager.OnItemRemove?.Invoke(randomItem);
     }
 
-    public void ItemCellClicked(InventoryItem clickedItem)
+    public void ItemCellClicked(InventoryItem clickedItem, InventoryCellType cellType)
     {
         //TODO change this
-        clickedItem.Use();
-        EventManager.OnItemRemove?.Invoke(clickedItem);
+
+        switch (cellType)
+        {
+            case InventoryCellType.Shop:
+                OnItemBought(clickedItem);
+                break;
+            default:
+                print("Using item");
+                clickedItem.Use();
+                EventManager.OnItemRemove?.Invoke(clickedItem);
+                break;
+        }
     }
 
     public void LoadData(InventoryData inventoryData)

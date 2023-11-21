@@ -36,11 +36,11 @@ public class ShopManager : MonoBehaviour
         UpdateDisplay();
     }
 
-    private void UpdateDisplay()
+    public void UpdateDisplay()
     {
         for (var i = 0; i < itemCells.Count; i++)
         {
-            if (i < storedItems.Count)
+            if (i < storedItems.Count && storedItems[i].count > 0)
             {
                 itemCells[i].UpdateDisplay(storedItems[i], InventoryCellType.Shop);
             }

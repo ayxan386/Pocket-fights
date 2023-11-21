@@ -31,6 +31,7 @@ public class InventoryCell : MonoBehaviour
         itemIcon.color = itemIconColor;
         descGm.SetActive(false);
         countText.alpha = 0;
+        priceText.alpha = 0;
     }
 
     [ContextMenu("Set color")]
@@ -100,10 +101,8 @@ public class InventoryCell : MonoBehaviour
 
     private void SendClick()
     {
-        if (storedItem != null)
-        {
-            InventoryController.Instance.ItemCellClicked(storedItem);
-        }
+        if (storedItem == null) return;
+        InventoryController.Instance.ItemCellClicked(storedItem, type);
     }
 }
 
