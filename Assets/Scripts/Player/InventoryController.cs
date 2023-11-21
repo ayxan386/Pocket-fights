@@ -35,7 +35,7 @@ public class InventoryController : MonoBehaviour
         EventManager.OnItemAdd += OnItemAdd;
         EventManager.OnItemAddAsLoot += OnItemAddAsLoot;
         EventManager.OnItemRemove += OnItemRemove;
-        EventManager.OnItemBought += OnItemBought;
+        EventManager.OnShopToggled += OnShopToggled;
     }
 
 
@@ -56,7 +56,7 @@ public class InventoryController : MonoBehaviour
 
     private void OnItemAdd(InventoryItem addedItem)
     {
-        var inventoryItem = ownedItems.FirstOrDefault(ownedItem => ownedItem.name == addedItem.name);
+        var inventoryItem = ownedItems.LastOrDefault(ownedItem => ownedItem.name == addedItem.name);
 
         while (addedItem.count > 0 && ownedItems.Count < inventorySize)
         {
@@ -109,6 +109,11 @@ public class InventoryController : MonoBehaviour
             ownedItems.Remove(removedItem);
         }
 
+        UpdateDisplay();
+    }
+
+    private void OnShopToggled(bool isShopOpen)
+    {
         UpdateDisplay();
     }
 

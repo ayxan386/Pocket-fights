@@ -14,6 +14,7 @@ public class InventoryItem : MonoBehaviour
     public string description;
     public UnityEvent onUseAction;
     public ItemType type;
+    public bool canBeSold;
 
     public void Use()
     {

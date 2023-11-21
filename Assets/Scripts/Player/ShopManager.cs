@@ -11,6 +11,7 @@ public class ShopManager : MonoBehaviour
     private List<InventoryCell> itemCells;
 
     public static ShopManager Instance { get; private set; }
+    public bool IsShopOpen { get; private set; }
 
     private void Awake()
     {
@@ -26,11 +27,18 @@ public class ShopManager : MonoBehaviour
             itemCells[index].SetId(index);
         }
 
-        EventManager.OnShopOpened += OnShopOpened;
+        EventManager.OnShopToggled += OnShopToggled;
+        EventManager.OnPauseMenuToggled += OnPauseMenuToggled;
     }
 
-    private void OnShopOpened(bool isShopOpen)
+    private void OnPauseMenuToggled(bool isPaused)
     {
+        if (!isPaused) EventManager.OnShopToggled?.Invoke(false);
+    }
+
+    private void OnShopToggled(bool isShopOpen)
+    {
+        IsShopOpen = isShopOpen;
         if (!isShopOpen) return;
 
         UpdateDisplay();

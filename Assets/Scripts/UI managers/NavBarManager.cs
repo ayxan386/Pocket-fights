@@ -31,7 +31,7 @@ public class NavBarManager : MonoBehaviour
                 if (!isShopOpen)
                 {
                     pauseMenuAnimator.SetTrigger("shopOpen");
-                    EventManager.OnShopOpened?.Invoke(true);
+                    EventManager.OnShopToggled?.Invoke(true);
                 }
 
                 isShopOpen = true;
@@ -40,6 +40,7 @@ public class NavBarManager : MonoBehaviour
                 if (isShopOpen)
                     pauseMenuAnimator.SetTrigger("shopClose");
                 isShopOpen = false;
+                EventManager.OnShopToggled?.Invoke(false);
                 break;
         }
     }

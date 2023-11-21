@@ -58,10 +58,17 @@ public class InventoryCell : MonoBehaviour
         countText.text = "x" + item.count;
         countText.alpha = 1;
 
-        if (type == InventoryCellType.Shop)
+        priceText.text = item.buyPrice + "g";
+        switch (type)
         {
-            priceText.text = item.buyPrice + "g";
-            priceText.alpha = 1;
+            case InventoryCellType.Shop:
+            case InventoryCellType.Bag when ShopManager.Instance.IsShopOpen && item.buyPrice > 0 && item.canBeSold:
+                priceText.alpha = 1;
+                break;
+            case InventoryCellType.Equipment:
+            default:
+                priceText.alpha = 0;
+                break;
         }
     }
 
