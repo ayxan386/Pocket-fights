@@ -10,6 +10,7 @@ public class InventoryItem : MonoBehaviour
     public new string name;
     public int count;
     public int buyPrice;
+    public int sellPrice;
     public int stackSize;
     public string description;
     public UnityEvent onUseAction;

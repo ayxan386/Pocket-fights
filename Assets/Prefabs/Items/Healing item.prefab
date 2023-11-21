@@ -49,6 +49,7 @@ MonoBehaviour:
   name: Meat
   count: 1
   buyPrice: 5
+  sellPrice: 3
   stackSize: 5
   description: Restores some health
   onUseAction:

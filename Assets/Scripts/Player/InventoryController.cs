@@ -56,7 +56,8 @@ public class InventoryController : MonoBehaviour
 
     private void OnItemAdd(InventoryItem addedItem)
     {
-        var inventoryItem = ownedItems.LastOrDefault(ownedItem => ownedItem.name == addedItem.name);
+        var inventoryItem = ownedItems.FirstOrDefault(ownedItem => ownedItem.name == addedItem.name
+                                                                   && ownedItem.count < ownedItem.stackSize);
 
         while (addedItem.count > 0 && ownedItems.Count < inventorySize)
         {
@@ -100,6 +101,23 @@ public class InventoryController : MonoBehaviour
         }
     }
 
+    private void OnItemSold(InventoryItem soldItem)
+    {
+        if (!soldItem.canBeSold) return;
+
+        soldItem.count--;
+        AddGold(soldItem.sellPrice);
+
+        if (soldItem.count <= 0)
+        {
+            EventManager.OnItemRemove?.Invoke(soldItem);
+        }
+        else
+        {
+            UpdateDisplay();
+        }
+    }
+
     private void OnItemRemove(InventoryItem removedItem)
     {
         removedItem.count -= 1;
@@ -139,6 +157,9 @@ public class InventoryController : MonoBehaviour
             case InventoryCellType.Shop:
                 OnItemBought(clickedItem);
                 break;
+            case InventoryCellType.Bag when ShopManager.Instance.IsShopOpen && clickedItem.canBeSold:
+                OnItemSold(clickedItem);
+                break;
             default:
                 print("Using item");
                 clickedItem.Use();
@@ -146,6 +167,7 @@ public class InventoryController : MonoBehaviour
                 break;
         }
     }
+
 
     public void LoadData(InventoryData inventoryData)
     {

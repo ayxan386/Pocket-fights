@@ -58,7 +58,7 @@ public class InventoryCell : MonoBehaviour
         countText.text = "x" + item.count;
         countText.alpha = 1;
 
-        priceText.text = item.buyPrice + "g";
+        priceText.text = (type == InventoryCellType.Shop ? item.buyPrice : item.sellPrice) + "g";
         switch (type)
         {
             case InventoryCellType.Shop:

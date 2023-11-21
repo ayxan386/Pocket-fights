@@ -49,6 +49,7 @@ MonoBehaviour:
   name: Mana regen  potion
   count: 1
   buyPrice: 12
+  sellPrice: 7
   stackSize: 5
   description: Improves mana regen
   onUseAction:

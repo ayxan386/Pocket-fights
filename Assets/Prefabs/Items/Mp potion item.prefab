@@ -49,6 +49,7 @@ MonoBehaviour:
   name: Mana potion
   count: 1
   buyPrice: 10
+  sellPrice: 7
   stackSize: 5
   description: Restores some mana
   onUseAction:
