@@ -114,4 +114,12 @@ public class ShopManager : MonoBehaviour
                                                            count / inventoryItem.stackSize));
         }
     }
+
+    public int GetPrice(InventoryItem inventoryItem)
+    {
+        boughtItemCounts.TryGetValue(inventoryItem.name, out var count);
+        return (int)Mathf.Floor(inventoryItem.maxSellPrice *
+                                Mathf.Pow(inventoryItem.priceDropRate,
+                                    count / inventoryItem.stackSize));
+    }
 }

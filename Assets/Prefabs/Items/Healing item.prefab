@@ -49,7 +49,7 @@ MonoBehaviour:
   name: Meat
   description: Restores some health
   stackSize: 5
-  count: 1
+  count: 15
   buyPrice: 5
   canBeSold: 1
   sellPrice: 3
