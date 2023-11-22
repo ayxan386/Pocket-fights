@@ -71,12 +71,15 @@ public class PlayerCombatInitiation : MonoBehaviour
             {
                 mobs.Add(controller);
             }
-            else if(mob.transform.TryGetComponent(out EntityController entity))
+            else if (mobs.Count == 0 && mob.transform.TryGetComponent(out EntityController entity))
             {
-                entity.Interact(); 
+                entity.Interact();
             }
         }
+    }
 
+    private void DeactivateAllMobs()
+    {
         var allMobsInScene = FindObjectsOfType<MobController>();
 
         mobsToActivate.Clear();
@@ -108,13 +111,8 @@ public class PlayerCombatInitiation : MonoBehaviour
     private void LoadingCombatScene()
     {
         wholeScene.SetActive(false);
+        DeactivateAllMobs();
         IsCombatScene = true;
         SceneManager.LoadScene("CombatScene", LoadSceneMode.Additive);
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawSphere(transform.position, checkRadius);
     }
 }

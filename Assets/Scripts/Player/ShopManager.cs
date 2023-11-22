@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class ShopManager : MonoBehaviour
@@ -8,7 +9,13 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private Transform itemCellHolder;
     [SerializeField] private ShopItemsData shopItemsData;
 
+    [Header("Refresh logic")] [SerializeField]
+    private int refreshCounter;
+
+    [SerializeField] private TextMeshProUGUI refreshCounterText;
+
     private List<InventoryCell> itemCells;
+    private int currentCounter;
 
     public static ShopManager Instance { get; private set; }
     public bool IsShopOpen { get; private set; }
@@ -29,6 +36,25 @@ public class ShopManager : MonoBehaviour
 
         EventManager.OnShopToggled += OnShopToggled;
         EventManager.OnPauseMenuToggled += OnPauseMenuToggled;
+        EventManager.OnMobDeath += OnMobDeath;
+        currentCounter = refreshCounter;
+    }
+
+    private void OnMobDeath(MobController obj)
+    {
+        UpdateRefreshCounter(-1);
+    }
+
+    private void UpdateRefreshCounter(int diff)
+    {
+        currentCounter += diff;
+        if (currentCounter <= 0)
+        {
+            currentCounter = refreshCounter;
+            storedItems = shopItemsData.GenerateShopData(transform);
+        }
+
+        UpdateDisplay();
     }
 
     private void OnPauseMenuToggled(bool isPaused)
@@ -57,5 +83,7 @@ public class ShopManager : MonoBehaviour
                 itemCells[i].SetNoItemState();
             }
         }
+
+        refreshCounterText.text = "Kill: " + currentCounter;
     }
 }
