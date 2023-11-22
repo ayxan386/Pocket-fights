@@ -15,6 +15,7 @@ public class InventoryController : MonoBehaviour
 
     public static InventoryController Instance { get; private set; }
     public InventoryData OwnedItem => new InventoryData(ownedItems);
+    public List<InventoryItem> OwnedItems => ownedItems;
     public int Gold => gold;
 
     private void Awake()
@@ -107,6 +108,8 @@ public class InventoryController : MonoBehaviour
 
         soldItem.count--;
         AddGold(soldItem.sellPrice);
+
+        ShopManager.Instance.ItemSold(soldItem, 1);
 
         if (soldItem.count <= 0)
         {

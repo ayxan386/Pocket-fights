@@ -8,14 +8,18 @@ public class InventoryItem : MonoBehaviour
 {
     public Sprite icon;
     public new string name;
+    public string description;
+    public int stackSize;
     public int count;
     public int buyPrice;
+    [Space(10)]
+    [Header("Selling")] public bool canBeSold;
     public int sellPrice;
-    public int stackSize;
-    public string description;
+    public int maxSellPrice;
+    public float priceDropRate;
+
+    [Space(10)] public ItemType type;
     public UnityEvent onUseAction;
-    public ItemType type;
-    public bool canBeSold;
 
     public void Use()
     {

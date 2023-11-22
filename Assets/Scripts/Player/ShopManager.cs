@@ -18,6 +18,7 @@ public class ShopManager : MonoBehaviour
     private int currentCounter;
 
     public static ShopManager Instance { get; private set; }
+    private Dictionary<string, int> boughtItemCounts;
     public bool IsShopOpen { get; private set; }
 
     private void Awake()
@@ -27,7 +28,7 @@ public class ShopManager : MonoBehaviour
 
     private void Start()
     {
-        storedItems = shopItemsData.GenerateShopData(transform);
+        RefreshShop();
         itemCells = itemCellHolder.GetComponentsInChildren<InventoryCell>().ToList();
         for (var index = 0; index < itemCells.Count; index++)
         {
@@ -40,6 +41,14 @@ public class ShopManager : MonoBehaviour
         currentCounter = refreshCounter;
     }
 
+    private void RefreshShop()
+    {
+        storedItems = shopItemsData.GenerateShopData(transform);
+        boughtItemCounts = new Dictionary<string, int>();
+        currentCounter = refreshCounter;
+        CheckBoughtItemCounts();
+    }
+
     private void OnMobDeath(MobController obj)
     {
         UpdateRefreshCounter(-1);
@@ -50,8 +59,7 @@ public class ShopManager : MonoBehaviour
         currentCounter += diff;
         if (currentCounter <= 0)
         {
-            currentCounter = refreshCounter;
-            storedItems = shopItemsData.GenerateShopData(transform);
+            RefreshShop();
         }
 
         UpdateDisplay();
@@ -67,6 +75,7 @@ public class ShopManager : MonoBehaviour
         IsShopOpen = isShopOpen;
         if (!isShopOpen) return;
 
+        CheckBoughtItemCounts();
         UpdateDisplay();
     }
 
@@ -85,5 +94,24 @@ public class ShopManager : MonoBehaviour
         }
 
         refreshCounterText.text = "Kill: " + currentCounter;
+    }
+
+    public void ItemSold(InventoryItem soldItem, int count)
+    {
+        boughtItemCounts.TryAdd(soldItem.name, 0);
+        boughtItemCounts[soldItem.name] += count;
+
+        CheckBoughtItemCounts();
+    }
+
+    private void CheckBoughtItemCounts()
+    {
+        foreach (var inventoryItem in InventoryController.Instance.OwnedItems)
+        {
+            boughtItemCounts.TryGetValue(inventoryItem.name, out var count);
+            inventoryItem.sellPrice = (int)Mathf.Floor(inventoryItem.maxSellPrice *
+                                                       Mathf.Pow(inventoryItem.priceDropRate,
+                                                           count / inventoryItem.stackSize));
+        }
     }
 }

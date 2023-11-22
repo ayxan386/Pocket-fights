@@ -47,11 +47,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 6592b916f86b19e428db6f6847c7b6dd, type: 3}
   name: Mana potion
+  description: Restores some mana
+  stackSize: 5
   count: 1
   buyPrice: 10
+  canBeSold: 1
   sellPrice: 7
-  stackSize: 5
-  description: Restores some mana
+  maxSellPrice: 8
+  priceDropRate: 0.92
+  type: 0
   onUseAction:
     m_PersistentCalls:
       m_Calls:
@@ -67,8 +71,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  type: 0
-  canBeSold: 1
 --- !u!114 &-830563134188924800
 MonoBehaviour:
   m_ObjectHideFlags: 0
