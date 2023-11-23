@@ -57,6 +57,12 @@ public class InventoryController : MonoBehaviour
 
     private void OnItemAdd(InventoryItem addedItem)
     {
+        if (addedItem.type == ItemType.Currency)
+        {
+            UseAllCurrencies(addedItem);
+            return;
+        }
+
         var inventoryItem = ownedItems.FirstOrDefault(ownedItem => ownedItem.name == addedItem.name
                                                                    && ownedItem.count < ownedItem.stackSize);
 
@@ -76,6 +82,15 @@ public class InventoryController : MonoBehaviour
         }
 
         UpdateDisplay();
+    }
+
+    private static void UseAllCurrencies(InventoryItem addedItem)
+    {
+        while (addedItem != null && addedItem.count > 0)
+        {
+            addedItem.Use();
+            addedItem.count--;
+        }
     }
 
 

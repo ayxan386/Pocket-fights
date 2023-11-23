@@ -41,5 +41,6 @@ public class InventoryItem : MonoBehaviour
 public enum ItemType
 {
     Useable,
-    Consumable
+    Consumable,
+    Currency
 }

@@ -55,7 +55,7 @@ MonoBehaviour:
   sellPrice: 0
   maxSellPrice: 0
   priceDropRate: 0.001
-  type: 0
+  type: 2
   onUseAction:
     m_PersistentCalls:
       m_Calls:
