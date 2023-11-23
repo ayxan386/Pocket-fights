@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -43,7 +42,7 @@ public class InfoDetailsManager : MonoBehaviour
         var statController = PlayerInputController.Instance.Stats;
         //Base attack
         var baseAttack = statController.GetStatValue(StatValue.BaseAttack);
-        this.baseAttack.UpdateDisplay("Base attack", baseAttack.maxValue.ToString("N0"));
+        this.baseAttack.UpdateDisplay("Base attack", baseAttack.currentValue.ToString("N0"));
 
         //Health
         var health = statController.GetStatValue(StatValue.Health);
@@ -55,10 +54,10 @@ public class InfoDetailsManager : MonoBehaviour
 
         //Damage Reduction
         var damageReduction = statController.GetStatValue(StatValue.DamageReduction);
-        this.damageReduction.UpdateDisplay("Damage reduction", damageReduction.maxValue.ToString("N0"));
+        this.damageReduction.UpdateDisplay("Damage reduction", damageReduction.currentValue.ToString("N0"));
 
         //Mana Regen
         var manaRegen = statController.GetStatValue(StatValue.ManaRegen);
-        this.manaRegen.UpdateDisplay("Mana regen.", manaRegen.maxValue.ToString("N0"));
+        this.manaRegen.UpdateDisplay("Mana regen.", manaRegen.currentValue.ToString("N0"));
     }
 }

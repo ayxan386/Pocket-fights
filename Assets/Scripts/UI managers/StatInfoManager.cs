@@ -28,6 +28,8 @@ public class StatInfoManager : MonoBehaviour
             var baseStat = playerInputController.Stats.GetBaseStat(statType);
             statBlocks[k].UpdateDisplay(statType.ToString(), baseStat.currentValue + "");
             statBlocks[k++].StatType = statType;
+
+            if (k == statBlocks.Count) break;
         }
     }
 }

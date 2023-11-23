@@ -67,6 +67,7 @@ public class InventoryCell : MonoBehaviour
                 break;
             case InventoryCellType.Equipment:
             default:
+                countText.alpha = 0;
                 priceText.alpha = 0;
                 break;
         }

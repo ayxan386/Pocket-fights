@@ -38,7 +38,8 @@ public class StatController : MonoBehaviour
             [StatTypes.Vitality] = new(startingVitality),
             [StatTypes.Strength] = new(startingStrength),
             [StatTypes.Mana] = new(startingMana),
-            [StatTypes.Defense] = new(startingDefense)
+            [StatTypes.Defense] = new(startingDefense),
+            [StatTypes.None] = new(0)
         };
 
         statValues = new Dictionary<StatValue, StatData>();
@@ -57,6 +58,7 @@ public class StatController : MonoBehaviour
         statValues[StatValue.DamageReduction] = new(baseStats[StatTypes.Defense].maxValue * 2 * Lsf,
             baseStats[StatTypes.Defense].currentValue * 2 * Lsf);
         statValues[StatValue.ManaRegen] = new(10, 10);
+        statValues[StatValue.None] = new(10, 10);
         
         UpdateOverallDisplay();
     }
@@ -74,6 +76,7 @@ public class StatController : MonoBehaviour
         statValues[StatValue.BaseAttack].maxValue = baseStats[StatTypes.Strength].maxValue * 5 * Lsf;
         statValues[StatValue.DamageReduction].maxValue = baseStats[StatTypes.Defense].maxValue * 2 * Lsf;
         statValues[StatValue.ManaRegen].maxValue = 10;
+        statValues[StatValue.None].maxValue = 10;
         
         healthBarIndicator.UpdateDisplay(statValues[StatValue.Health]);
         manaBarIndicator.UpdateDisplay(statValues[StatValue.Mana]);
@@ -206,7 +209,7 @@ public class StatController : MonoBehaviour
         }
     }
 
-    private void UpdateBaseStat(StatTypes statType, int diff)
+    public void UpdateBaseStat(StatTypes statType, int diff)
     {
         baseStats[statType].maxValue += diff;
         baseStats[statType].currentValue += diff;
@@ -219,6 +222,15 @@ public class StatController : MonoBehaviour
         var currentValue = statValues[statType].currentValue + diff;
         statValues[statType].currentValue = Mathf.Clamp(currentValue, 0, statValues[statType].maxValue);
         UpdateOverallDisplay();
+    }
+    
+    public void BoostStatValue(StatValue statType, int diff)
+    {
+        print($"Boosting {statType} by {diff}");
+        statValues[statType].currentValue += diff;
+        UpdateOverallDisplay();
+        EventManager.OnPlayerCoreUpdate?.Invoke(freePoints);
+        EventManager.OnBaseStatUpdate?.Invoke(baseStats[StatTypes.Vitality].maxValue);
     }
 
     private void UpdateFreePoints(int diff)
@@ -251,7 +263,8 @@ public enum StatTypes
     Vitality,
     Strength,
     Mana,
-    Defense
+    Defense,
+    None
 }
 
 public enum StatValue
@@ -260,7 +273,8 @@ public enum StatValue
     Mana,
     BaseAttack,
     DamageReduction,
-    ManaRegen
+    ManaRegen,
+    None
 }
 
 [Serializable]

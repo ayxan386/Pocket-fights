@@ -12,8 +12,8 @@ public class InventoryItem : MonoBehaviour
     public int stackSize;
     public int count;
     public int buyPrice;
-    [Space(10)]
-    [Header("Selling")] public bool canBeSold;
+    public bool displayInInventory;
+    [Space(10)] [Header("Selling")] public bool canBeSold;
     public int sellPrice;
     public int maxSellPrice;
     public float priceDropRate;
@@ -42,5 +42,6 @@ public enum ItemType
 {
     Useable,
     Consumable,
-    Currency
+    Currency,
+    Equipment
 }

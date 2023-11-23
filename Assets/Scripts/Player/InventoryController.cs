@@ -10,12 +10,15 @@ public class InventoryController : MonoBehaviour
     [SerializeField] private InventoryItem randomItem;
     [SerializeField] private int gold;
     [SerializeField] private int inventorySize;
+    [SerializeField] private EquipmentSlotCells equipmentCells;
 
     private List<InventoryCell> itemCells;
 
     public static InventoryController Instance { get; private set; }
     public InventoryData OwnedItem => new InventoryData(ownedItems);
     public List<InventoryItem> OwnedItems => ownedItems;
+
+    public EquipmentSlotCells EquipmentSlotCells => equipmentCells;
     public int Gold => gold;
 
     private void Awake()
@@ -44,7 +47,7 @@ public class InventoryController : MonoBehaviour
     {
         for (var i = 0; i < itemCells.Count; i++)
         {
-            if (i < ownedItems.Count)
+            if (i < ownedItems.Count && ownedItems[i].displayInInventory)
             {
                 itemCells[i].UpdateDisplay(ownedItems[i], InventoryCellType.Bag);
             }
@@ -179,10 +182,25 @@ public class InventoryController : MonoBehaviour
             case InventoryCellType.Bag when ShopManager.Instance.IsShopOpen && clickedItem.canBeSold:
                 OnItemSold(clickedItem);
                 break;
+            case InventoryCellType.Equipment:
+                (clickedItem as EquippableItem)?.TryUnEquip();
+                break;
             default:
                 print("Using item");
-                clickedItem.Use();
-                EventManager.OnItemRemove?.Invoke(clickedItem);
+                if (clickedItem is EquippableItem item)
+                {
+                    if (item.TryEquip())
+                    {
+                        EventManager.OnItemRemove?.Invoke(clickedItem);
+                        UpdateDisplay();
+                    }
+                }
+                else
+                {
+                    clickedItem.Use();
+                    EventManager.OnItemRemove?.Invoke(clickedItem);
+                }
+
                 break;
         }
     }
@@ -211,4 +229,21 @@ public class InventoryData
     {
         this.ownedItems = ownedItems;
     }
+}
+
+[Serializable]
+public struct EquipmentSlotCells
+{
+    [Header("Hands")] public InventoryCell mainHand;
+    public InventoryCell offHand;
+
+    [Header("Armor")] public InventoryCell helmet;
+    public InventoryCell chestplate;
+    public InventoryCell leggings;
+    public InventoryCell boots;
+
+    [Header("Accessories")] public InventoryCell leftRing;
+    public InventoryCell rightRing;
+    public InventoryCell leftBracelet;
+    public InventoryCell rightBracelet;
 }
