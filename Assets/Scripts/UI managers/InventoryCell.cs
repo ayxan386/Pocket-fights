@@ -9,15 +9,18 @@ public class InventoryCell : MonoBehaviour
     [SerializeField] private GameObject descGm;
     [SerializeField] private TextMeshProUGUI descText;
     [SerializeField] private TextMeshProUGUI countText;
+    [SerializeField] private TextMeshProUGUI priceText;
     [SerializeField] private Image innerPart;
     [SerializeField] private Color[] innerColors;
+    [SerializeField] private InventoryCellType type;
     public int id;
     public InventoryItem storedItem;
     private Coroutine clickCoro;
 
     private void Start()
     {
-        SetNoItemState();
+        if (storedItem == null && type != InventoryCellType.Equipment)
+            SetNoItemState();
     }
 
     public void SetNoItemState()
@@ -28,6 +31,7 @@ public class InventoryCell : MonoBehaviour
         itemIcon.color = itemIconColor;
         descGm.SetActive(false);
         countText.alpha = 0;
+        priceText.alpha = 0;
     }
 
     [ContextMenu("Set color")]
@@ -41,15 +45,32 @@ public class InventoryCell : MonoBehaviour
         }
     }
 
-    public void UpdateDisplay(InventoryItem item)
+    public void UpdateDisplay(InventoryItem item, InventoryCellType inventoryCellType)
     {
         storedItem = item;
+        type = inventoryCellType;
+
         var itemIconColor = itemIcon.color;
         itemIconColor.a = 1;
         itemIcon.color = itemIconColor;
         itemIcon.sprite = item.icon;
+
         countText.text = "x" + item.count;
         countText.alpha = 1;
+
+        priceText.text = (type == InventoryCellType.Shop ? item.buyPrice : item.sellPrice) + "g";
+        switch (type)
+        {
+            case InventoryCellType.Shop:
+            case InventoryCellType.Bag when ShopManager.Instance.IsShopOpen && item.buyPrice > 0 && item.canBeSold:
+                priceText.alpha = 1;
+                break;
+            case InventoryCellType.Equipment:
+            default:
+                countText.alpha = 0;
+                priceText.alpha = 0;
+                break;
+        }
     }
 
     public void SetId(int newId)
@@ -79,7 +100,7 @@ public class InventoryCell : MonoBehaviour
     {
         while (storedItem != null)
         {
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.2f);
             SendClick();
         }
 
@@ -88,9 +109,14 @@ public class InventoryCell : MonoBehaviour
 
     private void SendClick()
     {
-        if (storedItem != null)
-        {
-            InventoryController.Instance.ItemCellClicked(storedItem);
-        }
+        if (storedItem == null) return;
+        InventoryController.Instance.ItemCellClicked(storedItem, type);
     }
+}
+
+public enum InventoryCellType
+{
+    Bag,
+    Shop,
+    Equipment
 }

@@ -47,9 +47,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 4a39cb4b272639541b7bd5ac0649acf7, type: 3}
   name: Meat
-  count: 1
-  stackSize: 5
   description: Restores some health
+  stackSize: 5
+  count: 15
+  buyPrice: 5
+  canBeSold: 1
+  sellPrice: 3
+  maxSellPrice: 5
+  priceDropRate: 0.8
+  type: 0
   onUseAction:
     m_PersistentCalls:
       m_Calls:
@@ -65,7 +71,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  type: 0
 --- !u!114 &-830563134188924800
 MonoBehaviour:
   m_ObjectHideFlags: 0

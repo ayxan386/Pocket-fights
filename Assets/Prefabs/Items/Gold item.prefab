@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3337002340432959712}
   - component: {fileID: 3337002340432959719}
+  - component: {fileID: 6844731790824117005}
   m_Layer: 0
   m_Name: Gold item
   m_TagString: Untagged
@@ -46,10 +47,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 1020037480, guid: 7bb12e1a1363c514bb9ee72a9acafce2, type: 3}
   name: Gold coin
-  count: 2
-  stackSize: 99
   description: Gives player gold
+  stackSize: 99
+  count: 1
+  buyPrice: 0
+  canBeSold: 0
+  sellPrice: 0
+  maxSellPrice: 0
+  priceDropRate: 0.001
+  type: 2
   onUseAction:
     m_PersistentCalls:
-      m_Calls: []
-  type: 0
+      m_Calls:
+      - m_Target: {fileID: 6844731790824117005}
+        m_TargetAssemblyTypeName: GoldAmountChangeAction, Assembly-CSharp
+        m_MethodName: Use
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6844731790824117005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3337002340432959713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c84342a44277d0a4c8a36945c67fd0ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amount: 1

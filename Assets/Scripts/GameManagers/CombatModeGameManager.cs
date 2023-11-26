@@ -131,6 +131,7 @@ public class CombatModeGameManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         deadMob.gameObject.SetActive(false);
         FindNextSelectedMobs();
+        EventManager.OnMobDeath?.Invoke(deadMob);
         if (mobsInCombat.TrueForAll(mob => !mob.isActiveAndEnabled))
         {
             PlayerVictory();

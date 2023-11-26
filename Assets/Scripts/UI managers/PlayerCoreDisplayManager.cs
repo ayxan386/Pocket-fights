@@ -18,5 +18,6 @@ public class PlayerCoreDisplayManager : MonoBehaviour
         displayControllers[2].UpdateDisplay("Free Points", PlayerInputController.Instance.Stats.FreePoints.ToString());
         displayControllers[3]
             .UpdateDisplay("Skill Points", PlayerInputController.Instance.Stats.SkillPoints.ToString());
+        displayControllers[4].UpdateDisplay("Gold", InventoryController.Instance.Gold.ToString());
     }
 }

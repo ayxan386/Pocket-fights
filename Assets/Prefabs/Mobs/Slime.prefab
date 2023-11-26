@@ -611,10 +611,6 @@ MonoBehaviour:
     chance: 0.905
     count: {x: 3, y: 10}
   agent: {fileID: 787915798}
-  patrolPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &7537575747951249551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -633,9 +629,9 @@ MonoBehaviour:
   freePoints: 0
   skillPoints: 0
   sourceName: 
-  startingVitality: 1
+  startingVitality: 3
   startingStrength: 2
-  startingMana: 2
+  startingMana: 3
   startingDefense: 1
   statDebug: 
 --- !u!195 &787915798

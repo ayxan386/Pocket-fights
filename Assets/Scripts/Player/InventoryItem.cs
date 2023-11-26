@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -6,16 +7,29 @@ using UnityEngine.Events;
 public class InventoryItem : MonoBehaviour
 {
     public Sprite icon;
-    public string name;
-    public int count;
-    public int stackSize;
+    public new string name;
     public string description;
+    public int stackSize;
+    public int count;
+    public int buyPrice;
+    public bool displayInInventory;
+    [Space(10)] [Header("Selling")] public bool canBeSold;
+    public int sellPrice;
+    public int maxSellPrice;
+    public float priceDropRate;
+
+    [Space(10)] public ItemType type;
     public UnityEvent onUseAction;
-    public ItemType type;
 
     public void Use()
     {
         onUseAction.Invoke();
+    }
+
+    private IEnumerator Start()
+    {
+        yield return new WaitUntil(() => count <= 0);
+        Destroy(gameObject);
     }
 
     public override string ToString()
@@ -27,5 +41,7 @@ public class InventoryItem : MonoBehaviour
 public enum ItemType
 {
     Useable,
-    Consumable
+    Consumable,
+    Currency,
+    Equipment
 }

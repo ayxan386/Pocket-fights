@@ -8,11 +8,18 @@ public class InventoryController : MonoBehaviour
     [SerializeField] private List<InventoryItem> ownedItems;
     [SerializeField] private Transform itemCellHolder;
     [SerializeField] private InventoryItem randomItem;
+    [SerializeField] private int gold;
+    [SerializeField] private int inventorySize;
+    [SerializeField] private EquipmentSlotCells equipmentCells;
 
     private List<InventoryCell> itemCells;
 
     public static InventoryController Instance { get; private set; }
     public InventoryData OwnedItem => new InventoryData(ownedItems);
+    public List<InventoryItem> OwnedItems => ownedItems;
+
+    public EquipmentSlotCells EquipmentSlotCells => equipmentCells;
+    public int Gold => gold;
 
     private void Awake()
     {
@@ -32,6 +39,7 @@ public class InventoryController : MonoBehaviour
         EventManager.OnItemAdd += OnItemAdd;
         EventManager.OnItemAddAsLoot += OnItemAddAsLoot;
         EventManager.OnItemRemove += OnItemRemove;
+        EventManager.OnShopToggled += OnShopToggled;
     }
 
 
@@ -39,9 +47,9 @@ public class InventoryController : MonoBehaviour
     {
         for (var i = 0; i < itemCells.Count; i++)
         {
-            if (i < ownedItems.Count)
+            if (i < ownedItems.Count && ownedItems[i].displayInInventory)
             {
-                itemCells[i].UpdateDisplay(ownedItems[i]);
+                itemCells[i].UpdateDisplay(ownedItems[i], InventoryCellType.Bag);
             }
             else
             {
@@ -52,13 +60,21 @@ public class InventoryController : MonoBehaviour
 
     private void OnItemAdd(InventoryItem addedItem)
     {
-        var inventoryItem = ownedItems.FirstOrDefault(ownedItem => ownedItem.name == addedItem.name);
+        if (addedItem.type == ItemType.Currency)
+        {
+            UseAllCurrencies(addedItem);
+            return;
+        }
 
-        while (addedItem.count > 0)
+        var inventoryItem = ownedItems.FirstOrDefault(ownedItem => ownedItem.name == addedItem.name
+                                                                   && ownedItem.count < ownedItem.stackSize);
+
+        while (addedItem.count > 0 && ownedItems.Count < inventorySize)
         {
             if (inventoryItem == null || inventoryItem.count == inventoryItem.stackSize)
             {
                 inventoryItem = Instantiate(addedItem, transform);
+                inventoryItem.sellPrice = ShopManager.Instance.GetPrice(inventoryItem);
                 inventoryItem.count = 0;
                 ownedItems.Add(inventoryItem);
             }
@@ -71,6 +87,15 @@ public class InventoryController : MonoBehaviour
         UpdateDisplay();
     }
 
+    private static void UseAllCurrencies(InventoryItem addedItem)
+    {
+        while (addedItem != null && addedItem.count > 0)
+        {
+            addedItem.Use();
+            addedItem.count--;
+        }
+    }
+
 
     private void OnItemAddAsLoot(InventoryItem item, LootItemPanel panel)
     {
@@ -78,6 +103,42 @@ public class InventoryController : MonoBehaviour
         Destroy(panel.gameObject);
     }
 
+    private void OnItemBought(InventoryItem boughtItem)
+    {
+        if (boughtItem.buyPrice > Gold) return;
+
+        var prevCount = boughtItem.count;
+        boughtItem.count = 1;
+
+        OnItemAdd(boughtItem);
+
+        var boughtItemCount = 1 - boughtItem.count;
+        boughtItem.count = prevCount - boughtItemCount;
+        if (boughtItemCount > 0)
+        {
+            AddGold(-boughtItem.buyPrice * boughtItemCount);
+            ShopManager.Instance.UpdateDisplay();
+        }
+    }
+
+    private void OnItemSold(InventoryItem soldItem)
+    {
+        if (!soldItem.canBeSold) return;
+
+        soldItem.count--;
+        AddGold(soldItem.sellPrice);
+
+        ShopManager.Instance.ItemSold(soldItem, 1);
+
+        if (soldItem.count <= 0)
+        {
+            EventManager.OnItemRemove?.Invoke(soldItem);
+        }
+        else
+        {
+            UpdateDisplay();
+        }
+    }
 
     private void OnItemRemove(InventoryItem removedItem)
     {
@@ -91,6 +152,10 @@ public class InventoryController : MonoBehaviour
         UpdateDisplay();
     }
 
+    private void OnShopToggled(bool isShopOpen)
+    {
+        UpdateDisplay();
+    }
 
     [ContextMenu("Add random item")]
     public void AddRandomItem()
@@ -105,17 +170,52 @@ public class InventoryController : MonoBehaviour
         EventManager.OnItemRemove?.Invoke(randomItem);
     }
 
-    public void ItemCellClicked(InventoryItem clickedItem)
+    public void ItemCellClicked(InventoryItem clickedItem, InventoryCellType cellType)
     {
         //TODO change this
-        clickedItem.Use();
-        EventManager.OnItemRemove?.Invoke(clickedItem);
+
+        switch (cellType)
+        {
+            case InventoryCellType.Shop:
+                OnItemBought(clickedItem);
+                break;
+            case InventoryCellType.Bag when ShopManager.Instance.IsShopOpen && clickedItem.canBeSold:
+                OnItemSold(clickedItem);
+                break;
+            case InventoryCellType.Equipment:
+                (clickedItem as EquippableItem)?.TryUnEquip();
+                break;
+            default:
+                print("Using item");
+                if (clickedItem is EquippableItem item)
+                {
+                    if (item.TryEquip())
+                    {
+                        EventManager.OnItemRemove?.Invoke(clickedItem);
+                        UpdateDisplay();
+                    }
+                }
+                else
+                {
+                    clickedItem.Use();
+                    EventManager.OnItemRemove?.Invoke(clickedItem);
+                }
+
+                break;
+        }
     }
+
 
     public void LoadData(InventoryData inventoryData)
     {
         this.ownedItems = inventoryData.ownedItems;
         UpdateDisplay();
+    }
+
+    public void AddGold(int amount)
+    {
+        gold += amount;
+        EventManager.OnPlayerCoreUpdate?.Invoke(gold);
     }
 }
 
@@ -123,11 +223,27 @@ public class InventoryController : MonoBehaviour
 [Serializable]
 public class InventoryData
 {
-
     public List<InventoryItem> ownedItems;
 
     public InventoryData(List<InventoryItem> ownedItems)
     {
         this.ownedItems = ownedItems;
     }
+}
+
+[Serializable]
+public struct EquipmentSlotCells
+{
+    [Header("Hands")] public InventoryCell mainHand;
+    public InventoryCell offHand;
+
+    [Header("Armor")] public InventoryCell helmet;
+    public InventoryCell chestplate;
+    public InventoryCell leggings;
+    public InventoryCell boots;
+
+    [Header("Accessories")] public InventoryCell leftRing;
+    public InventoryCell rightRing;
+    public InventoryCell leftBracelet;
+    public InventoryCell rightBracelet;
 }
