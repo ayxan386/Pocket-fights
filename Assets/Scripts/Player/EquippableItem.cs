@@ -27,7 +27,6 @@ public class EquippableItem : InventoryItem
     private void Equip()
     {
         EquipmentManager.Instance.AddEquipment(this);
-
         ApplyEffect();
     }
 
@@ -36,15 +35,45 @@ public class EquippableItem : InventoryItem
         var stats = PlayerInputController.Instance.Stats;
         foreach (var statEffect in statEffects)
         {
-            stats.BoostStatValue(statEffect.statValue,
-                statEffect.TotalChange(stats.GetStatValue(statEffect.statValue).baseValue), shouldUpdate);
+            if (statEffect.statType == StatTypes.None) continue;
+            var totalChange = statEffect.TotalChange(stats.GetStatValue(statEffect.statValue).baseValue);
+            stats.BoostBaseStat(statEffect.statType, totalChange);
+        }
+
+        foreach (var statEffect in statEffects)
+        {
+            if (statEffect.statType != StatTypes.None) continue;
+            var totalChange = statEffect.TotalChange(stats.GetStatValue(statEffect.statValue).baseValue);
+            stats.BoostStatValue(statEffect.statValue, totalChange, shouldUpdate);
+        }
+    }
+
+    public void ReverseEffect(bool shouldUpdate = true)
+    {
+        var stats = PlayerInputController.Instance.Stats;
+
+        foreach (var statEffect in statEffects)
+        {
+            if (statEffect.statType != StatTypes.None) continue;
+            var totalChange = statEffect.TotalChange(stats.GetStatValue(statEffect.statValue).baseValue);
+            stats.BoostStatValue(statEffect.statValue, -totalChange, shouldUpdate);
+        }
+
+        foreach (var statEffect in statEffects)
+        {
+            if (statEffect.statType == StatTypes.None) continue;
+            var totalChange = statEffect.TotalChange(stats.GetStatValue(statEffect.statValue).baseValue);
+            stats.BoostBaseStat(statEffect.statType, -totalChange);
         }
     }
 
     public void TryUnEquip()
     {
-        EventManager.OnItemAdd?.Invoke(this);
+        print("trying to unequip");
+        isEquipped = false;
         displayInInventory = true;
+        ReverseEffect();
+        EquipmentManager.Instance.RemoveEquipment(this);
     }
 }
 

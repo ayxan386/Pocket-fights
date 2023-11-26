@@ -9,22 +9,12 @@ public class InfoDetailsManager : MonoBehaviour
     [SerializeField] private InfoRowIndicator damageReduction;
     [SerializeField] private InfoRowIndicator manaRegen;
 
-    void OnEnable()
-    {
-        EventManager.OnBaseStatUpdate += OnBaseStatUpdate;
-        EventManager.OnPlayerCoreUpdate += OnPlayerCoreUpdate;
-    }
-
     private IEnumerator Start()
     {
         yield return new WaitUntil(() => PlayerInputController.Instance != null);
+        EventManager.OnBaseStatUpdate += OnBaseStatUpdate;
+        EventManager.OnPlayerCoreUpdate += OnPlayerCoreUpdate;
         UpdateValues();
-    }
-
-    private void OnDisable()
-    {
-        EventManager.OnBaseStatUpdate -= OnBaseStatUpdate;
-        EventManager.OnPlayerCoreUpdate -= OnPlayerCoreUpdate;
     }
 
     private void OnPlayerCoreUpdate(int obj)

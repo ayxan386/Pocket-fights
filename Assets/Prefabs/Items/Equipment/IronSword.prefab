@@ -63,6 +63,10 @@ MonoBehaviour:
   equipmentGroup: 0
   slotCount: 1
   statEffects:
+  - statType: 1
+    statValue: 5
+    constantImprovement: 2
+    fractionalImprovement: 0
   - statType: 4
     statValue: 2
     constantImprovement: 15

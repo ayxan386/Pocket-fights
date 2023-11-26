@@ -74,14 +74,12 @@ public class StatController : MonoBehaviour
         statValues[StatValue.Mana].baseValue = baseStats[StatTypes.Mana].maxValue * 10 * Lsf;
         statValues[StatValue.Mana].maxValue = statValues[StatValue.Mana].baseValue;
         
-        print("Recalculating stats");
-        statValues[StatValue.BaseAttack].SetValue(baseStats[StatTypes.Strength].currentValue * 5 * Lsf);
-        print($"Attack for {baseStats[StatTypes.Strength].currentValue} is {statValues[StatValue.BaseAttack].baseValue}");
-        statValues[StatValue.DamageReduction].SetValue(baseStats[StatTypes.Defense].currentValue * 2 * Lsf);
-        statValues[StatValue.ManaRegen].SetValue(10); 
-        statValues[StatValue.None].SetValue(10);
+        statValues[StatValue.BaseAttack].UpdateBaseValue(baseStats[StatTypes.Strength].currentValue * 5 * Lsf);
+        statValues[StatValue.DamageReduction].UpdateBaseValue(baseStats[StatTypes.Defense].currentValue * 2 * Lsf);
+        statValues[StatValue.ManaRegen].UpdateBaseValue(10); 
+        statValues[StatValue.None].UpdateBaseValue(10);
         
-        EquipmentManager.Instance.ApplyAllEquipments();
+        // EquipmentManager.Instance.ApplyAllEquipments();
         
         UpdateOverallDisplay();
     }
@@ -111,7 +109,7 @@ public class StatController : MonoBehaviour
         switch (effect.type)
         {
             case StatEffectType.BaseStat:
-                UpdateBaseStat(effect.baseStat, 
+                UpgradeBaseStat(effect.baseStat, 
                     (int)effect.GetAmount(GetBaseStat(effect.baseStat).baseValue));
                 effect.gameObject.transform.parent = transform;
                 statusEffects.Add(effect);
@@ -138,7 +136,7 @@ public class StatController : MonoBehaviour
                 statusEffects.Remove(effect);
                 break;
             case StatEffectType.BaseStat:
-                UpdateBaseStat(effect.baseStat, (int)effect.GetFinalAmount()); 
+                UpgradeBaseStat(effect.baseStat, (int)effect.GetFinalAmount()); 
                 Destroy(effect.gameObject, 0.5f);
                 statusEffects.Remove(effect);
                 break;
@@ -209,11 +207,11 @@ public class StatController : MonoBehaviour
         if (freePoints > 0)
         {
             UpdateFreePoints(-1);
-            UpdateBaseStat(statType, 1);
+            UpgradeBaseStat(statType, 1);
         }
     }
 
-    public void UpdateBaseStat(StatTypes statType, int diff)
+    public void UpgradeBaseStat(StatTypes statType, int diff)
     {
         baseStats[statType].maxValue += diff;
         baseStats[statType].currentValue += diff;
@@ -227,6 +225,18 @@ public class StatController : MonoBehaviour
         var currentValue = statValues[statType].currentValue + diff;
         statValues[statType].currentValue = Mathf.Clamp(currentValue, 0, statValues[statType].maxValue);
         UpdateOverallDisplay();
+    }
+    
+    public void BoostBaseStat(StatTypes statType, int diff, bool shouldUpdate = false)
+    {
+        print($"Boosting {statType} by {diff}");
+        baseStats[statType].currentValue += diff;
+        baseStats[statType].maxValue = Mathf.Max(baseStats[statType].currentValue, baseStats[statType].maxValue);
+        CalculateStatValues();
+        if(shouldUpdate)
+            UpdateOverallDisplay();
+        
+        EventManager.OnBaseStatUpdate?.Invoke(baseStats[statType].currentValue);
     }
 
     public void BoostStatValue(StatValue statType, int diff, bool shouldUpdate = false)
@@ -306,10 +316,10 @@ public class StatData
     {
     }
 
-    public void SetValue(float value)
+    public void UpdateBaseValue(float newBase)
     {
-        maxValue = value;
-        baseValue = value;
-        currentValue = value;
+        maxValue = newBase;
+        currentValue += newBase - baseValue;
+        baseValue = newBase;
     }
 }

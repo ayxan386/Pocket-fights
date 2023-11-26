@@ -170,11 +170,11 @@ public class InventoryController : MonoBehaviour
         EventManager.OnItemRemove?.Invoke(randomItem);
     }
 
-    public void ItemCellClicked(InventoryItem clickedItem, InventoryCellType cellType)
+    public void ItemCellClicked(InventoryItem clickedItem, InventoryCellType cell)
     {
         //TODO change this
 
-        switch (cellType)
+        switch (cell)
         {
             case InventoryCellType.Shop:
                 OnItemBought(clickedItem);
@@ -191,7 +191,7 @@ public class InventoryController : MonoBehaviour
                 {
                     if (item.TryEquip())
                     {
-                        EventManager.OnItemRemove?.Invoke(clickedItem);
+                        ownedItems.Remove(item);
                         UpdateDisplay();
                     }
                 }

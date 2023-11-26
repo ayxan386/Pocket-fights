@@ -26,8 +26,14 @@ public class EquipmentManager : MonoBehaviour
     public void AddEquipment(EquippableItem equippableItem)
     {
         equippedItems.Add(equippableItem);
-        equippableItem.displayInInventory = false;
         GetSlotRef(equippableItem).UpdateDisplay(equippableItem, InventoryCellType.Equipment);
+    }
+    
+    public void RemoveEquipment(EquippableItem equippableItem)
+    {
+        equippedItems.Remove(equippableItem);
+        GetSlotRef(equippableItem).SetNoItemState();
+        EventManager.OnItemAdd?.Invoke(equippableItem);
     }
     
     public void ApplyAllEquipments()
@@ -54,15 +60,15 @@ public class EquipmentManager : MonoBehaviour
             case EquipmentType.Boots:
                 return InventoryController.Instance.EquipmentSlotCells.boots;
             case EquipmentType.SingleHand:
-                return rl == 0
+                return rl == 1
                     ? InventoryController.Instance.EquipmentSlotCells.mainHand
                     : InventoryController.Instance.EquipmentSlotCells.offHand;
             case EquipmentType.Ring:
-                return rl == 0
+                return rl == 1
                     ? InventoryController.Instance.EquipmentSlotCells.leftRing
                     : InventoryController.Instance.EquipmentSlotCells.rightRing;
             case EquipmentType.Bracelet:
-                return rl == 0
+                return rl == 1
                     ? InventoryController.Instance.EquipmentSlotCells.leftBracelet
                     : InventoryController.Instance.EquipmentSlotCells.rightBracelet;
             default:
