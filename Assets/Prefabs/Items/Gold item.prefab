@@ -51,6 +51,7 @@ MonoBehaviour:
   stackSize: 99
   count: 1
   buyPrice: 0
+  displayInInventory: 1
   canBeSold: 0
   sellPrice: 0
   maxSellPrice: 0

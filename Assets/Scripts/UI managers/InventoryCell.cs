@@ -1,9 +1,10 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventoryCell : MonoBehaviour
+public class InventoryCell : MonoBehaviour, IPointerEnterHandler, ISelectHandler
 {
     [SerializeField] private Image itemIcon;
     [SerializeField] private GameObject descGm;
@@ -62,8 +63,9 @@ public class InventoryCell : MonoBehaviour
         switch (type)
         {
             case InventoryCellType.Shop:
-            case InventoryCellType.Bag when ShopManager.Instance.IsShopOpen && item.buyPrice > 0 && item.canBeSold:
-                priceText.alpha = 1;
+            case InventoryCellType.Bag:
+                if (ShopManager.Instance.IsShopOpen && item.buyPrice > 0 && item.canBeSold)
+                    priceText.alpha = 1;
                 break;
             case InventoryCellType.Equipment:
             default:
@@ -111,6 +113,16 @@ public class InventoryCell : MonoBehaviour
     {
         if (storedItem == null) return;
         InventoryController.Instance.ItemCellClicked(storedItem, type);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (storedItem != null) ItemDescriptionManager.Instance.DisplayItem(storedItem);
+    }
+
+    public void OnSelect(BaseEventData eventData)
+    {
+        if (storedItem != null) ItemDescriptionManager.Instance.DisplayItem(storedItem);
     }
 }
 

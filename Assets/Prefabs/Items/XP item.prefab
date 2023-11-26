@@ -47,10 +47,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 645626868, guid: 7bb12e1a1363c514bb9ee72a9acafce2, type: 3}
   name: XP star
+  description: Gives player xp
+  stackSize: 99
   count: 2
   buyPrice: 5
-  stackSize: 99
-  description: Gives player xp
+  displayInInventory: 1
+  canBeSold: 0
+  sellPrice: 0
+  maxSellPrice: 0
+  priceDropRate: 0
+  type: 0
   onUseAction:
     m_PersistentCalls:
       m_Calls:
@@ -66,8 +72,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  type: 0
-  canBeSold: 0
 --- !u!114 &6985502362223682020
 MonoBehaviour:
   m_ObjectHideFlags: 0

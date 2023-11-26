@@ -51,6 +51,7 @@ MonoBehaviour:
   stackSize: 5
   count: 15
   buyPrice: 5
+  displayInInventory: 1
   canBeSold: 1
   sellPrice: 3
   maxSellPrice: 5
