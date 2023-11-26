@@ -23,8 +23,8 @@ public class InfoDetailsManager : MonoBehaviour
 
     private void OnDisable()
     {
-        EventManager.OnBaseStatUpdate += OnBaseStatUpdate;
-        EventManager.OnPlayerCoreUpdate += OnPlayerCoreUpdate;
+        EventManager.OnBaseStatUpdate -= OnBaseStatUpdate;
+        EventManager.OnPlayerCoreUpdate -= OnPlayerCoreUpdate;
     }
 
     private void OnPlayerCoreUpdate(int obj)

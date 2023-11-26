@@ -59,8 +59,6 @@ public class StatController : MonoBehaviour
             baseStats[StatTypes.Defense].currentValue * 2 * Lsf);
         statValues[StatValue.ManaRegen] = new(10, 10);
         statValues[StatValue.None] = new(10, 10);
-        
-        UpdateOverallDisplay();
     }
 
     private void UpdateOverallDisplay()
@@ -71,15 +69,21 @@ public class StatController : MonoBehaviour
 
     private void CalculateStatValues()
     {
-        statValues[StatValue.Health].maxValue = baseStats[StatTypes.Vitality].maxValue * 10 * Lsf;
-        statValues[StatValue.Mana].maxValue = baseStats[StatTypes.Mana].maxValue * 10 * Lsf;
-        statValues[StatValue.BaseAttack].maxValue = baseStats[StatTypes.Strength].maxValue * 5 * Lsf;
-        statValues[StatValue.DamageReduction].maxValue = baseStats[StatTypes.Defense].maxValue * 2 * Lsf;
-        statValues[StatValue.ManaRegen].maxValue = 10;
-        statValues[StatValue.None].maxValue = 10;
+        statValues[StatValue.Health].baseValue = baseStats[StatTypes.Vitality].maxValue * 10 * Lsf;
+        statValues[StatValue.Health].maxValue = statValues[StatValue.Health].baseValue;
+        statValues[StatValue.Mana].baseValue = baseStats[StatTypes.Mana].maxValue * 10 * Lsf;
+        statValues[StatValue.Mana].maxValue = statValues[StatValue.Mana].baseValue;
         
-        healthBarIndicator.UpdateDisplay(statValues[StatValue.Health]);
-        manaBarIndicator.UpdateDisplay(statValues[StatValue.Mana]);
+        print("Recalculating stats");
+        statValues[StatValue.BaseAttack].SetValue(baseStats[StatTypes.Strength].currentValue * 5 * Lsf);
+        print($"Attack for {baseStats[StatTypes.Strength].currentValue} is {statValues[StatValue.BaseAttack].baseValue}");
+        statValues[StatValue.DamageReduction].SetValue(baseStats[StatTypes.Defense].currentValue * 2 * Lsf);
+        statValues[StatValue.ManaRegen].SetValue(10); 
+        statValues[StatValue.None].SetValue(10);
+        
+        EquipmentManager.Instance.ApplyAllEquipments();
+        
+        UpdateOverallDisplay();
     }
 
     private void Start()
@@ -108,7 +112,7 @@ public class StatController : MonoBehaviour
         {
             case StatEffectType.BaseStat:
                 UpdateBaseStat(effect.baseStat, 
-                    (int)effect.GetAmount(GetBaseStat(effect.baseStat).maxValue));
+                    (int)effect.GetAmount(GetBaseStat(effect.baseStat).baseValue));
                 effect.gameObject.transform.parent = transform;
                 statusEffects.Add(effect);
                 break;
@@ -213,6 +217,7 @@ public class StatController : MonoBehaviour
     {
         baseStats[statType].maxValue += diff;
         baseStats[statType].currentValue += diff;
+        baseStats[statType].baseValue += diff;
         CalculateStatValues();
         EventManager.OnBaseStatUpdate?.Invoke(baseStats[statType].maxValue);
     }
@@ -223,12 +228,15 @@ public class StatController : MonoBehaviour
         statValues[statType].currentValue = Mathf.Clamp(currentValue, 0, statValues[statType].maxValue);
         UpdateOverallDisplay();
     }
-    
-    public void BoostStatValue(StatValue statType, int diff)
+
+    public void BoostStatValue(StatValue statType, int diff, bool shouldUpdate = false)
     {
         print($"Boosting {statType} by {diff}");
         statValues[statType].currentValue += diff;
-        UpdateOverallDisplay();
+        statValues[statType].maxValue = Mathf.Max(statValues[statType].currentValue, statValues[statType].maxValue);
+        if(shouldUpdate)
+            UpdateOverallDisplay();
+        
         EventManager.OnPlayerCoreUpdate?.Invoke(freePoints);
         EventManager.OnBaseStatUpdate?.Invoke(baseStats[StatTypes.Vitality].maxValue);
     }
@@ -238,7 +246,6 @@ public class StatController : MonoBehaviour
         freePoints += diff;
         EventManager.OnPlayerCoreUpdate?.Invoke(freePoints);
     }
-
 
     public void LoadData(StatSaveData savedData)
     {
@@ -281,6 +288,7 @@ public enum StatValue
 public class StatData
 {
     public float maxValue;
+    public float baseValue;
     public float currentValue;
 
     public StatData() : this(1, 1)
@@ -289,11 +297,19 @@ public class StatData
 
     public StatData(float maxValue, float currentValue)
     {
+        baseValue = maxValue;
         this.maxValue = maxValue;
         this.currentValue = currentValue;
     }
 
     public StatData(float maxValue) : this(maxValue, maxValue)
     {
+    }
+
+    public void SetValue(float value)
+    {
+        maxValue = value;
+        baseValue = value;
+        currentValue = value;
     }
 }

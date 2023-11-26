@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class EquipmentManager : MonoBehaviour
 {
-    private List<EquippableItem> equippedItems;
+    [SerializeField] private List<EquippableItem> equippedItems;
+
     public static EquipmentManager Instance { get; private set; }
 
     private void Awake()
@@ -27,6 +28,14 @@ public class EquipmentManager : MonoBehaviour
         equippedItems.Add(equippableItem);
         equippableItem.displayInInventory = false;
         GetSlotRef(equippableItem).UpdateDisplay(equippableItem, InventoryCellType.Equipment);
+    }
+    
+    public void ApplyAllEquipments()
+    {
+        foreach (var item in equippedItems)
+        {
+            item.ApplyEffect(false);
+        }
     }
 
     private InventoryCell GetSlotRef(EquippableItem equippableItem)

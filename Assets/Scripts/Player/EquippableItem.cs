@@ -28,11 +28,16 @@ public class EquippableItem : InventoryItem
     {
         EquipmentManager.Instance.AddEquipment(this);
 
+        ApplyEffect();
+    }
+
+    public void ApplyEffect(bool shouldUpdate = true)
+    {
         var stats = PlayerInputController.Instance.Stats;
         foreach (var statEffect in statEffects)
         {
             stats.BoostStatValue(statEffect.statValue,
-                statEffect.TotalChange(stats.GetStatValue(statEffect.statValue).maxValue));
+                statEffect.TotalChange(stats.GetStatValue(statEffect.statValue).baseValue), shouldUpdate);
         }
     }
 
