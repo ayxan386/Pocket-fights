@@ -128,7 +128,6 @@ public class PlayerInputController : MonoBehaviour
     {
         isPaused = !isPaused;
         EventManager.OnPauseMenuToggled?.Invoke(isPaused);
-        
     }
 
 
@@ -136,6 +135,8 @@ public class PlayerInputController : MonoBehaviour
     {
         if (CombatModeGameManager.Instance != null
             && !CombatModeGameManager.Instance.IsPlayerTurn) return;
+        if (!CombatModeGameManager.Instance.IsCombatGoing) return;
+        
         var actionDetails = PlayerActionManager.Instance.GetAction(index);
         var usedAction = statController.UsedAction(actionDetails.manaConsumption);
         if (usedAction)

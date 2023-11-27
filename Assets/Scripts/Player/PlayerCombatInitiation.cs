@@ -28,6 +28,35 @@ public class PlayerCombatInitiation : MonoBehaviour
         color.a = 0;
         colorSource.color = color;
         mobParent = GameObject.FindWithTag("MobParent");
+        StartCoroutine(MobCheck());
+    }
+
+    private IEnumerator MobCheck()
+    {
+        while (PlayerInputController.Instance != null)
+        {
+            var allMobs = Physics.SphereCastAll(transform.position, checkRadius, Vector3.forward, 0, mobLayer);
+            if (allMobs.Length == 0)
+            {
+                MobDescriptionManager.Instance.TurnOff();
+            }
+
+            MobController displayedMob = null;
+            foreach (var mob in allMobs)
+            {
+                if (mob.transform.TryGetComponent(out displayedMob))
+                {
+                    MobDescriptionManager.Instance.DisplayMob(displayedMob);
+                    break;
+                }
+            }
+
+            yield return new WaitForSeconds(0.1f);
+            yield return new WaitUntil(() =>
+                !IsCombatScene && (
+                    displayedMob == null
+                    || Vector3.Distance(transform.position, displayedMob.transform.position) > checkRadius));
+        }
     }
 
     public void StartInitiation(float duration)
@@ -63,7 +92,6 @@ public class PlayerCombatInitiation : MonoBehaviour
     private void FindAllMobs()
     {
         var allMobs = Physics.SphereCastAll(transform.position, checkRadius, Vector3.forward, 0, mobLayer);
-        print($"Found {allMobs.Length} mobs");
         mobs = new List<MobController>();
         foreach (var mob in allMobs)
         {

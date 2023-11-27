@@ -31,6 +31,8 @@ public class CombatModeGameManager : MonoBehaviour
 
     public bool IsPlayerTurn { get; private set; } = true;
 
+    public bool IsCombatGoing { get; private set; }
+
     private void Awake()
     {
         Instance = this;
@@ -52,9 +54,9 @@ public class CombatModeGameManager : MonoBehaviour
         loadingMenu.SetActive(false);
     }
 
-    private void OnCombatSceneLoading(bool obj)
+    private void OnCombatSceneLoading(bool isLoaded)
     {
-        if (!obj) return;
+        if (!isLoaded) return;
 
         PlayerInputController.Instance.PlacePlayer(playerStandPoint);
         if (PlayerCombatInitiation.Instance.mobs != null)
@@ -69,10 +71,12 @@ public class CombatModeGameManager : MonoBehaviour
         }
 
         SelectedEnemy = mobsInCombat[0];
+        IsCombatGoing = isLoaded;
     }
 
     public void EndPlayerTurn()
     {
+        if (!IsCombatGoing) return;
         endTurnButton.interactable = false;
         IsPlayerTurn = false;
         EventManager.OnPlayerTurnEnd?.Invoke(true);
@@ -101,6 +105,7 @@ public class CombatModeGameManager : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            IsCombatGoing = false;
             Time.timeScale = 0;
             endingMenu.SetActive(true);
             EndOfCombat();
@@ -144,7 +149,9 @@ public class CombatModeGameManager : MonoBehaviour
         {
             if (mob.IsAlive())
             {
+                SelectedEnemy?.Selected(false);
                 SelectedEnemy = mob;
+                SelectedEnemy.Selected(true);
                 break;
             }
         }
@@ -153,7 +160,10 @@ public class CombatModeGameManager : MonoBehaviour
     [ContextMenu("Player victory")]
     public void PlayerVictory()
     {
+        IsCombatGoing = false;
         var allDrops = mobsInCombat.ConvertAll(mob => mob.PossibleLoots);
+        var statController = PlayerInputController.Instance.Stats;
+        statController.UpdateStatValue(StatValue.Mana, (int)statController.GetStatValue(StatValue.Mana).maxValue);
         var generatedLoot = LootManager.GenerateLoot(allDrops);
         foreach (var valueTuple in generatedLoot)
         {

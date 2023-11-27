@@ -53,7 +53,7 @@ public class FloorManager : MonoBehaviour
                 var pos = transform.position;
                 if (roomInstances.Count % 2 == 0)
                 {
-                    pos.x += distanceBetweenRooms.x * roomInstances.Count * (roomInstances.Count % 2 == 0 ? 1 : -1);
+                    pos.x += distanceBetweenRooms.x * roomInstances.Count;
                 }
                 else
                 {

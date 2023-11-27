@@ -11,6 +11,8 @@ public class MobController : MonoBehaviour
     [SerializeField] private List<ActionDetails> actions;
     [SerializeField] private StatController statController;
     [SerializeField] private List<PossibleLoot> possibleDrops;
+    [SerializeField] private MobDisplayData displayData;
+    [SerializeField] private GameObject combatUiRef;
 
     [Header("AI parameters")] [SerializeField]
     private NavMeshAgent agent;
@@ -18,10 +20,18 @@ public class MobController : MonoBehaviour
     public Guid Id { get; private set; }
     public List<PossibleLoot> PossibleLoots => possibleDrops;
     public bool IsDoneAttack { get; private set; }
+    public MobDisplayData DisplayData => displayData;
+
     private bool isCombatModeActive = false;
 
     private IEnumerator Start()
     {
+        yield return new WaitUntil(() => PlayerCombatInitiation.Instance != null);
+        if (!PlayerCombatInitiation.Instance.IsCombatScene)
+        {
+            DeactivateCombatMode();
+        }
+
         while (true)
         {
             yield return new WaitUntil(() => gameObject.activeSelf && agent.enabled);
@@ -53,6 +63,7 @@ public class MobController : MonoBehaviour
     {
         Id = Guid.NewGuid();
         agent.enabled = false;
+        combatUiRef.SetActive(true);
         transform.position = mobStandPoint.position;
         transform.rotation = mobStandPoint.rotation;
         isCombatModeActive = true;
@@ -62,6 +73,7 @@ public class MobController : MonoBehaviour
 
     public void DeactivateCombatMode()
     {
+        combatUiRef.SetActive(false);
         isCombatModeActive = false;
         agent.enabled = true;
         EventManager.OnPlayerTurnEnd -= OnPlayerTurnEnd;
@@ -98,8 +110,21 @@ public class MobController : MonoBehaviour
         CombatModeGameManager.Instance.MobDefeated(this);
     }
 
+    public void Selected(bool isSelected)
+    {
+        if (isSelected)
+            MobDescriptionManager.Instance.DisplayMob(this);
+    }
+
     public bool IsAlive()
     {
         return gameObject.activeSelf && statController.GetStatValue(StatValue.Health).currentValue > 0;
     }
+}
+
+[Serializable]
+public class MobDisplayData
+{
+    public string displayName;
+    public Sprite icon;
 }
