@@ -13,6 +13,7 @@ public class PlayerCombatInitiation : MonoBehaviour
 
     public bool IsCombatScene;
     private GameObject mobParent;
+    private Coroutine initiationCorr;
     public List<MobController> mobs { get; private set; }
 
     public static PlayerCombatInitiation Instance { get; private set; }
@@ -61,7 +62,8 @@ public class PlayerCombatInitiation : MonoBehaviour
 
     public void StartInitiation(float duration)
     {
-        StartCoroutine(ColorChange(duration));
+        if (initiationCorr != null) return;
+        initiationCorr = StartCoroutine(ColorChange(duration));
     }
 
     private IEnumerator ColorChange(float duration)
@@ -81,6 +83,7 @@ public class PlayerCombatInitiation : MonoBehaviour
         color.a = 0;
         colorSource.color = color;
         FindAllMobs();
+        initiationCorr = null;
         yield return new WaitForSeconds(0.2f);
         if (mobs.Count <= 0) yield break;
 
