@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 33306855468718106}
   - component: {fileID: 23237172857443216}
   - component: {fileID: 731171739943527716}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SilverBirchTreeLarge
   m_TagString: Untagged
   m_Icon: {fileID: 0}

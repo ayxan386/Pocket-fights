@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 public class MobController : MonoBehaviour
@@ -15,7 +14,7 @@ public class MobController : MonoBehaviour
     [SerializeField] private GameObject combatUiRef;
 
     [Header("AI parameters")] [SerializeField]
-    private NavMeshAgent agent;
+    private MobMovementController movementController;
 
     public Guid Id { get; private set; }
     public List<PossibleLoot> PossibleLoots => possibleDrops;
@@ -34,8 +33,8 @@ public class MobController : MonoBehaviour
 
         while (true)
         {
-            yield return new WaitUntil(() => gameObject.activeSelf && agent.enabled);
-            yield return new WaitForSeconds(2);
+            yield return new WaitUntil(() => gameObject.activeSelf);
+            yield return new WaitForSeconds(1);
             if (!isCombatModeActive)
                 MoveTowardPlayer();
         }
@@ -43,8 +42,7 @@ public class MobController : MonoBehaviour
 
     private void MoveTowardPlayer()
     {
-        if (agent.enabled)
-            agent.SetDestination(PlayerInputController.Instance.transform.position);
+        movementController.Move = true;
     }
 
     public void ReceiveAttack(float baseDamage)
@@ -62,7 +60,7 @@ public class MobController : MonoBehaviour
     public void ActivateCombatMode(Transform mobStandPoint)
     {
         Id = Guid.NewGuid();
-        agent.enabled = false;
+        movementController.Navigate = false;
         combatUiRef.SetActive(true);
         transform.position = mobStandPoint.position;
         transform.rotation = mobStandPoint.rotation;
@@ -75,7 +73,7 @@ public class MobController : MonoBehaviour
     {
         combatUiRef.SetActive(false);
         isCombatModeActive = false;
-        agent.enabled = true;
+        movementController.Navigate = true;
         EventManager.OnPlayerTurnEnd -= OnPlayerTurnEnd;
     }
 
