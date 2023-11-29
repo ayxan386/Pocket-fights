@@ -70,7 +70,6 @@ public class MobMovementController : MonoBehaviour
                 movementVector.y = 0;
                 rb.velocity = movementVector;
                 var distance = Vector3.Distance(path[currentIndex].pos, transform.position);
-                print($"Distance to next point {distance}");
 
                 if (currentIndex + 1 >= path.Count)
                 {

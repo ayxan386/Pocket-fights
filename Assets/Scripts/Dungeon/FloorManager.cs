@@ -29,7 +29,7 @@ public class FloorManager : MonoBehaviour
         roomInstances = new List<RoomManager>();
         var randomRoomIndex = Random.Range(0, roomPrefabs.Count);
         var randomRoom = roomPrefabs[randomRoomIndex];
-        randomRoom = Instantiate(randomRoom, transform);
+        randomRoom = Instantiate(randomRoom, Vector3.zero, Quaternion.identity, transform);
 
         roomInstances.Add(randomRoom);
 
@@ -60,18 +60,12 @@ public class FloorManager : MonoBehaviour
             if (potentialRoom != null)
             {
                 var pos = transform.position;
-                if (roomInstances.Count % 2 == 0)
-                {
-                    pos.x += distanceBetweenRooms.x * roomInstances.Count;
-                }
-                else
-                {
-                    pos.z += distanceBetweenRooms.y * roomInstances.Count;
-                }
+                pos.x += distanceBetweenRooms.x * roomInstances.Count;
 
                 potentialRoom = Instantiate(potentialRoom, pos, Quaternion.identity, transform);
-                potentialRoom.Telepads.Find(pad => pad.Color == telepad.Color && !pad.IsLinked).Link(telepad);
                 roomInstances.Add(potentialRoom);
+
+                potentialRoom.Telepads.Find(pad => pad.Color == telepad.Color && !pad.IsLinked).Link(telepad);
             }
         }
     }
