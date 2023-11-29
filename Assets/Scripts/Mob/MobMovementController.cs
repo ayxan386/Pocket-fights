@@ -12,30 +12,22 @@ public class MobMovementController : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private float turnRate;
     [SerializeField] private Vector2Int gridSize;
-    [SerializeField] private float detectionRadius;
     [SerializeField] private Transform rayOrigin;
-    [SerializeField] private LayerMask obstructionLayer;
     [SerializeField] private bool drawGizmos;
 
     [FormerlySerializedAs("currentTargetPoint")] [Header("Debug")] [SerializeField]
     private GridPoint finalTargetPoint;
 
-    [Header("Obstruction avoidance")] [SerializeField]
-    private float obstructionAvoidanceDistance;
-
-    [SerializeField] private float obstructionAvoidanceFactor;
-    [SerializeField] private float obstructionAvoidanceDistancePower;
-
-    private List<GridPoint> path;
-
-    private Rigidbody rb;
-
     public bool Navigate { get; set; }
 
     public bool Move { get; set; }
 
-    public List<GridPoint> grid;
-    private Vector3 sumOfForces;
+    private List<GridPoint> grid;
+    public List<GridPoint> path;
+    public int currentIndex;
+    private Vector3 movementVector;
+    private RoomManager room;
+    private Rigidbody rb;
 
     private void Awake()
     {
@@ -49,59 +41,84 @@ public class MobMovementController : MonoBehaviour
 
     private IEnumerator TargetMovement()
     {
+        yield return new WaitForSeconds(1);
+        FindClosestRoom();
+        yield return new WaitForSeconds(0.2f);
         SelectRandomTarget();
+        yield return new WaitForSeconds(0.2f);
         while (true)
         {
             rb.velocity = Vector3.zero;
-            yield return new WaitUntil(() => Navigate && Move && finalTargetPoint != null);
-            // var dir = finalTargetPoint. - transform.position;
-            // dir.Normalize();
-            // sumOfForces = dir * movementSpeed;
-            // sumOfForces.y = 0;
-            //
-            // animator.SetBool("move", false);
-            // while (Vector3.Angle(transform.forward, sumOfForces) > 10)
-            // {
-            //     rb.velocity = Vector3.zero;
-            //     transform.forward = Vector3.Lerp(transform.forward, sumOfForces, turnRate * Time.deltaTime);
-            //     yield return null;
-            // }
-            //
-            // rb.AddForce(sumOfForces, ForceMode.Acceleration);
-            // animator.SetBool("move", true);
+            animator.SetBool("move", false);
+            yield return new WaitUntil(() => Navigate && Move && path != null);
+            var dir = path[currentIndex].pos - transform.position;
+            movementVector = dir.normalized * movementSpeed;
+            movementVector.y = 0;
 
-            if (Vector3.Distance(finalTargetPoint.pos, transform.position) < 0.1f) SelectRandomTarget();
-            yield return null;
+            while (Vector3.Angle(transform.forward, movementVector) > 10)
+            {
+                transform.forward = Vector3.Lerp(transform.forward, movementVector, turnRate * Time.deltaTime);
+                yield return null;
+            }
+
+            animator.SetBool("move", true);
+
+            while (Navigate && Move)
+            {
+                dir = path[currentIndex].pos - transform.position;
+                movementVector = dir.normalized * movementSpeed;
+                movementVector.y = 0;
+                rb.velocity = movementVector;
+                var distance = Vector3.Distance(path[currentIndex].pos, transform.position);
+                print($"Distance to next point {distance}");
+
+                if (currentIndex + 1 >= path.Count)
+                {
+                    currentIndex = 0;
+                    SelectRandomTarget();
+                    break;
+                }
+
+                if (distance < 0.6f)
+                {
+                    currentIndex++;
+                    break;
+                }
+
+                yield return null;
+            }
         }
     }
 
-    private void SelectRandomTarget()
+    [ContextMenu("Select random target")]
+    public void SelectRandomTarget()
     {
-        FindAllHits();
         var finalIndex = Random.Range(0, grid.Count);
-        var maxDist = -1f;
-        for (var index = 0; index < grid.Count; index++)
+        while (grid[finalIndex].isObstructed)
         {
-            var point = grid[index];
-            if(point.isObstructed) continue;
-            var distance = Vector3.Distance(point.pos, transform.position);
-            if (distance > maxDist)
-            {
-                finalIndex = index;
-                maxDist = distance;
-            }
+            finalIndex = Random.Range(0, grid.Count);
         }
+
+        foreach (var point in grid)
+        {
+            point.visitIndex = 0;
+            point.parentIndex = -1;
+        }
+
+        currentIndex = 0;
 
         finalTargetPoint = grid[finalIndex];
         finalTargetPoint.parentIndex = -1;
+
         var order = new Queue<int>();
         order.Enqueue(finalIndex);
+
         while (order.Count > 0)
         {
             var currentIndex = order.Dequeue();
-            print($"Checking {currentIndex}");
-            grid[currentIndex].isVisited = true;
-            if (Vector3.Distance(transform.position, grid[currentIndex].pos) < 0.1f)
+            grid[currentIndex].visitIndex = 2;
+            var distToMob = Vector3.Distance(transform.position, grid[currentIndex].pos);
+            if (distToMob <= 0.9f)
             {
                 //Found player pos
                 path = new List<GridPoint>();
@@ -110,29 +127,27 @@ public class MobMovementController : MonoBehaviour
                     path.Add(grid[currentIndex]);
                     currentIndex = grid[currentIndex].parentIndex;
                 }
-        
-                break;
+
+                return;
             }
-        
+
             var allNeighbours = GetAllNeighbours(currentIndex);
-            print($"Found {allNeighbours.Count} nei");
             foreach (var neighbour in allNeighbours)
             {
-                if (!neighbour.isObstructed && !neighbour.isVisited)
+                if (!neighbour.isObstructed && neighbour.visitIndex == 0)
                 {
+                    neighbour.visitIndex = 1;
                     neighbour.parentIndex = currentIndex;
                     order.Enqueue(neighbour.index);
                 }
             }
-        
         }
     }
 
     private List<GridPoint> GetAllNeighbours(int currentIndex)
     {
-        var x = currentIndex % gridSize.y;
         var y = currentIndex / gridSize.y;
-        print($"Index to corr: {currentIndex} {x} , {y}");
+        var x = currentIndex % gridSize.y;
         var res = new List<GridPoint>();
         if (x + 1 < gridSize.x)
         {
@@ -157,24 +172,23 @@ public class MobMovementController : MonoBehaviour
         return res;
     }
 
-
-    private void FindAllHits()
+    private void FindClosestRoom()
     {
-        grid = new List<GridPoint>();
-        for (var x = -gridSize.x / 2; x < gridSize.x / 2; x += 1)
+        var minDistance = 1000000f;
+        foreach (var room in FloorManager.Instance.Rooms)
         {
-            for (var z = -gridSize.y / 2; z < gridSize.y / 2; z += 1)
+            var distance = Vector3.Distance(transform.position, room.transform.position);
+            if (distance < minDistance)
             {
-                var pos = rayOrigin.position;
-                pos.x = Mathf.Floor(pos.x + x);
-                pos.z += Mathf.Floor(pos.z + z);
-
-                var gridPoint = new GridPoint(pos, x + gridSize.x / 2 + gridSize.y * (z + gridSize.y / 2));
-                grid.Add(gridPoint);
-                gridPoint.isObstructed = Physics.CheckSphere(pos, detectionRadius, obstructionLayer);
+                minDistance = distance;
+                this.room = room;
+                gridSize = room.GridSize;
             }
         }
+
+        grid = room.Grid.ConvertAll(point => new GridPoint(point));
     }
+
 
     private void OnDrawGizmosSelected()
     {
@@ -182,13 +196,15 @@ public class MobMovementController : MonoBehaviour
 
         foreach (var hit in grid)
         {
-            if (hit.parentIndex == -1)
+            if (hit == finalTargetPoint)
             {
                 Gizmos.color = Color.blue;
-            } else if (hit.isVisited)
+            }
+            else if (path != null && path.Contains(hit))
             {
                 Gizmos.color = Color.green;
-            } else if (hit.isObstructed)
+            }
+            else if (hit.isObstructed)
             {
                 Gizmos.color = Color.red;
             }
@@ -196,12 +212,12 @@ public class MobMovementController : MonoBehaviour
             {
                 Gizmos.color = Color.yellow;
             }
-            
-            Gizmos.DrawSphere(hit.pos, detectionRadius);
+
+            Gizmos.DrawSphere(hit.pos, 0.3f);
         }
 
         Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(rayOrigin.position, sumOfForces);
+        Gizmos.DrawRay(rayOrigin.position, movementVector);
     }
 }
 
@@ -210,7 +226,7 @@ public class GridPoint
 {
     public Vector3 pos;
     public bool isObstructed;
-    public bool isVisited;
+    public int visitIndex;
     public int parentIndex;
     public int index;
 
@@ -218,5 +234,10 @@ public class GridPoint
     {
         this.pos = pos;
         this.index = index;
+    }
+
+    public GridPoint(GridPoint input) : this(input.pos, input.index)
+    {
+        isObstructed = input.isObstructed;
     }
 }

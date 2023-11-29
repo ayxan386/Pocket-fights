@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Cinemachine;
-using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -24,6 +23,8 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private List<BlockChance> blocks;
     [SerializeField] private List<string> floorBlocks;
     [SerializeField] private List<TopBottomPairs> topBottomPairsList;
+    [SerializeField] private LayerMask obstructionLayer;
+    [SerializeField] private float detectionRadius;
 
     [Header("Game of life params")] [SerializeField]
     private string joiningCellName = "water";
@@ -34,7 +35,8 @@ public class RoomManager : MonoBehaviour
 
     [Header("Room decor")] [SerializeField]
     private List<BlockChance> decorPrefabs;
-    [SerializeField] [Range(0,1f)] private float density;
+
+    [SerializeField] [Range(0, 1f)] private float density;
     [SerializeField] private Transform decorHolder;
     [SerializeField] private bool showGizmos;
     [SerializeField] private LayerMask forbiddenLayers;
@@ -42,14 +44,19 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private List<Vector3> decorPosition;
     [SerializeField] private bool randomSeed;
     [SerializeField] private int currentSeed;
+    private List<GridPoint> grid;
 
     public List<TeleportPad> Telepads => pads;
 
     public string ComparisonName => comparisonName;
+    public Vector2Int GridSize => dimensions;
+    public Transform FloorStartingPoint => floorGenerationPoint;
+    public List<GridPoint> Grid => grid;
 
     private void Start()
     {
         pads.ForEach(pad => pad.LinkedRoom = this);
+        FindAllHits();
     }
 
     public void Activate()
@@ -190,7 +197,7 @@ public class RoomManager : MonoBehaviour
     private BlockChance GetRandomBlock(float x, float y, List<BlockChance> blockCollection)
     {
         var chance = Mathf.PerlinNoise(x + offset.x, y + offset.y);
-        print("chance: " +chance);
+        print("chance: " + chance);
         foreach (var tuple in blockCollection)
         {
             if (chance >= tuple.weight.x && chance <= tuple.weight.y)
@@ -204,10 +211,10 @@ public class RoomManager : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        if(!showGizmos) return;
+        if (!showGizmos) return;
 
         GenerateDecorPositions();
-        
+
         Gizmos.color = Color.cyan;
         foreach (var pos in decorPosition)
         {
@@ -222,15 +229,32 @@ public class RoomManager : MonoBehaviour
         {
             currentSeed = (int)(Random.value * Random.Range(1000, 123456));
         }
-        
+
         Random.InitState(currentSeed);
         for (int childIndex = 0; childIndex < layerToPlaceDecorOnTop.childCount; childIndex++)
         {
             if (Random.value <= density)
             {
                 var capBlock = layerToPlaceDecorOnTop.GetChild(childIndex);
-                if(( forbiddenLayers & (1 << capBlock.gameObject.layer)) != 0) continue;
+                if ((forbiddenLayers & (1 << capBlock.gameObject.layer)) != 0) continue;
                 decorPosition.Add(capBlock.position);
+            }
+        }
+    }
+
+    private void FindAllHits()
+    {
+        grid = new List<GridPoint>();
+        for (var x = 0; x < dimensions.x; x += 1)
+        {
+            for (var z = 0; z < dimensions.y; z += 1)
+            {
+                var pos = floorGenerationPoint.GetChild(x * dimensions.y + z).transform.position;
+                pos.y += 1.7f;
+                
+                var gridPoint = new GridPoint(pos, z + x * dimensions.y);
+                grid.Add(gridPoint);
+                gridPoint.isObstructed = Physics.CheckSphere(pos, detectionRadius, obstructionLayer);
             }
         }
     }
@@ -245,7 +269,7 @@ public class RoomManager : MonoBehaviour
             // newBlock.transform.position = decorPos + randomDecor.placementOffset;
             // newBlock.transform.rotation = Quaternion.identity;
             // newBlock.transform.SetParent(decorHolder);
-        } 
+        }
     }
 }
 

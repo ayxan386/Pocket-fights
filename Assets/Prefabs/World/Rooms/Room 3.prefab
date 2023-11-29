@@ -4409,6 +4409,10 @@ MonoBehaviour:
     top: {fileID: 1443664247703714, guid: 2f04c901114ddd645a43441e87ca3ac7, type: 3}
   - bottomName: clay
     top: {fileID: 5380408333849072702, guid: 6d2d8270942572e46a0c83794dae5c25, type: 3}
+  obstructionLayer:
+    serializedVersion: 2
+    m_Bits: 144
+  detectionRadius: 0
   joiningCellName: water
   cellNumberThreshold: 3
   deadCellCount: 0

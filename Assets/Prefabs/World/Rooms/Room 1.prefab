@@ -294,6 +294,10 @@ MonoBehaviour:
   blocks: []
   floorBlocks: []
   topBottomPairsList: []
+  obstructionLayer:
+    serializedVersion: 2
+    m_Bits: 144
+  detectionRadius: 0.35
   joiningCellName: water
   cellNumberThreshold: 0
   deadCellCount: 1

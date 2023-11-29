@@ -8,6 +8,15 @@ public class FloorManager : MonoBehaviour
     [SerializeField] private Vector2 distanceBetweenRooms;
     [SerializeField] private Vector2Int numberOfRooms;
 
+    public static FloorManager Instance { get; private set; }
+
+    public List<RoomManager> Rooms => roomInstances;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     private void Start()
     {
         roomInstances[0].PlacePlayer();
