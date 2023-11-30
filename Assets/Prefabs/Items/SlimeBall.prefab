@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3337002340432959712}
   - component: {fileID: 3337002340432959719}
-  - component: {fileID: -830563134188924800}
   m_Layer: 0
   m_Name: SlimeBall
   m_TagString: Untagged
@@ -59,30 +58,4 @@ MonoBehaviour:
   type: 0
   onUseAction:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: -830563134188924800}
-        m_TargetAssemblyTypeName: HpRestoringAction, Assembly-CSharp
-        m_MethodName: Use
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &-830563134188924800
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3337002340432959713}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 843889a6557aba4459418471b612b2b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  amount: 10
-  statValue: 0
+      m_Calls: []

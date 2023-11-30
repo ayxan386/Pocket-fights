@@ -73,6 +73,7 @@ public class ShopManager : MonoBehaviour
     private void OnShopToggled(bool isShopOpen)
     {
         IsShopOpen = isShopOpen;
+        InventoryController.Instance.UpdateDisplay();
         if (!isShopOpen) return;
 
         CheckBoughtItemCounts();

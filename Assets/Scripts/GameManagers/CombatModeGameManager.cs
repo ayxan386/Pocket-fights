@@ -58,6 +58,9 @@ public class CombatModeGameManager : MonoBehaviour
     {
         if (!isLoaded) return;
 
+        var statController = PlayerInputController.Instance.Stats;
+        statController.UpdateStatValue(StatValue.Mana, (int)statController.GetStatValue(StatValue.Mana).maxValue);
+        
         PlayerInputController.Instance.PlacePlayer(playerStandPoint);
         if (PlayerCombatInitiation.Instance.mobs != null)
         {
@@ -70,8 +73,8 @@ public class CombatModeGameManager : MonoBehaviour
             mob.ActivateCombatMode(mobStandPoints[index]);
         }
 
-        SelectedEnemy = mobsInCombat[0];
         IsCombatGoing = isLoaded;
+        FindNextSelectedMobs();
     }
 
     public void EndPlayerTurn()

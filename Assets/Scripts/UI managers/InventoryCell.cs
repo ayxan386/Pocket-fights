@@ -63,11 +63,13 @@ public class InventoryCell : MonoBehaviour, IPointerEnterHandler, ISelectHandler
         switch (type)
         {
             case InventoryCellType.Shop:
+                priceText.alpha = 1;
+                break;
             case InventoryCellType.Bag:
-                if (ShopManager.Instance.IsShopOpen && item.buyPrice > 0 && item.canBeSold)
+                if (ShopManager.Instance.IsShopOpen && item.canBeSold)
                     priceText.alpha = 1;
                 else
-                    priceText.alpha = 1;
+                    priceText.alpha = 0;
                 break;
             case InventoryCellType.Equipment:
             default:

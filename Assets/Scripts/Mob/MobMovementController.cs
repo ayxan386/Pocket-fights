@@ -20,8 +20,6 @@ public class MobMovementController : MonoBehaviour
 
     public bool Navigate { get; set; }
 
-    public bool Move { get; set; }
-
     private List<GridPoint> grid;
     public List<GridPoint> path;
     public int currentIndex;
@@ -34,7 +32,7 @@ public class MobMovementController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    private void Start()
+    private void OnEnable()
     {
         StartCoroutine(TargetMovement());
     }
@@ -44,26 +42,29 @@ public class MobMovementController : MonoBehaviour
         yield return new WaitForSeconds(1);
         FindClosestRoom();
         yield return new WaitForSeconds(0.2f);
-        SelectRandomTarget();
-        yield return new WaitForSeconds(0.2f);
+        while (path.Count == 0)
+        {
+            SelectRandomTarget();
+            yield return new WaitForSeconds(0.2f);
+        }
+
         while (true)
         {
             rb.velocity = Vector3.zero;
-            animator.SetBool("move", false);
-            yield return new WaitUntil(() => Navigate && Move && path != null);
+            yield return new WaitUntil(() => Navigate && gameObject.activeSelf && currentIndex < path.Count);
             var dir = path[currentIndex].pos - transform.position;
             movementVector = dir.normalized * movementSpeed;
             movementVector.y = 0;
 
-            while (Navigate && Move && Vector3.Angle(transform.forward, movementVector) > 3)
+            while (Navigate && Vector3.Angle(transform.forward, movementVector) > 3)
             {
                 transform.forward = Vector3.Lerp(transform.forward, movementVector, turnRate * Time.deltaTime);
                 yield return null;
             }
 
-            animator.SetBool("move", true);
 
-            while (Navigate && Move)
+            animator.SetBool("move", Navigate);
+            while (Navigate && gameObject.activeSelf)
             {
                 dir = path[currentIndex].pos - transform.position;
                 movementVector = dir.normalized * movementSpeed;

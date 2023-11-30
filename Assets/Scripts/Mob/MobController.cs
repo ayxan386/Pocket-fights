@@ -21,8 +21,6 @@ public class MobController : MonoBehaviour
     public bool IsDoneAttack { get; private set; }
     public MobDisplayData DisplayData => displayData;
 
-    private bool isCombatModeActive = false;
-
     private IEnumerator Start()
     {
         yield return new WaitUntil(() => PlayerCombatInitiation.Instance != null);
@@ -30,19 +28,6 @@ public class MobController : MonoBehaviour
         {
             DeactivateCombatMode();
         }
-
-        while (true)
-        {
-            yield return new WaitUntil(() => gameObject.activeSelf);
-            yield return new WaitForSeconds(1);
-            if (!isCombatModeActive)
-                MoveTowardPlayer();
-        }
-    }
-
-    private void MoveTowardPlayer()
-    {
-        movementController.Move = true;
     }
 
     public void ReceiveAttack(float baseDamage)
@@ -60,11 +45,12 @@ public class MobController : MonoBehaviour
     public void ActivateCombatMode(Transform mobStandPoint)
     {
         Id = Guid.NewGuid();
+        animator.SetBool("move", false);
         movementController.Navigate = false;
-        combatUiRef.SetActive(true);
+
         transform.position = mobStandPoint.position;
         transform.rotation = mobStandPoint.rotation;
-        isCombatModeActive = true;
+
         EventManager.OnPlayerTurnEnd += OnPlayerTurnEnd;
     }
 
@@ -72,7 +58,6 @@ public class MobController : MonoBehaviour
     public void DeactivateCombatMode()
     {
         combatUiRef.SetActive(false);
-        isCombatModeActive = false;
         movementController.Navigate = true;
         EventManager.OnPlayerTurnEnd -= OnPlayerTurnEnd;
     }
@@ -111,7 +96,11 @@ public class MobController : MonoBehaviour
     public void Selected(bool isSelected)
     {
         if (isSelected)
+        {
             MobDescriptionManager.Instance.DisplayMob(this);
+        }
+
+        combatUiRef.SetActive(isSelected);
     }
 
     public bool IsAlive()

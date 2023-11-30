@@ -39,7 +39,6 @@ public class InventoryController : MonoBehaviour
         EventManager.OnItemAdd += OnItemAdd;
         EventManager.OnItemAddAsLoot += OnItemAddAsLoot;
         EventManager.OnItemRemove += OnItemRemove;
-        EventManager.OnShopToggled += OnShopToggled;
     }
 
 
@@ -149,11 +148,6 @@ public class InventoryController : MonoBehaviour
             ownedItems.Remove(removedItem);
         }
 
-        UpdateDisplay();
-    }
-
-    private void OnShopToggled(bool isShopOpen)
-    {
         UpdateDisplay();
     }
 
