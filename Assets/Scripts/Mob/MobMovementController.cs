@@ -55,7 +55,7 @@ public class MobMovementController : MonoBehaviour
             movementVector = dir.normalized * movementSpeed;
             movementVector.y = 0;
 
-            while (Vector3.Angle(transform.forward, movementVector) > 10)
+            while (Navigate && Move && Vector3.Angle(transform.forward, movementVector) > 3)
             {
                 transform.forward = Vector3.Lerp(transform.forward, movementVector, turnRate * Time.deltaTime);
                 yield return null;
