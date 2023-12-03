@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 7013166036221969263}
   - component: {fileID: 4497398274171659917}
   - component: {fileID: 1077087004638866790}
-  - component: {fileID: 9121880177918454880}
   m_Layer: 0
   m_Name: Selection Floor indicator
   m_TagString: Untagged
@@ -1592,18 +1591,4 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9090548133584967116}
-  m_Mesh: {fileID: 0}
---- !u!64 &9121880177918454880
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9090548133584967116}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
   m_Mesh: {fileID: 0}
