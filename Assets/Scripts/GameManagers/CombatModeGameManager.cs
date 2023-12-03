@@ -41,11 +41,14 @@ public class CombatModeGameManager : MonoBehaviour
     private void OnEnable()
     {
         EventManager.OnCombatSceneLoading += OnCombatSceneLoading;
+        EventManager.OnChangeSelection += OnChangeSelection;
     }
+
 
     private void OnDisable()
     {
         EventManager.OnCombatSceneLoading -= OnCombatSceneLoading;
+        EventManager.OnChangeSelection -= OnChangeSelection;
     }
 
     IEnumerator Start()
@@ -145,6 +148,24 @@ public class CombatModeGameManager : MonoBehaviour
             PlayerVictory();
         }
     }
+    
+    private void OnChangeSelection(float dirF)
+    {
+        var it = 0;
+        var dir = Mathf.RoundToInt(dirF);
+        var index = mobsInCombat.FindIndex(enm => enm == SelectedEnemy);
+        var count = mobsInCombat.Count;
+        while (it < count)
+        {
+            index = (index + dir + count) % count;
+            if (mobsInCombat[index].IsAlive())
+            {
+                ChangeSelectedEnemy(mobsInCombat[index]);
+                break;
+            }
+            it++;
+        }
+    }
 
     private void FindNextSelectedMobs()
     {
@@ -152,12 +173,17 @@ public class CombatModeGameManager : MonoBehaviour
         {
             if (mob.IsAlive())
             {
-                SelectedEnemy?.Selected(false);
-                SelectedEnemy = mob;
-                SelectedEnemy.Selected(true);
+                ChangeSelectedEnemy(mob);
                 break;
             }
         }
+    }
+
+    private void ChangeSelectedEnemy(MobController mob)
+    {
+        SelectedEnemy?.Selected(false);
+        SelectedEnemy = mob;
+        SelectedEnemy.Selected(true);
     }
 
     [ContextMenu("Player victory")]

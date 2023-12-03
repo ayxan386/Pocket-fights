@@ -12,6 +12,7 @@ public class MobController : MonoBehaviour
     [SerializeField] private List<PossibleLoot> possibleDrops;
     [SerializeField] private MobDisplayData displayData;
     [SerializeField] private GameObject combatUiRef;
+    [SerializeField] private GameObject selectionIndicators;
 
     [Header("AI parameters")] [SerializeField]
     private MobMovementController movementController;
@@ -101,6 +102,7 @@ public class MobController : MonoBehaviour
         }
 
         combatUiRef.SetActive(isSelected);
+        selectionIndicators.SetActive(isSelected);
     }
 
     public bool IsAlive()

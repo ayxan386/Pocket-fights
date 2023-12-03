@@ -130,6 +130,12 @@ public class PlayerInputController : MonoBehaviour
         EventManager.OnPauseMenuToggled?.Invoke(isPaused);
     }
 
+    private void OnChangeSelection(InputValue inp)
+    {
+        var changeDir = inp.Get<float>();
+        EventManager.OnChangeSelection?.Invoke(changeDir);
+    }
+
 
     private void OnActionUsed(int index)
     {
