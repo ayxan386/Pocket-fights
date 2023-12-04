@@ -27,6 +27,7 @@ public class StatusManager : MonoBehaviour
     {
         foreach (var statusEffect in statusEffects)
         {
+            print("changed number of turns");
             statusEffect.numberOfTurns--;
 
             if (statusEffect.numberOfTurns <= 0)
@@ -59,10 +60,7 @@ public class StatusManager : MonoBehaviour
 
     public void RemoveStatusEffect(StatEffect effect)
     {
-        RelatedStats.BoostStatValue(effect.statValue,
-            -effect.GetAmount(RelatedStats.GetStatValue(effect.statValue).baseValue));
-        Destroy(effect.gameObject, 0.1f);
-
+        RelatedStats.BoostStatValue(effect.statValue, -effect.CurrentEffect());
         RelatedStats.UpdateOverallDisplay();
     }
 }

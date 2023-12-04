@@ -63,7 +63,7 @@ public class CombatModeGameManager : MonoBehaviour
 
         var statController = PlayerInputController.Instance.Stats;
         statController.UpdateStatValue(StatValue.Mana, (int)statController.GetStatValue(StatValue.Mana).maxValue);
-        
+
         PlayerInputController.Instance.PlacePlayer(playerStandPoint);
         if (PlayerCombatInitiation.Instance.mobs != null)
         {
@@ -92,6 +92,7 @@ public class CombatModeGameManager : MonoBehaviour
     private IEnumerator AttackPlayer()
     {
         yield return new WaitForSeconds(1.5f);
+        if (!IsCombatGoing) yield break;
         foreach (var mobController in mobsInCombat)
         {
             if (!mobController.IsAlive()) continue;
@@ -148,7 +149,7 @@ public class CombatModeGameManager : MonoBehaviour
             PlayerVictory();
         }
     }
-    
+
     private void OnChangeSelection(float dirF)
     {
         var it = 0;
@@ -163,6 +164,7 @@ public class CombatModeGameManager : MonoBehaviour
                 ChangeSelectedEnemy(mobsInCombat[index]);
                 break;
             }
+
             it++;
         }
     }
@@ -190,6 +192,7 @@ public class CombatModeGameManager : MonoBehaviour
     public void PlayerVictory()
     {
         IsCombatGoing = false;
+        EventManager.OnPlayerTurnEnd?.Invoke(true);
         var allDrops = mobsInCombat.ConvertAll(mob => mob.PossibleLoots);
         var statController = PlayerInputController.Instance.Stats;
         statController.UpdateStatValue(StatValue.Mana, (int)statController.GetStatValue(StatValue.Mana).maxValue);

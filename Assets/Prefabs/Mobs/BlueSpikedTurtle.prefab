@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1720301486421528723}
   - component: {fileID: 5574467509146340015}
   - component: {fileID: 2614685643450567791}
+  - component: {fileID: 859008723346298956}
   m_Layer: 6
   m_Name: BlueSpikedTurtle
   m_TagString: Untagged
@@ -127,6 +128,8 @@ MonoBehaviour:
   startingStrength: 3
   startingMana: 3
   startingDefense: 5
+  statusManager: {fileID: 1893852470456414675, guid: 627262a31811c094f92d65ef57ba3c47,
+    type: 3}
   statDebug: 
 --- !u!114 &1720301486421528723
 MonoBehaviour:
@@ -184,6 +187,19 @@ CapsuleCollider:
   m_Height: 1.33
   m_Direction: 2
   m_Center: {x: 0, y: 0.3, z: 0}
+--- !u!114 &859008723346298956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2614685643450567790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a577efa10af3e324f9308c5d3b8be2b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statusEffects: []
 --- !u!1 &2616563055842584556
 GameObject:
   m_ObjectHideFlags: 0
