@@ -49,7 +49,7 @@ MonoBehaviour:
   name: XP star
   description: Gives player xp
   stackSize: 99
-  count: 2
+  count: 10
   buyPrice: 5
   displayInInventory: 1
   canBeSold: 0
