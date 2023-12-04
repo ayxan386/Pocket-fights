@@ -9,17 +9,20 @@ public class TotemController : MonoBehaviour
 
     [SerializeField] private LayerMask detectionLayer;
     [SerializeField] private float effectRate;
+    [SerializeField] private int effectCountLimit;
 
     [Space(10)]
     [SerializeField] private UnityEvent effects;
 
+    [SerializeField] private UnityEvent exhaustActions;
+
     [Header("Effects")]
     [SerializeField] private GameObject particleEffects;
 
-
     private GameObject particles;
     private Transform playerTransformRef;
-    private bool isInArea;
+    private bool canApply;
+    private bool exhausted = false;
 
     private void OnEnable()
     {
@@ -33,16 +36,22 @@ public class TotemController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        isInArea = Physics.CheckSphere(transform.position, radius, detectionLayer);
+        canApply = effectCountLimit > 0 && Physics.CheckSphere(transform.position, radius, detectionLayer);
 
-        if (isInArea && particleEffects != null && particles == null)
+        if (canApply && particleEffects != null && particles == null)
         {
             particles = Instantiate(particleEffects, playerTransformRef.position, Quaternion.identity,
                 playerTransformRef);
         }
-        else if (!isInArea && particles != null)
+        else if (!canApply && particles != null)
         {
             Destroy(particles);
+        }
+
+        if (!exhausted && effectCountLimit <= 0)
+        {
+            exhausted = true;
+            exhaustActions.Invoke();
         }
     }
 
@@ -50,11 +59,13 @@ public class TotemController : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitUntil(() => isInArea);
-
-
+            yield return new WaitUntil(() => canApply);
             effects.Invoke();
+            effectCountLimit--;
             yield return new WaitForSeconds(effectRate);
+
+            if (exhausted)
+                yield break;
         }
     }
 

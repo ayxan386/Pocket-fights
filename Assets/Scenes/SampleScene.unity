@@ -6636,6 +6636,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tressure chest
       objectReference: {fileID: 0}
+    - target: {fileID: 6777147077050129456, guid: d1a02a822dda57043a2104bb6a7f3a22,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6782132621704762094, guid: d1a02a822dda57043a2104bb6a7f3a22,
         type: 3}
       propertyPath: m_RootOrder
