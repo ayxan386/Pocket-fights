@@ -398,6 +398,7 @@ GameObject:
   - component: {fileID: 6624753099587176156}
   - component: {fileID: 2799020158510873072}
   - component: {fileID: 7511746869703984597}
+  - component: {fileID: 8241440604058807163}
   m_Layer: 0
   m_Name: Healing totem
   m_TagString: Untagged
@@ -466,7 +467,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   effectRate: 1
-  effectCountLimit: 1000
+  effectCountLimit: 5
   effects:
     m_PersistentCalls:
       m_Calls:
@@ -482,10 +483,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  exhaustActions:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8241440604058807163}
+        m_TargetAssemblyTypeName: ColorChangingAction, Assembly-CSharp
+        m_MethodName: Use
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   particleEffects: {fileID: 5683349556572209548, guid: 2ce2281d8c43fba4b8cd2ef78d35378f,
     type: 3}
-  areaIndicator: {fileID: 7447258636934476051}
-  exhaustedColor: {r: 1, g: 0.47843137, b: 0.4392157, a: 0.6862745}
 --- !u!114 &2799020158510873072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -514,6 +528,20 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0.43, z: 0}
+--- !u!114 &8241440604058807163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7336894595526758846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a94bb612f29238499f4a3f000b86512, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 7447258636934476051}
+  exhaustedColor: {r: 1, g: 0.58149534, b: 0.5529412, a: 0.29803923}
 --- !u!1 &7336894595526760106
 GameObject:
   m_ObjectHideFlags: 0

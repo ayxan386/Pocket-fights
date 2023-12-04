@@ -11,18 +11,20 @@ public class StatController : MonoBehaviour
     [SerializeField] private int skillPoints;
     [SerializeField] private string sourceName;
 
-    [Header("Starting stats")] [SerializeField]
-    private int startingVitality = 4;
+    [Header("Starting stats")]
+    [SerializeField] private int startingVitality = 4;
 
     [SerializeField] private int startingStrength = 4;
     [SerializeField] private int startingMana = 4;
     [SerializeField] private int startingDefense = 4;
 
+    [Space(10)]
+    [SerializeField] private StatusManager statusManager;
+
     [SerializeField] [TextArea] private string statDebug;
 
     private Dictionary<StatTypes, StatData> baseStats;
     private Dictionary<StatValue, StatData> statValues;
-    private List<StatEffect> statusEffects;
 
     public float Lsf => Mathf.Pow(1.03f, level);
     public int Level => level;
@@ -30,6 +32,7 @@ public class StatController : MonoBehaviour
     public int SkillPoints => skillPoints;
 
     public string SourceName => sourceName;
+    public StatusManager StatusManager => statusManager;
 
     private void Awake()
     {
@@ -42,8 +45,8 @@ public class StatController : MonoBehaviour
             [StatTypes.None] = new(0)
         };
 
+        statusManager.RelatedStats = this;
         statValues = new Dictionary<StatValue, StatData>();
-        statusEffects = new List<StatEffect>();
         InitiateStatValues();
     }
 
@@ -61,7 +64,7 @@ public class StatController : MonoBehaviour
         statValues[StatValue.None] = new(10, 10);
     }
 
-    private void UpdateOverallDisplay()
+    public void UpdateOverallDisplay()
     {
         healthBarIndicator.UpdateDisplay(statValues[StatValue.Health]);
         manaBarIndicator.UpdateDisplay(statValues[StatValue.Mana]);
@@ -73,80 +76,16 @@ public class StatController : MonoBehaviour
         statValues[StatValue.Health].maxValue = statValues[StatValue.Health].baseValue;
         statValues[StatValue.Mana].baseValue = baseStats[StatTypes.Mana].maxValue * 10 * Lsf;
         statValues[StatValue.Mana].maxValue = statValues[StatValue.Mana].baseValue;
-        
+
         statValues[StatValue.BaseAttack].UpdateBaseValue(baseStats[StatTypes.Strength].currentValue * 5 * Lsf);
         statValues[StatValue.DamageReduction].UpdateBaseValue(baseStats[StatTypes.Defense].currentValue * 2 * Lsf);
-        statValues[StatValue.ManaRegen].UpdateBaseValue(10); 
+        statValues[StatValue.ManaRegen].UpdateBaseValue(10);
         statValues[StatValue.None].UpdateBaseValue(10);
-        
+
         // EquipmentManager.Instance.ApplyAllEquipments();
-        
+
         UpdateOverallDisplay();
     }
-
-    private void Start()
-    {
-        healthBarIndicator ??= GameObject.FindGameObjectWithTag("PlayerHealthBar").GetComponent<StatBarIndicator>();
-        manaBarIndicator ??= GameObject.FindGameObjectWithTag("PlayerManaBar").GetComponent<StatBarIndicator>();
-        EventManager.OnPlayerTurnEnd += OnPlayerTurnEnd;
-    }
-
-    private void OnPlayerTurnEnd(bool obj)
-    {
-        foreach (var statusEffect in statusEffects)
-        {
-            statusEffect.numberOfTurns--;
-
-            if (statusEffect.numberOfTurns <= 0)
-            {
-                RemoveStatusEffect(statusEffect);
-            }
-        }
-    }
-
-    public void AddStatusEffect(StatEffect effect)
-    {
-        switch (effect.type)
-        {
-            case StatEffectType.BaseStat:
-                UpgradeBaseStat(effect.baseStat, 
-                    (int)effect.GetAmount(GetBaseStat(effect.baseStat).baseValue));
-                effect.gameObject.transform.parent = transform;
-                statusEffects.Add(effect);
-                break;
-            case StatEffectType.StatValue:
-                statValues[effect.statValue].currentValue += effect.GetAmount(statValues[effect.statValue].currentValue);
-                effect.gameObject.transform.parent = transform;
-                statusEffects.Add(effect);
-                break;
-            default:
-                print("No such type found");
-                break;
-        }
-        UpdateOverallDisplay();
-    }
-    
-    public void RemoveStatusEffect(StatEffect effect)
-    {
-        switch (effect.type)
-        {
-            case StatEffectType.StatValue:
-                statValues[effect.statValue].currentValue -= effect.GetFinalAmount();
-                Destroy(effect.gameObject, 0.5f);
-                statusEffects.Remove(effect);
-                break;
-            case StatEffectType.BaseStat:
-                UpgradeBaseStat(effect.baseStat, (int)effect.GetFinalAmount()); 
-                Destroy(effect.gameObject, 0.5f);
-                statusEffects.Remove(effect);
-                break;
-            default:
-                print("No such type found");
-                break;
-        }
-        UpdateOverallDisplay();
-    }
-
 
     public StatData GetStatValue(StatValue statValue)
     {
@@ -219,36 +158,23 @@ public class StatController : MonoBehaviour
         CalculateStatValues();
         EventManager.OnBaseStatUpdate?.Invoke(baseStats[statType].maxValue);
     }
-    
+
     public void UpdateStatValue(StatValue statType, int diff)
     {
         var currentValue = statValues[statType].currentValue + diff;
         statValues[statType].currentValue = Mathf.Clamp(currentValue, 0, statValues[statType].maxValue);
         UpdateOverallDisplay();
     }
-    
-    public void BoostBaseStat(StatTypes statType, int diff, bool shouldUpdate = false)
-    {
-        print($"Boosting {statType} by {diff}");
-        baseStats[statType].currentValue += diff;
-        baseStats[statType].maxValue = Mathf.Max(baseStats[statType].currentValue, baseStats[statType].maxValue);
-        CalculateStatValues();
-        if(shouldUpdate)
-            UpdateOverallDisplay();
-        
-        EventManager.OnBaseStatUpdate?.Invoke(baseStats[statType].currentValue);
-    }
 
-    public void BoostStatValue(StatValue statType, int diff, bool shouldUpdate = false)
+    public void BoostStatValue(StatValue statType, float diff, bool shouldUpdate = false)
     {
         print($"Boosting {statType} by {diff}");
         statValues[statType].currentValue += diff;
         statValues[statType].maxValue = Mathf.Max(statValues[statType].currentValue, statValues[statType].maxValue);
-        if(shouldUpdate)
+        if (shouldUpdate)
             UpdateOverallDisplay();
-        
+
         EventManager.OnPlayerCoreUpdate?.Invoke(freePoints);
-        EventManager.OnBaseStatUpdate?.Invoke(baseStats[StatTypes.Vitality].maxValue);
     }
 
     private void UpdateFreePoints(int diff)

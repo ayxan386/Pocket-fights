@@ -33,16 +33,9 @@ public class EquippableItem : InventoryItem
     public void ApplyEffect(bool shouldUpdate = true)
     {
         var stats = PlayerInputController.Instance.Stats;
-        foreach (var statEffect in statEffects)
-        {
-            if (statEffect.statType == StatTypes.None) continue;
-            var totalChange = statEffect.TotalChange(stats.GetStatValue(statEffect.statValue).baseValue);
-            stats.BoostBaseStat(statEffect.statType, totalChange);
-        }
 
         foreach (var statEffect in statEffects)
         {
-            if (statEffect.statType != StatTypes.None) continue;
             var totalChange = statEffect.TotalChange(stats.GetStatValue(statEffect.statValue).baseValue);
             stats.BoostStatValue(statEffect.statValue, totalChange, shouldUpdate);
         }
@@ -54,22 +47,13 @@ public class EquippableItem : InventoryItem
 
         foreach (var statEffect in statEffects)
         {
-            if (statEffect.statType != StatTypes.None) continue;
             var totalChange = statEffect.TotalChange(stats.GetStatValue(statEffect.statValue).baseValue);
             stats.BoostStatValue(statEffect.statValue, -totalChange, shouldUpdate);
-        }
-
-        foreach (var statEffect in statEffects)
-        {
-            if (statEffect.statType == StatTypes.None) continue;
-            var totalChange = statEffect.TotalChange(stats.GetStatValue(statEffect.statValue).baseValue);
-            stats.BoostBaseStat(statEffect.statType, -totalChange);
         }
     }
 
     public void TryUnEquip()
     {
-        print("trying to unequip");
         isEquipped = false;
         displayInInventory = true;
         ReverseEffect();
@@ -99,7 +83,6 @@ public enum EquipmentGroup
 [Serializable]
 public class EquipmentStatEffect
 {
-    public StatTypes statType;
     public StatValue statValue;
     public int constantImprovement;
     public float fractionalImprovement;

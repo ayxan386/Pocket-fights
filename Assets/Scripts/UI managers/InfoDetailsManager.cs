@@ -32,22 +32,23 @@ public class InfoDetailsManager : MonoBehaviour
         var statController = PlayerInputController.Instance.Stats;
         //Base attack
         var baseAttack = statController.GetStatValue(StatValue.BaseAttack);
-        this.baseAttack.UpdateDisplay("Base attack", baseAttack.currentValue.ToString("N0"));
+        this.baseAttack.UpdateDisplay("Base attack", $"{baseAttack.baseValue:N0}({baseAttack.currentValue:N0})");
 
         //Health
         var health = statController.GetStatValue(StatValue.Health);
-        this.health.UpdateDisplay("Health", health.maxValue.ToString("N0"));
+        this.health.UpdateDisplay("Health", $"{health.maxValue:N0}({health.currentValue:N0})");
 
         //Mana
         var mana = statController.GetStatValue(StatValue.Mana);
-        this.maxMana.UpdateDisplay("Mana", mana.maxValue.ToString("N0"));
+        this.maxMana.UpdateDisplay("Mana", $"{mana.maxValue:N0}({mana.currentValue:N0})");
 
         //Damage Reduction
         var damageReduction = statController.GetStatValue(StatValue.DamageReduction);
-        this.damageReduction.UpdateDisplay("Damage reduction", damageReduction.currentValue.ToString("N0"));
+        this.damageReduction.UpdateDisplay("Damage reduction",
+            $"{damageReduction.baseValue:N0}({damageReduction.currentValue:N0})");
 
         //Mana Regen
         var manaRegen = statController.GetStatValue(StatValue.ManaRegen);
-        this.manaRegen.UpdateDisplay("Mana regen.", manaRegen.currentValue.ToString("N0"));
+        this.manaRegen.UpdateDisplay("Mana regen.", $"{manaRegen.baseValue:N0}({manaRegen.currentValue:N0})");
     }
 }

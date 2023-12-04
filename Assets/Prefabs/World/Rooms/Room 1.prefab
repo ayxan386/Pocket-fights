@@ -265,7 +265,7 @@ Transform:
   - {fileID: 3694069855215291809}
   - {fileID: 3694069856486544509}
   - {fileID: 3326916716221530932}
-  - {fileID: 1409941115573500390}
+  - {fileID: 7584442456035048197}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13999,80 +13999,80 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5814833103271366457}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &8388798800327193638
+--- !u!1001 &6869626223763127102
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 3694069855595287756}
     m_Modifications:
-    - target: {fileID: 7492333818162990528, guid: bbf000f714f86a04b9e2eba01b0fd446,
+    - target: {fileID: 3896891987118492445, guid: a23b566c0260ef74c9a6de79d114b303,
+        type: 3}
+      propertyPath: m_Name
+      value: Blessing totem
+      objectReference: {fileID: 0}
+    - target: {fileID: 3896891987118768187, guid: a23b566c0260ef74c9a6de79d114b303,
         type: 3}
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 7492333818162990528, guid: bbf000f714f86a04b9e2eba01b0fd446,
+    - target: {fileID: 3896891987118768187, guid: a23b566c0260ef74c9a6de79d114b303,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.99
+      value: -4.9297113
       objectReference: {fileID: 0}
-    - target: {fileID: 7492333818162990528, guid: bbf000f714f86a04b9e2eba01b0fd446,
+    - target: {fileID: 3896891987118768187, guid: a23b566c0260ef74c9a6de79d114b303,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.000429817
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7492333818162990528, guid: bbf000f714f86a04b9e2eba01b0fd446,
+    - target: {fileID: 3896891987118768187, guid: a23b566c0260ef74c9a6de79d114b303,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.84
+      value: 9.01796
       objectReference: {fileID: 0}
-    - target: {fileID: 7492333818162990528, guid: bbf000f714f86a04b9e2eba01b0fd446,
+    - target: {fileID: 3896891987118768187, guid: a23b566c0260ef74c9a6de79d114b303,
         type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.70111084
       objectReference: {fileID: 0}
-    - target: {fileID: 7492333818162990528, guid: bbf000f714f86a04b9e2eba01b0fd446,
+    - target: {fileID: 3896891987118768187, guid: a23b566c0260ef74c9a6de79d114b303,
         type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7492333818162990528, guid: bbf000f714f86a04b9e2eba01b0fd446,
+    - target: {fileID: 3896891987118768187, guid: a23b566c0260ef74c9a6de79d114b303,
         type: 3}
       propertyPath: m_LocalRotation.y
       value: 0.7130524
       objectReference: {fileID: 0}
-    - target: {fileID: 7492333818162990528, guid: bbf000f714f86a04b9e2eba01b0fd446,
+    - target: {fileID: 3896891987118768187, guid: a23b566c0260ef74c9a6de79d114b303,
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7492333818162990528, guid: bbf000f714f86a04b9e2eba01b0fd446,
+    - target: {fileID: 3896891987118768187, guid: a23b566c0260ef74c9a6de79d114b303,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7492333818162990528, guid: bbf000f714f86a04b9e2eba01b0fd446,
+    - target: {fileID: 3896891987118768187, guid: a23b566c0260ef74c9a6de79d114b303,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7492333818162990528, guid: bbf000f714f86a04b9e2eba01b0fd446,
+    - target: {fileID: 3896891987118768187, guid: a23b566c0260ef74c9a6de79d114b303,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7492333818163234534, guid: bbf000f714f86a04b9e2eba01b0fd446,
-        type: 3}
-      propertyPath: m_Name
-      value: XP granting tree
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: bbf000f714f86a04b9e2eba01b0fd446, type: 3}
---- !u!4 &1409941115573500390 stripped
+  m_SourcePrefab: {fileID: 100100000, guid: a23b566c0260ef74c9a6de79d114b303, type: 3}
+--- !u!4 &7584442456035048197 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 7492333818162990528, guid: bbf000f714f86a04b9e2eba01b0fd446,
+  m_CorrespondingSourceObject: {fileID: 3896891987118768187, guid: a23b566c0260ef74c9a6de79d114b303,
     type: 3}
-  m_PrefabInstance: {fileID: 8388798800327193638}
+  m_PrefabInstance: {fileID: 6869626223763127102}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8955079317908669242
 PrefabInstance:

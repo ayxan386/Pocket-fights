@@ -5,34 +5,24 @@ public class StatEffect : MonoBehaviour
     public int numberOfTurns;
     public float amount;
     public bool isMult;
-    public bool eachTurn;
-    public StatTypes baseStat;
     public StatValue statValue;
-    public StatEffectType type;
-    private float finalAmount;
+    private float LastAmount;
 
     public void AddPlayerStatusEffect()
     {
-        PlayerInputController.Instance.Stats.AddStatusEffect(this);
+        PlayerInputController.Instance.Stats.StatusManager.AddStatusEffect(this);
     }
 
     public float GetAmount(float val)
     {
-        finalAmount = isMult
+        LastAmount = isMult
             ? val * amount
             : amount;
-        return finalAmount;
+        return LastAmount;
     }
 
-    public float GetFinalAmount()
+    public float CurrentEffect()
     {
-        return finalAmount;
+        return LastAmount;
     }
-}
-
-public enum StatEffectType
-{
-    BaseStat,
-    StatValue,
-    Misc
 }
