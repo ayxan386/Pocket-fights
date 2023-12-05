@@ -18,10 +18,17 @@ public class SpawnerController : MonoBehaviour
     [SerializeField] private GameObject boxMainBody;
     private GameObject mobParent;
 
+    public bool IsExhausted => boxMainBody.activeSelf;
+
     private void Start()
     {
-        data = Instantiate(possibleSpawnPatterns[Random.Range(0, possibleSpawnPatterns.Count)], transform);
         mobParent = GameObject.FindWithTag("MobParent");
+    }
+
+    public SpawnerData SetSpawnerData()
+    {
+        data = Instantiate(possibleSpawnPatterns[Random.Range(0, possibleSpawnPatterns.Count)], transform);
+        return data;
     }
 
     private void OnEnable()

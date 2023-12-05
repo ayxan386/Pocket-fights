@@ -31,6 +31,7 @@ public class FloorManager : MonoBehaviour
         var randomRoom = roomPrefabs[randomRoomIndex];
         randomRoom = Instantiate(randomRoom, Vector3.zero, Quaternion.identity, transform);
         randomRoom.PlaceSpecialtyBlocks(0);
+        randomRoom.SetExitConditions();
 
         roomInstances.Add(randomRoom);
 
@@ -65,6 +66,7 @@ public class FloorManager : MonoBehaviour
 
                 potentialRoom = Instantiate(potentialRoom, pos, Quaternion.identity, transform);
                 potentialRoom.PlaceSpecialtyBlocks(1f * roomInstances.Count / maxRooms / 10f);
+                potentialRoom.SetExitConditions();
                 roomInstances.Add(potentialRoom);
 
                 potentialRoom.Telepads.Find(pad => pad.Color == telepad.Color && !pad.IsLinked).Link(telepad);

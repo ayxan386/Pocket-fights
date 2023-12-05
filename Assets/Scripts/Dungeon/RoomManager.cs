@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Cinemachine;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -50,6 +51,13 @@ public class RoomManager : MonoBehaviour
 
     [SerializeField] private List<Transform> specialtyBlockSpawnPoints;
 
+    [Header("Exit condition")]
+    [SerializeField] private ExitConditionType exitConditionType;
+
+    [SerializeField] private SpawnerController targetSpawner;
+    [SerializeField] private int killCounter;
+    [SerializeField] private ExitConditionDisplayManager exitConditionDisplayManager;
+
     private List<GridPoint> grid;
 
     public List<TeleportPad> Telepads => pads;
@@ -58,20 +66,54 @@ public class RoomManager : MonoBehaviour
     public Vector2Int GridSize => dimensions;
     public List<GridPoint> Grid => grid;
 
+    public bool CanExit { get; private set; } = true;
+
     private void Start()
     {
         pads.ForEach(pad => pad.LinkedRoom = this);
+        EventManager.OnMobDeath += OnMobDeath;
+        CanExit = false;
+        CheckExitConditions();
         FindAllHits();
+    }
+
+    private void OnMobDeath(MobController obj)
+    {
+        killCounter--;
+        exitConditionDisplayManager.UpdateDisplay(exitConditionType, killCounter, targetSpawner);
+
+        CheckExitConditions();
+    }
+
+    private void CheckExitConditions()
+    {
+        switch (exitConditionType)
+        {
+            case ExitConditionType.None:
+                CanExit = true;
+                return;
+            case ExitConditionType.KillCounter:
+                if (killCounter <= 0) CanExit = true;
+                break;
+            case ExitConditionType.SpawnerExhaust:
+                if (targetSpawner.IsExhausted) CanExit = true;
+                break;
+            default:
+                print("Unknown exit condition");
+                break;
+        }
     }
 
     public void Activate()
     {
         roomCamera.Priority = 15;
+        exitConditionDisplayManager.gameObject.SetActive(exitConditionType != ExitConditionType.None);
     }
 
     public void Deactivate()
     {
         roomCamera.Priority = 5;
+        exitConditionDisplayManager.gameObject.SetActive(false);
     }
 
     public void PlacePlayer()
@@ -309,6 +351,40 @@ public class RoomManager : MonoBehaviour
                 Quaternion.identity, transform);
         }
     }
+
+    public void SetExitConditions()
+    {
+        var allSpawners = GetComponentsInChildren<SpawnerController>();
+        if (allSpawners.Length == 0)
+        {
+            exitConditionDisplayManager.gameObject.SetActive(false);
+            return;
+        }
+        if (allSpawners.Length == 1)
+        {
+            var spawnerData = allSpawners[0].SetSpawnerData();
+            targetSpawner = allSpawners[0];
+            
+            killCounter = spawnerData.numberOfMobsLeft.Aggregate((num,sum) => sum + num);
+            exitConditionType = ExitConditionType.SpawnerExhaust;
+        }
+        else
+        {
+            var maxAverage = -1;
+            foreach (var spawner in allSpawners)
+            {
+                var spawnerData = spawner.SetSpawnerData();
+                var average = (int)spawnerData.numberOfMobsLeft.Average(data => data);
+                maxAverage = Mathf.Max(average, maxAverage);
+            }
+
+            killCounter = maxAverage;
+            exitConditionType = ExitConditionType.KillCounter;
+        }
+        
+        CanExit = false;
+        exitConditionDisplayManager.UpdateDisplay(exitConditionType, killCounter, targetSpawner);
+    }
 }
 
 [Serializable]
@@ -325,4 +401,12 @@ public class TopBottomPairs
 {
     public string bottomName;
     public GameObject top;
+}
+
+[Serializable]
+public enum ExitConditionType
+{
+    None,
+    KillCounter,
+    SpawnerExhaust
 }

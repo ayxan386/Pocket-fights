@@ -48,7 +48,7 @@ public class TeleportPad : MonoBehaviour
 
     private IEnumerator TeleportPlayer()
     {
-        if (linkedPad.OnCooldown || OnCooldown) yield break;
+        if (!LinkedRoom.CanExit || linkedPad.OnCooldown || OnCooldown) yield break;
         OnCooldown = true;
 
         teleportParticles.Play();
