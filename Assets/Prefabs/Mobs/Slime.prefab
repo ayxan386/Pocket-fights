@@ -725,6 +725,7 @@ MonoBehaviour:
   combatUiRef: {fileID: 7326945592532151411}
   selectionIndicators: {fileID: 2670460002510860829}
   movementController: {fileID: -2712961378370848657}
+  statScalingFactor: 2
 --- !u!114 &7537575747951249551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -743,7 +744,7 @@ MonoBehaviour:
   freePoints: 0
   skillPoints: 0
   sourceName: 
-  startingVitality: 3
+  startingVitality: 6
   startingStrength: 2
   startingMana: 3
   startingDefense: 1

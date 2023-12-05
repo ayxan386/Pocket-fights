@@ -16,6 +16,6 @@ public class StatInfoDisplayController : MonoBehaviour
 
     public void Clicked()
     {
-        PlayerInputController.Instance.Stats.UpgradeStat(StatType);
+        PlayerInputController.Instance.Stats.UpgradeStat(StatType, 1);
     }
 }

@@ -27,6 +27,11 @@ PrefabInstance:
       propertyPath: statusManager
       value: 
       objectReference: {fileID: 2324439228375727426}
+    - target: {fileID: 7537575747951249551, guid: 627262a31811c094f92d65ef57ba3c47,
+        type: 3}
+      propertyPath: startingVitality
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7622230981891531222, guid: 627262a31811c094f92d65ef57ba3c47,
         type: 3}
       propertyPath: m_RootOrder
@@ -88,6 +93,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 0f9ca57593cefad4f906fdc99fd1547c,
         type: 3}
+    - target: {fileID: 7622900003042665912, guid: 627262a31811c094f92d65ef57ba3c47,
+        type: 3}
+      propertyPath: statScalingFactor
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7622900003042665912, guid: 627262a31811c094f92d65ef57ba3c47,
         type: 3}
       propertyPath: displayData.displayName

@@ -27,7 +27,12 @@ public class StatController : MonoBehaviour
     private Dictionary<StatValue, StatData> statValues;
 
     public float Lsf => Mathf.Pow(1.03f, level);
-    public int Level => level;
+    public int Level
+    {
+        get => level;
+        set => level = value;
+    }
+
     public int FreePoints => freePoints;
     public int SkillPoints => skillPoints;
 
@@ -141,12 +146,12 @@ public class StatController : MonoBehaviour
         manaBarIndicator.UpdateDisplay(statValues[StatValue.Mana]);
     }
 
-    public void UpgradeStat(StatTypes statType)
+    public void UpgradeStat(StatTypes statType, int diff = 1)
     {
         if (freePoints > 0)
         {
-            UpdateFreePoints(-1);
-            UpgradeBaseStat(statType, 1);
+            UpdateFreePoints(-diff);
+            UpgradeBaseStat(statType, diff);
         }
     }
 

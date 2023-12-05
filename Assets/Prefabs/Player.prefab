@@ -969,7 +969,7 @@ MonoBehaviour:
   healthBarIndicator: {fileID: 2537967826420748827}
   manaBarIndicator: {fileID: 6356805335538947302}
   level: 1
-  freePoints: 12
+  freePoints: 3
   skillPoints: 0
   sourceName: Player
   startingVitality: 4

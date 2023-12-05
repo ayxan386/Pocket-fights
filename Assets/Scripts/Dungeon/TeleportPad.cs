@@ -68,6 +68,11 @@ public class TeleportPad : MonoBehaviour
         OnCooldown = false;
     }
 
+    private void OnDisable()
+    {
+        OnCooldown = false;
+    }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = UnityEngine.Color.blue;

@@ -11,8 +11,8 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private Transform playerSpawnPoint;
     [SerializeField] private string comparisonName;
 
-    [Header("Floor generation")] [SerializeField]
-    private Transform floorGenerationPoint;
+    [Header("Floor generation")]
+    [SerializeField] private Transform floorGenerationPoint;
 
     [SerializeField] private Transform capLayer;
 
@@ -26,15 +26,15 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private LayerMask obstructionLayer;
     [SerializeField] private float detectionRadius;
 
-    [Header("Game of life params")] [SerializeField]
-    private string joiningCellName = "water";
+    [Header("Game of life params")]
+    [SerializeField] private string joiningCellName = "water";
 
     [SerializeField] private int cellNumberThreshold;
     [SerializeField] private int deadCellCount = 1;
     [SerializeField] private string deadCellName;
 
-    [Header("Room decor")] [SerializeField]
-    private List<BlockChance> decorPrefabs;
+    [Header("Room decor")]
+    [SerializeField] private List<BlockChance> decorPrefabs;
 
     [SerializeField] [Range(0, 1f)] private float density;
     [SerializeField] private Transform decorHolder;
@@ -44,13 +44,18 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private List<Vector3> decorPosition;
     [SerializeField] private bool randomSeed;
     [SerializeField] private int currentSeed;
+
+    [Header("Room specialty")]
+    [SerializeField] private List<BlockChance> specialtyBlockPrefabs;
+
+    [SerializeField] private List<Transform> specialtyBlockSpawnPoints;
+
     private List<GridPoint> grid;
 
     public List<TeleportPad> Telepads => pads;
 
     public string ComparisonName => comparisonName;
     public Vector2Int GridSize => dimensions;
-    public Transform FloorStartingPoint => floorGenerationPoint;
     public List<GridPoint> Grid => grid;
 
     private void Start()
@@ -251,7 +256,7 @@ public class RoomManager : MonoBehaviour
             {
                 var pos = floorGenerationPoint.GetChild(x * dimensions.y + z).transform.position;
                 pos.y += 1.7f;
-                
+
                 var gridPoint = new GridPoint(pos, z + x * dimensions.y);
                 grid.Add(gridPoint);
                 gridPoint.isObstructed = Physics.CheckSphere(pos, detectionRadius, obstructionLayer);
@@ -269,6 +274,39 @@ public class RoomManager : MonoBehaviour
             // newBlock.transform.position = decorPos + randomDecor.placementOffset;
             // newBlock.transform.rotation = Quaternion.identity;
             // newBlock.transform.SetParent(decorHolder);
+        }
+    }
+
+    public void PlaceSpecialtyBlocks(float difficulty)
+    {
+        var numberOfSpecialtyBlocks = Random.Range(0, specialtyBlockSpawnPoints.Count);
+        var usedPoints = new HashSet<int>();
+        for (var i = 0; i < numberOfSpecialtyBlocks; i++)
+        {
+            var roll = Mathf.Clamp01(Random.value + difficulty);
+            var block =
+                specialtyBlockPrefabs.Find(blockChance =>
+                    blockChance.weight.x <= roll && blockChance.weight.y >= roll);
+
+            if (block == null) continue;
+
+            var randomPoint = Random.Range(0, specialtyBlockSpawnPoints.Count);
+            var it = 0;
+            while (usedPoints.Contains(randomPoint) && it < 100)
+            {
+                it++;
+                randomPoint = Random.Range(0, specialtyBlockSpawnPoints.Count);
+            }
+
+            usedPoints.Add(randomPoint);
+            Instantiate(block.block, specialtyBlockSpawnPoints[randomPoint].position, Quaternion.identity, transform);
+        }
+
+        if (usedPoints.Count == 0)
+        {
+            Instantiate(specialtyBlockPrefabs[0].block,
+                specialtyBlockSpawnPoints[Random.Range(0, specialtyBlockSpawnPoints.Count)].position,
+                Quaternion.identity, transform);
         }
     }
 }

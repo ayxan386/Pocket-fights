@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -17,6 +18,8 @@ public class MobController : MonoBehaviour
     [Header("AI parameters")] [SerializeField]
     private MobMovementController movementController;
 
+    [SerializeField] private float statScalingFactor;
+
     public Guid Id { get; private set; }
     public List<PossibleLoot> PossibleLoots => possibleDrops;
     public bool IsDoneAttack { get; private set; }
@@ -25,6 +28,23 @@ public class MobController : MonoBehaviour
     private IEnumerator Start()
     {
         yield return new WaitUntil(() => PlayerCombatInitiation.Instance != null);
+
+        var totalSumOfStats = 0f;
+        foreach (var statType in Enum.GetValues(typeof(StatTypes)).Cast<StatTypes>())
+        {
+            totalSumOfStats += statController.GetBaseStat(statType).baseValue;
+        }
+
+        statController.Level += PlayerInputController.Instance.Stats.Level;
+        var statsToAllocate = statController.Level * statScalingFactor;
+        foreach (var statType in Enum.GetValues(typeof(StatTypes)).Cast<StatTypes>())
+        {
+            statController.UpgradeBaseStat(statType,
+                (int)(statsToAllocate * statController.GetBaseStat(statType).baseValue / totalSumOfStats));
+        }
+
+        statController.UpdateStatValue(StatValue.Mana, (int)statController.GetStatValue(StatValue.Mana).maxValue);
+        statController.UpdateStatValue(StatValue.Health, (int)statController.GetStatValue(StatValue.Health).maxValue);
         if (!PlayerCombatInitiation.Instance.IsCombatScene)
         {
             DeactivateCombatMode();

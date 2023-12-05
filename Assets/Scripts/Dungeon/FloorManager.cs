@@ -30,6 +30,7 @@ public class FloorManager : MonoBehaviour
         var randomRoomIndex = Random.Range(0, roomPrefabs.Count);
         var randomRoom = roomPrefabs[randomRoomIndex];
         randomRoom = Instantiate(randomRoom, Vector3.zero, Quaternion.identity, transform);
+        randomRoom.PlaceSpecialtyBlocks(0);
 
         roomInstances.Add(randomRoom);
 
@@ -38,12 +39,12 @@ public class FloorManager : MonoBehaviour
         while (roomInstances.Count < maxRooms && roomInstances.Exists(room => room.HasUnlinkedTelepad())
                                               && iteration < 100)
         {
-            CreateRoomForEachPad(roomInstances.Find(room => room.HasUnlinkedTelepad()));
+            CreateRoomForEachPad(roomInstances.Find(room => room.HasUnlinkedTelepad()), maxRooms);
             iteration++;
         }
     }
 
-    private void CreateRoomForEachPad(RoomManager currentRoom)
+    private void CreateRoomForEachPad(RoomManager currentRoom, int maxRooms)
     {
         foreach (var telepad in currentRoom.Telepads)
         {
@@ -63,6 +64,7 @@ public class FloorManager : MonoBehaviour
                 pos.x += distanceBetweenRooms.x * roomInstances.Count;
 
                 potentialRoom = Instantiate(potentialRoom, pos, Quaternion.identity, transform);
+                potentialRoom.PlaceSpecialtyBlocks(1f * roomInstances.Count / maxRooms / 10f);
                 roomInstances.Add(potentialRoom);
 
                 potentialRoom.Telepads.Find(pad => pad.Color == telepad.Color && !pad.IsLinked).Link(telepad);

@@ -275,6 +275,7 @@ MonoBehaviour:
   combatUiRef: {fileID: 3956050004639955305}
   selectionIndicators: {fileID: 7205943410975181103}
   movementController: {fileID: 653475729322339701}
+  statScalingFactor: 4
 --- !u!114 &4310760141054729621
 MonoBehaviour:
   m_ObjectHideFlags: 0

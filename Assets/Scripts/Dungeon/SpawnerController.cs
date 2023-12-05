@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 
 public class SpawnerController : MonoBehaviour
 {
+    [SerializeField] private List<SpawnerData> possibleSpawnPatterns;
     [SerializeField] private SpawnerData data;
     [SerializeField] private float activationRange;
 
@@ -15,10 +16,22 @@ public class SpawnerController : MonoBehaviour
 
     [SerializeField] private Animator boxAnimator;
     [SerializeField] private GameObject boxMainBody;
+    private GameObject mobParent;
 
-    private IEnumerator Start()
+    private void Start()
     {
-        var mobParent = GameObject.FindWithTag("MobParent");
+        data = Instantiate(possibleSpawnPatterns[Random.Range(0, possibleSpawnPatterns.Count)], transform);
+        mobParent = GameObject.FindWithTag("MobParent");
+    }
+
+    private void OnEnable()
+    {
+        StartCoroutine(SpawnRoutine());
+    }
+
+    private IEnumerator SpawnRoutine()
+    {
+        yield return new WaitUntil(() => mobParent != null);
         while (CheckIfThereMobsLeft())
         {
             yield return new WaitUntil(() =>
@@ -26,6 +39,8 @@ public class SpawnerController : MonoBehaviour
                 && Vector3.Distance(
                     PlayerInputController.Instance.transform.position, transform.position) <= activationRange
             );
+
+            print("Trying to spawn mobs");
 
             var count = spawnedMobs.Count(mob => mob.gameObject.activeSelf);
             for (int mobCount = count; mobCount < data.maxNumberOfMobs;)
@@ -61,7 +76,7 @@ public class SpawnerController : MonoBehaviour
 
     private bool CheckIfThereMobsLeft()
     {
-        return data.numberOfMobsLeft.TrueForAll(number => number > 0);
+        return data.numberOfMobsLeft.Exists(number => number > 0);
     }
 
     private Vector3 FindRandomPos(int depth)
