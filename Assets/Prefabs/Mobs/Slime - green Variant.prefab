@@ -27,6 +27,22 @@ PrefabInstance:
       propertyPath: startingVitality
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 7537575747951249551, guid: 627262a31811c094f92d65ef57ba3c47,
+        type: 3}
+      propertyPath: <Level>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7537575747951249551, guid: 627262a31811c094f92d65ef57ba3c47,
+        type: 3}
+      propertyPath: <SourceName>k__BackingField
+      value: Slime
+      objectReference: {fileID: 0}
+    - target: {fileID: 7537575747951249551, guid: 627262a31811c094f92d65ef57ba3c47,
+        type: 3}
+      propertyPath: <StatusManager>k__BackingField
+      value: 
+      objectReference: {fileID: 1893852470456414675, guid: 627262a31811c094f92d65ef57ba3c47,
+        type: 3}
     - target: {fileID: 7622230981891531222, guid: 627262a31811c094f92d65ef57ba3c47,
         type: 3}
       propertyPath: m_RootOrder

@@ -968,15 +968,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBarIndicator: {fileID: 2537967826420748827}
   manaBarIndicator: {fileID: 6356805335538947302}
-  level: 1
-  freePoints: 3
-  skillPoints: 0
-  sourceName: Player
+  <Level>k__BackingField: 1
+  <FreePoints>k__BackingField: 3
+  <SkillPoints>k__BackingField: 0
+  <SourceName>k__BackingField: Player
   startingVitality: 4
   startingStrength: 4
   startingMana: 4
   startingDefense: 4
-  statusManager: {fileID: 5067885928721536392}
+  <StatusManager>k__BackingField: {fileID: 5067885928721536392}
   statDebug: 
 --- !u!1 &456437888624018187
 GameObject:

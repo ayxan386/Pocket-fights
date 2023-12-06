@@ -6,10 +6,12 @@ public class StatController : MonoBehaviour
 {
     [SerializeField] private StatBarIndicator healthBarIndicator;
     [SerializeField] private StatBarIndicator manaBarIndicator;
-    [SerializeField] private int level;
-    [SerializeField] private int freePoints;
-    [SerializeField] private int skillPoints;
-    [SerializeField] private string sourceName;
+    [field: Header("Core values")] 
+    [field: SerializeField] public int Level { get; set; }
+
+    [field: SerializeField] public int FreePoints { get; private set; }
+    [field: SerializeField] public int SkillPoints { get; private set; }
+    [field: SerializeField] public string SourceName { get; private set; }
 
     [Header("Starting stats")]
     [SerializeField] private int startingVitality = 4;
@@ -18,26 +20,17 @@ public class StatController : MonoBehaviour
     [SerializeField] private int startingMana = 4;
     [SerializeField] private int startingDefense = 4;
 
-    [Space(10)]
-    [SerializeField] private StatusManager statusManager;
+    [field: Space(10)]
+    [field: SerializeField]
+    public StatusManager StatusManager { get; private set; }
 
     [SerializeField] [TextArea] private string statDebug;
 
     private Dictionary<StatTypes, StatData> baseStats;
     private Dictionary<StatValue, StatData> statValues;
 
-    public float Lsf => Mathf.Pow(1.03f, level);
-    public int Level
-    {
-        get => level;
-        set => level = value;
-    }
+    public float Lsf => Mathf.Pow(1.03f, Level);
 
-    public int FreePoints => freePoints;
-    public int SkillPoints => skillPoints;
-
-    public string SourceName => sourceName;
-    public StatusManager StatusManager => statusManager;
 
     private void Awake()
     {
@@ -50,7 +43,7 @@ public class StatController : MonoBehaviour
             [StatTypes.None] = new(0)
         };
 
-        statusManager.RelatedStats = this;
+        StatusManager.RelatedStats = this;
         statValues = new Dictionary<StatValue, StatData>();
         InitiateStatValues();
     }
@@ -148,7 +141,7 @@ public class StatController : MonoBehaviour
 
     public void UpgradeStat(StatTypes statType, int diff = 1)
     {
-        if (freePoints > 0)
+        if (FreePoints > 0)
         {
             UpdateFreePoints(-diff);
             UpgradeBaseStat(statType, diff);
@@ -179,13 +172,13 @@ public class StatController : MonoBehaviour
         if (shouldUpdate)
             UpdateOverallDisplay();
 
-        EventManager.OnPlayerCoreUpdate?.Invoke(freePoints);
+        EventManager.OnPlayerCoreUpdate?.Invoke(FreePoints);
     }
 
     private void UpdateFreePoints(int diff)
     {
-        freePoints += diff;
-        EventManager.OnPlayerCoreUpdate?.Invoke(freePoints);
+        FreePoints += diff;
+        EventManager.OnPlayerCoreUpdate?.Invoke(FreePoints);
     }
 
     public void LoadData(StatSaveData savedData)
@@ -195,14 +188,14 @@ public class StatController : MonoBehaviour
         InitiateStatValues();
 
         EventManager.OnBaseStatUpdate?.Invoke(baseStats[StatTypes.Vitality].maxValue);
-        EventManager.OnPlayerCoreUpdate?.Invoke(freePoints);
+        EventManager.OnPlayerCoreUpdate?.Invoke(FreePoints);
     }
 
     public void UpdateLevel(int increment)
     {
-        level += increment;
-        UpdateFreePoints(level);
-        EventManager.OnPlayerCoreUpdate?.Invoke(freePoints);
+        Level += increment;
+        UpdateFreePoints(Level);
+        EventManager.OnPlayerCoreUpdate?.Invoke(FreePoints);
     }
 }
 

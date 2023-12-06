@@ -290,16 +290,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBarIndicator: {fileID: 96256714286668075}
   manaBarIndicator: {fileID: 96256715066010106}
-  level: 2
-  freePoints: 0
-  skillPoints: 0
-  sourceName: 
+  <Level>k__BackingField: 1
+  <FreePoints>k__BackingField: 0
+  <SkillPoints>k__BackingField: 0
+  <SourceName>k__BackingField: Sandy spider
   startingVitality: 5
   startingStrength: 3
   startingMana: 3
   startingDefense: 5
-  statusManager: {fileID: 1893852470456414675, guid: 627262a31811c094f92d65ef57ba3c47,
-    type: 3}
+  <StatusManager>k__BackingField: {fileID: 886488272252522660}
   statDebug: 
 --- !u!114 &653475729322339701
 MonoBehaviour:

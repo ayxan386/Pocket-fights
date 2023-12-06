@@ -740,15 +740,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBarIndicator: {fileID: 5917101324805901361}
   manaBarIndicator: {fileID: 5917101326189231328}
-  level: 1
-  freePoints: 0
-  skillPoints: 0
-  sourceName: 
+  <Level>k__BackingField: 1
+  <FreePoints>k__BackingField: 0
+  <SkillPoints>k__BackingField: 0
+  <SourceName>k__BackingField: Slime
   startingVitality: 6
   startingStrength: 2
   startingMana: 3
   startingDefense: 1
-  statusManager: {fileID: 1893852470456414675}
+  <StatusManager>k__BackingField: {fileID: 1893852470456414675}
   statDebug: 
 --- !u!114 &-2712961378370848657
 MonoBehaviour:
