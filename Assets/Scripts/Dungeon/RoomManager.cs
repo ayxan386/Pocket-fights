@@ -80,9 +80,9 @@ public class RoomManager : MonoBehaviour
     private void OnMobDeath(MobController obj)
     {
         killCounter--;
-        exitConditionDisplayManager.UpdateDisplay(exitConditionType, killCounter, targetSpawner);
-
         CheckExitConditions();
+        
+        exitConditionDisplayManager.UpdateDisplay(killCounter, CanExit);
     }
 
     private void CheckExitConditions()
@@ -296,8 +296,8 @@ public class RoomManager : MonoBehaviour
         {
             for (var z = 0; z < dimensions.y; z += 1)
             {
-                var pos = floorGenerationPoint.GetChild(x * dimensions.y + z).transform.position;
-                pos.y += 1.7f;
+                var pos = capLayer.GetChild(x * dimensions.y + z).transform.position;
+                pos.y += .3f;
 
                 var gridPoint = new GridPoint(pos, z + x * dimensions.y);
                 grid.Add(gridPoint);
@@ -383,7 +383,7 @@ public class RoomManager : MonoBehaviour
         }
         
         CanExit = false;
-        exitConditionDisplayManager.UpdateDisplay(exitConditionType, killCounter, targetSpawner);
+        exitConditionDisplayManager.UpdateDisplay(killCounter, CanExit);
     }
 }
 

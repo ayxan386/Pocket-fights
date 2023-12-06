@@ -269,11 +269,11 @@ MonoBehaviour:
       type: 3}
     chance: 0.905
     count: {x: 3, y: 10}
-  displayData:
-    displayName: Sandy spider
-    icon: {fileID: 21300000, guid: dac89db86157924438c73f8537e91f0c, type: 3}
   combatUiRef: {fileID: 3956050004639955305}
   selectionIndicators: {fileID: 7205943410975181103}
+  <DisplayData>k__BackingField:
+    displayName: Sandy spider
+    icon: {fileID: 21300000, guid: dac89db86157924438c73f8537e91f0c, type: 3}
   movementController: {fileID: 653475729322339701}
   statScalingFactor: 4
 --- !u!114 &4310760141054729621

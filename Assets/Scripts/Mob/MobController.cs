@@ -11,9 +11,9 @@ public class MobController : MonoBehaviour
     [SerializeField] private List<ActionDetails> actions;
     [SerializeField] private StatController statController;
     [SerializeField] private List<PossibleLoot> possibleDrops;
-    [SerializeField] private MobDisplayData displayData;
     [SerializeField] private GameObject combatUiRef;
     [SerializeField] private GameObject selectionIndicators;
+    [field: SerializeField] public MobDisplayData DisplayData { get; private set; }
 
     [Header("AI parameters")] [SerializeField]
     private MobMovementController movementController;
@@ -23,7 +23,7 @@ public class MobController : MonoBehaviour
     public Guid Id { get; private set; }
     public List<PossibleLoot> PossibleLoots => possibleDrops;
     public bool IsDoneAttack { get; private set; }
-    public MobDisplayData DisplayData => displayData;
+    
 
     private IEnumerator Start()
     {

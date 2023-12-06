@@ -18,7 +18,7 @@ public class SpawnerController : MonoBehaviour
     [SerializeField] private GameObject boxMainBody;
     private GameObject mobParent;
 
-    public bool IsExhausted => boxMainBody.activeSelf;
+    public bool IsExhausted => !boxMainBody.activeSelf;
 
     private void Start()
     {

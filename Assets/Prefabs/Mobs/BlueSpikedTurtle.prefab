@@ -100,11 +100,11 @@ MonoBehaviour:
       type: 3}
     chance: 0.905
     count: {x: 3, y: 10}
-  displayData:
-    displayName: Blue spiked turle
-    icon: {fileID: 21300000, guid: bb829bd040180ca43b649c6213c197a2, type: 3}
   combatUiRef: {fileID: 2893728941982123151}
   selectionIndicators: {fileID: 5545137670216957671}
+  <DisplayData>k__BackingField:
+    displayName: Blue spiked snail-turtle
+    icon: {fileID: 21300000, guid: bb829bd040180ca43b649c6213c197a2, type: 3}
   movementController: {fileID: 1720301486421528723}
   statScalingFactor: 3
 --- !u!114 &2674227932017811571

@@ -114,6 +114,17 @@ PrefabInstance:
       propertyPath: displayData.displayName
       value: Acidic green slime (small)
       objectReference: {fileID: 0}
+    - target: {fileID: 7622900003042665912, guid: 627262a31811c094f92d65ef57ba3c47,
+        type: 3}
+      propertyPath: <DisplayData>k__BackingField.icon
+      value: 
+      objectReference: {fileID: 21300000, guid: ceca9cc98d0b3b14fa3ac934a74652f9,
+        type: 3}
+    - target: {fileID: 7622900003042665912, guid: 627262a31811c094f92d65ef57ba3c47,
+        type: 3}
+      propertyPath: <DisplayData>k__BackingField.displayName
+      value: Acidic green slime (small)
+      objectReference: {fileID: 0}
     - target: {fileID: 7624356310046074002, guid: 627262a31811c094f92d65ef57ba3c47,
         type: 3}
       propertyPath: m_Name

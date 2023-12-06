@@ -719,11 +719,11 @@ MonoBehaviour:
       type: 3}
     chance: 0.905
     count: {x: 2, y: 7}
-  displayData:
-    displayName: Fiery red slime (small)
-    icon: {fileID: 21300000, guid: aaf447b5bc450a047a8b23c831bd3385, type: 3}
   combatUiRef: {fileID: 7326945592532151411}
   selectionIndicators: {fileID: 2670460002510860829}
+  <DisplayData>k__BackingField:
+    displayName: Fiery red slime (small)
+    icon: {fileID: 21300000, guid: aaf447b5bc450a047a8b23c831bd3385, type: 3}
   movementController: {fileID: -2712961378370848657}
   statScalingFactor: 2
 --- !u!114 &7537575747951249551
