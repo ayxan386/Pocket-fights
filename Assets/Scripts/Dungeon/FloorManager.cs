@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,8 +18,9 @@ public class FloorManager : MonoBehaviour
         Instance = this;
     }
 
-    private void Start()
+    private IEnumerator Start()
     {
+        yield return new WaitUntil(() => PlayerInputController.Instance != null);
         roomInstances[0].PlacePlayer();
         roomInstances[0].Activate();
     }
