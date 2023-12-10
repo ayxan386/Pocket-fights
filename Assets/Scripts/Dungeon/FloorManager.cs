@@ -20,6 +20,9 @@ public class FloorManager : MonoBehaviour
 
     private IEnumerator Start()
     {
+        yield return new WaitForSeconds(0.1f);
+        GenerateFloor();
+        yield return new WaitForSeconds(0.1f);
         yield return new WaitUntil(() => PlayerInputController.Instance != null);
         roomInstances[0].PlacePlayer();
         roomInstances[0].Activate();
