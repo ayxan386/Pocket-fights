@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -13,10 +12,12 @@ public class SkillCellManager : MonoBehaviour, IPointerEnterHandler, IPointerExi
     [SerializeField] private Color filledColor;
 
     private List<Image> upgradeCircles;
+    public Skill RelatedSkill { get; private set; }
 
     public void Display(Skill skill)
     {
         icon.sprite = skill.displayDetails.icon;
+        RelatedSkill = skill;
         if (upgradeCircles == null || upgradeCircles.Count != skill.maxLevel)
         {
             CreateCircles(skill);
@@ -48,14 +49,16 @@ public class SkillCellManager : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        
+        EventManager.OnSkillCellSelected?.Invoke(this, true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        EventManager.OnSkillCellSelected?.Invoke(this, false);
     }
 
     public void OnSelect(BaseEventData eventData)
     {
+        EventManager.OnSkillCellSelected?.Invoke(this, true);
     }
 }

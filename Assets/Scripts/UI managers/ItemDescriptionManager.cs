@@ -22,4 +22,12 @@ public class ItemDescriptionManager : MonoBehaviour
         title.text = item.name;
         desc.text = item.description;
     }
+
+    public void DisplaySkill(Skill skill)
+    {
+        if (skill == null) return;
+        icon.sprite = skill.displayDetails.icon;
+        title.text = skill.displayDetails.displayName;
+        desc.text = skill.Description;
+    }
 }

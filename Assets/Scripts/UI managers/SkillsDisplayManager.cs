@@ -6,6 +6,7 @@ public class SkillsDisplayManager : MonoBehaviour
 {
     [SerializeField] private Transform skillCellHolder;
     [SerializeField] private SkillCellManager skillCellManagerPrefab;
+    [SerializeField] private ItemDescriptionManager description;
 
     private List<SkillCellManager> cellManagers;
 
@@ -16,6 +17,18 @@ public class SkillsDisplayManager : MonoBehaviour
                                          && PlayerActionManager.Instance.AllSkills.Count > 0);
         print("waiting done");
         FillSkillCells();
+
+        EventManager.OnSkillCellSelected += OnSkillCellSelected;
+    }
+
+    private void OnSkillCellSelected(SkillCellManager selectedCell, bool isSelected)
+    {
+        description.gameObject.SetActive(isSelected);
+
+        if (!isSelected) return;
+
+        description.transform.position = selectedCell.transform.position;
+        description.DisplaySkill(selectedCell.RelatedSkill);
     }
 
     private void FillSkillCells()
