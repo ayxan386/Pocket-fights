@@ -20,6 +20,19 @@ public class PlayerActionManager : MonoBehaviour
     private void Start()
     {
         actions = skillHolder.GetComponentsInChildren<Skill>().ToList();
+        EventManager.OnSkillCellClicked += OnSkillCellClicked;
+    }
+
+    private void OnSkillCellClicked(SkillCellManager clickedCell)
+    {
+        var stat = PlayerInputController.Instance.Stats;
+        if (clickedCell.RelatedSkill.CanUpgrade
+            && stat.SkillPoints >= clickedCell.RelatedSkill.UpgradeCost)
+        {
+            stat.UseSkillPoints(clickedCell.RelatedSkill.UpgradeCost);
+            clickedCell.RelatedSkill.Upgrade();
+            EventManager.OnSkillUpgraded?.Invoke(clickedCell);
+        }
     }
 
     public Skill GetAction(int actionIndex)

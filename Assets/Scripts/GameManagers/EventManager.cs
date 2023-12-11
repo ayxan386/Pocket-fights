@@ -16,5 +16,8 @@ public class EventManager : MonoBehaviour
     public static Action<bool> OnShopToggled;
     public static Action<MobController> OnMobDeath;
     public static Action<float> OnChangeSelection;
+    //Skill related events
     public static Action<SkillCellManager, bool> OnSkillCellSelected;
+    public static Action<SkillCellManager> OnSkillCellClicked;
+    public static Action<SkillCellManager> OnSkillUpgraded;
 }

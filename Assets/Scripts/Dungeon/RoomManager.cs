@@ -59,6 +59,7 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private ExitConditionDisplayManager exitConditionDisplayManager;
 
     private List<GridPoint> grid;
+    private bool isActive;
 
     public List<TeleportPad> Telepads => pads;
 
@@ -79,6 +80,7 @@ public class RoomManager : MonoBehaviour
 
     private void OnMobDeath(MobController obj)
     {
+        if(!isActive) return;
         killCounter--;
         CheckExitConditions();
         
@@ -106,12 +108,14 @@ public class RoomManager : MonoBehaviour
 
     public void Activate()
     {
+        isActive = true;
         roomCamera.Priority = 15;
         exitConditionDisplayManager.gameObject.SetActive(exitConditionType != ExitConditionType.None);
     }
 
     public void Deactivate()
     {
+        isActive = false;
         roomCamera.Priority = 5;
         exitConditionDisplayManager.gameObject.SetActive(false);
     }

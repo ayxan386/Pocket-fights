@@ -6,7 +6,8 @@ public class StatController : MonoBehaviour
 {
     [SerializeField] private StatBarIndicator healthBarIndicator;
     [SerializeField] private StatBarIndicator manaBarIndicator;
-    [field: Header("Core values")] 
+
+    [field: Header("Core values")]
     [field: SerializeField] public int Level { get; set; }
 
     [field: SerializeField] public int FreePoints { get; private set; }
@@ -196,6 +197,15 @@ public class StatController : MonoBehaviour
         Level += increment;
         UpdateFreePoints(Level);
         EventManager.OnPlayerCoreUpdate?.Invoke(FreePoints);
+    }
+
+    public void UseSkillPoints(int usedPointsAmount)
+    {
+        if (usedPointsAmount > SkillPoints)
+            throw new ArgumentException("Cannot use more than owned amount");
+
+        SkillPoints -= usedPointsAmount;
+        EventManager.OnPlayerCoreUpdate?.Invoke(SkillPoints);
     }
 }
 

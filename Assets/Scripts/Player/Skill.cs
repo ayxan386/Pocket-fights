@@ -17,17 +17,15 @@ public class Skill : MonoBehaviour
 
     public string Description => $"{displayDetails.descriptionBase} \n Mana cost: {manaConsumption}" +
                                  $"\n Current effect {multiplier}"
-                                 + (currentLevel < maxLevel ? $" \n Upgrade cost: x{currentLevel + 1}" : "");
+                                 + (currentLevel < maxLevel ? $" \n Upgrade cost: x{UpgradeCost}" : "");
 
-    public bool Upgrade()
+    public int UpgradeCost => currentLevel + 1;
+
+    public bool CanUpgrade => currentLevel < maxLevel;
+
+    public void Upgrade()
     {
-        if (currentLevel < maxLevel)
-        {
-            currentLevel++;
-            return true;
-        }
-
-        return false;
+        if (currentLevel < maxLevel) currentLevel++;
     }
 }
 

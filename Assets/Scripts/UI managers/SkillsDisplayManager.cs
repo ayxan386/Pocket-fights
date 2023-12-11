@@ -19,6 +19,13 @@ public class SkillsDisplayManager : MonoBehaviour
         FillSkillCells();
 
         EventManager.OnSkillCellSelected += OnSkillCellSelected;
+        EventManager.OnSkillUpgraded += OnSkillUpgraded;
+    }
+
+    private void OnSkillUpgraded(SkillCellManager toUpdate)
+    {
+        toUpdate.Display(toUpdate.RelatedSkill);
+        description.DisplaySkill(toUpdate.RelatedSkill);
     }
 
     private void OnSkillCellSelected(SkillCellManager selectedCell, bool isSelected)
