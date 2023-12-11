@@ -22,7 +22,7 @@ public class MobDescriptionManager : MonoBehaviour
         dropListItems = dropList.GetComponentsInChildren<Image>();
         foreach (var dropListItem in dropListItems)
         {
-            dropListItem.gameObject.SetActive(false); 
+            dropListItem.gameObject.SetActive(false);
         }
     }
 
@@ -35,7 +35,7 @@ public class MobDescriptionManager : MonoBehaviour
     {
         menuRef.SetActive(true);
         icon.sprite = mobController.DisplayData.icon;
-        title.text = mobController.DisplayData.displayName;
+        title.text = mobController.DisplayData.displayName + $" LVL: {mobController.Stats.Level}";
 
         var k = 0;
 

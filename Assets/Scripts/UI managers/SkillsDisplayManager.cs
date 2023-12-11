@@ -12,10 +12,8 @@ public class SkillsDisplayManager : MonoBehaviour
 
     private IEnumerator Start()
     {
-        print("waiting");
         yield return new WaitUntil(() => PlayerActionManager.Instance != null
                                          && PlayerActionManager.Instance.AllSkills.Count > 0);
-        print("waiting done");
         FillSkillCells();
 
         EventManager.OnSkillCellSelected += OnSkillCellSelected;
@@ -41,7 +39,6 @@ public class SkillsDisplayManager : MonoBehaviour
     private void FillSkillCells()
     {
         var allSkills = PlayerActionManager.Instance.AllSkills;
-        print($"Creating skills {allSkills.Count}");
 
         cellManagers = new List<SkillCellManager>();
         foreach (var skill in allSkills)

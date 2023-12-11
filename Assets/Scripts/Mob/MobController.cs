@@ -22,6 +22,8 @@ public class MobController : MonoBehaviour
 
     public Guid Id { get; private set; }
     public List<PossibleLoot> PossibleLoots => possibleDrops;
+
+    public StatController Stats => statController;
     public bool IsDoneAttack { get; private set; }
     
 

@@ -195,6 +195,7 @@ public class StatController : MonoBehaviour
     public void UpdateLevel(int increment)
     {
         Level += increment;
+        SkillPoints += Mathf.Max(Level / 2, 1);
         UpdateFreePoints(Level);
         EventManager.OnPlayerCoreUpdate?.Invoke(FreePoints);
     }
