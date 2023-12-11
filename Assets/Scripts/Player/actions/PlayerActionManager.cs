@@ -1,36 +1,29 @@
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerActionManager : MonoBehaviour
 {
-    [SerializeField] private List<ActionDetails> actions;
+    [SerializeField] private Transform skillHolder;
+    [SerializeField] private List<Skill> actions;
+
+    public List<Skill> AllSkills => actions.FindAll(action => action.type != ActionType.ReceiveAttack);
 
     public static PlayerActionManager Instance { get; private set; }
 
     private void Awake()
     {
         Instance = this;
+        actions = new List<Skill>();
     }
 
-    public ActionDetails GetAction(int actionIndex)
+    private void Start()
+    {
+        actions = skillHolder.GetComponentsInChildren<Skill>().ToList();
+    }
+
+    public Skill GetAction(int actionIndex)
     {
         return actions[actionIndex];
     }
-}
-
-[Serializable]
-public class ActionDetails
-{
-    public string animationName;
-    public float attackMult;
-    public float manaConsumption;
-    public ActionType type;
-}
-
-[Serializable]
-public enum ActionType
-{
-    Attack,
-    ReceiveAttack
 }

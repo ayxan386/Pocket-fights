@@ -143,13 +143,13 @@ public class PlayerInputController : MonoBehaviour
             && !CombatModeGameManager.Instance.IsPlayerTurn) return;
         if (!CombatModeGameManager.Instance.IsCombatGoing) return;
         
-        var actionDetails = PlayerActionManager.Instance.GetAction(index);
+        var actionDetails = PlayerActionManager.Instance.GetAction(index + 1);
         var usedAction = statController.UsedAction(actionDetails.manaConsumption);
         if (usedAction)
         {
             animator.SetTrigger(actionDetails.animationName);
             CombatModeGameManager.Instance.SelectedEnemy.ReceiveAttack(
-                statController.GetStatValue(StatValue.BaseAttack).currentValue * actionDetails.attackMult);
+                statController.GetStatValue(StatValue.BaseAttack).currentValue * actionDetails.multiplier);
         }
     }
 

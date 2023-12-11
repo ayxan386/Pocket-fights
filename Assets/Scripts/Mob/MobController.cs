@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 public class MobController : MonoBehaviour
 {
     [SerializeField] private Animator animator;
-    [SerializeField] private List<ActionDetails> actions;
+    [SerializeField] private List<Skill> actions;
     [SerializeField] private StatController statController;
     [SerializeField] private List<PossibleLoot> possibleDrops;
     [SerializeField] private GameObject combatUiRef;

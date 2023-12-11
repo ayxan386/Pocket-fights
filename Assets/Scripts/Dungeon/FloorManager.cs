@@ -8,6 +8,7 @@ public class FloorManager : MonoBehaviour
     [SerializeField] private List<RoomManager> roomInstances;
     [SerializeField] private Vector2 distanceBetweenRooms;
     [SerializeField] private Vector2Int numberOfRooms;
+    [SerializeField] private bool autoGenerate = true;
 
     public static FloorManager Instance { get; private set; }
 
@@ -20,9 +21,13 @@ public class FloorManager : MonoBehaviour
 
     private IEnumerator Start()
     {
-        yield return new WaitForSeconds(0.1f);
-        GenerateFloor();
-        yield return new WaitForSeconds(0.1f);
+        if (autoGenerate)
+        {
+            yield return new WaitForSeconds(0.1f);
+            GenerateFloor();
+            yield return new WaitForSeconds(0.1f);
+        }
+
         yield return new WaitUntil(() => PlayerInputController.Instance != null);
         roomInstances[0].PlacePlayer();
         roomInstances[0].Activate();
