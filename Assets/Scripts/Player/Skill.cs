@@ -14,18 +14,20 @@ public class Skill : MonoBehaviour
     public List<float> effects;
     public int currentLevel;
     public int maxLevel;
+    public string slotName;
+    public bool isSelected;
 
     public string Description => $"{displayDetails.descriptionBase} \n Mana cost: {manaConsumption}" +
                                  $"\n Current effect {multiplier}"
-                                 + (currentLevel < maxLevel ? $" \n Upgrade cost: x{UpgradeCost}" : "");
+                                 + (CanUpgrade ? $" \n Upgrade cost: x{UpgradeCost}" : "Max LVL");
 
     public int UpgradeCost => currentLevel + 1;
 
-    public bool CanUpgrade => currentLevel < maxLevel;
+    public bool CanUpgrade => currentLevel + 1 < maxLevel;
 
     public void Upgrade()
     {
-        if (currentLevel < maxLevel) currentLevel++;
+        if (currentLevel + 1 < maxLevel) currentLevel++;
     }
 }
 

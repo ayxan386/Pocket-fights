@@ -20,10 +20,9 @@ public class PlayerActionManager : MonoBehaviour
     private void Start()
     {
         actions = skillHolder.GetComponentsInChildren<Skill>().ToList();
-        EventManager.OnSkillCellClicked += OnSkillCellClicked;
     }
 
-    private void OnSkillCellClicked(SkillCellManager clickedCell)
+    public void UpgradeSkill(SkillCellManager clickedCell)
     {
         var stat = PlayerInputController.Instance.Stats;
         if (clickedCell.RelatedSkill.CanUpgrade
@@ -37,6 +36,14 @@ public class PlayerActionManager : MonoBehaviour
 
     public Skill GetAction(int actionIndex)
     {
-        return actions[actionIndex];
+        foreach (var skill in actions)
+        {
+            if (skill.type != ActionType.ReceiveAttack
+                && skill.isSelected
+                && skill.slotName == actionIndex.ToString())
+                return skill;
+        }
+
+        return null;
     }
 }

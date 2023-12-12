@@ -144,6 +144,9 @@ public class PlayerInputController : MonoBehaviour
         if (!CombatModeGameManager.Instance.IsCombatGoing) return;
         
         var actionDetails = PlayerActionManager.Instance.GetAction(index + 1);
+        
+        if(actionDetails == null) return;
+        
         var usedAction = statController.UsedAction(actionDetails.manaConsumption);
         if (usedAction)
         {
