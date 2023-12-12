@@ -656,7 +656,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colorSource: {fileID: 2100000, guid: 6c84ace517908ce46aad1b6fad08992e, type: 2}
   wholeScene: {fileID: 0}
-  checkRadius: 3.5
+  checkRadius: 2.59
   mobLayer:
     serializedVersion: 2
     m_Bits: 64

@@ -33,8 +33,7 @@ public class SpawnerController : MonoBehaviour
 
     private void OnEnable()
     {
-        if(CheckIfThereMobsLeft())
-            StartCoroutine(SpawnRoutine());
+        StartCoroutine(SpawnRoutine());
     }
 
     private IEnumerator SpawnRoutine()
@@ -47,8 +46,6 @@ public class SpawnerController : MonoBehaviour
                 && Vector3.Distance(
                     PlayerInputController.Instance.transform.position, transform.position) <= activationRange
             );
-
-            print("Trying to spawn mobs");
 
             var count = spawnedMobs.Count(mob => mob.gameObject.activeSelf);
             for (int mobCount = count; mobCount < data.maxNumberOfMobs;)
@@ -72,8 +69,6 @@ public class SpawnerController : MonoBehaviour
 
             yield return new WaitForSeconds(data.spawnerRate);
         }
-
-        SpawnerFinished();
     }
 
     private void SpawnerFinished()

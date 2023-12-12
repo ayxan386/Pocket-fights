@@ -146,4 +146,10 @@ public class PlayerCombatInitiation : MonoBehaviour
         IsCombatScene = true;
         SceneManager.LoadScene("CombatScene", LoadSceneMode.Additive);
     }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, checkRadius);
+    }
 }
