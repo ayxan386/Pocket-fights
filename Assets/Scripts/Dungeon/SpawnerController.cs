@@ -33,7 +33,8 @@ public class SpawnerController : MonoBehaviour
 
     private void OnEnable()
     {
-        StartCoroutine(SpawnRoutine());
+        if(CheckIfThereMobsLeft())
+            StartCoroutine(SpawnRoutine());
     }
 
     private IEnumerator SpawnRoutine()
