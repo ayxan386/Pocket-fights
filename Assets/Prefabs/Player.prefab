@@ -2070,6 +2070,7 @@ MonoBehaviour:
   description: {fileID: 595294731974905863}
   skillOptions: {fileID: 5936137109418873717}
   skillSelectionDisplay: {fileID: 4981782013626656729}
+  upgradeOption: {fileID: 8730349727993381535}
 --- !u!114 &4981782013626656729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18288,6 +18289,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &8730349727993381535 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2946284380798972823, guid: ba2d75ed3351f194faa1b73835514bf9,
+    type: 3}
+  m_PrefabInstance: {fileID: 5893840661126623496}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4628842714232295464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5924608635715400265
 PrefabInstance:
   m_ObjectHideFlags: 0

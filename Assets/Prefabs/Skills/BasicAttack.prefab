@@ -56,6 +56,6 @@ MonoBehaviour:
   - 1.2
   - 1.4
   currentLevel: 0
-  maxLevel: 3
-  slotName: W
+  maxLevel: 5
+  slotName: 1
   isSelected: 1

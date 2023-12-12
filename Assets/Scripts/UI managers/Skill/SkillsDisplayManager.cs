@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class SkillsDisplayManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class SkillsDisplayManager : MonoBehaviour
     [SerializeField] private ItemDescriptionManager description;
     [SerializeField] private Transform skillOptions;
     [SerializeField] private SkillSelectionManager skillSelectionDisplay;
+    [SerializeField] private Button upgradeOption;
 
     private List<SkillCellManager> cellManagers;
     private SkillCellManager lastClickedCell;
@@ -53,6 +55,9 @@ public class SkillsDisplayManager : MonoBehaviour
     private void OnSkillCellClicked(SkillCellManager clickedCell)
     {
         lastClickedCell = clickedCell;
+        upgradeOption.interactable = clickedCell.RelatedSkill.CanUpgrade
+                                     && PlayerInputController.Instance.Stats.SkillPoints >=
+                                     clickedCell.RelatedSkill.UpgradeCost;
         skillOptions.gameObject.SetActive(true);
         EventSystem.current.SetSelectedGameObject(skillOptions.GetChild(0).gameObject);
         skillOptions.position = clickedCell.transform.position;
