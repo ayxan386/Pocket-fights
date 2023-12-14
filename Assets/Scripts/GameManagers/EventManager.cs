@@ -6,6 +6,7 @@ public class EventManager : MonoBehaviour
     public static Action<bool> OnPlayerTurnEnd;
     public static Action<float> OnBaseStatUpdate;
     public static Action<int> OnPlayerCoreUpdate;
+    public static Action<StatValue, StatData> OnStatChanged;
     public static Action<int> OnSaveStarted;
     public static Action<StatController> OnStatSave;
     public static Action<InventoryItem> OnItemAdd;
@@ -15,7 +16,9 @@ public class EventManager : MonoBehaviour
     public static Action<bool> OnPauseMenuToggled;
     public static Action<bool> OnShopToggled;
     public static Action<MobController> OnMobDeath;
+
     public static Action<float> OnChangeSelection;
+
     //Skill related events
     public static Action<SkillCellManager, bool> OnSkillCellSelected;
     public static Action<SkillCellManager> OnSkillCellClicked;

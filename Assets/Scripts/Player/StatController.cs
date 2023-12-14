@@ -112,6 +112,7 @@ public class StatController : MonoBehaviour
     {
         if (statValues[StatValue.Mana].currentValue < manaConsumption) return false;
         statValues[StatValue.Mana].currentValue -= manaConsumption;
+        EventManager.OnStatChanged?.Invoke(StatValue.Mana, statValues[StatValue.Mana]);
         manaBarIndicator.UpdateDisplay(statValues[StatValue.Mana]);
         return true;
     }
@@ -137,6 +138,7 @@ public class StatController : MonoBehaviour
         statValues[StatValue.Mana].currentValue = Mathf.Clamp(
             statValues[StatValue.Mana].currentValue + statValues[StatValue.ManaRegen].currentValue,
             0, statValues[StatValue.Mana].maxValue);
+        EventManager.OnStatChanged?.Invoke(StatValue.Mana,statValues[StatValue.Mana]);
         manaBarIndicator.UpdateDisplay(statValues[StatValue.Mana]);
     }
 
@@ -162,6 +164,7 @@ public class StatController : MonoBehaviour
     {
         var currentValue = statValues[statType].currentValue + diff;
         statValues[statType].currentValue = Mathf.Clamp(currentValue, 0, statValues[statType].maxValue);
+        EventManager.OnStatChanged?.Invoke(statType, statValues[statType]);
         UpdateOverallDisplay();
     }
 

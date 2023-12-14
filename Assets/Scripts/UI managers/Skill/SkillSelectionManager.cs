@@ -9,13 +9,24 @@ public class SkillSelectionManager : MonoBehaviour
 {
     [SerializeField] private List<SkillSelectionDisplay> skillDisplays;
     [SerializeField] private Sprite emptySlotIcon;
+    [SerializeField] private bool displayManaCost;
 
     public IEnumerator Start()
     {
         yield return new WaitUntil(() => PlayerActionManager.Instance != null
                                          && PlayerActionManager.Instance.AllSkills.Count > 0);
+        if(displayManaCost)
+            EventManager.OnStatChanged += OnStatChanged;
 
         UpdateUi();
+    }
+
+    private void OnStatChanged(StatValue statValue, StatData obj)
+    {
+        if (statValue == StatValue.Mana)
+        {
+            UpdateUi();
+        }
     }
 
     public void UpdateUi()
@@ -30,19 +41,19 @@ public class SkillSelectionManager : MonoBehaviour
             switch (selectedSkill.slotName)
             {
                 case "1":
-                    skillDisplays[0].icon.sprite = selectedSkill.displayDetails.icon;
+                    UpdateSkillDisplay(skillDisplays[0], selectedSkill);
                     flag += 1;
                     break;
                 case "2":
-                    skillDisplays[1].icon.sprite = selectedSkill.displayDetails.icon;
+                    UpdateSkillDisplay(skillDisplays[1], selectedSkill);
                     flag += 2;
                     break;
                 case "3":
-                    skillDisplays[2].icon.sprite = selectedSkill.displayDetails.icon;
+                    UpdateSkillDisplay(skillDisplays[2], selectedSkill);
                     flag += 4;
                     break;
                 case "4":
-                    skillDisplays[3].icon.sprite = selectedSkill.displayDetails.icon;
+                    UpdateSkillDisplay(skillDisplays[3], selectedSkill);
                     flag += 8;
                     break;
             }
@@ -54,6 +65,21 @@ public class SkillSelectionManager : MonoBehaviour
             if (isSelected == 1) continue;
 
             skillDisplays[i].icon.sprite = emptySlotIcon;
+            skillDisplays[i].slotNameText.text = skillDisplays[i].slotNameText.text[0].ToString();
+            skillDisplays[i].slotNameText.color = Color.black;
+        }
+    }
+
+    private void UpdateSkillDisplay(SkillSelectionDisplay display, Skill skill)
+    {
+        display.icon.sprite = skill.displayDetails.icon;
+        if (displayManaCost)
+        {
+            display.slotNameText.text = display.slotNameText.text[0]+ $" MP {skill.manaConsumption}";
+            var currentMana = PlayerInputController.Instance.Stats.GetStatValue(StatValue.Mana).currentValue;
+            var notEnoughMana = currentMana < skill.manaConsumption;
+            display.notEnoughManaImage.gameObject.SetActive(notEnoughMana);
+            display.slotNameText.color = notEnoughMana ? Color.red : Color.black;
         }
     }
 }
@@ -62,5 +88,6 @@ public class SkillSelectionManager : MonoBehaviour
 public class SkillSelectionDisplay
 {
     public TextMeshProUGUI slotNameText;
+    public Image notEnoughManaImage;
     public Image icon;
 }

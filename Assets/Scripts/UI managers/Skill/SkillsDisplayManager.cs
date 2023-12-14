@@ -10,7 +10,7 @@ public class SkillsDisplayManager : MonoBehaviour
     [SerializeField] private SkillCellManager skillCellManagerPrefab;
     [SerializeField] private ItemDescriptionManager description;
     [SerializeField] private Transform skillOptions;
-    [SerializeField] private SkillSelectionManager skillSelectionDisplay;
+    [SerializeField] private List<SkillSelectionManager> skillSelectionDisplay;
     [SerializeField] private Button upgradeOption;
 
     private List<SkillCellManager> cellManagers;
@@ -34,7 +34,7 @@ public class SkillsDisplayManager : MonoBehaviour
             case "upgrade":
                 PlayerActionManager.Instance.UpgradeSkill(lastClickedCell);
                 break;
-            default:
+            default: //binding to specific slot
                 var equippedSkill =
                     PlayerActionManager.Instance.AllSkills.Find(skill => skill.isSelected && skill.slotName == option);
                 if (equippedSkill != null)
@@ -45,7 +45,8 @@ public class SkillsDisplayManager : MonoBehaviour
 
                 lastClickedCell.RelatedSkill.isSelected = true;
                 lastClickedCell.RelatedSkill.slotName = option;
-                skillSelectionDisplay.UpdateUi();
+                foreach (var display in skillSelectionDisplay) display.UpdateUi();
+                
                 break;
         }
 

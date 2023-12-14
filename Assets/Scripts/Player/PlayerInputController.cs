@@ -8,8 +8,11 @@ public class PlayerInputController : MonoBehaviour
     [Header("Movement")] [SerializeField] private float movementSpeed;
     [SerializeField] private Animator animator;
     [SerializeField] private Transform cameraRotation;
-    [Header("Misc")] [SerializeField] private PlayerCombatInitiation combatInitiation;
+    
+    [Header("Misc")] 
+    [SerializeField] private PlayerCombatInitiation combatInitiation;
     [SerializeField] private StatController statController;
+    [SerializeField] private GameObject inGameUiRef;
 
     [Header("Leveling")] [SerializeField] private float currentXp;
     [SerializeField] private AnimationCurve xpRequirements;
@@ -126,6 +129,7 @@ public class PlayerInputController : MonoBehaviour
 
     private void OnPause()
     {
+        inGameUiRef.SetActive(isPaused);
         isPaused = !isPaused;
         EventManager.OnPauseMenuToggled?.Invoke(isPaused);
     }
