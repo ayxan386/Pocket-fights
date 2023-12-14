@@ -18,8 +18,9 @@ public class Skill : MonoBehaviour
     public bool isSelected;
 
     public string Description => $"{displayDetails.descriptionBase} \n Mana cost: {manaConsumption}" +
-                                 $"\n Current effect {multiplier}"
-                                 + (CanUpgrade ? $" \n Upgrade cost: x{UpgradeCost}" : "Max LVL");
+                                 $"\n Current effect: {multiplier}"
+                                 + (CanUpgrade ? $"-> {effects[currentLevel + 1]}" : "")
+                                 + (CanUpgrade ? $" \n Upgrade cost: x{UpgradeCost}" : "\n Max LVL");
 
     public int UpgradeCost => currentLevel + 1;
 
