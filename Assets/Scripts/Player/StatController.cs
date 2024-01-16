@@ -78,7 +78,6 @@ public class StatController : MonoBehaviour
 
         statValues[StatValue.BaseAttack].UpdateBaseValue(baseStats[StatTypes.Strength].currentValue * 5 * Lsf);
         statValues[StatValue.DamageReduction].UpdateBaseValue(baseStats[StatTypes.Defense].currentValue * 2 * Lsf);
-        statValues[StatValue.ManaRegen].UpdateBaseValue(10);
         statValues[StatValue.None].UpdateBaseValue(10);
 
         // EquipmentManager.Instance.ApplyAllEquipments();
@@ -161,11 +160,11 @@ public class StatController : MonoBehaviour
         UpdateOverallDisplay();
     }
 
-    public void BoostStatValue(StatValue statType, float diff, bool shouldUpdate = false)
+    public void BoostStatValue(StatValue stat, float diff, bool shouldUpdate = false)
     {
-        print($"Boosting {statType} by {diff}");
-        statValues[statType].currentValue += diff;
-        statValues[statType].maxValue = Mathf.Max(statValues[statType].currentValue, statValues[statType].maxValue);
+        print($"Boosting {stat} by {diff}");
+        statValues[stat].currentValue += diff;
+        statValues[stat].maxValue = Mathf.Max(statValues[stat].currentValue, statValues[stat].maxValue);
         if (shouldUpdate)
             UpdateOverallDisplay();
 

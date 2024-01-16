@@ -12,6 +12,7 @@ public class SkillsDisplayManager : MonoBehaviour
     [SerializeField] private Transform skillOptions;
     [SerializeField] private List<SkillSelectionManager> skillSelectionDisplay;
     [SerializeField] private Button upgradeOption;
+    [SerializeField] private Button[] equipOption;
 
     private List<SkillCellManager> cellManagers;
     private SkillCellManager lastClickedCell;
@@ -35,6 +36,7 @@ public class SkillsDisplayManager : MonoBehaviour
                 PlayerActionManager.Instance.UpgradeSkill(lastClickedCell);
                 break;
             default: //binding to specific slot
+                if (lastClickedCell.RelatedSkill.type == ActionType.Passive) return;
                 var equippedSkill =
                     PlayerActionManager.Instance.AllSkills.Find(skill => skill.isSelected && skill.slotName == option);
                 if (equippedSkill != null)
@@ -46,7 +48,7 @@ public class SkillsDisplayManager : MonoBehaviour
                 lastClickedCell.RelatedSkill.isSelected = true;
                 lastClickedCell.RelatedSkill.slotName = option;
                 foreach (var display in skillSelectionDisplay) display.UpdateUi();
-                
+
                 break;
         }
 
@@ -59,6 +61,13 @@ public class SkillsDisplayManager : MonoBehaviour
         upgradeOption.interactable = clickedCell.RelatedSkill.CanUpgrade
                                      && PlayerInputController.Instance.Stats.SkillPoints >=
                                      clickedCell.RelatedSkill.UpgradeCost;
+
+        var canBeSelected = clickedCell.RelatedSkill.type != ActionType.Passive;
+        foreach (var option in equipOption)
+        {
+            option.interactable = canBeSelected;
+        }
+
         skillOptions.gameObject.SetActive(true);
         EventSystem.current.SetSelectedGameObject(skillOptions.GetChild(0).gameObject);
         skillOptions.position = clickedCell.transform.position;

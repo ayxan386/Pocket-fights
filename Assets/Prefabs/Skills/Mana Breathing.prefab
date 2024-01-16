@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6739678855245900918}
   - component: {fileID: 6204179879270805217}
+  - component: {fileID: 6155719195952606668}
   m_Layer: 0
-  m_Name: ReceiveAttack
+  m_Name: Mana Breathing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,21 +45,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0a2b06e9daa06b4c88dd4c5a1b2fbdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationName: receiveAttack
+  animationName: attack01
   manaConsumption: 0
-  type: 2
+  type: 1
   displayDetails:
-    icon: {fileID: 21300000, guid: 5fd50594014b70e48bd6993443d46b32, type: 3}
-    displayName: Receiving attack
-    descriptionBase: 
+    icon: {fileID: 21300000, guid: 0f62342fef8e8a341b4579680dbfbe6f, type: 3}
+    displayName: Breath of Mana
+    descriptionBase: Regulate your breathing to improve mana circulation
   effects:
-  - 1.5
-  - 2.25
-  activationPrice: 0
-  currentLevel: 0
+  - 1.15
+  - 1.2
+  - 1.4
+  activationPrice: 2
+  currentLevel: -1
   maxLevel: 3
-  slotName: 
+  slotName: 1
   isSelected: 0
   usageEffects:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6155719195952606668}
+        m_TargetAssemblyTypeName: StatValueUpgradeAction, Assembly-CSharp
+        m_MethodName: ApplyEffect
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6155719195952606668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184396450984925242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd45a322e6bcfac43830e4b8d5642db2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stat: 4

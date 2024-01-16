@@ -20,12 +20,14 @@ public class Skill : MonoBehaviour
     public bool isSelected;
     public UnityEvent<Skill, StatController, StatController> usageEffects;
 
-    public string Description => $"{displayDetails.descriptionBase} \n Mana cost: {manaConsumption}" +
-                                 $"\n Current effect: {multiplier}"
-                                 + (CanUpgrade ? $"-> {effects[currentLevel + 1]}" : "")
-                                 + (CanUpgrade ? $" \n Upgrade cost: x{UpgradeCost}" : "\n Max LVL");
+    public string Description => IsActive
+        ? ($"{displayDetails.descriptionBase} \n Mana cost: {manaConsumption}" +
+           $"\n Current effect: {multiplier}"
+           + (CanUpgrade ? $"-> {effects[currentLevel + 1]}" : "")
+           + (CanUpgrade ? $" \n Upgrade cost: x{UpgradeCost}" : "\n Max LVL"))
+        : $" {displayDetails.descriptionBase}\n Activation cost: x{activationPrice} \n Effect: x{effects[0]}";
 
-    public bool IsActive => currentLevel > 0;
+    public bool IsActive => currentLevel >= 0;
 
     public int UpgradeCost => IsActive ? (currentLevel + 1) : activationPrice;
 
@@ -33,7 +35,10 @@ public class Skill : MonoBehaviour
 
     public void Upgrade()
     {
-        if (currentLevel + 1 < maxLevel) currentLevel++;
+        if (currentLevel + 1 < maxLevel)
+        {
+            currentLevel++;
+        }
     }
 }
 
@@ -49,5 +54,6 @@ public class SkillDisplayDetails
 public enum ActionType
 {
     Attack,
+    Passive,
     ReceiveAttack
 }

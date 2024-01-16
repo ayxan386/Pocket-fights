@@ -45,10 +45,10 @@ public class InfoDetailsManager : MonoBehaviour
         //Damage Reduction
         var damageReduction = statController.GetStatValue(StatValue.DamageReduction);
         this.damageReduction.UpdateDisplay("Damage reduction",
-            $"{damageReduction.baseValue:N0}({damageReduction.currentValue:N0})");
+            $"{damageReduction.baseValue:N0}({damageReduction.currentValue:N1})");
 
         //Mana Regen
         var manaRegen = statController.GetStatValue(StatValue.ManaRegen);
-        this.manaRegen.UpdateDisplay("Mana regen.", $"{manaRegen.baseValue:N0}({manaRegen.currentValue:N0})");
+        this.manaRegen.UpdateDisplay("Mana regen.", $"{manaRegen.currentValue:N1}");
     }
 }

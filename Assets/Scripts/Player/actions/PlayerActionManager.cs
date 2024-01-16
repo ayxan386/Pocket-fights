@@ -25,11 +25,17 @@ public class PlayerActionManager : MonoBehaviour
     public void UpgradeSkill(SkillCellManager clickedCell)
     {
         var stat = PlayerInputController.Instance.Stats;
-        if (clickedCell.RelatedSkill.CanUpgrade
-            && stat.SkillPoints >= clickedCell.RelatedSkill.UpgradeCost)
+        var targetSkill = clickedCell.RelatedSkill;
+        if (targetSkill.CanUpgrade && stat.SkillPoints >= targetSkill.UpgradeCost)
         {
-            stat.UseSkillPoints(clickedCell.RelatedSkill.UpgradeCost);
-            clickedCell.RelatedSkill.Upgrade();
+            stat.UseSkillPoints(targetSkill.UpgradeCost);
+            targetSkill.Upgrade();
+
+            if (targetSkill.type == ActionType.Passive)
+            {
+                targetSkill.usageEffects?.Invoke(targetSkill, PlayerInputController.Instance.Stats, null);
+            }
+
             EventManager.OnSkillUpgraded?.Invoke(clickedCell);
         }
     }
