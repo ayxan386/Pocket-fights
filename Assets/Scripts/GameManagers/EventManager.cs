@@ -18,6 +18,7 @@ public class EventManager : MonoBehaviour
     public static Action<MobController> OnMobDeath;
 
     public static Action<float> OnChangeSelection;
+    public static Action<bool> OnPlayerVictory;
 
     //Skill related events
     public static Action<SkillCellManager, bool> OnSkillCellSelected;

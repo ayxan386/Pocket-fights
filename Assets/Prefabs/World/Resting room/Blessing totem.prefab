@@ -211,9 +211,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfTurns: 5
+  isDamageBased: 0
   amount: 1.5
   isMult: 1
-  statValue: 2
+  baseValue: 4
+  affectedValue: 4
+  LastAmount: 0
+  DamageBuffer: 0
 --- !u!1001 &6036345630715650708
 PrefabInstance:
   m_ObjectHideFlags: 0

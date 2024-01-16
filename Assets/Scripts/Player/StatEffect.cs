@@ -3,10 +3,13 @@ using UnityEngine;
 public class StatEffect : MonoBehaviour
 {
     public int numberOfTurns;
+    public bool isDamageBased;
     public float amount;
     public bool isMult;
-    public StatValue statValue;
-    private float LastAmount;
+    public StatValue baseValue;
+    public StatValue affectedValue;
+    public float LastAmount;
+    public float DamageBuffer;
 
     public void AddPlayerStatusEffect()
     {
@@ -18,6 +21,7 @@ public class StatEffect : MonoBehaviour
         LastAmount = isMult
             ? val * amount
             : amount;
+        if (isDamageBased) DamageBuffer = LastAmount;
         return LastAmount;
     }
 

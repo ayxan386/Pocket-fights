@@ -61,6 +61,7 @@ public class StatController : MonoBehaviour
             baseStats[StatTypes.Defense].currentValue * 2 * Lsf);
         statValues[StatValue.ManaRegen] = new(10, 10);
         statValues[StatValue.None] = new(10, 10);
+        statValues[StatValue.DamageBuffer] = new(10, 10);
     }
 
     public void UpdateOverallDisplay()
@@ -95,11 +96,6 @@ public class StatController : MonoBehaviour
         return baseStats[stat];
     }
 
-    public void ReceiveAttack(float baseDmg, Action onDeathCallback)
-    {
-     
-    }
-
     public bool UsedAction(float manaConsumption)
     {
         if (statValues[StatValue.Mana].currentValue < manaConsumption) return false;
@@ -130,7 +126,7 @@ public class StatController : MonoBehaviour
         statValues[StatValue.Mana].currentValue = Mathf.Clamp(
             statValues[StatValue.Mana].currentValue + statValues[StatValue.ManaRegen].currentValue,
             0, statValues[StatValue.Mana].maxValue);
-        EventManager.OnStatChanged?.Invoke(StatValue.Mana,statValues[StatValue.Mana]);
+        EventManager.OnStatChanged?.Invoke(StatValue.Mana, statValues[StatValue.Mana]);
         manaBarIndicator.UpdateDisplay(statValues[StatValue.Mana]);
     }
 
@@ -206,9 +202,11 @@ public class StatController : MonoBehaviour
 
     public void ReceiveAttack(float baseDmg)
     {
-        statValues[StatValue.Health].currentValue -=
-            Mathf.Max(baseDmg - statValues[StatValue.DamageReduction].currentValue, 0);
-        
+        var receivedDamage = Mathf.Max(baseDmg - statValues[StatValue.DamageReduction].currentValue, 0);
+        receivedDamage = StatusManager.CheckForDamage(receivedDamage);
+
+        statValues[StatValue.Health].currentValue -= receivedDamage;
+
         if (statValues[StatValue.Health].currentValue <= 0)
         {
             AttachedEntity.OnDeathCallback();
@@ -217,7 +215,7 @@ public class StatController : MonoBehaviour
         {
             AttachedEntity.OnReceiveAttack();
         }
-        
+
         healthBarIndicator.UpdateDisplay(statValues[StatValue.Health]);
     }
 }
@@ -238,7 +236,8 @@ public enum StatValue
     BaseAttack,
     DamageReduction,
     ManaRegen,
-    None
+    None,
+    DamageBuffer
 }
 
 [Serializable]
