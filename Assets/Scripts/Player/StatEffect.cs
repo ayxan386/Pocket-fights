@@ -10,6 +10,9 @@ public class StatEffect : MonoBehaviour
     public StatValue affectedValue;
     public float LastAmount;
     public float DamageBuffer;
+    public bool isPositive;
+    public DisplayDetails displayDetails;
+    public StatusEffectDisplayManager RelatedDisplayManager;
 
     public void AddPlayerStatusEffect()
     {

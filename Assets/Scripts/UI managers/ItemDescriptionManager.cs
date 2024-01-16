@@ -30,4 +30,13 @@ public class ItemDescriptionManager : MonoBehaviour
         title.text = skill.displayDetails.displayName;
         desc.text = skill.Description;
     }
+
+    public void DisplayStatusEffect(StatEffect statEffect)
+    {
+        if (statEffect == null) return;
+        print("Displaying");
+        icon.sprite = statEffect.displayDetails.icon;
+        title.text = statEffect.displayDetails.displayName;
+        desc.text = "";
+    }
 }

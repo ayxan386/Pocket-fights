@@ -11,7 +11,7 @@ public class Skill : MonoBehaviour
 
     public float manaConsumption;
     public ActionType type;
-    public SkillDisplayDetails displayDetails;
+    public DisplayDetails displayDetails;
     public List<float> effects;
     public int activationPrice;
     public int currentLevel;
@@ -43,7 +43,7 @@ public class Skill : MonoBehaviour
 }
 
 [Serializable]
-public class SkillDisplayDetails
+public class DisplayDetails
 {
     public Sprite icon;
     public string displayName;

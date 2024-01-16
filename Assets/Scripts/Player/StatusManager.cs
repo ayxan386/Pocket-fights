@@ -5,6 +5,8 @@ using UnityEngine;
 public class StatusManager : MonoBehaviour
 {
     [SerializeField] private List<StatEffect> statusEffects;
+    [SerializeField] private Transform statusDisplayParent;
+    [SerializeField] private StatusEffectDisplayManager statusEffectDisplayPrefab;
 
     public StatController RelatedStats { get; set; }
 
@@ -78,6 +80,10 @@ public class StatusManager : MonoBehaviour
             effect.GetAmount(RelatedStats.GetStatValue(effect.baseValue).baseValue));
 
         statusEffects.Add(effect);
+        statusDisplayParent.gameObject.SetActive(true);
+        var statusEffectDisplayManager = Instantiate(statusEffectDisplayPrefab, statusDisplayParent);
+        statusEffectDisplayManager.UpdateDisplay(effect);
+        effect.RelatedDisplayManager = statusEffectDisplayManager;
 
         RelatedStats.UpdateOverallDisplay();
     }
@@ -87,10 +93,14 @@ public class StatusManager : MonoBehaviour
         RelatedStats.BoostStatValue(effect.affectedValue, -effect.CurrentEffect());
         RelatedStats.UpdateOverallDisplay();
 
+        Destroy(effect.RelatedDisplayManager.gameObject);
+
         if (effect.gameObject.name.ContainsInsensitive("clone"))
         {
             Destroy(effect.gameObject);
         }
+
+        statusDisplayParent.gameObject.SetActive(statusDisplayParent.childCount > 0);
     }
 
     public float CheckForDamage(float receivedDamage)
