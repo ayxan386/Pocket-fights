@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class MobController : MonoBehaviour
+public class MobController : MonoBehaviour, BaseEntityCallbacks
 {
     [SerializeField] private Animator animator;
     [SerializeField] private List<Skill> actions;
@@ -25,7 +25,7 @@ public class MobController : MonoBehaviour
 
     public StatController Stats => statController;
     public bool IsDoneAttack { get; private set; }
-    
+
 
     private IEnumerator Start()
     {
@@ -37,6 +37,7 @@ public class MobController : MonoBehaviour
             totalSumOfStats += statController.GetBaseStat(statType).baseValue;
         }
 
+        statController.AttachedEntity = this;
         statController.Level += PlayerInputController.Instance.Stats.Level;
         var statsToAllocate = statController.Level * statScalingFactor;
         foreach (var statType in Enum.GetValues(typeof(StatTypes)).Cast<StatTypes>())
@@ -53,13 +54,6 @@ public class MobController : MonoBehaviour
         }
     }
 
-    public void ReceiveAttack(float baseDamage)
-    {
-        var actionDetails = actions.Find(action => action.type == ActionType.ReceiveAttack);
-        animator.SetTrigger(actionDetails.animationName);
-        statController.ReceiveAttack(baseDamage, OnDeathCallback);
-    }
-
     private void OnDestroy()
     {
         DeactivateCombatMode();
@@ -70,9 +64,8 @@ public class MobController : MonoBehaviour
         Id = Guid.NewGuid();
         animator.SetBool("move", false);
         movementController.Navigate = false;
-
-        transform.position = mobStandPoint.position;
-        transform.rotation = mobStandPoint.rotation;
+        
+        transform.SetPositionAndRotation(mobStandPoint.position, mobStandPoint.rotation);
 
         EventManager.OnPlayerTurnEnd += OnPlayerTurnEnd;
     }
@@ -104,14 +97,19 @@ public class MobController : MonoBehaviour
         if (usedAction)
         {
             animator.SetTrigger(actionDetails.animationName);
-            PlayerInputController.Instance.ReceiveAttack(
-                statController.GetStatValue(StatValue.BaseAttack).currentValue);
+            actionDetails.usageEffects?.Invoke(actionDetails, statController, PlayerInputController.Instance.Stats);
         }
 
         IsDoneAttack = true;
     }
 
-    private void OnDeathCallback()
+    public void OnReceiveAttack()
+    {
+        var actionDetails = actions.Find(action => action.type == ActionType.ReceiveAttack);
+        animator.SetTrigger(actionDetails.animationName);
+    }
+
+    public void OnDeathCallback()
     {
         CombatModeGameManager.Instance.MobDefeated(this);
     }

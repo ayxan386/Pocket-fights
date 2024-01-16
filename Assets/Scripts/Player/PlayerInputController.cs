@@ -3,14 +3,15 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(PlayerInput))]
-public class PlayerInputController : MonoBehaviour
+public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
 {
     [Header("Movement")] [SerializeField] private float movementSpeed;
     [SerializeField] private Animator animator;
     [SerializeField] private Transform cameraRotation;
-    
-    [Header("Misc")] 
+
+    [Header("Misc")]
     [SerializeField] private PlayerCombatInitiation combatInitiation;
+
     [SerializeField] private StatController statController;
     [SerializeField] private GameObject inGameUiRef;
 
@@ -49,6 +50,8 @@ public class PlayerInputController : MonoBehaviour
         EventManager.OnSaveStarted += OnSaveStarted;
         EventManager.OnCombatSceneLoading += OnCombatSceneLoading;
         DataManager.Instance.LoadPlayerStats();
+
+        statController.AttachedEntity = this;
     }
 
     private void OnCombatSceneLoading(bool isCombatScene)
@@ -82,12 +85,11 @@ public class PlayerInputController : MonoBehaviour
         }
     }
 
-    public void ReceiveAttack(float baseDamage)
+    public void OnReceiveAttack()
     {
-        Stats.ReceiveAttack(baseDamage, OnDeathCallback);
     }
 
-    private void OnDeathCallback()
+    public void OnDeathCallback()
     {
     }
 
@@ -146,17 +148,17 @@ public class PlayerInputController : MonoBehaviour
         if (CombatModeGameManager.Instance != null
             && !CombatModeGameManager.Instance.IsPlayerTurn) return;
         if (!CombatModeGameManager.Instance.IsCombatGoing) return;
-        
+
         var actionDetails = PlayerActionManager.Instance.GetAction(index + 1);
-        
-        if(actionDetails == null) return;
-        
+
+        if (actionDetails == null) return;
+
         var usedAction = statController.UsedAction(actionDetails.manaConsumption);
         if (usedAction)
         {
             animator.SetTrigger(actionDetails.animationName);
-            CombatModeGameManager.Instance.SelectedEnemy.ReceiveAttack(
-                statController.GetStatValue(StatValue.BaseAttack).currentValue * actionDetails.multiplier);
+            var selectedEnemy = CombatModeGameManager.Instance.SelectedEnemy;
+            actionDetails.usageEffects?.Invoke(actionDetails, statController, selectedEnemy.Stats);
         }
     }
 

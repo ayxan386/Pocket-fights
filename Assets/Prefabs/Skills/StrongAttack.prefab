@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6739678855245900918}
   - component: {fileID: 6204179879270805217}
+  - component: {fileID: -7952066276243416848}
   m_Layer: 0
   m_Name: StrongAttack
   m_TagString: Untagged
@@ -55,7 +56,35 @@ MonoBehaviour:
   - 1.5
   - 2.25
   - 3
+  activationPrice: 0
   currentLevel: 0
   maxLevel: 3
   slotName: 2
   isSelected: 1
+  usageEffects:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -7952066276243416848}
+        m_TargetAssemblyTypeName: StdDamageDealingAction, Assembly-CSharp
+        m_MethodName: ApplyEffect
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &-7952066276243416848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184396450984925242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bac9c99086602f04da324e826d05a79e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

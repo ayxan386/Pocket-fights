@@ -31,7 +31,7 @@ public class StatController : MonoBehaviour
     private Dictionary<StatValue, StatData> statValues;
 
     public float Lsf => Mathf.Pow(1.03f, Level);
-
+    public BaseEntityCallbacks AttachedEntity { get; set; }
 
     private void Awake()
     {
@@ -98,14 +98,7 @@ public class StatController : MonoBehaviour
 
     public void ReceiveAttack(float baseDmg, Action onDeathCallback)
     {
-        statValues[StatValue.Health].currentValue -=
-            Mathf.Max(baseDmg - statValues[StatValue.DamageReduction].currentValue, 0);
-        if (statValues[StatValue.Health].currentValue <= 0)
-        {
-            onDeathCallback.Invoke();
-        }
-
-        healthBarIndicator.UpdateDisplay(statValues[StatValue.Health]);
+     
     }
 
     public bool UsedAction(float manaConsumption)
@@ -210,6 +203,23 @@ public class StatController : MonoBehaviour
 
         SkillPoints -= usedPointsAmount;
         EventManager.OnPlayerCoreUpdate?.Invoke(SkillPoints);
+    }
+
+    public void ReceiveAttack(float baseDmg)
+    {
+        statValues[StatValue.Health].currentValue -=
+            Mathf.Max(baseDmg - statValues[StatValue.DamageReduction].currentValue, 0);
+        
+        if (statValues[StatValue.Health].currentValue <= 0)
+        {
+            AttachedEntity.OnDeathCallback();
+        }
+        else
+        {
+            AttachedEntity.OnReceiveAttack();
+        }
+        
+        healthBarIndicator.UpdateDisplay(statValues[StatValue.Health]);
     }
 }
 
