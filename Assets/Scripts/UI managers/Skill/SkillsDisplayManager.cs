@@ -58,11 +58,13 @@ public class SkillsDisplayManager : MonoBehaviour
     private void OnSkillCellClicked(SkillCellManager clickedCell)
     {
         lastClickedCell = clickedCell;
-        upgradeOption.interactable = clickedCell.RelatedSkill.CanUpgrade
+        var relatedSkill = clickedCell.RelatedSkill;
+        upgradeOption.interactable = relatedSkill.CanUpgrade
                                      && PlayerInputController.Instance.Stats.SkillPoints >=
-                                     clickedCell.RelatedSkill.UpgradeCost;
+                                     relatedSkill.UpgradeCost;
 
-        var canBeSelected = clickedCell.RelatedSkill.type != ActionType.Passive;
+        var canBeSelected = relatedSkill.type != ActionType.Passive && relatedSkill.IsActive;
+
         foreach (var option in equipOption)
         {
             option.interactable = canBeSelected;
