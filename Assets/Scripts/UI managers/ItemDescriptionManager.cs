@@ -51,7 +51,7 @@ public class ItemDescriptionManager : MonoBehaviour
         print($"Displaying {name}");
         icon.sprite = statEffect.displayDetails.icon;
         title.text = statEffect.displayDetails.displayName;
-        desc.text = "";
+        desc.text = statEffect.GetDescription();
     }
 
     public enum DescriptionType

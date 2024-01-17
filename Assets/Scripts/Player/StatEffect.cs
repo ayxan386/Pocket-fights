@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class StatEffect : MonoBehaviour
@@ -32,5 +33,32 @@ public class StatEffect : MonoBehaviour
     public float CurrentEffect()
     {
         return LastAmount;
+    }
+
+    public string GetDescription()
+    {
+        var suffix = "";
+        switch (affectedValue)
+        {
+            case StatValue.Health:
+                break;
+            case StatValue.Mana:
+                break;
+            case StatValue.BaseAttack:
+                break;
+            case StatValue.DamageReduction:
+                break;
+            case StatValue.ManaRegen:
+                break;
+            case StatValue.None:
+                break;
+            case StatValue.DamageBuffer:
+                suffix = $"Can block {DamageBuffer} DMG";
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+
+        return displayDetails.descriptionBase + "\n" + suffix;
     }
 }
