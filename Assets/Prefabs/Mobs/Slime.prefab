@@ -751,7 +751,7 @@ MonoBehaviour:
     displayName: Fiery red slime (small)
     icon: {fileID: 21300000, guid: aaf447b5bc450a047a8b23c831bd3385, type: 3}
   movementController: {fileID: -2712961378370848657}
-  statScalingFactor: 2
+  statScalingFactor: 4
 --- !u!114 &7537575747951249551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -844,6 +844,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statusEffects: []
+  statusDisplayParent: {fileID: 0}
+  statusEffectDisplayPrefab: {fileID: 0}
 --- !u!1 &7624490305936650686
 GameObject:
   m_ObjectHideFlags: 0

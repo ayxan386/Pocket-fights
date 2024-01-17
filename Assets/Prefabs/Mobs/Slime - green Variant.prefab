@@ -107,7 +107,7 @@ PrefabInstance:
     - target: {fileID: 7622900003042665912, guid: 627262a31811c094f92d65ef57ba3c47,
         type: 3}
       propertyPath: statScalingFactor
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7622900003042665912, guid: 627262a31811c094f92d65ef57ba3c47,
         type: 3}
@@ -156,3 +156,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statusEffects: []
+  statusDisplayParent: {fileID: 0}
+  statusEffectDisplayPrefab: {fileID: 0}

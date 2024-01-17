@@ -9,6 +9,7 @@ public class StatEffect : MonoBehaviour
     public bool isMult;
     public StatValue baseValue;
     public StatValue affectedValue;
+    public StatusEffectType effectType;
     public float LastAmount;
     public float DamageBuffer;
     public bool isPositive;
@@ -38,22 +39,15 @@ public class StatEffect : MonoBehaviour
     public string GetDescription()
     {
         var suffix = "";
-        switch (affectedValue)
+        switch (effectType)
         {
-            case StatValue.Health:
+            case StatusEffectType.None:
                 break;
-            case StatValue.Mana:
-                break;
-            case StatValue.BaseAttack:
-                break;
-            case StatValue.DamageReduction:
-                break;
-            case StatValue.ManaRegen:
-                break;
-            case StatValue.None:
-                break;
-            case StatValue.DamageBuffer:
+            case StatusEffectType.DamageBuffer:
                 suffix = $"Can block {DamageBuffer} DMG";
+                break;
+            case StatusEffectType.Healing:
+                suffix = $"Heals {LastAmount:N0} HP";
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -61,4 +55,29 @@ public class StatEffect : MonoBehaviour
 
         return displayDetails.descriptionBase + "\n" + suffix;
     }
+
+    public void TriggerEffect(StatController relatedStats)
+    {
+        switch (effectType)
+        {
+            case StatusEffectType.None:
+                break;
+            case StatusEffectType.DamageBuffer:
+                break;
+            case StatusEffectType.Healing:
+                relatedStats.UpdateStatValue(StatValue.Health, (int)LastAmount);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+
+        RelatedDisplayManager.UpdateDisplay(this);
+    }
+}
+
+public enum StatusEffectType
+{
+    None,
+    DamageBuffer,
+    Healing
 }

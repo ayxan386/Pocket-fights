@@ -61,7 +61,6 @@ public class StatController : MonoBehaviour
             baseStats[StatTypes.Defense].currentValue * 2 * Lsf);
         statValues[StatValue.ManaRegen] = new(10, 10);
         statValues[StatValue.None] = new(10, 10);
-        statValues[StatValue.DamageBuffer] = new(10, 10);
     }
 
     public void UpdateOverallDisplay()
@@ -236,8 +235,7 @@ public enum StatValue
     BaseAttack,
     DamageReduction,
     ManaRegen,
-    None,
-    DamageBuffer
+    None
 }
 
 [Serializable]

@@ -54,6 +54,7 @@ public class StatusManager : MonoBehaviour
             if (statusEffect.isDamageBased) continue;
 
             statusEffect.numberOfTurns--;
+            statusEffect.TriggerEffect(RelatedStats);
 
             if (statusEffect.numberOfTurns <= 0)
             {
@@ -113,7 +114,7 @@ public class StatusManager : MonoBehaviour
             var diff = Mathf.Min(receivedDamage, statusEffect.DamageBuffer);
             statusEffect.DamageBuffer -= diff;
 
-            if (statusEffect.affectedValue == StatValue.DamageBuffer)
+            if (statusEffect.effectType == StatusEffectType.DamageBuffer)
                 receivedDamage -= diff;
 
             CheckRemainingAmount(statusEffect);
