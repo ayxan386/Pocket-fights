@@ -2815,6 +2815,7 @@ MonoBehaviour:
   icon: {fileID: 2307793837117527464}
   title: {fileID: 1496290961240468527}
   desc: {fileID: 4581852883974804253}
+  type: 0
 --- !u!1 &7410850272342550087
 GameObject:
   m_ObjectHideFlags: 0
@@ -2910,6 +2911,7 @@ MonoBehaviour:
   icon: {fileID: 2270734334206660713}
   title: {fileID: 7839062539813195230}
   desc: {fileID: 6775910117792493627}
+  type: 1
 --- !u!1 &7452226511585259838
 GameObject:
   m_ObjectHideFlags: 0

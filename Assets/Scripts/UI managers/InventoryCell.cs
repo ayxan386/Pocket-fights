@@ -121,12 +121,12 @@ public class InventoryCell : MonoBehaviour, IPointerEnterHandler, ISelectHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (storedItem != null) ItemDescriptionManager.Instance.DisplayItem(storedItem);
+        if (storedItem != null) ItemDescriptionManager.InventoryInstance.DisplayItem(storedItem);
     }
 
     public void OnSelect(BaseEventData eventData)
     {
-        if (storedItem != null) ItemDescriptionManager.Instance.DisplayItem(storedItem);
+        if (storedItem != null) ItemDescriptionManager.InventoryInstance.DisplayItem(storedItem);
     }
 }
 

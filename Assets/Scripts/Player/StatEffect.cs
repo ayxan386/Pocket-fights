@@ -14,6 +14,7 @@ public class StatEffect : MonoBehaviour
     public DisplayDetails displayDetails;
     public StatusEffectDisplayManager RelatedDisplayManager;
 
+    [ContextMenu("Add status")]
     public void AddPlayerStatusEffect()
     {
         PlayerInputController.Instance.Stats.StatusManager.AddStatusEffect(this);

@@ -26,12 +26,12 @@ public class StatusEffectDisplayManager : MonoBehaviour, IPointerEnterHandler, I
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (lastEffect == null) return;
-        ItemDescriptionManager.Instance.DisplayStatusEffect(lastEffect);
+        ItemDescriptionManager.InventoryInstance.DisplayStatusEffect(lastEffect);
     }
 
     public void OnSelect(BaseEventData eventData)
     {
         if (lastEffect == null) return;
-        ItemDescriptionManager.Instance.DisplayStatusEffect(lastEffect);
+        ItemDescriptionManager.InventoryInstance.DisplayStatusEffect(lastEffect);
     }
 }

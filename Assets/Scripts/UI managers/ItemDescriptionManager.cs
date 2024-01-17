@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,11 +9,24 @@ public class ItemDescriptionManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI title;
     [SerializeField] private TextMeshProUGUI desc;
 
-    public static ItemDescriptionManager Instance { get; private set; }
+    [SerializeField] private DescriptionType type = DescriptionType.Inventory;
+
+    public static ItemDescriptionManager InventoryInstance { get; private set; }
+    public static ItemDescriptionManager SkillInstance { get; private set; }
 
     private void Awake()
     {
-        Instance = this;
+        switch (type)
+        {
+            case DescriptionType.Inventory:
+                InventoryInstance = this;
+                break;
+            case DescriptionType.Skill:
+                SkillInstance = this;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
     }
 
     public void DisplayItem(InventoryItem item)
@@ -34,9 +48,15 @@ public class ItemDescriptionManager : MonoBehaviour
     public void DisplayStatusEffect(StatEffect statEffect)
     {
         if (statEffect == null) return;
-        print("Displaying");
+        print($"Displaying {name}");
         icon.sprite = statEffect.displayDetails.icon;
         title.text = statEffect.displayDetails.displayName;
         desc.text = "";
+    }
+
+    public enum DescriptionType
+    {
+        Inventory,
+        Skill
     }
 }
