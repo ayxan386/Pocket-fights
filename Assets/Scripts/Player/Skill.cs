@@ -8,7 +8,6 @@ public class Skill : MonoBehaviour
 {
     public string animationName;
     public float multiplier => effects[currentLevel];
-
     public float manaConsumption;
     public ActionType type;
     public DisplayDetails displayDetails;
@@ -18,6 +17,7 @@ public class Skill : MonoBehaviour
     public int maxLevel;
     public string slotName;
     public bool isSelected;
+    public bool canBeUsed;
     public UnityEvent<Skill, StatController, StatController> usageEffects;
 
     public string Description => IsActive
@@ -38,6 +38,17 @@ public class Skill : MonoBehaviour
         if (currentLevel + 1 < maxLevel)
         {
             currentLevel++;
+        }
+    }
+
+    public void Disable()
+    {
+        canBeUsed = false;
+        EventManager.OnPlayerVictory += OnPlayerVictory;
+
+        void OnPlayerVictory(bool obj)
+        {
+            canBeUsed = true;
         }
     }
 }

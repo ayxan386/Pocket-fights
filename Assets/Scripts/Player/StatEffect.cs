@@ -14,8 +14,10 @@ public class StatEffect : MonoBehaviour
     public float LastAmount;
     public float DamageBuffer;
     public bool isPositive;
+    public bool needsToBeDeleted = false;
     public DisplayDetails displayDetails;
     public StatusEffectDisplayManager RelatedDisplayManager;
+    public UnityEvent<StatEffect, StatController> secondaryEffect;
 
     [ContextMenu("Add status")]
     public void AddPlayerStatusEffect()
@@ -29,6 +31,7 @@ public class StatEffect : MonoBehaviour
             ? val * amount
             : amount;
         if (isDamageBased) DamageBuffer = LastAmount;
+        if (baseValue == StatValue.None) LastAmount = amount;
         return LastAmount;
     }
 
@@ -50,6 +53,8 @@ public class StatEffect : MonoBehaviour
             case StatusEffectType.Healing:
                 suffix = $"Heals {LastAmount:N0} HP";
                 break;
+            case StatusEffectType.StatusGiving:
+                break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
@@ -68,6 +73,10 @@ public class StatEffect : MonoBehaviour
             case StatusEffectType.Healing:
                 relatedStats.UpdateStatValue(StatValue.Health, (int)LastAmount);
                 break;
+            case StatusEffectType.StatusGiving:
+                print("Triggered");
+                secondaryEffect?.Invoke(this, relatedStats);
+                break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
@@ -80,5 +89,6 @@ public enum StatusEffectType
 {
     None,
     DamageBuffer,
-    Healing
+    Healing,
+    StatusGiving
 }

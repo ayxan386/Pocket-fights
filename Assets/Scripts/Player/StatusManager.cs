@@ -1,18 +1,23 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class StatusManager : MonoBehaviour
 {
     [SerializeField] private List<StatEffect> statusEffects;
+    [SerializeField] private HashSet<StatEffect> pendingEffects;
+    [SerializeField] private HashSet<StatEffect> removalPendingEffects;
     [SerializeField] private Transform statusDisplayParent;
     [SerializeField] private StatusEffectDisplayManager statusEffectDisplayPrefab;
 
     public StatController RelatedStats { get; set; }
 
+    private bool isIterating;
+
     private void Awake()
     {
         statusEffects = new List<StatEffect>();
+        pendingEffects = new HashSet<StatEffect>();
+        removalPendingEffects = new HashSet<StatEffect>();
     }
 
     private void Start()
@@ -33,14 +38,11 @@ public class StatusManager : MonoBehaviour
     {
         foreach (var statusEffect in statusEffects)
         {
-            if (!statusEffect.isDamageBased) continue;
-
             RemoveStatusEffect(statusEffect);
         }
 
         RemoveUselessEffects();
     }
-
 
     private void OnBaseStatUpdate(float obj)
     {
@@ -49,6 +51,7 @@ public class StatusManager : MonoBehaviour
 
     private void OnPlayerTurnEnd(bool obj)
     {
+        isIterating = true;
         foreach (var statusEffect in statusEffects)
         {
             if (statusEffect.isDamageBased) continue;
@@ -61,6 +64,10 @@ public class StatusManager : MonoBehaviour
                 RemoveStatusEffect(statusEffect);
             }
         }
+
+        isIterating = false;
+        statusEffects.AddRange(pendingEffects);
+        pendingEffects.Clear();
 
         RemoveUselessEffects();
     }
@@ -77,10 +84,16 @@ public class StatusManager : MonoBehaviour
 
     public void AddStatusEffect(StatEffect effect)
     {
-        RelatedStats.BoostStatValue(effect.affectedValue,
-            effect.GetAmount(RelatedStats.GetStatValue(effect.baseValue).baseValue));
+        BoostByEffect(effect);
+        if (isIterating)
+        {
+            pendingEffects.Add(effect);
+        }
+        else
+        {
+            statusEffects.Add(effect);
+        }
 
-        statusEffects.Add(effect);
         statusDisplayParent.gameObject.SetActive(true);
         var statusEffectDisplayManager = Instantiate(statusEffectDisplayPrefab, statusDisplayParent);
         statusEffectDisplayManager.UpdateDisplay(effect);
@@ -89,17 +102,24 @@ public class StatusManager : MonoBehaviour
         RelatedStats.UpdateOverallDisplay();
     }
 
+    private void BoostByEffect(StatEffect effect)
+    {
+        RelatedStats.BoostStatValue(effect.affectedValue,
+            effect.GetAmount(RelatedStats.GetStatValue(effect.baseValue).baseValue));
+    }
+
     private void RemoveStatusEffect(StatEffect effect)
     {
+        if (effect == null || !statusEffects.Contains(effect)) return;
+
         RelatedStats.BoostStatValue(effect.affectedValue, -effect.CurrentEffect());
         RelatedStats.UpdateOverallDisplay();
 
-        Destroy(effect.RelatedDisplayManager.gameObject);
+        if (effect.RelatedDisplayManager != null)
+            Destroy(effect.RelatedDisplayManager.gameObject);
 
-        if (effect.gameObject.name.ContainsInsensitive("clone"))
-        {
-            Destroy(effect.gameObject);
-        }
+        if (effect.needsToBeDeleted)
+            removalPendingEffects.Add(effect);
 
         statusDisplayParent.gameObject.SetActive(statusDisplayParent.childCount > 0);
     }
@@ -136,6 +156,14 @@ public class StatusManager : MonoBehaviour
     private void RemoveUselessEffects()
     {
         statusEffects = statusEffects.FindAll(effect => (effect.isDamageBased && effect.DamageBuffer > 0)
-                                                        || effect.numberOfTurns > 0);
+                                                        || (effect.numberOfTurns > 0
+                                                            && !removalPendingEffects.Contains(effect)));
+
+        foreach (var removalPendingEffect in removalPendingEffects)
+        {
+            Destroy(removalPendingEffect.gameObject);
+        }
+
+        removalPendingEffects.Clear();
     }
 }

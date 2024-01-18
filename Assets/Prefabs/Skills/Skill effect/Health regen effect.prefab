@@ -55,14 +55,13 @@ MonoBehaviour:
   LastAmount: 0
   DamageBuffer: 0
   isPositive: 1
+  needsToBeDeleted: 1
   displayDetails:
     icon: {fileID: -651057808, guid: 080cb6d98b00c2645b2c41df5f69bc78, type: 3}
     displayName: Accelarated healing
     descriptionBase: Heal portion of your HP every turn
   RelatedDisplayManager: {fileID: 0}
-  triggerEffect:
-    m_PersistentCalls:
-      m_Calls: []
+  secondaryEffects: []
 --- !u!1001 &2650717485388904082
 PrefabInstance:
   m_ObjectHideFlags: 0

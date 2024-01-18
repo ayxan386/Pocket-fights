@@ -98,6 +98,7 @@ public class MobController : MonoBehaviour, BaseEntityCallbacks
         {
             animator.SetTrigger(actionDetails.animationName);
             actionDetails.usageEffects?.Invoke(actionDetails, statController, PlayerInputController.Instance.Stats);
+            EventManager.OnSkillUsedByPlayer?.Invoke(actionDetails, false);
         }
 
         IsDoneAttack = true;

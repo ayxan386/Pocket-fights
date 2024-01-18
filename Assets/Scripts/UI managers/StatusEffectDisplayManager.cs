@@ -26,6 +26,7 @@ public class StatusEffectDisplayManager : MonoBehaviour, IPointerEnterHandler, I
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (lastEffect == null) return;
+        print($"Hovering over {lastEffect.displayDetails.displayName}");
         ItemDescriptionManager.InventoryInstance.DisplayStatusEffect(lastEffect);
     }
 

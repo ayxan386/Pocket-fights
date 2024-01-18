@@ -15,8 +15,25 @@ public class SkillSelectionManager : MonoBehaviour
     {
         yield return new WaitUntil(() => PlayerActionManager.Instance != null
                                          && PlayerActionManager.Instance.AllSkills.Count > 0);
-        if(displayManaCost)
+        if (displayManaCost)
             EventManager.OnStatChanged += OnStatChanged;
+
+        EventManager.OnSkillUsedByPlayer += OnSkillUsedByPlayer;
+
+        UpdateUi();
+    }
+
+    private void OnDestroy()
+    {
+        if (displayManaCost)
+            EventManager.OnStatChanged -= OnStatChanged;
+        
+        EventManager.OnSkillUsedByPlayer -= OnSkillUsedByPlayer;
+    }
+
+    private void OnSkillUsedByPlayer(Skill usedSkill, bool isUsedByPlayer)
+    {
+        if (!isUsedByPlayer) return;
 
         UpdateUi();
     }
@@ -75,9 +92,9 @@ public class SkillSelectionManager : MonoBehaviour
         display.icon.sprite = skill.displayDetails.icon;
         if (displayManaCost)
         {
-            display.slotNameText.text = display.slotNameText.text[0]+ $" MP {skill.manaConsumption}";
+            display.slotNameText.text = display.slotNameText.text[0] + $" MP {skill.manaConsumption}";
             var currentMana = PlayerInputController.Instance.Stats.GetStatValue(StatValue.Mana).currentValue;
-            var notEnoughMana = currentMana < skill.manaConsumption;
+            var notEnoughMana = currentMana < skill.manaConsumption || !skill.canBeUsed;
             display.notEnoughManaImage.gameObject.SetActive(notEnoughMana);
             display.slotNameText.color = notEnoughMana ? Color.red : Color.black;
         }

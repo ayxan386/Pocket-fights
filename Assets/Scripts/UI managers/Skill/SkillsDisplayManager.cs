@@ -28,6 +28,13 @@ public class SkillsDisplayManager : MonoBehaviour
         EventManager.OnSkillCellClicked += OnSkillCellClicked;
     }
 
+    private void OnDestroy()
+    {
+        EventManager.OnSkillCellSelected -= OnSkillCellSelected;
+        EventManager.OnSkillUpgraded -= OnSkillUpgraded;
+        EventManager.OnSkillCellClicked -= OnSkillCellClicked;
+    }
+
     public void OptionSelected(string option)
     {
         switch (option)
@@ -60,8 +67,7 @@ public class SkillsDisplayManager : MonoBehaviour
         lastClickedCell = clickedCell;
         var relatedSkill = clickedCell.RelatedSkill;
         upgradeOption.interactable = relatedSkill.CanUpgrade
-                                     && PlayerInputController.Instance.Stats.SkillPoints >=
-                                     relatedSkill.UpgradeCost;
+                                     && PlayerInputController.Instance.Stats.SkillPoints >= relatedSkill.UpgradeCost;
 
         var canBeSelected = relatedSkill.type != ActionType.Passive && relatedSkill.IsActive;
 

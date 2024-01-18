@@ -61,6 +61,7 @@ MonoBehaviour:
   maxLevel: 3
   slotName: 2
   isSelected: 1
+  canBeUsed: 1
   usageEffects:
     m_PersistentCalls:
       m_Calls:

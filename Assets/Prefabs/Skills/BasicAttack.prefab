@@ -56,11 +56,14 @@ MonoBehaviour:
   - 1
   - 1.2
   - 1.4
+  - 1.6
+  - 1.8
   activationPrice: 0
   currentLevel: 0
   maxLevel: 5
   slotName: 1
   isSelected: 1
+  canBeUsed: 1
   usageEffects:
     m_PersistentCalls:
       m_Calls:

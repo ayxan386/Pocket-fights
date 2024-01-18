@@ -9,8 +9,7 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
     [SerializeField] private Animator animator;
     [SerializeField] private Transform cameraRotation;
 
-    [Header("Misc")]
-    [SerializeField] private PlayerCombatInitiation combatInitiation;
+    [Header("Misc")] [SerializeField] private PlayerCombatInitiation combatInitiation;
 
     [SerializeField] private StatController statController;
     [SerializeField] private GameObject inGameUiRef;
@@ -151,14 +150,16 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
 
         var actionDetails = PlayerActionManager.Instance.GetAction(index + 1);
 
-        if (actionDetails == null) return;
+        if (actionDetails == null || !actionDetails.canBeUsed) return;
 
         var usedAction = statController.UsedAction(actionDetails.manaConsumption);
+
         if (usedAction)
         {
             animator.SetTrigger(actionDetails.animationName);
             var selectedEnemy = CombatModeGameManager.Instance.SelectedEnemy;
             actionDetails.usageEffects?.Invoke(actionDetails, statController, selectedEnemy.Stats);
+            EventManager.OnSkillUsedByPlayer?.Invoke(actionDetails, true);
         }
     }
 

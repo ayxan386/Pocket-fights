@@ -61,6 +61,7 @@ MonoBehaviour:
   maxLevel: 3
   slotName: 1
   isSelected: 0
+  canBeUsed: 1
   usageEffects:
     m_PersistentCalls:
       m_Calls:
@@ -68,6 +69,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: StatusApplyingAction, Assembly-CSharp
         m_MethodName: ApplyEffectToCaster
         m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6204179879270805217}
+        m_TargetAssemblyTypeName: Skill, Assembly-CSharp
+        m_MethodName: Disable
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

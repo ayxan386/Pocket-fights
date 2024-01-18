@@ -15,4 +15,11 @@ public class StatusApplyingAction : MonoBehaviour
         effect.amount = usedSkill.multiplier;
         target.StatusManager.AddStatusEffect(Instantiate(effect, transform));
     }
+
+    public void ApplyEffectToCaster(StatEffect usedSkill, StatController caster)
+    {
+        var statEffect = Instantiate(effect, caster.StatusManager.transform);
+        statEffect.amount *= usedSkill.LastAmount;
+        caster.StatusManager.AddStatusEffect(statEffect);
+    }
 }

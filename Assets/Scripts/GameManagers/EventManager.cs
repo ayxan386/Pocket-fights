@@ -19,6 +19,7 @@ public class EventManager : MonoBehaviour
 
     public static Action<float> OnChangeSelection;
     public static Action<bool> OnPlayerVictory;
+    public static Action<Skill, bool> OnSkillUsedByPlayer;
 
     //Skill related events
     public static Action<SkillCellManager, bool> OnSkillCellSelected;
