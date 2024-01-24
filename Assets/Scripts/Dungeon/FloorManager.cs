@@ -5,10 +5,12 @@ using UnityEngine;
 public class FloorManager : MonoBehaviour
 {
     [SerializeField] private List<RoomManager> roomPrefabs;
+    [SerializeField] private RoomManager endRoom;
     [SerializeField] private List<RoomManager> roomInstances;
     [SerializeField] private Vector2 distanceBetweenRooms;
     [SerializeField] private Vector2Int numberOfRooms;
     [SerializeField] private bool autoGenerate = true;
+    private int maxRooms;
 
     public static FloorManager Instance { get; private set; }
 
@@ -46,16 +48,23 @@ public class FloorManager : MonoBehaviour
         roomInstances.Add(randomRoom);
 
         var iteration = 0;
-        var maxRooms = Random.Range(numberOfRooms.x, numberOfRooms.y);
-        while (roomInstances.Count < maxRooms && roomInstances.Exists(room => room.HasUnlinkedTelepad())
-                                              && iteration < 100)
+        maxRooms = Random.Range(numberOfRooms.x, numberOfRooms.y);
+        while (roomInstances.Count < maxRooms - 1 && roomInstances.Exists(room => room.HasUnlinkedTelepad())
+                                                  && iteration < 100)
         {
-            CreateRoomForEachPad(roomInstances.Find(room => room.HasUnlinkedTelepad()), maxRooms);
+            CreateRoomForEachPad(FindRoomWithUnlinkedTelepad());
             iteration++;
         }
+
+        AddSpecificRoom(endRoom, FindRoomWithUnlinkedTelepad());
     }
 
-    private void CreateRoomForEachPad(RoomManager currentRoom, int maxRooms)
+    private RoomManager FindRoomWithUnlinkedTelepad()
+    {
+        return roomInstances.Find(room => room.HasUnlinkedTelepad());
+    }
+
+    private void CreateRoomForEachPad(RoomManager currentRoom)
     {
         foreach (var telepad in currentRoom.Telepads)
         {
@@ -71,6 +80,31 @@ public class FloorManager : MonoBehaviour
 
             if (potentialRoom != null)
             {
+                var transform1 = transform;
+                var pos = transform1.position;
+                pos.x += distanceBetweenRooms.x * roomInstances.Count;
+
+                potentialRoom = Instantiate(potentialRoom, pos, Quaternion.identity, transform1);
+                potentialRoom.PlaceSpecialtyBlocks(1f * roomInstances.Count / maxRooms / 10f);
+                potentialRoom.SetExitConditions();
+                roomInstances.Add(potentialRoom);
+
+                potentialRoom.Telepads.Find(pad => pad.Color == telepad.Color && !pad.IsLinked).Link(telepad);
+            }
+            
+        }
+    }
+
+    private void AddSpecificRoom(RoomManager roomToAdd, RoomManager currentRoom)
+    {
+        foreach (var telepad in currentRoom.Telepads)
+        {
+            if (telepad.IsLinked) continue;
+
+            var potentialRoom = roomToAdd;
+
+            if (potentialRoom != null)
+            {
                 var pos = transform.position;
                 pos.x += distanceBetweenRooms.x * roomInstances.Count;
 
@@ -81,6 +115,7 @@ public class FloorManager : MonoBehaviour
 
                 potentialRoom.Telepads.Find(pad => pad.Color == telepad.Color && !pad.IsLinked).Link(telepad);
             }
+            break;
         }
     }
 }

@@ -41,6 +41,13 @@ public class InventoryController : MonoBehaviour
         EventManager.OnItemRemove += OnItemRemove;
     }
 
+    private void OnDestroy()
+    {
+        EventManager.OnItemAdd -= OnItemAdd;
+        EventManager.OnItemAddAsLoot -= OnItemAddAsLoot;
+        EventManager.OnItemRemove -= OnItemRemove;
+    }
+
 
     public void UpdateDisplay()
     {

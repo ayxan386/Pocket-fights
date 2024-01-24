@@ -14,6 +14,11 @@ public class NavBarManager : MonoBehaviour
         OpenTab("Inventory");
     }
 
+    private void OnDestroy()
+    {
+        EventManager.OnPauseMenuToggled -= OnPauseMenuToggled;
+    }
+
     private void OnPauseMenuToggled(bool isPaused)
     {
         pauseMenuAnimator.SetTrigger(isPaused ? "open" : "close");

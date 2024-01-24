@@ -345,14 +345,16 @@ public class RoomManager : MonoBehaviour
             }
 
             usedPoints.Add(randomPoint);
-            Instantiate(block.block, specialtyBlockSpawnPoints[randomPoint].position, Quaternion.identity, transform);
+            var position = specialtyBlockSpawnPoints[randomPoint].position + block.placementOffset;
+            Instantiate(block.block, position, Quaternion.identity, transform);
         }
 
         if (usedPoints.Count == 0)
         {
-            Instantiate(specialtyBlockPrefabs[0].block,
-                specialtyBlockSpawnPoints[Random.Range(0, specialtyBlockSpawnPoints.Count)].position,
-                Quaternion.identity, transform);
+            var block = specialtyBlockPrefabs[0];
+            var position = specialtyBlockSpawnPoints[Random.Range(0, specialtyBlockSpawnPoints.Count)].position
+                           + block.placementOffset;
+            Instantiate(block.block, position, Quaternion.identity, transform);
         }
     }
 
