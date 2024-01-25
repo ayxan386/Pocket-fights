@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cinemachine;
+using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -188,24 +189,18 @@ public class RoomManager : MonoBehaviour
     public void GameOfLife()
     {
         var temp = new List<string>();
-        for (int x = 0; x < dimensions.x; x++)
+        for (int y = 0; y < dimensions.y; y++)
         {
-            for (int y = 0; y < dimensions.y; y++)
+            for (int x = 0; x < dimensions.x; x++)
             {
                 var index = GetIndex(y, x);
                 var bottomLayer = floorBlocks[index];
                 var numberOfWaterCells =
-                    IsWater(y, x + 1) + IsWater(y, x - 1) + IsWater(y - 1, x) + IsWater(y - 1, x);
+                    IsWater(y, x + 1) + IsWater(y, x - 1) + IsWater(y + 1, x) + IsWater(y - 1, x)
+                    +IsWater(y+1, x + 1) + IsWater(y+1, x - 1) + IsWater(y - 1, x + 1) + IsWater(y - 1, x - 1);
                 if (bottomLayer != joiningCellName)
                 {
-                    if (numberOfWaterCells >= cellNumberThreshold)
-                    {
-                        temp.Add(joiningCellName);
-                    }
-                    else
-                    {
-                        temp.Add(floorBlocks[index]);
-                    }
+                    temp.Add(numberOfWaterCells >= cellNumberThreshold ? joiningCellName : bottomLayer);
                 }
                 else
                 {
