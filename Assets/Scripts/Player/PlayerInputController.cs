@@ -21,11 +21,12 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
 
 
     private CharacterController cc;
-    private PlayerInput playerInput;
     private Vector3 movementVector;
     private bool isPaused;
     public Vector3 lastPosition;
     public Quaternion lastRotation;
+
+    public PlayerInput playerInput { get; private set; }
 
     public StatController Stats => statController;
 

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class TwoOfKindManager : MonoBehaviour
 {
@@ -27,7 +26,7 @@ public class TwoOfKindManager : MonoBehaviour
             for (int y = 0; y < optionSize.y; y++)
             {
                 var option = Instantiate(optionPrefab, optionParent);
-                var pos = option.transform.position;
+                var pos = optionParent.position;
                 pos.x += (offsetFactor.x + offset.x) * x;
                 pos.z += (offsetFactor.z + offset.z) * y;
                 option.transform.position = pos;
@@ -61,7 +60,7 @@ public class TwoOfKindManager : MonoBehaviour
             otherOption.enabled = false;
 
             var newDrop = Instantiate(prevOpennedOption.PrizeName.itemPrefab);
-            newDrop.count = 1;
+            newDrop.count = prevOpennedOption.PrizeName.count.y;
             EventManager.OnItemAdd?.Invoke(newDrop);
         }
         else
@@ -78,11 +77,13 @@ public class TwoOfKindManager : MonoBehaviour
 
     private void StartGame()
     {
-        miniGameCamera.Priority = 55;
+        miniGameCamera.Priority = 15;
+        PlayerInputController.Instance.playerInput.DeactivateInput();
     }
 
     private void EndGame()
     {
         miniGameCamera.Priority = 5;
+        PlayerInputController.Instance.playerInput.ActivateInput();
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 
@@ -13,16 +14,17 @@ public class TwoOfKindOption : MonoBehaviour
     public PossibleLoot PrizeName { get; set; }
     public TwoOfKindManager Manager { get; set; }
 
-    private void Start()
+    private IEnumerator Start()
     {
         startRotation = transform.eulerAngles;
+        yield return new WaitUntil(() => PrizeName != null);
+
+        Instantiate(PrizeName.inWorldDisplayItem, prizeParent);
     }
 
     public void Uncover()
     {
-        coverPivot.DORotate(targetRotation, rotationDuration);
-
-        Manager.OptionOpened(this);
+        coverPivot.DORotate(targetRotation, rotationDuration).OnComplete(() => Manager.OptionOpened(this));
     }
 
     public void Cover()

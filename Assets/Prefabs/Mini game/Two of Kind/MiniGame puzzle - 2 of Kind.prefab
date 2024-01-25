@@ -120,25 +120,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prizePrefabs:
-  - itemPrefab: {fileID: 3337002340432959719, guid: fd7389eff2aaccb488d74264e9423df1,
+  - inWorldDisplayItem: {fileID: 6382180039258008640, guid: aa7c4099eaa40f945a9a2b5ba18481e1,
+      type: 3}
+    itemPrefab: {fileID: 3337002340432959719, guid: fd7389eff2aaccb488d74264e9423df1,
       type: 3}
     chance: 0.608
-    count: {x: 1, y: 5}
-  - itemPrefab: {fileID: 3337002340432959719, guid: 7ff3a8fc8a51b6a43a4b497297549136,
+    count: {x: 1, y: 3}
+  - inWorldDisplayItem: {fileID: 6373917805193620123, guid: 5cf40d6a0b25f5d488824675548374a4,
       type: 3}
-    chance: 0.144
-    count: {x: 1, y: 2}
-  - itemPrefab: {fileID: 3337002340432959719, guid: 407cd09bed077b2439addf797101809b,
+    itemPrefab: {fileID: 3337002340432959719, guid: 407cd09bed077b2439addf797101809b,
       type: 3}
     chance: 0.396
-    count: {x: 1, y: 5}
+    count: {x: 1, y: 1}
   optionPrefab: {fileID: 494402872320438675, guid: c01783c582e146d44a3ce84b23b579f0,
     type: 3}
   optionSize: {x: 5, y: 5}
   offsetFactor: {x: 0.09, y: 0, z: 0.11}
-  offset: {x: 0.01, y: 0, z: 0.01}
+  offset: {x: 0.03, y: 0, z: 0.01}
   optionParent: {fileID: 4576185136649769262}
-  miniGameCamera: {fileID: 0}
+  miniGameCamera: {fileID: 1014039552708425680}
   maxPairChoice: 3
 --- !u!1 &4341016436940883207
 GameObject:
@@ -259,7 +259,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4946282929877358614}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.029, y: 0.698, z: 0.051}
+  m_LocalPosition: {x: -0.232, y: 0.698, z: -0.268}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -290,8 +290,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5825640059964219206}
-  m_LocalRotation: {x: -0.4134527, y: -0.5736347, z: 0.41345248, w: -0.57363504}
-  m_LocalPosition: {x: -0.54226613, y: 1.9300269, z: -0.06604195}
+  m_LocalRotation: {x: 0.41345268, y: 0.5736348, z: -0.41345263, w: 0.57363486}
+  m_LocalPosition: {x: -0.5422672, y: 1.9300269, z: -0.06605053}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -315,7 +315,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 10
+  m_Priority: 55
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 8051332064584966346}
   m_Follow: {fileID: 8051332064584966346}

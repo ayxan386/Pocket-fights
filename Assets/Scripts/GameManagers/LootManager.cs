@@ -37,6 +37,7 @@ public static class LootManager
 [Serializable]
 public class PossibleLoot
 {
+    public GameObject inWorldDisplayItem;
     public InventoryItem itemPrefab;
     [Range(0, 1f)] public float chance;
     public Vector2Int count;

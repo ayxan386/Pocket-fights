@@ -86,6 +86,7 @@ MonoBehaviour:
   roomPrefabs:
   - {fileID: 3694069855595287759, guid: a256b7c9c1855b341a3a884103d6bc2f, type: 3}
   - {fileID: 6257951923183327996, guid: 627d344e9ce32cd4d8cf1643b8326746, type: 3}
+  - {fileID: 8334363031111895939, guid: fe01ebdebfde2d6438ca35d8396da269, type: 3}
   - {fileID: 4282307684779486102, guid: 61eeb1d735ab21447ab9451411e18e08, type: 3}
   - {fileID: 1419417744967704818, guid: 1bab13041b8aa194f93c10f9083ada06, type: 3}
   endRoom: {fileID: 3694069855595287759, guid: 91114934c4992ee4098f27c76b16afef, type: 3}
