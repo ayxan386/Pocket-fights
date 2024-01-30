@@ -110,7 +110,7 @@ public class RoomManager : MonoBehaviour
     public void Activate()
     {
         isActive = true;
-        roomCamera.Priority = 15;
+        // roomCamera.Priority = 15;
         exitConditionDisplayManager.gameObject.SetActive(exitConditionType != ExitConditionType.None);
     }
 
@@ -178,10 +178,10 @@ public class RoomManager : MonoBehaviour
                 var bottomLayer = floorBlocks[GetIndex(y, x)];
                 var pair = topBottomPairsList.Find(pair => pair.bottomName == bottomLayer);
 
-                // var newBlock = PrefabUtility.InstantiatePrefab(pair.top) as GameObject;
-                // newBlock.transform.position = pos;
-                // newBlock.transform.rotation = Quaternion.identity;
-                // newBlock.transform.SetParent(capLayer);
+                var newBlock = PrefabUtility.InstantiatePrefab(pair.top) as GameObject;
+                newBlock.transform.position = pos;
+                newBlock.transform.rotation = Quaternion.identity;
+                newBlock.transform.SetParent(capLayer);
             }
         }
     }
@@ -243,7 +243,6 @@ public class RoomManager : MonoBehaviour
     private BlockChance GetRandomBlock(float x, float y, List<BlockChance> blockCollection)
     {
         var chance = Mathf.PerlinNoise(x + offset.x, y + offset.y);
-        print("chance: " + chance);
         foreach (var tuple in blockCollection)
         {
             if (chance >= tuple.weight.x && chance <= tuple.weight.y)
@@ -311,10 +310,10 @@ public class RoomManager : MonoBehaviour
         foreach (var decorPos in decorPosition)
         {
             var randomDecor = GetRandomBlock(decorPos.x, decorPos.z, decorPrefabs);
-            // var newBlock = PrefabUtility.InstantiatePrefab(randomDecor.block) as GameObject;
-            // newBlock.transform.position = decorPos + randomDecor.placementOffset;
-            // newBlock.transform.rotation = Quaternion.identity;
-            // newBlock.transform.SetParent(decorHolder);
+            var newBlock = PrefabUtility.InstantiatePrefab(randomDecor.block) as GameObject;
+            newBlock.transform.position = decorPos + randomDecor.placementOffset;
+            newBlock.transform.rotation = Quaternion.identity;
+            newBlock.transform.SetParent(decorHolder);
         }
     }
 
