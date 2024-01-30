@@ -132,6 +132,11 @@ MonoBehaviour:
       type: 3}
     chance: 0.396
     count: {x: 1, y: 1}
+  - inWorldDisplayItem: {fileID: 2040924518753661669, guid: 1e5e38224cf3cf444a217da27df59d2e,
+      type: 3}
+    itemPrefab: {fileID: 0}
+    chance: 0.396
+    count: {x: 1, y: 1}
   optionPrefab: {fileID: 494402872320438675, guid: c01783c582e146d44a3ce84b23b579f0,
     type: 3}
   optionSize: {x: 5, y: 5}
@@ -139,7 +144,7 @@ MonoBehaviour:
   offset: {x: 0.03, y: 0, z: 0.01}
   optionParent: {fileID: 4576185136649769262}
   miniGameCamera: {fileID: 1014039552708425680}
-  maxPairChoice: 3
+  maxPairChoice: 5
 --- !u!1 &4341016436940883207
 GameObject:
   m_ObjectHideFlags: 0
