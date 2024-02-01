@@ -49,9 +49,18 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
     {
         EventManager.OnSaveStarted += OnSaveStarted;
         EventManager.OnCombatSceneLoading += OnCombatSceneLoading;
+        EventManager.OnPauseMenuToggled += OnPauseMenuToggled;
+
         DataManager.Instance.LoadPlayerStats();
 
         statController.AttachedEntity = this;
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.OnSaveStarted -= OnSaveStarted;
+        EventManager.OnCombatSceneLoading -= OnCombatSceneLoading;
+        EventManager.OnPauseMenuToggled -= OnPauseMenuToggled;
     }
 
     private void OnCombatSceneLoading(bool isCombatScene)
@@ -64,7 +73,6 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
             PlaceAtLastState();
         }
     }
-
 
     private void OnSaveStarted(int obj)
     {
@@ -81,6 +89,11 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
             transform.forward = dir;
             cc.SimpleMove(dir * movementSpeed);
         }
+    }
+
+    private void OnPauseMenuToggled(bool updatedState)
+    {
+        isPaused = updatedState;
     }
 
     public void OnReceiveAttack()
@@ -130,8 +143,7 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
     private void OnPause()
     {
         inGameUiRef.SetActive(isPaused);
-        isPaused = !isPaused;
-        EventManager.OnPauseMenuToggled?.Invoke(isPaused);
+        EventManager.OnPauseMenuToggled?.Invoke(!isPaused);
     }
 
     private void OnChangeSelection(InputValue inp)
@@ -167,7 +179,6 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
     {
         EventManager.OnSaveStarted?.Invoke(1);
     }
-
 
     private float CalculateXpRequirements()
     {

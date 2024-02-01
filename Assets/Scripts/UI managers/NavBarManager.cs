@@ -5,7 +5,13 @@ public class NavBarManager : MonoBehaviour
 {
     [SerializeField] private List<GameObject> tabs;
     [SerializeField] private Animator pauseMenuAnimator;
-    public bool isShopOpen = false;
+
+    public static NavBarManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -22,7 +28,6 @@ public class NavBarManager : MonoBehaviour
     private void OnPauseMenuToggled(bool isPaused)
     {
         pauseMenuAnimator.SetTrigger(isPaused ? "open" : "close");
-        isShopOpen = isShopOpen && isPaused;
     }
 
     public void OpenTab(string tabName)
@@ -33,18 +38,16 @@ public class NavBarManager : MonoBehaviour
         {
             case "Shop":
                 tabs.Find(tab => tab.name == "Inventory").SetActive(true);
-                if (!isShopOpen)
+                if (!ShopManager.Instance.IsShopOpen)
                 {
                     pauseMenuAnimator.SetTrigger("shopOpen");
                     EventManager.OnShopToggled?.Invoke(true);
                 }
 
-                isShopOpen = true;
                 break;
             default:
-                if (isShopOpen)
+                if (ShopManager.Instance.IsShopOpen)
                     pauseMenuAnimator.SetTrigger("shopClose");
-                isShopOpen = false;
                 EventManager.OnShopToggled?.Invoke(false);
                 break;
         }
