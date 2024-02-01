@@ -80,7 +80,6 @@ public class InventoryController : MonoBehaviour
             if (inventoryItem == null || inventoryItem.count == inventoryItem.stackSize)
             {
                 inventoryItem = Instantiate(addedItem, transform);
-                inventoryItem.sellPrice = ShopManager.Instance.GetPrice(inventoryItem);
                 inventoryItem.count = 0;
                 ownedItems.Add(inventoryItem);
             }
