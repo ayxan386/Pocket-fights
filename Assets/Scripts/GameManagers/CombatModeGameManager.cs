@@ -113,8 +113,8 @@ public class CombatModeGameManager : MonoBehaviour
         if (currentHealth <= 0)
         {
             IsCombatGoing = false;
+            EndOfCombat();
             GlobalGameManager.Instance.EndDungeon();
-            // EndOfCombat();
         }
     }
 

@@ -52,6 +52,7 @@ public class InventoryController : MonoBehaviour
 
     public void UpdateDisplay()
     {
+        if (itemCells == null) return;
         for (var i = 0; i < itemCells.Count; i++)
         {
             if (i < ownedItems.Count && ownedItems[i].displayInInventory)

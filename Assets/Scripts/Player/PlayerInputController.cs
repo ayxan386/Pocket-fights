@@ -39,18 +39,14 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
         Instance = this;
         cc = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
-        EventManager.OnPlayerTurnEnd += OnPlayerTurnEnd;
     }
 
-    private void OnPlayerTurnEnd(bool obj)
-    {
-        statController.RegenMana();
-    }
 
     private IEnumerator Start()
     {
         EventManager.OnCombatSceneLoading += OnCombatSceneLoading;
         EventManager.OnPauseMenuToggled += OnPauseMenuToggled;
+        EventManager.OnPlayerTurnEnd += OnPlayerTurnEnd;
         statController.AttachedEntity = this;
         loadingScreen.SetActive(true);
         DataManager.Instance.LoadPlayerStats();
@@ -63,6 +59,7 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
     {
         EventManager.OnCombatSceneLoading -= OnCombatSceneLoading;
         EventManager.OnPauseMenuToggled -= OnPauseMenuToggled;
+        EventManager.OnPlayerTurnEnd -= OnPlayerTurnEnd;
     }
 
     private void OnCombatSceneLoading(bool isCombatScene)
@@ -86,6 +83,11 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
             transform.forward = dir;
             cc.SimpleMove(dir * movementSpeed);
         }
+    }
+
+    private void OnPlayerTurnEnd(bool obj)
+    {
+        statController.RegenMana();
     }
 
     private void OnPauseMenuToggled(bool updatedState)
