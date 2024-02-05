@@ -113,10 +113,8 @@ public class CombatModeGameManager : MonoBehaviour
         if (currentHealth <= 0)
         {
             IsCombatGoing = false;
-            Time.timeScale = 0;
-            endingMenu.SetActive(true);
-            EndOfCombat();
-            endText.text = "You lost!!!";
+            GlobalGameManager.Instance.EndDungeon();
+            // EndOfCombat();
         }
     }
 
@@ -192,10 +190,10 @@ public class CombatModeGameManager : MonoBehaviour
     public void PlayerVictory()
     {
         IsCombatGoing = false;
-        
+
         EventManager.OnPlayerTurnEnd?.Invoke(true);
         EventManager.OnPlayerVictory?.Invoke(true);
-        
+
         var allDrops = mobsInCombat.ConvertAll(mob => mob.PossibleLoots);
         var statController = PlayerInputController.Instance.Stats;
         statController.UpdateStatValue(StatValue.Mana, (int)statController.GetStatValue(StatValue.Mana).maxValue);
@@ -207,7 +205,6 @@ public class CombatModeGameManager : MonoBehaviour
             var lootItemPanel = Instantiate(lootItemPanelPrefab, lootHolder);
             lootItemPanel.UpdateDisplay(newDrop);
         }
-        
 
 
         lootPanelAnimation.SetTrigger("open");

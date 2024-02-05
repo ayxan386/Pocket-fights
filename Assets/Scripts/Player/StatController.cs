@@ -174,9 +174,12 @@ public class StatController : MonoBehaviour
 
     public void LoadData(StatSaveData savedData)
     {
+        Level = savedData.level;
+        FreePoints = savedData.freePoints;
+        SkillPoints = savedData.skillPoints;
         baseStats = savedData.baseStats;
-        statValues = savedData.statValues;
         InitiateStatValues();
+        statValues = savedData.statValues;
 
         EventManager.OnBaseStatUpdate?.Invoke(baseStats[StatTypes.Vitality].maxValue);
         EventManager.OnPlayerCoreUpdate?.Invoke(FreePoints);

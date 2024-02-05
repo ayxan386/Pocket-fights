@@ -7,9 +7,8 @@ public class ConsumablesSelection : MonoBehaviour
 
     public void ShowSelection()
     {
-        var inventoryData = InventoryController.Instance.OwnedItem;
+        var inventoryData = InventoryController.Instance.OwnedItems;
 
-        var consumables = inventoryData.ownedItems.FindAll(item => item.type == ItemType.Consumable);
-        
+        var consumables = inventoryData.FindAll(item => item.type == ItemType.Consumable);
     }
 }

@@ -8,7 +8,6 @@ public class EventManager : MonoBehaviour
     public static Action<int> OnPlayerCoreUpdate;
     public static Action<StatValue, StatData> OnStatChanged;
     public static Action<int> OnSaveStarted;
-    public static Action<StatController> OnStatSave;
     public static Action<InventoryItem> OnItemAdd;
     public static Action<InventoryItem, LootItemPanel> OnItemAddAsLoot;
     public static Action<InventoryItem> OnItemRemove;

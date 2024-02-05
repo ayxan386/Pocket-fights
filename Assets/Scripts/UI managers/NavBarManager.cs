@@ -33,7 +33,7 @@ public class NavBarManager : MonoBehaviour
     public void OpenTab(string tabName)
     {
         tabs.ForEach(tab => tab.SetActive(false));
-        tabs.Find(tab => tab.name == tabName).SetActive(true);
+        tabs.Find(tab => tab.name == tabName)?.SetActive(true);
         switch (tabName)
         {
             case "Shop":
@@ -44,6 +44,9 @@ public class NavBarManager : MonoBehaviour
                     EventManager.OnShopToggled?.Invoke(true);
                 }
 
+                break;
+            case "Save":
+                PlayerInputController.Instance.SaveEventTrigger();
                 break;
             default:
                 if (ShopManager.Instance.IsShopOpen)

@@ -25,12 +25,13 @@ public class FloorManager : MonoBehaviour
     {
         if (autoGenerate)
         {
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.15f);
             GenerateFloor();
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.15f);
         }
 
         yield return new WaitUntil(() => PlayerInputController.Instance != null);
+
         roomInstances[0].PlacePlayer();
         roomInstances[0].Activate();
     }
@@ -91,7 +92,6 @@ public class FloorManager : MonoBehaviour
 
                 potentialRoom.Telepads.Find(pad => pad.Color == telepad.Color && !pad.IsLinked).Link(telepad);
             }
-            
         }
     }
 
@@ -115,6 +115,7 @@ public class FloorManager : MonoBehaviour
 
                 potentialRoom.Telepads.Find(pad => pad.Color == telepad.Color && !pad.IsLinked).Link(telepad);
             }
+
             break;
         }
     }

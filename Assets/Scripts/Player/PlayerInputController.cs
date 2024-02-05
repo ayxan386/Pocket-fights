@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,6 +14,7 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
 
     [SerializeField] private StatController statController;
     [SerializeField] private GameObject inGameUiRef;
+    [SerializeField] private GameObject loadingScreen;
 
     [Header("Leveling")] [SerializeField] private float currentXp;
     [SerializeField] private AnimationCurve xpRequirements;
@@ -45,20 +47,20 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
         statController.RegenMana();
     }
 
-    private void Start()
+    private IEnumerator Start()
     {
-        EventManager.OnSaveStarted += OnSaveStarted;
         EventManager.OnCombatSceneLoading += OnCombatSceneLoading;
         EventManager.OnPauseMenuToggled += OnPauseMenuToggled;
-
-        DataManager.Instance.LoadPlayerStats();
-
         statController.AttachedEntity = this;
+        loadingScreen.SetActive(true);
+        DataManager.Instance.LoadPlayerStats();
+        DataManager.Instance.LoadInventory();
+        yield return new WaitForSeconds(0.1f);
+        loadingScreen.SetActive(false);
     }
 
     private void OnDestroy()
     {
-        EventManager.OnSaveStarted -= OnSaveStarted;
         EventManager.OnCombatSceneLoading -= OnCombatSceneLoading;
         EventManager.OnPauseMenuToggled -= OnPauseMenuToggled;
     }
@@ -72,11 +74,6 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
             playerInput.SwitchCurrentActionMap("Player");
             PlaceAtLastState();
         }
-    }
-
-    private void OnSaveStarted(int obj)
-    {
-        EventManager.OnStatSave?.Invoke(Stats);
     }
 
     private void Update()
@@ -177,7 +174,8 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
     [ContextMenu("Save trigger")]
     public void SaveEventTrigger()
     {
-        EventManager.OnSaveStarted?.Invoke(1);
+        DataManager.Instance.OnStatSave(Stats);
+        DataManager.Instance.SaveInventory();
     }
 
     private float CalculateXpRequirements()

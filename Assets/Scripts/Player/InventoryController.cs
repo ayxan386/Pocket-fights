@@ -11,11 +11,12 @@ public class InventoryController : MonoBehaviour
     [SerializeField] private int gold;
     [SerializeField] private int inventorySize;
     [SerializeField] private EquipmentSlotCells equipmentCells;
+    [SerializeField] private List<InventoryItem> itemPrefabs;
 
     private List<InventoryCell> itemCells;
 
     public static InventoryController Instance { get; private set; }
-    public InventoryData OwnedItem => new InventoryData(ownedItems);
+    public InventoryData SaveData => new InventoryData(ownedItems);
     public List<InventoryItem> OwnedItems => ownedItems;
 
     public EquipmentSlotCells EquipmentSlotCells => equipmentCells;
@@ -208,7 +209,15 @@ public class InventoryController : MonoBehaviour
 
     public void LoadData(InventoryData inventoryData)
     {
-        this.ownedItems = inventoryData.ownedItems;
+        foreach (var savedItem in inventoryData.ownedItems)
+        {
+            var inventoryItemPrefab = itemPrefabs.Find(prefab => prefab.name == savedItem.saveName);
+            if (inventoryItemPrefab == null) continue;
+            var inventoryItem = Instantiate(inventoryItemPrefab, transform);
+            inventoryItem.count = savedItem.count;
+            OnItemAdd(inventoryItem);
+        }
+
         UpdateDisplay();
     }
 
@@ -223,11 +232,27 @@ public class InventoryController : MonoBehaviour
 [Serializable]
 public class InventoryData
 {
-    public List<InventoryItem> ownedItems;
+    public List<InventoryItemWrapper> ownedItems;
 
     public InventoryData(List<InventoryItem> ownedItems)
     {
-        this.ownedItems = ownedItems;
+        this.ownedItems = ownedItems.ConvertAll(item => new InventoryItemWrapper(
+            item.name, item.count, item is EquippableItem));
+    }
+}
+
+[Serializable]
+public class InventoryItemWrapper
+{
+    public string saveName;
+    public int count;
+    public bool equipped;
+
+    public InventoryItemWrapper(string saveName, int count, bool equipped)
+    {
+        this.saveName = saveName;
+        this.count = count;
+        this.equipped = equipped;
     }
 }
 

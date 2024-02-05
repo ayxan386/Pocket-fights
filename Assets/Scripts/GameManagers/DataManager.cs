@@ -9,7 +9,7 @@ public class DataManager : MonoBehaviour
     [SerializeField] private string pathName;
     [SerializeField] private string filename;
     [SerializeField] [TextArea] private string testJson;
-    
+
     public static DataManager Instance { get; private set; }
 
     private void Awake()
@@ -17,16 +17,14 @@ public class DataManager : MonoBehaviour
         Instance = this;
     }
 
-    private void Start()
+    public void OnStatSave(StatController toSave)
     {
-        EventManager.OnStatSave += OnStatSave;
-    }
-
-    private void OnStatSave(StatController toSave)
-    {
-        var basePath = PreSaveProcess("player_stats__");
+        var basePath = PreSaveProcess("player_stats_");
 
         var statSaveData = new StatSaveData();
+        statSaveData.level = toSave.Level;
+        statSaveData.freePoints = toSave.FreePoints;
+        statSaveData.skillPoints = toSave.SkillPoints;
         statSaveData.sourceName = toSave.SourceName;
         statSaveData.baseStats = new SerializedDictionary<StatTypes, StatData>();
         statSaveData.statValues = new SerializedDictionary<StatValue, StatData>();
@@ -35,6 +33,7 @@ public class DataManager : MonoBehaviour
             var baseStat = toSave.GetBaseStat(statType);
             statSaveData.baseStats.Add(statType, baseStat);
         }
+
         foreach (var statValue in Enum.GetValues(typeof(StatValue)).Cast<StatValue>())
         {
             var baseStat = toSave.GetStatValue(statValue);
@@ -48,18 +47,14 @@ public class DataManager : MonoBehaviour
 
     private string PreSaveProcess(string filePrefix)
     {
-        var basePath = Application.persistentDataPath;
-        basePath += pathName;
+        var basePath = Path.Combine(Application.persistentDataPath, pathName);
         if (!Directory.Exists(basePath))
         {
             Directory.CreateDirectory(basePath);
         }
 
-        basePath = Path.Join(basePath, filePrefix + filename);
-        if (!File.Exists(basePath))
-        {
-            File.Create(basePath);
-        }
+        basePath = Path.Combine(basePath, filePrefix + filename);
+        print($"Base path: {basePath}");
 
         return basePath;
     }
@@ -67,20 +62,22 @@ public class DataManager : MonoBehaviour
     [ContextMenu("Save inventory")]
     public void SaveInventory()
     {
-        var instanceOwnedItem = InventoryController.Instance.OwnedItem;
+        var instanceOwnedItem = InventoryController.Instance.SaveData;
 
         var basePath = PreSaveProcess("inventory");
-        
+
         var json = JsonUtility.ToJson(instanceOwnedItem);
 
         File.WriteAllText(basePath, json);
     }
-    
+
 
     [ContextMenu("Load inventory")]
     public void LoadInventory()
     {
         var basePath = PreSaveProcess("inventory");
+        if (!File.Exists(basePath)) return;
+        
         var allJson = File.ReadAllText(basePath);
         var inventoryData = JsonUtility.FromJson<InventoryData>(allJson);
         InventoryController.Instance.LoadData(inventoryData);
@@ -89,11 +86,21 @@ public class DataManager : MonoBehaviour
     [ContextMenu("Load from string")]
     public void LoadPlayerStats()
     {
-        var statSaveData = JsonUtility.FromJson<StatSaveData>(testJson);
+        var basePath = PreSaveProcess("player_stats_");
+        if (!File.Exists(basePath)) return;
+
+        var allJson = File.ReadAllText(basePath);
+        var statSaveData = JsonUtility.FromJson<StatSaveData>(allJson);
         if (statSaveData.sourceName == "Player")
         {
             PlayerInputController.Instance.Stats.LoadData(statSaveData);
         }
+    }
+
+    public void LoadPlayer()
+    {
+        LoadInventory();
+        LoadPlayerStats();
     }
 }
 
@@ -101,7 +108,10 @@ public class DataManager : MonoBehaviour
 public class StatSaveData
 {
     public string sourceName;
+    public int level;
+    public int freePoints;
+    public int skillPoints;
+
     public SerializedDictionary<StatTypes, StatData> baseStats;
     public SerializedDictionary<StatValue, StatData> statValues;
-
 }

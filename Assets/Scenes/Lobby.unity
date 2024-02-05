@@ -20229,11 +20229,6 @@ PrefabInstance:
       propertyPath: cameraRotation
       value: 
       objectReference: {fileID: 556495188}
-    - target: {fileID: 51443049420896145, guid: 9903153025cebd64d82db2065549fe87,
-        type: 3}
-      propertyPath: movementCorrectionAngle.y
-      value: 32
-      objectReference: {fileID: 0}
     - target: {fileID: 51443049420896151, guid: 9903153025cebd64d82db2065549fe87,
         type: 3}
       propertyPath: m_RootOrder
@@ -22612,21 +22607,6 @@ PrefabInstance:
     - target: {fileID: 7058761434067070361, guid: 9903153025cebd64d82db2065549fe87,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7222240726146972786, guid: 9903153025cebd64d82db2065549fe87,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 123.17967
-      objectReference: {fileID: 0}
-    - target: {fileID: 7222240726292023878, guid: 9903153025cebd64d82db2065549fe87,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 347
-      objectReference: {fileID: 0}
-    - target: {fileID: 7222240726400717882, guid: 9903153025cebd64d82db2065549fe87,
-        type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7270760740767965026, guid: 9903153025cebd64d82db2065549fe87,
@@ -53522,7 +53502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dungeonName: BasicDungeon
-  minWaitPeriod: 3
+  minWaitPeriod: 2
   loadingScreen: {fileID: 1228050739}
 --- !u!1001 &1016558887
 PrefabInstance:
