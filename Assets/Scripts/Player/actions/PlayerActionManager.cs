@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -6,8 +7,9 @@ public class PlayerActionManager : MonoBehaviour
 {
     [SerializeField] private Transform skillHolder;
     [SerializeField] private List<Skill> actions;
-
     public List<Skill> AllSkills => actions.FindAll(action => action.type != ActionType.ReceiveAttack);
+
+    public SkillSaveDataWrapper SaveData => new SkillSaveDataWrapper(AllSkills);
 
     public static PlayerActionManager Instance { get; private set; }
 
@@ -51,5 +53,52 @@ public class PlayerActionManager : MonoBehaviour
         }
 
         return null;
+    }
+
+    public void LoadData(SkillSaveDataWrapper data)
+    {
+        foreach (var skillSaveData in data.skills)
+        {
+            var skill = actions.Find(action => action.name == skillSaveData.id);
+            if (skill == null) continue;
+            print("Found relevant skill");
+            skill.currentLevel = skillSaveData.level;
+            if (skillSaveData.isSelected)
+            {
+                skill.slotName = skillSaveData.slotName;
+                skill.isSelected = true;
+            }
+        }
+
+        EventManager.OnSkillDisplayUpdate?.Invoke(true);
+    }
+}
+
+[Serializable]
+public class SkillSaveData
+{
+    public string id;
+    public int level;
+    public string slotName;
+    public bool isSelected;
+
+    public SkillSaveData(string id, int level, bool inputIsSelected, string inputSlotName)
+    {
+        this.id = id;
+        this.level = level;
+        isSelected = inputIsSelected;
+        this.slotName = isSelected ? inputSlotName : "E";
+    }
+}
+
+[Serializable]
+public class SkillSaveDataWrapper
+{
+    public List<SkillSaveData> skills;
+
+    public SkillSaveDataWrapper(List<Skill> allSkills)
+    {
+        skills = allSkills.ConvertAll(skill =>
+            new SkillSaveData(skill.name, skill.currentLevel, skill.isSelected, skill.slotName));
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,7 +10,7 @@ public class GlobalGameManager : MonoBehaviour
     [field: SerializeField] public int CurrentFloorNumber { get; set; }
 
     private const string CurrentFloor = "currentFloor";
-    
+
     public static GlobalGameManager Instance { get; private set; }
 
     private void Awake()
@@ -38,7 +37,7 @@ public class GlobalGameManager : MonoBehaviour
     private void OnExitPortalDetected(bool isExitPortal)
     {
         CurrentFloorNumber++;
-        PlayerInputController.Instance.SaveEventTrigger();
+        DataManager.Instance.SaveEventTrigger();
         if (CurrentFloorNumber >= totalNumberOfFloors)
         {
             EndDungeon();

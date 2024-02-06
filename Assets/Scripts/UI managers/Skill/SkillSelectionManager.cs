@@ -19,16 +19,19 @@ public class SkillSelectionManager : MonoBehaviour
             EventManager.OnStatChanged += OnStatChanged;
 
         EventManager.OnSkillUsedByPlayer += OnSkillUsedByPlayer;
+        EventManager.OnSkillDisplayUpdate += OnSkillDisplayUpdate;
 
         UpdateUi();
     }
+
 
     private void OnDestroy()
     {
         if (displayManaCost)
             EventManager.OnStatChanged -= OnStatChanged;
-        
+
         EventManager.OnSkillUsedByPlayer -= OnSkillUsedByPlayer;
+        EventManager.OnSkillDisplayUpdate -= OnSkillDisplayUpdate;
     }
 
     private void OnSkillUsedByPlayer(Skill usedSkill, bool isUsedByPlayer)
@@ -44,6 +47,11 @@ public class SkillSelectionManager : MonoBehaviour
         {
             UpdateUi();
         }
+    }
+
+    private void OnSkillDisplayUpdate(bool obj)
+    {
+        UpdateUi();
     }
 
     public void UpdateUi()

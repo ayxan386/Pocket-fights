@@ -945,11 +945,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillHolder: {fileID: 5980132709683215314}
-  actions:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  actions: []
 --- !u!114 &356217490
 MonoBehaviour:
   m_ObjectHideFlags: 0

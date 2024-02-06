@@ -126,7 +126,7 @@ public class PlayerCombatInitiation : MonoBehaviour
 
     public void UnloadCombatScene()
     {
-        PlayerInputController.Instance.SaveEventTrigger();
+        DataManager.Instance.SaveEventTrigger();
         SceneManager.UnloadSceneAsync("CombatScene");
         StartCoroutine(WaitThenLoad());
     }

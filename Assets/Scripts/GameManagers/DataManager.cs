@@ -58,7 +58,6 @@ public class DataManager : MonoBehaviour
         return basePath;
     }
 
-    [ContextMenu("Save inventory")]
     public void SaveInventory()
     {
         var instanceOwnedItem = InventoryController.Instance.SaveData;
@@ -70,7 +69,6 @@ public class DataManager : MonoBehaviour
         File.WriteAllText(basePath, json);
     }
 
-    [ContextMenu("Save equipment")]
     public void SaveEquippment()
     {
         var instanceOwnedItem = EquipmentManager.Instance.SaveData;
@@ -82,8 +80,17 @@ public class DataManager : MonoBehaviour
         File.WriteAllText(basePath, json);
     }
 
+    public void SaveSkills()
+    {
+        var instanceOwnedItem = PlayerActionManager.Instance.SaveData;
 
-    [ContextMenu("Load inventory")]
+        var basePath = PreSaveProcess("skills_");
+
+        var json = JsonUtility.ToJson(instanceOwnedItem);
+
+        File.WriteAllText(basePath, json);
+    }
+
     public void LoadInventory()
     {
         var basePath = PreSaveProcess("inventory");
@@ -94,7 +101,6 @@ public class DataManager : MonoBehaviour
         InventoryController.Instance.LoadData(inventoryData);
     }
 
-    [ContextMenu("Load from string")]
     public void LoadPlayerStats()
     {
         var basePath = PreSaveProcess("player_stats_");
@@ -108,23 +114,42 @@ public class DataManager : MonoBehaviour
         }
     }
 
-    [ContextMenu("Load Equipment")]
     public void LoadEquipment()
     {
         var basePath = PreSaveProcess("equipment_");
         if (!File.Exists(basePath)) return;
 
         var allJson = File.ReadAllText(basePath);
-        print($"Equipment json {allJson}");
         var inventoryData = JsonUtility.FromJson<InventoryData>(allJson);
         EquipmentManager.Instance.LoadData(inventoryData);
     }
 
+    public void LoadSkills()
+    {
+        var basePath = PreSaveProcess("skills_");
+        if (!File.Exists(basePath)) return;
+
+        var allJson = File.ReadAllText(basePath);
+        var data = JsonUtility.FromJson<SkillSaveDataWrapper>(allJson);
+        PlayerActionManager.Instance.LoadData(data);
+    }
+
+    [ContextMenu("Load player")]
     public void LoadPlayer()
     {
         LoadInventory();
         LoadPlayerStats();
         LoadEquipment();
+        LoadSkills();
+    }
+
+    [ContextMenu("Save trigger")]
+    public void SaveEventTrigger()
+    {
+        OnStatSave(PlayerInputController.Instance.Stats);
+        SaveInventory();
+        SaveEquippment();
+        SaveSkills();
     }
 }
 

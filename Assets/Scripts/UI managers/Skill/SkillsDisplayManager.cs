@@ -26,6 +26,7 @@ public class SkillsDisplayManager : MonoBehaviour
         EventManager.OnSkillCellSelected += OnSkillCellSelected;
         EventManager.OnSkillUpgraded += OnSkillUpgraded;
         EventManager.OnSkillCellClicked += OnSkillCellClicked;
+        EventManager.OnSkillDisplayUpdate += OnSkillDisplayUpdate;
     }
 
     private void OnDestroy()
@@ -33,6 +34,7 @@ public class SkillsDisplayManager : MonoBehaviour
         EventManager.OnSkillCellSelected -= OnSkillCellSelected;
         EventManager.OnSkillUpgraded -= OnSkillUpgraded;
         EventManager.OnSkillCellClicked -= OnSkillCellClicked;
+        EventManager.OnSkillDisplayUpdate -= OnSkillDisplayUpdate;
     }
 
     public void OptionSelected(string option)
@@ -54,12 +56,22 @@ public class SkillsDisplayManager : MonoBehaviour
 
                 lastClickedCell.RelatedSkill.isSelected = true;
                 lastClickedCell.RelatedSkill.slotName = option;
-                foreach (var display in skillSelectionDisplay) display.UpdateUi();
+                UpdateAllUi();
 
                 break;
         }
 
         skillOptions.gameObject.SetActive(false);
+    }
+
+    private void UpdateAllUi()
+    {
+        foreach (var display in skillSelectionDisplay) display.UpdateUi();
+    }
+
+    private void OnSkillDisplayUpdate(bool random)
+    {
+        UpdateAllUi();
     }
 
     private void OnSkillCellClicked(SkillCellManager clickedCell)

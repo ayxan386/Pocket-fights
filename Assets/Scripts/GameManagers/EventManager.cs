@@ -24,6 +24,7 @@ public class EventManager : MonoBehaviour
     public static Action<SkillCellManager, bool> OnSkillCellSelected;
     public static Action<SkillCellManager> OnSkillCellClicked;
     public static Action<SkillCellManager> OnSkillUpgraded;
+    public static Action<bool> OnSkillDisplayUpdate;
 
     //Portal related events
     public static Action<bool> OnExitPortalDetected;

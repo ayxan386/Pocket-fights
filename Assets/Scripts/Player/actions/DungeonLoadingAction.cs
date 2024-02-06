@@ -10,7 +10,7 @@ public class DungeonLoadingAction : MonoBehaviour
 
     public void LoadDungeon()
     {
-        PlayerInputController.Instance.SaveEventTrigger();
+        DataManager.Instance.SaveEventTrigger();
         var ctx = SceneManager.LoadSceneAsync(dungeonName);
         ctx.allowSceneActivation = false;
         StartCoroutine(WaitThenLoad(ctx));

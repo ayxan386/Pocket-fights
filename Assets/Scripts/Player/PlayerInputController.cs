@@ -172,13 +172,6 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
         }
     }
 
-    [ContextMenu("Save trigger")]
-    public void SaveEventTrigger()
-    {
-        DataManager.Instance.OnStatSave(Stats);
-        DataManager.Instance.SaveInventory();
-        DataManager.Instance.SaveEquippment();
-    }
 
     private float CalculateXpRequirements()
     {
