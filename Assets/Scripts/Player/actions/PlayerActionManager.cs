@@ -61,7 +61,6 @@ public class PlayerActionManager : MonoBehaviour
         {
             var skill = actions.Find(action => action.name == skillSaveData.id);
             if (skill == null) continue;
-            print("Found relevant skill");
             skill.currentLevel = skillSaveData.level;
             if (skillSaveData.isSelected)
             {
