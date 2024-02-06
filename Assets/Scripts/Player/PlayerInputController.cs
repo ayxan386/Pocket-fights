@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -34,11 +35,14 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
 
     public static PlayerInputController Instance { get; private set; }
 
+    public PlayerState State { get; private set; }
+
     private void Awake()
     {
         Instance = this;
         cc = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
+        State = new PlayerState();
     }
 
 
@@ -141,7 +145,7 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
     private void OnPause()
     {
         inGameUiRef.SetActive(isPaused);
-        EventManager.OnPauseMenuToggled?.Invoke(!isPaused);
+        EventManager.OnPauseMenuToggled?.Invoke(!State.isLookingAtQuests && !isPaused);
     }
 
     private void OnChangeSelection(InputValue inp)
@@ -208,4 +212,10 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
         transform.rotation = playerStandPoint.rotation;
         cc.enabled = true;
     }
+}
+
+[Serializable]
+public class PlayerState
+{
+    public bool isLookingAtQuests;
 }
