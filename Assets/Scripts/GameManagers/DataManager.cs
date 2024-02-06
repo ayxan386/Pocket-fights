@@ -54,7 +54,6 @@ public class DataManager : MonoBehaviour
         }
 
         basePath = Path.Combine(basePath, filePrefix + filename);
-        print($"Base path: {basePath}");
 
         return basePath;
     }
@@ -71,13 +70,25 @@ public class DataManager : MonoBehaviour
         File.WriteAllText(basePath, json);
     }
 
+    [ContextMenu("Save equipment")]
+    public void SaveEquippment()
+    {
+        var instanceOwnedItem = EquipmentManager.Instance.SaveData;
+
+        var basePath = PreSaveProcess("equipment_");
+
+        var json = JsonUtility.ToJson(instanceOwnedItem);
+
+        File.WriteAllText(basePath, json);
+    }
+
 
     [ContextMenu("Load inventory")]
     public void LoadInventory()
     {
         var basePath = PreSaveProcess("inventory");
         if (!File.Exists(basePath)) return;
-        
+
         var allJson = File.ReadAllText(basePath);
         var inventoryData = JsonUtility.FromJson<InventoryData>(allJson);
         InventoryController.Instance.LoadData(inventoryData);
@@ -97,10 +108,23 @@ public class DataManager : MonoBehaviour
         }
     }
 
+    [ContextMenu("Load Equipment")]
+    public void LoadEquipment()
+    {
+        var basePath = PreSaveProcess("equipment_");
+        if (!File.Exists(basePath)) return;
+
+        var allJson = File.ReadAllText(basePath);
+        print($"Equipment json {allJson}");
+        var inventoryData = JsonUtility.FromJson<InventoryData>(allJson);
+        EquipmentManager.Instance.LoadData(inventoryData);
+    }
+
     public void LoadPlayer()
     {
         LoadInventory();
         LoadPlayerStats();
+        LoadEquipment();
     }
 }
 

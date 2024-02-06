@@ -49,8 +49,7 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
         EventManager.OnPlayerTurnEnd += OnPlayerTurnEnd;
         statController.AttachedEntity = this;
         loadingScreen.SetActive(true);
-        DataManager.Instance.LoadPlayerStats();
-        DataManager.Instance.LoadInventory();
+        DataManager.Instance.LoadPlayer();
         yield return new WaitForSeconds(0.1f);
         loadingScreen.SetActive(false);
     }
@@ -178,6 +177,7 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
     {
         DataManager.Instance.OnStatSave(Stats);
         DataManager.Instance.SaveInventory();
+        DataManager.Instance.SaveEquippment();
     }
 
     private float CalculateXpRequirements()

@@ -6,8 +6,11 @@ using UnityEngine;
 public class EquipmentManager : MonoBehaviour
 {
     [SerializeField] private List<EquippableItem> equippedItems;
+    [SerializeField] private List<EquippableItem> itemPrefabs;
 
     public static EquipmentManager Instance { get; private set; }
+
+    public InventoryData SaveData => new(equippedItems);
 
     private void Awake()
     {
@@ -25,17 +28,18 @@ public class EquipmentManager : MonoBehaviour
 
     public void AddEquipment(EquippableItem equippableItem)
     {
+        equippableItem.isEquipped = true;
         equippedItems.Add(equippableItem);
         GetSlotRef(equippableItem).UpdateDisplay(equippableItem, InventoryCellType.Equipment);
     }
-    
+
     public void RemoveEquipment(EquippableItem equippableItem)
     {
         equippedItems.Remove(equippableItem);
         GetSlotRef(equippableItem).SetNoItemState();
         EventManager.OnItemAdd?.Invoke(equippableItem);
     }
-    
+
     public void ApplyAllEquipments()
     {
         foreach (var item in equippedItems)
@@ -73,6 +77,18 @@ public class EquipmentManager : MonoBehaviour
                     : InventoryController.Instance.EquipmentSlotCells.rightBracelet;
             default:
                 throw new ArgumentOutOfRangeException();
+        }
+    }
+
+    public void LoadData(InventoryData inventoryData)
+    {
+        foreach (var savedItem in inventoryData.ownedItems)
+        {
+            var inventoryItemPrefab = itemPrefabs.Find(prefab => prefab.name == savedItem.saveName);
+            if (inventoryItemPrefab == null || !savedItem.equipped) continue;
+            var inventoryItem = Instantiate(inventoryItemPrefab, transform);
+            inventoryItem.count = savedItem.count;
+            AddEquipment(inventoryItem);
         }
     }
 }

@@ -16,7 +16,7 @@ public class InventoryController : MonoBehaviour
     private List<InventoryCell> itemCells;
 
     public static InventoryController Instance { get; private set; }
-    public InventoryData SaveData => new InventoryData(ownedItems);
+    public InventoryData SaveData => new(ownedItems);
     public List<InventoryItem> OwnedItems => ownedItems;
 
     public EquipmentSlotCells EquipmentSlotCells => equipmentCells;
@@ -237,8 +237,13 @@ public class InventoryData
 
     public InventoryData(List<InventoryItem> ownedItems)
     {
-        this.ownedItems = ownedItems.ConvertAll(item => new InventoryItemWrapper(
-            item.name, item.count, item is EquippableItem));
+        this.ownedItems = ownedItems.ConvertAll(item => new InventoryItemWrapper(item.name, item.count));
+    }
+
+    public InventoryData(List<EquippableItem> equippedItems)
+    {
+        ownedItems =
+            equippedItems.ConvertAll(item => new InventoryItemWrapper(item.name, item.count, item.isEquipped));
     }
 }
 
@@ -248,6 +253,13 @@ public class InventoryItemWrapper
     public string saveName;
     public int count;
     public bool equipped;
+
+    public InventoryItemWrapper(string saveName, int count)
+    {
+        this.saveName = saveName;
+        this.count = count;
+        equipped = false;
+    }
 
     public InventoryItemWrapper(string saveName, int count, bool equipped)
     {

@@ -3317,6 +3317,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   equippedItems: []
+  itemPrefabs:
+  - {fileID: -2524362128158772954, guid: 729f847e8c2581248bfcd406f62b2209, type: 3}
+  - {fileID: -2524362128158772954, guid: a65255d315432994d95a18a9b2425195, type: 3}
 --- !u!1 &8061449212600044658
 GameObject:
   m_ObjectHideFlags: 0
