@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Quest
 {
@@ -11,15 +12,15 @@ namespace Quest
 
         public void AddQuests(List<QuestData> currentQuests, int desiredCount)
         {
+            Debug.Log($"Trying to add quest to {currentQuests.Count} upto {desiredCount}");
             var flag = 0;
-
-            while (currentQuests.Count < desiredCount && flag < potentialQuests.Count)
+            while (currentQuests.Count < desiredCount && flag < 100)
             {
-                var potentialQuest = potentialQuests[flag];
                 flag++;
-                if (currentQuests.Exists(quest => quest.targetName == potentialQuest.targetName)) continue;
+                var potentialQuest = potentialQuests[Random.Range(0, potentialQuests.Count)];
 
                 var questData = new QuestData(potentialQuest);
+                Debug.Log($"Adding new quest {questData}");
                 currentQuests.Add(questData);
             }
         }

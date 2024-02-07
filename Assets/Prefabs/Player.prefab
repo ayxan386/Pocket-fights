@@ -1757,7 +1757,7 @@ MonoBehaviour:
     type: 3}
   potentialQuestSource: {fileID: 11400000, guid: 7fb6b1d9a13e7434987200e404d7cee8,
     type: 2}
-  targetCount: 3
+  targetCount: 4
 --- !u!1 &2329697332004954896
 GameObject:
   m_ObjectHideFlags: 0

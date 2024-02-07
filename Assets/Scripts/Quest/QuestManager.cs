@@ -47,8 +47,8 @@ public class QuestManager : MonoBehaviour
     public void AcceptQuest(QuestData questRef, QuestUi questUi)
     {
         questRef.inProgress = true;
-
         questUi.UpdateDisplay(questRef);
+        DataManager.Instance.SaveQuests();
     }
 }
 
@@ -67,12 +67,12 @@ public class QuestData
     public QuestData(PotentialQuest potentialQuest)
     {
         id = Guid.NewGuid().ToString();
+        targetName = potentialQuest.targetName;
         title = potentialQuest.title;
         goalCount = Random.Range(potentialQuest.goalRange.x, potentialQuest.goalRange.y);
-        targetName = potentialQuest.targetName;
+        gold = potentialQuest.goldAmount * goalCount;
+        expAmount = potentialQuest.expAmount * goalCount;
         currentProgress = 0;
-        gold = potentialQuest.goldAmount;
-        expAmount = potentialQuest.expAmount;
     }
 }
 
