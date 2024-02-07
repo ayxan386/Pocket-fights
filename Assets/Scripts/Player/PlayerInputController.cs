@@ -25,10 +25,11 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
 
     private CharacterController cc;
     private Vector3 movementVector;
-    private bool isPaused;
+
     public Vector3 lastPosition;
     public Quaternion lastRotation;
 
+    public bool isPaused { get; private set; }
     public PlayerInput playerInput { get; private set; }
 
     public StatController Stats => statController;
@@ -139,7 +140,8 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
 
     private void OnCombatInitiate()
     {
-        combatInitiation.StartInitiation(3);
+        if (isPaused || State.isLookingAtQuests) return;
+        combatInitiation.StartInitiation(2.5f);
     }
 
     private void OnPause()

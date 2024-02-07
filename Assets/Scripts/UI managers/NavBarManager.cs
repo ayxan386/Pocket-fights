@@ -5,6 +5,7 @@ public class NavBarManager : MonoBehaviour
 {
     [SerializeField] private List<GameObject> tabs;
     [SerializeField] private Animator pauseMenuAnimator;
+    [SerializeField] private Transform questHolder;
 
     public static NavBarManager Instance { get; private set; }
 
@@ -27,6 +28,7 @@ public class NavBarManager : MonoBehaviour
 
     private void OnPauseMenuToggled(bool isPaused)
     {
+        if (PlayerInputController.Instance.isPaused == isPaused) return;
         pauseMenuAnimator.SetTrigger(isPaused ? "open" : "close");
     }
 
@@ -53,11 +55,32 @@ public class NavBarManager : MonoBehaviour
             case "Save":
                 DataManager.Instance.SaveEventTrigger();
                 break;
+            case "Inventory":
+                InventoryController.Instance.UpdateDisplay();
+                DefaultPostBehavior();
+                break;
+            case "InfoPanel":
+                EventManager.OnBaseStatUpdate?.Invoke(0);
+                DefaultPostBehavior();
+                break;
+            case "Skills":
+                EventManager.OnSkillDisplayUpdate?.Invoke(true);
+                DefaultPostBehavior();
+                break;
+            case "Quests":
+                QuestManager.Instance.OpenUi(questHolder, true);
+                DefaultPostBehavior();
+                break;
             default:
-                if (ShopManager.Instance.IsShopOpen)
-                    pauseMenuAnimator.SetTrigger("shopClose");
-                EventManager.OnShopToggled?.Invoke(false);
+                DefaultPostBehavior();
                 break;
         }
+    }
+
+    private void DefaultPostBehavior()
+    {
+        if (ShopManager.Instance.IsShopOpen)
+            pauseMenuAnimator.SetTrigger("shopClose");
+        EventManager.OnShopToggled?.Invoke(false);
     }
 }

@@ -28,7 +28,7 @@ public class QuestManager : MonoBehaviour
         DataManager.Instance.SaveQuests();
     }
 
-    public void OpenUi(Transform targetParent)
+    public void OpenUi(Transform targetParent, bool shouldFilterForAcceptance = false)
     {
         for (var index = 0; index < targetParent.childCount; index++)
         {
@@ -39,6 +39,7 @@ public class QuestManager : MonoBehaviour
 
         foreach (var quest in quests)
         {
+            if (shouldFilterForAcceptance && !quest.inProgress) continue;
             var questUi = Instantiate(questUiPrefab, targetParent);
             questUi.UpdateDisplay(quest);
         }

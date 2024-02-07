@@ -18,13 +18,16 @@ public class QuestBoardOpeningAction : MonoBehaviour
 
     private void OnPauseMenuToggled(bool obj)
     {
-        canOpen = !obj;
-        if (!canOpen) questBoardAnim.Disappear();
+        if (!canOpen)
+            questBoardAnim.Disappear();
+        canOpen = true;
+        PlayerInputController.Instance.State.isLookingAtQuests = false;
     }
 
     public void OpenBoard()
     {
         if (!canOpen) return;
+        canOpen = false;
         questBoardAnim.Appear();
         QuestManager.Instance.OpenUi(questHolder);
         PlayerInputController.Instance.State.isLookingAtQuests = true;
