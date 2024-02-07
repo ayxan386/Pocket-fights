@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: KillingQuest
   m_EditorClassIdentifier: 
   potentialQuests:
-  - title: 'Defeat fiery slimes | {0,3}g | {1,3}exp.  {2,2}/{3,2} '
+  - title: Defeat fiery slimes
     goalRange: {x: 3, y: 6}
     targetName: Slime
     goldAmount: 25
     expAmount: 15
-  - title: 'Defeat sandy spiders | {0,3}g | {1,3}exp. {2,2}/{3,2} '
+  - title: Defeat sandy spiders
     goalRange: {x: 1, y: 3}
     targetName: Sandy spider
     goldAmount: 45

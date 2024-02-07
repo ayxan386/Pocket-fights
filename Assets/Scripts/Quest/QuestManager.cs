@@ -43,20 +43,30 @@ public class QuestManager : MonoBehaviour
             questUi.UpdateDisplay(quest);
         }
     }
+
+    public void AcceptQuest(QuestData questRef, QuestUi questUi)
+    {
+        questRef.inProgress = true;
+
+        questUi.UpdateDisplay(questRef);
+    }
 }
 
 [Serializable]
 public class QuestData
 {
+    public string id;
     public string title;
     public int goalCount;
     public int currentProgress;
     public string targetName;
     public int gold;
     public int expAmount;
+    public bool inProgress;
 
     public QuestData(PotentialQuest potentialQuest)
     {
+        id = Guid.NewGuid().ToString();
         title = potentialQuest.title;
         goalCount = Random.Range(potentialQuest.goalRange.x, potentialQuest.goalRange.y);
         targetName = potentialQuest.targetName;

@@ -17,6 +17,16 @@ public class UiAnimation : MonoBehaviour
     [ContextMenu("Disappear")]
     public void Disappear()
     {
-        transformRef.DOMove(disappearLocation, duration);
+        transformRef.DOAnchorPos(disappearLocation, duration);
+    }
+
+    public void ScaleAppear()
+    {
+        transformRef.DOScale(appearLocation, duration);
+    }
+
+    public void ScaleDisappear()
+    {
+        transformRef.DOScale(disappearLocation, duration);
     }
 }
