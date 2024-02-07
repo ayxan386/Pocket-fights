@@ -134,6 +134,31 @@ public class DataManager : MonoBehaviour
         PlayerActionManager.Instance.LoadData(data);
     }
 
+    public void SaveQuests()
+    {
+        var toSave = QuestManager.Instance.WrappedData;
+
+        var basePath = PreSaveProcess("quests_");
+
+        var json = JsonUtility.ToJson(toSave);
+
+        File.WriteAllText(basePath, json);
+    }
+
+    public void LoadQuests()
+    {
+        var basePath = PreSaveProcess("quests_");
+        if (!File.Exists(basePath))
+        {
+            QuestManager.Instance.WrappedData = new QuestDataWrapper();
+            return;
+        }
+
+        var allJson = File.ReadAllText(basePath);
+        var data = JsonUtility.FromJson<QuestDataWrapper>(allJson);
+        QuestManager.Instance.WrappedData = data;
+    }
+
     [ContextMenu("Load player")]
     public void LoadPlayer()
     {
@@ -141,6 +166,7 @@ public class DataManager : MonoBehaviour
         LoadPlayerStats();
         LoadEquipment();
         LoadSkills();
+        LoadQuests();
     }
 
     [ContextMenu("Save trigger")]
@@ -150,6 +176,7 @@ public class DataManager : MonoBehaviour
         SaveInventory();
         SaveEquippment();
         SaveSkills();
+        SaveQuests();
     }
 }
 

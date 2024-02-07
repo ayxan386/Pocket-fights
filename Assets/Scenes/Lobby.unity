@@ -948,7 +948,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-8432
+  m_Name: pb_Mesh-8434
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -11757,7 +11757,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1818
+  m_Name: pb_Mesh-1820
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -17193,7 +17193,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-8382
+  m_Name: pb_Mesh-8384
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -39461,7 +39461,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-8412
+  m_Name: pb_Mesh-8414
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -65336,7 +65336,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-10934
+  m_Name: pb_Mesh-11050
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -102843,6 +102843,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Quest board
+      objectReference: {fileID: 0}
+    - target: {fileID: 3921152693094691519, guid: dc5496bf2a52ebf4998227c1013da3bd,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3921152693094691519, guid: dc5496bf2a52ebf4998227c1013da3bd,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3921152693094691519, guid: dc5496bf2a52ebf4998227c1013da3bd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3921152693094691519, guid: dc5496bf2a52ebf4998227c1013da3bd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc5496bf2a52ebf4998227c1013da3bd, type: 3}

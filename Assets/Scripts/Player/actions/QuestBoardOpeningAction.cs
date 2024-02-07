@@ -3,6 +3,7 @@ using UnityEngine;
 public class QuestBoardOpeningAction : MonoBehaviour
 {
     [SerializeField] private UiAnimation questBoardAnim;
+    [SerializeField] private Transform questHolder;
     private bool canOpen = true;
 
     private void Start()
@@ -25,6 +26,7 @@ public class QuestBoardOpeningAction : MonoBehaviour
     {
         if (!canOpen) return;
         questBoardAnim.Appear();
+        QuestManager.Instance.OpenUi(questHolder);
         PlayerInputController.Instance.State.isLookingAtQuests = true;
     }
 }
