@@ -11,6 +11,11 @@ public class PlayerCoreDisplayManager : MonoBehaviour
         OnPlayerCoreUpdate(0);
     }
 
+    private void OnDestroy()
+    {
+        EventManager.OnPlayerCoreUpdate -= OnPlayerCoreUpdate;
+    }
+
     private void OnPlayerCoreUpdate(int newValue)
     {
         displayControllers[0].UpdateDisplay("LVL", PlayerInputController.Instance.Stats.Level.ToString());

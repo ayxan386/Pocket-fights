@@ -49,6 +49,7 @@ public class Skill : MonoBehaviour
         void OnPlayerVictory(bool obj)
         {
             canBeUsed = true;
+            EventManager.OnPlayerVictory -= OnPlayerVictory;
         }
     }
 }

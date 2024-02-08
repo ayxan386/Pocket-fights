@@ -23,10 +23,10 @@ public class GlobalGameManager : MonoBehaviour
         EventManager.OnExitPortalDetected += OnExitPortalDetected;
         CurrentFloorNumber = PlayerPrefs.GetInt(CurrentFloor, 0);
 
-        if (CurrentFloorNumber == 0)
-        {
-            DataManager.Instance.LoadPlayer();
-        }
+        // if (CurrentFloorNumber == 0)
+        // {
+        //     DataManager.Instance.LoadPlayer();
+        // }
     }
 
     private void OnDestroy()
@@ -48,14 +48,16 @@ public class GlobalGameManager : MonoBehaviour
         }
     }
 
+    [ContextMenu("End dungeon")]
     public void EndDungeon()
     {
+        DataManager.Instance.SaveEventTrigger();
         StartCoroutine(DungeonComplete());
     }
 
     private IEnumerator FloorComplete()
     {
-        //Save data
+        DataManager.Instance.SaveEventTrigger();
         PlayerPrefs.SetInt(CurrentFloor, CurrentFloorNumber);
         yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene(floorSceneName);
@@ -63,7 +65,7 @@ public class GlobalGameManager : MonoBehaviour
 
     private IEnumerator DungeonComplete()
     {
-        //Save data
+        yield return new WaitForSeconds(1.0f);
         PlayerPrefs.DeleteKey(CurrentFloor);
         yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene(endSceneName);

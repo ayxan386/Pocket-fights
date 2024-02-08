@@ -253,11 +253,13 @@ MonoBehaviour:
   - {fileID: 2296809795659627779}
   statController: {fileID: 4310760141054729621}
   possibleDrops:
-  - itemPrefab: {fileID: 3337002340432959719, guid: 407cd09bed077b2439addf797101809b,
+  - inWorldDisplayItem: {fileID: 0}
+    itemPrefab: {fileID: 3337002340432959719, guid: 407cd09bed077b2439addf797101809b,
       type: 3}
     chance: 0.905
     count: {x: 1, y: 5}
-  - itemPrefab: {fileID: 3337002340432959719, guid: fd7389eff2aaccb488d74264e9423df1,
+  - inWorldDisplayItem: {fileID: 0}
+    itemPrefab: {fileID: 3337002340432959719, guid: fd7389eff2aaccb488d74264e9423df1,
       type: 3}
     chance: 0.905
     count: {x: 3, y: 10}
@@ -266,6 +268,10 @@ MonoBehaviour:
   <DisplayData>k__BackingField:
     displayName: Sandy spider
     icon: {fileID: 21300000, guid: dac89db86157924438c73f8537e91f0c, type: 3}
+  <Tags>k__BackingField:
+  - mob
+  - spider
+  - Sandy spider
   movementController: {fileID: 653475729322339701}
   statScalingFactor: 6
 --- !u!114 &4310760141054729621

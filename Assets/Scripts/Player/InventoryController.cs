@@ -16,7 +16,7 @@ public class InventoryController : MonoBehaviour
     private List<InventoryCell> itemCells;
 
     public static InventoryController Instance { get; private set; }
-    public InventoryData SaveData => new(ownedItems);
+    public InventoryData SaveData => new(ownedItems, Gold);
     public List<InventoryItem> OwnedItems => ownedItems;
 
     public EquipmentSlotCells EquipmentSlotCells => equipmentCells;
@@ -210,6 +210,7 @@ public class InventoryController : MonoBehaviour
 
     public void LoadData(InventoryData inventoryData)
     {
+        ownedItems = new List<InventoryItem>();
         foreach (var savedItem in inventoryData.ownedItems)
         {
             var inventoryItemPrefab = itemPrefabs.Find(prefab => prefab.name == savedItem.saveName);
@@ -218,6 +219,8 @@ public class InventoryController : MonoBehaviour
             inventoryItem.count = savedItem.count;
             OnItemAdd(inventoryItem);
         }
+
+        gold = inventoryData.goldAmount;
 
         UpdateDisplay();
     }
@@ -234,10 +237,12 @@ public class InventoryController : MonoBehaviour
 public class InventoryData
 {
     public List<InventoryItemWrapper> ownedItems;
+    public int goldAmount;
 
-    public InventoryData(List<InventoryItem> ownedItems)
+    public InventoryData(List<InventoryItem> ownedItems, int goldAmount)
     {
         this.ownedItems = ownedItems.ConvertAll(item => new InventoryItemWrapper(item.name, item.count));
+        this.goldAmount = goldAmount;
     }
 
     public InventoryData(List<EquippableItem> equippedItems)

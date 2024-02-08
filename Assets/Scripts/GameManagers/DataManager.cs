@@ -93,21 +93,25 @@ public class DataManager : MonoBehaviour
 
     public void LoadInventory()
     {
+        print("Trying to load player inventory");
         var basePath = PreSaveProcess("inventory");
         if (!File.Exists(basePath)) return;
 
         var allJson = File.ReadAllText(basePath);
         var inventoryData = JsonUtility.FromJson<InventoryData>(allJson);
+        print($"Loaded player inventory: inventory size {inventoryData.ownedItems.Count}");
         InventoryController.Instance.LoadData(inventoryData);
     }
 
     public void LoadPlayerStats()
     {
+        print("Trying to load player stats");
         var basePath = PreSaveProcess("player_stats_");
         if (!File.Exists(basePath)) return;
 
         var allJson = File.ReadAllText(basePath);
         var statSaveData = JsonUtility.FromJson<StatSaveData>(allJson);
+        print($"Loaded player stats: lvl {statSaveData.level}");
         if (statSaveData.sourceName == "Player")
         {
             PlayerInputController.Instance.Stats.LoadData(statSaveData);
@@ -116,6 +120,7 @@ public class DataManager : MonoBehaviour
 
     public void LoadEquipment()
     {
+        print("Trying to load player equipment");
         var basePath = PreSaveProcess("equipment_");
         if (!File.Exists(basePath)) return;
 
@@ -126,6 +131,7 @@ public class DataManager : MonoBehaviour
 
     public void LoadSkills()
     {
+        print("Trying to load player skills");
         var basePath = PreSaveProcess("skills_");
         if (!File.Exists(basePath)) return;
 
@@ -147,6 +153,7 @@ public class DataManager : MonoBehaviour
 
     public void LoadQuests()
     {
+        print("Trying to load player quests");
         var basePath = PreSaveProcess("quests_");
         if (!File.Exists(basePath))
         {
@@ -162,8 +169,8 @@ public class DataManager : MonoBehaviour
     [ContextMenu("Load player")]
     public void LoadPlayer()
     {
-        LoadInventory();
         LoadPlayerStats();
+        LoadInventory();
         LoadEquipment();
         LoadSkills();
         LoadQuests();
@@ -172,6 +179,7 @@ public class DataManager : MonoBehaviour
     [ContextMenu("Save trigger")]
     public void SaveEventTrigger()
     {
+        print($"Saving everything to {Application.persistentDataPath}");
         OnStatSave(PlayerInputController.Instance.Stats);
         SaveInventory();
         SaveEquippment();

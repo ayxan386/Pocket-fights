@@ -14,6 +14,7 @@ public class MobController : MonoBehaviour, BaseEntityCallbacks
     [SerializeField] private GameObject combatUiRef;
     [SerializeField] private GameObject selectionIndicators;
     [field: SerializeField] public MobDisplayData DisplayData { get; private set; }
+    [field: SerializeField] public List<string> Tags { get; private set; }
 
     [Header("AI parameters")] [SerializeField]
     private MobMovementController movementController;
@@ -64,7 +65,7 @@ public class MobController : MonoBehaviour, BaseEntityCallbacks
         Id = Guid.NewGuid();
         animator.SetBool("move", false);
         movementController.Navigate = false;
-        
+
         transform.SetPositionAndRotation(mobStandPoint.position, mobStandPoint.rotation);
 
         EventManager.OnPlayerTurnEnd += OnPlayerTurnEnd;

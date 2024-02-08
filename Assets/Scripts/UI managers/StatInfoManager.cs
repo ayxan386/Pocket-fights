@@ -13,6 +13,11 @@ public class StatInfoManager : MonoBehaviour
         EventManager.OnBaseStatUpdate += OnBaseStatUpdate;
     }
 
+    private void OnDisable()
+    {
+        EventManager.OnBaseStatUpdate -= OnBaseStatUpdate;
+    }
+
     private IEnumerator Start()
     {
         yield return new WaitUntil(() => PlayerInputController.Instance != null);

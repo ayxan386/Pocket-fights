@@ -118,11 +118,13 @@ MonoBehaviour:
   - {fileID: 3781824941804170760}
   statController: {fileID: 2674227932017811571}
   possibleDrops:
-  - itemPrefab: {fileID: 3337002340432959719, guid: 407cd09bed077b2439addf797101809b,
+  - inWorldDisplayItem: {fileID: 0}
+    itemPrefab: {fileID: 3337002340432959719, guid: 407cd09bed077b2439addf797101809b,
       type: 3}
     chance: 0.905
     count: {x: 1, y: 5}
-  - itemPrefab: {fileID: 3337002340432959719, guid: fd7389eff2aaccb488d74264e9423df1,
+  - inWorldDisplayItem: {fileID: 0}
+    itemPrefab: {fileID: 3337002340432959719, guid: fd7389eff2aaccb488d74264e9423df1,
       type: 3}
     chance: 0.905
     count: {x: 3, y: 10}
@@ -131,6 +133,10 @@ MonoBehaviour:
   <DisplayData>k__BackingField:
     displayName: Blue spiked snail-turtle
     icon: {fileID: 21300000, guid: bb829bd040180ca43b649c6213c197a2, type: 3}
+  <Tags>k__BackingField:
+  - mob
+  - BlueSpikedTurtle
+  - turtle
   movementController: {fileID: 1720301486421528723}
   statScalingFactor: 5
 --- !u!114 &2674227932017811571

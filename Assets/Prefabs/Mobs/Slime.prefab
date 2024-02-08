@@ -733,15 +733,18 @@ MonoBehaviour:
   - {fileID: 4003806132726856973}
   statController: {fileID: 7537575747951249551}
   possibleDrops:
-  - itemPrefab: {fileID: 3337002340432959719, guid: 407cd09bed077b2439addf797101809b,
+  - inWorldDisplayItem: {fileID: 0}
+    itemPrefab: {fileID: 3337002340432959719, guid: 407cd09bed077b2439addf797101809b,
       type: 3}
     chance: 0.905
     count: {x: 1, y: 5}
-  - itemPrefab: {fileID: 3337002340432959719, guid: fd7389eff2aaccb488d74264e9423df1,
+  - inWorldDisplayItem: {fileID: 0}
+    itemPrefab: {fileID: 3337002340432959719, guid: fd7389eff2aaccb488d74264e9423df1,
       type: 3}
     chance: 0.905
     count: {x: 3, y: 10}
-  - itemPrefab: {fileID: 3337002340432959719, guid: aebb7f363d5dcc84c8a3e22adc27fc76,
+  - inWorldDisplayItem: {fileID: 0}
+    itemPrefab: {fileID: 3337002340432959719, guid: aebb7f363d5dcc84c8a3e22adc27fc76,
       type: 3}
     chance: 0.905
     count: {x: 2, y: 7}
@@ -750,6 +753,10 @@ MonoBehaviour:
   <DisplayData>k__BackingField:
     displayName: Fiery red slime (small)
     icon: {fileID: 21300000, guid: aaf447b5bc450a047a8b23c831bd3385, type: 3}
+  <Tags>k__BackingField:
+  - mob
+  - slime
+  - Fiery slime
   movementController: {fileID: -2712961378370848657}
   statScalingFactor: 4
 --- !u!114 &7537575747951249551

@@ -17,6 +17,12 @@ public class InfoDetailsManager : MonoBehaviour
         UpdateValues();
     }
 
+    private void OnDestroy()
+    {
+        EventManager.OnBaseStatUpdate -= OnBaseStatUpdate;
+        EventManager.OnPlayerCoreUpdate -= OnPlayerCoreUpdate;
+    }
+
     private void OnPlayerCoreUpdate(int obj)
     {
         UpdateValues();

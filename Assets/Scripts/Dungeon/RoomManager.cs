@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cinemachine;
-using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -73,7 +72,6 @@ public class RoomManager : MonoBehaviour
     private void Start()
     {
         pads.ForEach(pad => pad.LinkedRoom = this);
-        EventManager.OnMobDeath += OnMobDeath;
         CanExit = false;
         CheckExitConditions();
         FindAllHits();
@@ -111,6 +109,7 @@ public class RoomManager : MonoBehaviour
     {
         isActive = true;
         roomCamera.Priority = 15;
+        EventManager.OnMobDeath += OnMobDeath;
         exitConditionDisplayManager.gameObject.SetActive(exitConditionType != ExitConditionType.None);
     }
 
@@ -118,7 +117,13 @@ public class RoomManager : MonoBehaviour
     {
         isActive = false;
         roomCamera.Priority = 5;
+        EventManager.OnMobDeath -= OnMobDeath;
         exitConditionDisplayManager.gameObject.SetActive(false);
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.OnMobDeath -= OnMobDeath;
     }
 
     public void PlacePlayer()

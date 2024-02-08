@@ -54,6 +54,7 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
         EventManager.OnPlayerTurnEnd += OnPlayerTurnEnd;
         statController.AttachedEntity = this;
         loadingScreen.SetActive(true);
+        yield return new WaitForSeconds(0.2f);
         DataManager.Instance.LoadPlayer();
         yield return new WaitForSeconds(0.1f);
         loadingScreen.SetActive(false);
@@ -97,6 +98,7 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
     private void OnPauseMenuToggled(bool updatedState)
     {
         isPaused = updatedState;
+        inGameUiRef.SetActive(!isPaused);
     }
 
     public void OnReceiveAttack()
@@ -146,7 +148,6 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
 
     private void OnPause()
     {
-        inGameUiRef.SetActive(isPaused);
         EventManager.OnPauseMenuToggled?.Invoke(!State.isLookingAtQuests && !isPaused);
     }
 

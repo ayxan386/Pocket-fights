@@ -406,9 +406,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f295c86a5a6ecfa4f9575723cfa3b37f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalNumberOfFloors: 2
+  totalNumberOfFloors: 1
   floorSceneName: BasicDungeon
-  endSceneName: MainMenu
+  endSceneName: Lobby
   <CurrentFloorNumber>k__BackingField: 0
 --- !u!1 &2163032917579677015
 GameObject:

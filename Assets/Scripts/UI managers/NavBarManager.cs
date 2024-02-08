@@ -8,6 +8,8 @@ public class NavBarManager : MonoBehaviour
     [SerializeField] private Transform questHolder;
 
     public static NavBarManager Instance { get; private set; }
+    private bool lastPauseState;
+    private string lastTabName;
 
     private void Awake()
     {
@@ -28,8 +30,14 @@ public class NavBarManager : MonoBehaviour
 
     private void OnPauseMenuToggled(bool isPaused)
     {
-        if (PlayerInputController.Instance.isPaused == isPaused) return;
+        if (lastPauseState == isPaused) return;
+        lastPauseState = isPaused;
         pauseMenuAnimator.SetTrigger(isPaused ? "open" : "close");
+
+        if (isPaused && lastTabName != null)
+        {
+            UpdateTabContent(lastTabName);
+        }
     }
 
     public void OpenTab(string tabName)
@@ -41,6 +49,14 @@ public class NavBarManager : MonoBehaviour
             nextTab.SetActive(true);
         }
 
+        lastTabName = tabName;
+
+        UpdateTabContent(tabName);
+        DefaultPostBehavior();
+    }
+
+    private void UpdateTabContent(string tabName)
+    {
         switch (tabName)
         {
             case "Shop":
@@ -57,28 +73,22 @@ public class NavBarManager : MonoBehaviour
                 break;
             case "Inventory":
                 InventoryController.Instance.UpdateDisplay();
-                DefaultPostBehavior();
                 break;
             case "InfoPanel":
                 EventManager.OnBaseStatUpdate?.Invoke(0);
-                DefaultPostBehavior();
                 break;
             case "Skills":
                 EventManager.OnSkillDisplayUpdate?.Invoke(true);
-                DefaultPostBehavior();
                 break;
             case "Quests":
                 QuestManager.Instance.OpenUi(questHolder, true);
-                DefaultPostBehavior();
-                break;
-            default:
-                DefaultPostBehavior();
                 break;
         }
     }
 
     private void DefaultPostBehavior()
     {
+        if (lastTabName is "Shop" or "Save") return;
         if (ShopManager.Instance.IsShopOpen)
             pauseMenuAnimator.SetTrigger("shopClose");
         EventManager.OnShopToggled?.Invoke(false);
