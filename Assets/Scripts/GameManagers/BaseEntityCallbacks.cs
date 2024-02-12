@@ -1,6 +1,6 @@
 public interface BaseEntityCallbacks
 {
-    void OnReceiveAttack();
+    void OnReceiveAttack(float receivedDamage);
 
     void OnDeathCallback();
 }

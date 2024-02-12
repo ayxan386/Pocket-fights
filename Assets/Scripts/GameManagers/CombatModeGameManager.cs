@@ -64,7 +64,7 @@ public class CombatModeGameManager : MonoBehaviour
         var statController = PlayerInputController.Instance.Stats;
         statController.UpdateStatValue(StatValue.Mana, (int)statController.GetStatValue(StatValue.Mana).maxValue);
 
-        PlayerInputController.Instance.PlacePlayer(playerStandPoint);
+        PlayerInputController.Instance.PlacePlayer(playerStandPoint, false);
         if (PlayerCombatInitiation.Instance.mobs != null)
         {
             mobsInCombat = PlayerCombatInitiation.Instance.mobs;

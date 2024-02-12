@@ -8,14 +8,15 @@ public class StatController : MonoBehaviour
     [SerializeField] private StatBarIndicator manaBarIndicator;
 
     [field: Header("Core values")]
-    [field: SerializeField] public int Level { get; set; }
+    [field: SerializeField]
+    public int Level { get; set; }
 
     [field: SerializeField] public int FreePoints { get; private set; }
     [field: SerializeField] public int SkillPoints { get; private set; }
     [field: SerializeField] public string SourceName { get; private set; }
 
-    [Header("Starting stats")]
-    [SerializeField] private int startingVitality = 4;
+    [Header("Starting stats")] [SerializeField]
+    private int startingVitality = 4;
 
     [SerializeField] private int startingStrength = 4;
     [SerializeField] private int startingMana = 4;
@@ -26,6 +27,10 @@ public class StatController : MonoBehaviour
     public StatusManager StatusManager { get; private set; }
 
     [SerializeField] [TextArea] private string statDebug;
+
+    [Header("Receive attack VFX")] [SerializeField]
+    private FloatingTextManager damagePrefab;
+    [field: SerializeField] public Transform animationPosition { get; set; }
 
     private Dictionary<StatTypes, StatData> baseStats;
     private Dictionary<StatValue, StatData> statValues;
@@ -208,6 +213,7 @@ public class StatController : MonoBehaviour
         receivedDamage = StatusManager.CheckForDamage(receivedDamage);
 
         statValues[StatValue.Health].currentValue -= receivedDamage;
+        SpawnDamageIndicator(receivedDamage);
 
         if (statValues[StatValue.Health].currentValue <= 0)
         {
@@ -215,10 +221,19 @@ public class StatController : MonoBehaviour
         }
         else
         {
-            AttachedEntity.OnReceiveAttack();
+            AttachedEntity.OnReceiveAttack(receivedDamage);
         }
 
         healthBarIndicator.UpdateDisplay(statValues[StatValue.Health]);
+    }
+
+    private void SpawnDamageIndicator(float receivedDamage)
+    {
+        var floatingText = Instantiate(damagePrefab, transform.position, Quaternion.identity, transform);
+        print($"The parent angle {transform.eulerAngles.y}");
+        floatingText.SetDirection(transform.eulerAngles.y > 200);
+        floatingText.transform.forward = transform.forward;
+        floatingText.floatingText.text = $"-{receivedDamage:N0}HP";
     }
 }
 

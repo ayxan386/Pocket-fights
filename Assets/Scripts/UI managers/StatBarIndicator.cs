@@ -11,6 +11,6 @@ public class StatBarIndicator : MonoBehaviour
     public void UpdateDisplay(StatData data)
     {
         filler.fillAmount = data.currentValue / data.maxValue;
-        textIndicator.text = percentage ? $"{(int)(filler.fillAmount * 100)}%" : data.currentValue.ToString();
+        textIndicator.text = percentage ? $"{(int)(filler.fillAmount * 100)}%" : data.currentValue.ToString("N0");
     }
 }

@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &413261837416273566
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7848622681579244473}
+  m_Layer: 0
+  m_Name: Attack Postion
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7848622681579244473
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 413261837416273566}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.002, y: -0.020088196, z: 1.365}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4219773925617185996}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3956050004639955305
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,7 +231,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4217369390209626504}
-  m_LocalRotation: {x: -0, y: -0.95783794, z: -0, w: 0.28730902}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.99, y: 10.33, z: 12.59}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -210,9 +241,10 @@ Transform:
   - {fileID: 6803156801757202506}
   - {fileID: 5905500798464333038}
   - {fileID: 5659430377179558593}
+  - {fileID: 7848622681579244473}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -146.606, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &4310760141054729620
 Animator:
   serializedVersion: 5
@@ -298,6 +330,9 @@ MonoBehaviour:
   startingDefense: 5
   <StatusManager>k__BackingField: {fileID: 886488272252522660}
   statDebug: 
+  damagePrefab: {fileID: 8339762821915644875, guid: 55eacaae333f49f4991b756644b68496,
+    type: 3}
+  <animationPosition>k__BackingField: {fileID: 7848622681579244473}
 --- !u!114 &653475729322339701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -543,6 +578,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BasicAttack
       objectReference: {fileID: 0}
+    - target: {fileID: 1117245306228900475, guid: ab9902901cce7b64ab6ac08888f0d628,
+        type: 3}
+      propertyPath: offset.y
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 6739678855245900918, guid: ab9902901cce7b64ab6ac08888f0d628,
         type: 3}
       propertyPath: m_RootOrder
@@ -729,6 +769,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4311140442574687640, guid: f6c194e7dcad32940abbc783f11a36a9,
+        type: 3}
+      propertyPath: percentage
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4311140442574687644, guid: f6c194e7dcad32940abbc783f11a36a9,
         type: 3}

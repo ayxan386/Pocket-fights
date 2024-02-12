@@ -105,7 +105,7 @@ public class MobController : MonoBehaviour, BaseEntityCallbacks
         IsDoneAttack = true;
     }
 
-    public void OnReceiveAttack()
+    public void OnReceiveAttack(float receivedDamage)
     {
         var actionDetails = actions.Find(action => action.type == ActionType.ReceiveAttack);
         animator.SetTrigger(actionDetails.animationName);

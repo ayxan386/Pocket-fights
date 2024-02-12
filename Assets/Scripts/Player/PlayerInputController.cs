@@ -23,6 +23,7 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
     [SerializeField] private int maxLevel;
 
 
+
     private CharacterController cc;
     private Vector3 movementVector;
 
@@ -70,7 +71,10 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
     private void OnCombatSceneLoading(bool isCombatScene)
     {
         if (isCombatScene)
+        {
             playerInput.SwitchCurrentActionMap("CombatMode");
+            cc.enabled = false;
+        }
         else
         {
             playerInput.SwitchCurrentActionMap("Player");
@@ -101,7 +105,7 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
         inGameUiRef.SetActive(!isPaused);
     }
 
-    public void OnReceiveAttack()
+    public void OnReceiveAttack(float receivedDamage)
     {
     }
 
@@ -206,14 +210,14 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
         cc.enabled = true;
     }
 
-    public void PlacePlayer(Transform playerStandPoint)
+    public void PlacePlayer(Transform playerStandPoint, bool finalState = true)
     {
         lastPosition = transform.position;
         lastRotation = transform.rotation;
         cc.enabled = false;
         transform.position = playerStandPoint.position;
         transform.rotation = playerStandPoint.rotation;
-        cc.enabled = true;
+        cc.enabled = finalState;
     }
 }
 
