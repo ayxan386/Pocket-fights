@@ -230,7 +230,6 @@ public class StatController : MonoBehaviour
     private void SpawnDamageIndicator(float receivedDamage)
     {
         var floatingText = Instantiate(damagePrefab, transform.position, Quaternion.identity, transform);
-        print($"The parent angle {transform.eulerAngles.y}");
         floatingText.SetDirection(transform.eulerAngles.y > 200);
         floatingText.transform.forward = transform.forward;
         floatingText.floatingText.text = $"-{receivedDamage:N0}HP";

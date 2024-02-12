@@ -22,6 +22,9 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
     [SerializeField] private float xpMultiplier;
     [SerializeField] private int maxLevel;
 
+    [Header("Footsteps")] [SerializeField] private float spawnRate;
+    [SerializeField] private Transform leftFoot, rightFoot;
+    [SerializeField] private FadingSprite leftFootSprite, rightFootSprite;
 
 
     private CharacterController cc;
@@ -38,6 +41,10 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
     public static PlayerInputController Instance { get; private set; }
 
     public PlayerState State { get; private set; }
+
+    private float lastSpawnTime;
+    private bool isLeftFoot;
+    [SerializeField] private LayerMask groundLayer;
 
     private void Awake()
     {
@@ -91,6 +98,35 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
             var dir = temp * movementVector;
             transform.forward = dir;
             cc.SimpleMove(dir * movementSpeed);
+
+            if (lastSpawnTime + spawnRate < Time.time)
+            {
+                lastSpawnTime = Time.time;
+                SpawnFootstep();
+            }
+        }
+    }
+
+    private void SpawnFootstep()
+    {
+        if (isLeftFoot)
+        {
+            RaycastAndFootprint(leftFoot);
+        }
+        else
+        {
+            RaycastAndFootprint(rightFoot);
+        }
+
+        isLeftFoot = !isLeftFoot;
+    }
+
+    private void RaycastAndFootprint(Transform origin)
+    {
+        if (Physics.Raycast(origin.position, Vector3.down, out RaycastHit hit, 0.2f, groundLayer))
+        {
+            Instantiate(leftFootSprite, hit.point + hit.normal * 0.05f,
+                Quaternion.LookRotation(origin.forward));
         }
     }
 
