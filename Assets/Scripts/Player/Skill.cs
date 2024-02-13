@@ -33,6 +33,8 @@ public class Skill : MonoBehaviour
 
     public bool CanUpgrade => currentLevel + 1 < maxLevel;
 
+    public bool Lock { get; set; }
+
     public void Upgrade()
     {
         if (currentLevel + 1 < maxLevel)

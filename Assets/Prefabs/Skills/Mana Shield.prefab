@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 6739678855245900918}
   - component: {fileID: 6204179879270805217}
   - component: {fileID: -5830009548996150611}
+  - component: {fileID: 183102461902616262}
+  - component: {fileID: -3231723183950828299}
   m_Layer: 0
   m_Name: Mana Shield
   m_TagString: Untagged
@@ -65,8 +67,8 @@ MonoBehaviour:
   usageEffects:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -5830009548996150611}
-        m_TargetAssemblyTypeName: StatusApplyingAction, Assembly-CSharp
+      - m_Target: {fileID: -3231723183950828299}
+        m_TargetAssemblyTypeName: AnimationPlayingAction, Assembly-CSharp
         m_MethodName: ApplyEffectToCaster
         m_Mode: 0
         m_Arguments:
@@ -90,3 +92,56 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effect: {fileID: 2040261291136945368, guid: 76178b982ae202144acaff0982a6d2a0, type: 3}
+--- !u!114 &183102461902616262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184396450984925242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 730b80d05b6f3ba4080a042c2a3e0ea1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-3231723183950828299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184396450984925242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d0e56a5d0c46e44c9bae9f01bc8ea86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delayNext: 0.3
+  usageEffects:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -5830009548996150611}
+        m_TargetAssemblyTypeName: StatusApplyingAction, Assembly-CSharp
+        m_MethodName: ApplyEffectToCaster
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 183102461902616262}
+        m_TargetAssemblyTypeName: UsageUnlockingAction, Assembly-CSharp
+        m_MethodName: ApplyEffectToCaster
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  animationName: smackEarth

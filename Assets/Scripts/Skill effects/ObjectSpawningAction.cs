@@ -1,11 +1,22 @@
 using UnityEngine;
 
-public class ObjectSpawningAction : MonoBehaviour
+public class ObjectSpawningAction : BasicAction
 {
     [SerializeField] private GameObject objPrefab;
+    [SerializeField] private float lifespan;
+    [SerializeField] private Vector3 offset;
 
-    public void ApplyEffectToCaster(Skill usedSkill, StatController caster, StatController target)
+    protected override void MainAction(Skill skill, StatController caster, StatController target)
     {
-        Instantiate(objPrefab, Vector3.zero, Quaternion.identity, caster.transform);
+        var casterTransform = caster.transform;
+        var ins = Instantiate(objPrefab,
+            casterTransform.position + offset,
+            Quaternion.LookRotation(casterTransform.forward),
+            casterTransform);
+
+        if (lifespan > 0)
+        {
+            Destroy(ins, lifespan);
+        }
     }
 }

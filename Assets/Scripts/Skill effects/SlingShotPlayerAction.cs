@@ -1,14 +1,15 @@
 using DG.Tweening;
 using UnityEngine;
 
-public class SlingShotPlayerAction : MonoBehaviour
+public class SlingShotPlayerAction : BasicAction
 {
     [SerializeField] private float duration;
     [SerializeField] private Vector3 offset;
+
     private Vector3 initialPos;
     private Transform casterTransform;
 
-    public void ApplyEffectToCaster(Skill usedSkill, StatController caster, StatController target)
+    protected override void MainAction(Skill skill, StatController caster, StatController target)
     {
         casterTransform = caster.transform;
         initialPos = casterTransform.position;

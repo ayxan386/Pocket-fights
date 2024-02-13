@@ -10,8 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 6739678855245900918}
   - component: {fileID: 6204179879270805217}
+  - component: {fileID: 1471422863420139441}
   - component: {fileID: -7952066276243416848}
   - component: {fileID: 8929861595771803819}
+  - component: {fileID: 7366916297360167601}
+  - component: {fileID: -1232593532290628946}
   m_Layer: 0
   m_Name: StrongAttack
   m_TagString: Untagged
@@ -66,6 +69,18 @@ MonoBehaviour:
   usageEffects:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1471422863420139441}
+        m_TargetAssemblyTypeName: ObjectSpawningAction, Assembly-CSharp
+        m_MethodName: ApplyEffectToCaster
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: -7952066276243416848}
         m_TargetAssemblyTypeName: StdDamageDealingAction, Assembly-CSharp
         m_MethodName: ApplyEffect
@@ -78,8 +93,24 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1471422863420139441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184396450984925242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62f49e677ca0d0b45b23ce44d7b7d4ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delayNext: 0.8
+  usageEffects:
+    m_PersistentCalls:
+      m_Calls:
       - m_Target: {fileID: 8929861595771803819}
-        m_TargetAssemblyTypeName: SlingShotPlayerAction, Assembly-CSharp
+        m_TargetAssemblyTypeName: BasicAction, Assembly-CSharp
         m_MethodName: ApplyEffectToCaster
         m_Mode: 0
         m_Arguments:
@@ -90,6 +121,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: -1232593532290628946}
+        m_TargetAssemblyTypeName: BasicAction, Assembly-CSharp
+        m_MethodName: ApplyEffectToCaster
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  objPrefab: {fileID: 2040261291136945370, guid: 4d90da9c28b6dce47852eae41925fc41,
+    type: 3}
+  lifespan: 2
+  offset: {x: 0, y: -0.3, z: 0}
 --- !u!114 &-7952066276243416848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,5 +161,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7551bc6b817e7e40ab6e9f128f5f5e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  delayNext: 0.4
+  usageEffects:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7366916297360167601}
+        m_TargetAssemblyTypeName: UsageUnlockingAction, Assembly-CSharp
+        m_MethodName: ApplyEffectToCaster
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   duration: 0.4
   offset: {x: 0, y: 0.2, z: 0}
+--- !u!114 &7366916297360167601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184396450984925242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 730b80d05b6f3ba4080a042c2a3e0ea1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-1232593532290628946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184396450984925242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d0e56a5d0c46e44c9bae9f01bc8ea86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delayNext: 0
+  usageEffects:
+    m_PersistentCalls:
+      m_Calls: []
+  animationName: attack01

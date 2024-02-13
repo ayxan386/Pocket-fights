@@ -30,8 +30,9 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
     private CharacterController cc;
     private Vector3 movementVector;
 
-    public Vector3 lastPosition;
-    public Quaternion lastRotation;
+    private Vector3 lastPosition;
+    private Quaternion lastRotation;
+    public bool UsingAction { get; set; }
 
     public bool isPaused { get; private set; }
     public PlayerInput playerInput { get; private set; }
@@ -41,6 +42,7 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
     public static PlayerInputController Instance { get; private set; }
 
     public PlayerState State { get; private set; }
+    public Animator Animator => animator;
 
     private float lastSpawnTime;
     private bool isLeftFoot;
@@ -203,7 +205,10 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
         if (CombatModeGameManager.Instance != null
             && !CombatModeGameManager.Instance.IsPlayerTurn) return;
         if (!CombatModeGameManager.Instance.IsCombatGoing) return;
+        if (UsingAction) return;
 
+        UsingAction = true;
+        
         var actionDetails = PlayerActionManager.Instance.GetAction(index + 1);
 
         if (actionDetails == null || !actionDetails.canBeUsed) return;
@@ -212,7 +217,7 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
 
         if (usedAction)
         {
-            animator.SetTrigger(actionDetails.animationName);
+            // animator.SetTrigger(actionDetails.animationName);
             var selectedEnemy = CombatModeGameManager.Instance.SelectedEnemy;
             actionDetails.usageEffects?.Invoke(actionDetails, statController, selectedEnemy.Stats);
             EventManager.OnSkillUsedByPlayer?.Invoke(actionDetails, true);

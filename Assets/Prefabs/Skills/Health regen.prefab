@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 6739678855245900918}
   - component: {fileID: 6204179879270805217}
   - component: {fileID: -5830009548996150611}
+  - component: {fileID: -7801569560349296450}
+  - component: {fileID: -5467086276545589996}
   m_Layer: 0
   m_Name: Health regen
   m_TagString: Untagged
@@ -65,8 +67,8 @@ MonoBehaviour:
   usageEffects:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -5830009548996150611}
-        m_TargetAssemblyTypeName: StatusApplyingAction, Assembly-CSharp
+      - m_Target: {fileID: -5467086276545589996}
+        m_TargetAssemblyTypeName: AnimationPlayingAction, Assembly-CSharp
         m_MethodName: ApplyEffectToCaster
         m_Mode: 0
         m_Arguments:
@@ -89,6 +91,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: -7801569560349296450}
+        m_TargetAssemblyTypeName: UsageUnlockingAction, Assembly-CSharp
+        m_MethodName: ApplyEffectToCaster
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &-5830009548996150611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,3 +116,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effect: {fileID: 2040261291136945368, guid: b3b196ca522663c4faee75115ae32c09, type: 3}
+--- !u!114 &-7801569560349296450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184396450984925242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 730b80d05b6f3ba4080a042c2a3e0ea1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-5467086276545589996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184396450984925242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d0e56a5d0c46e44c9bae9f01bc8ea86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationName: openArms
+  delayNext: 0
