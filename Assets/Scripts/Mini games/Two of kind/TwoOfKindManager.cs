@@ -78,12 +78,14 @@ public class TwoOfKindManager : MonoBehaviour
     private void StartGame()
     {
         miniGameCamera.Priority = 15;
+        FloorManager.Instance.ToggleFollowCamera(false);
         PlayerInputController.Instance.playerInput.DeactivateInput();
     }
 
     private void EndGame()
     {
         miniGameCamera.Priority = 5;
+        FloorManager.Instance.ToggleFollowCamera(true);
         PlayerInputController.Instance.playerInput.ActivateInput();
     }
 }

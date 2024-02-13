@@ -108,7 +108,6 @@ public class RoomManager : MonoBehaviour
     public void Activate()
     {
         isActive = true;
-        roomCamera.Priority = 15;
         EventManager.OnMobDeath += OnMobDeath;
         exitConditionDisplayManager.gameObject.SetActive(exitConditionType != ExitConditionType.None);
     }
@@ -116,7 +115,6 @@ public class RoomManager : MonoBehaviour
     public void Deactivate()
     {
         isActive = false;
-        roomCamera.Priority = 5;
         EventManager.OnMobDeath -= OnMobDeath;
         exitConditionDisplayManager.gameObject.SetActive(false);
     }

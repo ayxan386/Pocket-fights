@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 
 public class FloorManager : MonoBehaviour
@@ -10,6 +11,9 @@ public class FloorManager : MonoBehaviour
     [SerializeField] private Vector2 distanceBetweenRooms;
     [SerializeField] private Vector2Int numberOfRooms;
     [SerializeField] private bool autoGenerate = true;
+    [SerializeField] private CameraFollow cameraRef;
+    [SerializeField] private CinemachineBrain cameraBrain;
+    [SerializeField] private Vector3 followAngles;
     private int maxRooms;
 
     public static FloorManager Instance { get; private set; }
@@ -31,9 +35,21 @@ public class FloorManager : MonoBehaviour
         }
 
         yield return new WaitUntil(() => PlayerInputController.Instance != null);
-
+        cameraRef.Target = PlayerInputController.Instance.transform;
+        ToggleFollowCamera(true);
         roomInstances[0].PlacePlayer();
         roomInstances[0].Activate();
+    }
+
+    public void ToggleFollowCamera(bool shouldFollow)
+    {
+        cameraBrain.enabled = !shouldFollow;
+        cameraRef.enabled = shouldFollow;
+
+        if (shouldFollow)
+        {
+            cameraRef.transform.eulerAngles = followAngles;
+        }
     }
 
     [ContextMenu("Generate floor")]

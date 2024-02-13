@@ -96,6 +96,9 @@ MonoBehaviour:
   distanceBetweenRooms: {x: 75, y: 75}
   numberOfRooms: {x: 3, y: 8}
   autoGenerate: 0
+  cameraRef: {fileID: 2389073483227726872}
+  cameraBrain: {fileID: 2163032917579677020}
+  followAngles: {x: 30, y: 45, z: 0}
 --- !u!1 &2163032916416872324
 GameObject:
   m_ObjectHideFlags: 0
@@ -423,6 +426,7 @@ GameObject:
   - component: {fileID: 2163032917579677016}
   - component: {fileID: 2163032917579677019}
   - component: {fileID: 2163032917579677020}
+  - component: {fileID: 2389073483227726872}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -472,7 +476,7 @@ Camera:
   far clip plane: 349.55
   field of view: 72.4
   orthographic: 1
-  orthographic size: 8.4
+  orthographic size: 6.8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -536,7 +540,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2163032917579677015}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
   m_Name: 
@@ -563,6 +567,22 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2389073483227726872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2163032917579677015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcc9b3dd5800e7248ba91a4d73c805bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  offset: {x: -6.28, y: 7.91, z: -8}
+  followSpeed: 5
+  allowedMaxDistance: 3
 --- !u!1 &2163032917718402799
 GameObject:
   m_ObjectHideFlags: 0

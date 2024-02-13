@@ -10,6 +10,7 @@ public class PlayerCombatInitiation : MonoBehaviour
     [SerializeField] private float checkRadius;
     [SerializeField] private LayerMask mobLayer;
     [SerializeField] private List<MobController> mobsToActivate;
+    [SerializeField] private GameObject unloadingScreen;
 
     public bool IsCombatScene;
     private GameObject mobParent;
@@ -133,11 +134,13 @@ public class PlayerCombatInitiation : MonoBehaviour
 
     private IEnumerator WaitThenLoad()
     {
+        unloadingScreen.SetActive(true);
+        EventManager.OnCombatSceneLoading?.Invoke(false);
         wholeScene.SetActive(true);
         yield return new WaitForSeconds(0.5f);
+        unloadingScreen.SetActive(false);
         mobsToActivate.ForEach(mob => mob.gameObject.SetActive(true));
         IsCombatScene = false;
-        EventManager.OnCombatSceneLoading?.Invoke(false);
     }
 
     private void LoadingCombatScene()

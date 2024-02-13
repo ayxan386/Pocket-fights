@@ -7,8 +7,15 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private float followSpeed = 5f;
     [SerializeField] private float allowedMaxDistance;
 
+    public Transform Target
+    {
+        get => target;
+        set => target = value;
+    }
+
     private void LateUpdate()
     {
+        if (target == null) return;
         var desiredPosition = target.position + offset;
         if (Vector3.Distance(transform.position, desiredPosition) > allowedMaxDistance)
         {
