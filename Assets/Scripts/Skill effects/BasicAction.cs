@@ -16,12 +16,12 @@ public abstract class BasicAction : MonoBehaviour
     protected IEnumerator DelayNextAction(Skill usedSkill, StatController caster, StatController target,
         Action<Skill, StatController, StatController> action)
     {
-        yield return new WaitUntil(() => !usedSkill.Lock);
-        usedSkill.Lock = true;
+        // yield return new WaitUntil(() => !usedSkill.Lock);
+        // usedSkill.Lock = true;
         action.Invoke(usedSkill, caster, target);
         yield return new WaitForSeconds(delayNext);
         usageEffects?.Invoke(usedSkill, caster, target);
-        usedSkill.Lock = false;
+        // usedSkill.Lock = false;
     }
 
     protected abstract void MainAction(Skill skill, StatController caster, StatController target);

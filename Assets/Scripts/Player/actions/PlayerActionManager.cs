@@ -11,6 +11,8 @@ public class PlayerActionManager : MonoBehaviour
 
     public SkillSaveDataWrapper SaveData => new SkillSaveDataWrapper(AllSkills);
 
+    public Skill ReceiveAttack => actions.Find(action => action.type == ActionType.ReceiveAttack);
+
     public static PlayerActionManager Instance { get; private set; }
 
     private void Awake()

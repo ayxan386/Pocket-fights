@@ -37,6 +37,8 @@ public class StatController : MonoBehaviour
 
     public float Lsf => Mathf.Pow(1.03f, Level);
     public BaseEntityCallbacks AttachedEntity { get; set; }
+    
+    public Animator Animator { get; set; }
 
     private void Awake()
     {

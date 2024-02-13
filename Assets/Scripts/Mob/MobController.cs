@@ -39,6 +39,7 @@ public class MobController : MonoBehaviour, BaseEntityCallbacks
         }
 
         statController.AttachedEntity = this;
+        statController.Animator = animator;
         statController.Level += PlayerInputController.Instance.Stats.Level;
         var statsToAllocate = statController.Level * statScalingFactor;
         foreach (var statType in Enum.GetValues(typeof(StatTypes)).Cast<StatTypes>())
@@ -97,7 +98,7 @@ public class MobController : MonoBehaviour, BaseEntityCallbacks
         var usedAction = statController.UsedAction(actionDetails.manaConsumption);
         if (usedAction)
         {
-            animator.SetTrigger(actionDetails.animationName);
+            // animator.SetTrigger(actionDetails.animationName);
             actionDetails.usageEffects?.Invoke(actionDetails, statController, PlayerInputController.Instance.Stats);
             EventManager.OnSkillUsedByPlayer?.Invoke(actionDetails, false);
         }
@@ -108,7 +109,8 @@ public class MobController : MonoBehaviour, BaseEntityCallbacks
     public void OnReceiveAttack(float receivedDamage)
     {
         var actionDetails = actions.Find(action => action.type == ActionType.ReceiveAttack);
-        animator.SetTrigger(actionDetails.animationName);
+        actionDetails.usageEffects?.Invoke(actionDetails, statController, null);
+        // animator.SetTrigger(actionDetails.animationName);
     }
 
     public void OnDeathCallback()

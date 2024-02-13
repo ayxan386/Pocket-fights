@@ -42,7 +42,6 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
     public static PlayerInputController Instance { get; private set; }
 
     public PlayerState State { get; private set; }
-    public Animator Animator => animator;
 
     private float lastSpawnTime;
     private bool isLeftFoot;
@@ -63,6 +62,7 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
         EventManager.OnPauseMenuToggled += OnPauseMenuToggled;
         EventManager.OnPlayerTurnEnd += OnPlayerTurnEnd;
         statController.AttachedEntity = this;
+        statController.Animator = animator;
         loadingScreen.SetActive(true);
         yield return new WaitForSeconds(0.2f);
         DataManager.Instance.LoadPlayer();
@@ -145,6 +145,8 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
 
     public void OnReceiveAttack(float receivedDamage)
     {
+        var baseSkill = PlayerActionManager.Instance.ReceiveAttack;
+        baseSkill.usageEffects?.Invoke(baseSkill, Stats, null);
     }
 
     public void OnDeathCallback()
@@ -199,7 +201,6 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
         EventManager.OnChangeSelection?.Invoke(changeDir);
     }
 
-
     private void OnActionUsed(int index)
     {
         if (CombatModeGameManager.Instance != null
@@ -217,7 +218,6 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
 
         if (usedAction)
         {
-            // animator.SetTrigger(actionDetails.animationName);
             var selectedEnemy = CombatModeGameManager.Instance.SelectedEnemy;
             actionDetails.usageEffects?.Invoke(actionDetails, statController, selectedEnemy.Stats);
             EventManager.OnSkillUsedByPlayer?.Invoke(actionDetails, true);

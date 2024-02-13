@@ -959,8 +959,6 @@ MonoBehaviour:
     type: 3}
   rightFootSprite: {fileID: 7202458905262403693, guid: 8ccb174d85a389846b6a672b1cd72868,
     type: 3}
-  lastPosition: {x: 0, y: 0, z: 0}
-  lastRotation: {x: 0, y: 0, z: 0, w: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -16587,6 +16585,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ComboAttack
+      objectReference: {fileID: 0}
+    - target: {fileID: 1471422863420139441, guid: bcad01095be44bb458881a9150d06d36,
+        type: 3}
+      propertyPath: delayNext
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 6739678855245900918, guid: bcad01095be44bb458881a9150d06d36,
         type: 3}

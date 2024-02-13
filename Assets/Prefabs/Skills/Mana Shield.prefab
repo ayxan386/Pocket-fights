@@ -145,3 +145,4 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   animationName: smackEarth
+  onCaster: 1
