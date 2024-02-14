@@ -32,6 +32,8 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
 
     private Vector3 lastPosition;
     private Quaternion lastRotation;
+
+    private bool InUiMode => isPaused || State.isLookingAtQuests;
     public bool UsingAction { get; set; }
 
     public bool isPaused { get; private set; }
@@ -155,7 +157,7 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
 
     private void OnMove(InputValue inputValue)
     {
-        if(isPaused) return;
+        if (InUiMode) return;
         var inputVector = inputValue.Get<Vector2>();
         movementVector = new Vector3(inputVector.x, 0, inputVector.y);
     }
@@ -182,42 +184,43 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
 
     private void OnEndTurn()
     {
-        if(isPaused) return;
+        if (InUiMode) return;
         CombatModeGameManager.Instance.EndPlayerTurn();
     }
 
     private void OnCombatInitiate()
     {
-        if (isPaused || State.isLookingAtQuests) return;
+        if (InUiMode) return;
         combatInitiation.StartInitiation(2.5f);
     }
 
     private void OnPause()
     {
+        movementVector = Vector3.zero;
         EventManager.OnPauseMenuToggled?.Invoke(!State.isLookingAtQuests && !isPaused);
     }
 
     private void OnChangeSelection(InputValue inp)
     {
-        if(isPaused) return;
+        if (InUiMode) return;
         var changeDir = inp.Get<float>();
         EventManager.OnChangeSelection?.Invoke(changeDir);
     }
 
     private void OnActionUsed(int index)
     {
-        if(isPaused) return;
+        if (InUiMode) return;
         if (CombatModeGameManager.Instance != null
             && !CombatModeGameManager.Instance.IsPlayerTurn) return;
         if (!CombatModeGameManager.Instance.IsCombatGoing) return;
         if (UsingAction) return;
 
-        UsingAction = true;
-        
+
         var actionDetails = PlayerActionManager.Instance.GetAction(index + 1);
 
         if (actionDetails == null || !actionDetails.canBeUsed) return;
 
+        UsingAction = true;
         var usedAction = statController.UsedAction(actionDetails.manaConsumption);
 
         if (usedAction)

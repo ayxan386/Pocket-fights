@@ -366,12 +366,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnUp: {fileID: 5832458554511861388}
+    m_SelectOnDown: {fileID: 5832458554511861388}
+    m_SelectOnLeft: {fileID: 5832458554511861388}
+    m_SelectOnRight: {fileID: 5832458554511861388}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -408,6 +408,30 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7629093066119032651}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: set_interactable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 7629093066119032651}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: Select
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!1 &1165801771607366711
 GameObject:
@@ -504,6 +528,7 @@ MonoBehaviour:
   appearLocation: {x: 1, y: 1, z: 1}
   disappearLocation: {x: 0, y: 0, z: 0}
   duration: 0.76
+  appearanceSelection: {fileID: 5433932304739118027}
 --- !u!1 &1791919777374616191
 GameObject:
   m_ObjectHideFlags: 0
@@ -2474,6 +2499,8 @@ MonoBehaviour:
   topButton: {fileID: 7629093066119032651}
   rewardClaiming: {fileID: 9011744787846730508}
   claimingButton: {fileID: 6460068066175895425}
+  acceptingPanel: {fileID: 1165801771607366711}
+  <SelectionRef>k__BackingField: {fileID: 7629093066119032651}
 --- !u!114 &7629093066119032651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2488,7 +2515,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
-    m_WrapAround: 0
+    m_WrapAround: 1
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -2522,6 +2549,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UiAnimation, Assembly-CSharp
         m_MethodName: ScaleAppear
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7629093066119032651}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: set_interactable
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

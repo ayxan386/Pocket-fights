@@ -12,8 +12,10 @@ public class QuestUi : MonoBehaviour
     [SerializeField] private Button topButton;
     [SerializeField] private GameObject rewardClaiming;
     [SerializeField] private Button claimingButton;
+    [SerializeField] private GameObject acceptingPanel;
 
     private QuestData questRef;
+    [field: SerializeField] public Button SelectionRef { get; set; }
 
     public void UpdateDisplay(QuestData quest, bool canClaim = false)
     {
@@ -25,8 +27,9 @@ public class QuestUi : MonoBehaviour
         expReward.text = "" + quest.expAmount;
         // topButton.gameObject.SetActive(!quest.completed);
         rewardClaiming.SetActive(quest.completed);
-        claimingButton.interactable = canClaim;
         topButton.interactable = !quest.inProgress;
+        acceptingPanel.SetActive(topButton.interactable);
+        claimingButton.interactable = canClaim;
     }
 
     public void AcceptQuest()

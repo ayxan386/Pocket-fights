@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class NavBarManager : MonoBehaviour
 {
@@ -38,7 +37,7 @@ public class NavBarManager : MonoBehaviour
 
         if (isPaused && lastTabName != null)
         {
-            UpdateTabContent(lastTabName);
+            UpdateTabContent(lastTabName == "Shop" ? "Inventory" : lastTabName);
             SelectTab();
         }
     }

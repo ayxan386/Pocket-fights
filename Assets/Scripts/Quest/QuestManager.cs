@@ -88,6 +88,11 @@ public class QuestManager : MonoBehaviour
             if (shouldFilterForAcceptance && !quest.inProgress) continue;
             var questUi = Instantiate(questUiPrefab, targetParent);
             questUi.UpdateDisplay(quest, !shouldFilterForAcceptance);
+
+            if (questUi.SelectionRef.interactable)
+            {
+                questUi.SelectionRef.Select();
+            }
         }
     }
 
@@ -95,7 +100,23 @@ public class QuestManager : MonoBehaviour
     {
         questRef.inProgress = true;
         questUi.UpdateDisplay(questRef);
+        SelectOtherQuest(questUi);
+
         DataManager.Instance.SaveQuests();
+    }
+
+    private static void SelectOtherQuest(QuestUi questUi)
+    {
+        var questHolder = questUi.transform.parent;
+        for (var i = 0; i < questHolder.childCount; i++)
+        {
+            if (questHolder.GetChild(i).TryGetComponent(out QuestUi ui) && ui != questUi &&
+                ui.SelectionRef.interactable)
+            {
+                ui.SelectionRef.Select();
+                return;
+            }
+        }
     }
 
     public void ClaimQuestRewards(QuestData questRef, QuestUi questUi)
