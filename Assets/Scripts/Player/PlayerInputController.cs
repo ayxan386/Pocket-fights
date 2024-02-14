@@ -155,6 +155,7 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
 
     private void OnMove(InputValue inputValue)
     {
+        if(isPaused) return;
         var inputVector = inputValue.Get<Vector2>();
         movementVector = new Vector3(inputVector.x, 0, inputVector.y);
     }
@@ -181,6 +182,7 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
 
     private void OnEndTurn()
     {
+        if(isPaused) return;
         CombatModeGameManager.Instance.EndPlayerTurn();
     }
 
@@ -197,12 +199,14 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
 
     private void OnChangeSelection(InputValue inp)
     {
+        if(isPaused) return;
         var changeDir = inp.Get<float>();
         EventManager.OnChangeSelection?.Invoke(changeDir);
     }
 
     private void OnActionUsed(int index)
     {
+        if(isPaused) return;
         if (CombatModeGameManager.Instance != null
             && !CombatModeGameManager.Instance.IsPlayerTurn) return;
         if (!CombatModeGameManager.Instance.IsCombatGoing) return;

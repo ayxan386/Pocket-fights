@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class NavBarManager : MonoBehaviour
 {
@@ -37,6 +39,19 @@ public class NavBarManager : MonoBehaviour
         if (isPaused && lastTabName != null)
         {
             UpdateTabContent(lastTabName);
+            SelectTab();
+        }
+    }
+
+    public void SelectTab(string tabName = "Inventory")
+    {
+        for (int index = 0; index < transform.childCount; index++)
+        {
+            var child = transform.GetChild(index);
+            if (child.gameObject.name == tabName)
+            {
+                EventSystem.current.SetSelectedGameObject(child.gameObject);
+            }
         }
     }
 

@@ -113,7 +113,7 @@ public class InventoryCell : MonoBehaviour, IPointerEnterHandler, ISelectHandler
         clickCoro = null;
     }
 
-    private void SendClick()
+    public void SendClick()
     {
         if (storedItem == null) return;
         InventoryController.Instance.ItemCellClicked(storedItem, type);

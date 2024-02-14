@@ -61,7 +61,13 @@ public class SkillsDisplayManager : MonoBehaviour
                 break;
         }
 
+        DisableSkillOptions();
+    }
+
+    private void DisableSkillOptions()
+    {
         skillOptions.gameObject.SetActive(false);
+        NavBarManager.Instance.SelectTab("Skills");
     }
 
     private void UpdateAllUi()
@@ -105,9 +111,8 @@ public class SkillsDisplayManager : MonoBehaviour
         if (EventSystem.current.currentSelectedGameObject != null
             && EventSystem.current.currentSelectedGameObject.name.Contains("Option")) yield break;
 
-        skillOptions.gameObject.SetActive(false);
+        DisableSkillOptions(); 
     }
-
 
     private void OnSkillUpgraded(SkillCellManager toUpdate)
     {

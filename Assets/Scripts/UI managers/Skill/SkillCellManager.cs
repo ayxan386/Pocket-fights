@@ -3,7 +3,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class SkillCellManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ISelectHandler, IPointerClickHandler
+public class SkillCellManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ISelectHandler,
+    IPointerClickHandler
 {
     [SerializeField] private Image icon;
     [SerializeField] private Transform upgradeHolder;
@@ -63,6 +64,11 @@ public class SkillCellManager : MonoBehaviour, IPointerEnterHandler, IPointerExi
     }
 
     public void OnPointerClick(PointerEventData eventData)
+    {
+        SkillClicked();
+    }
+
+    public void SkillClicked()
     {
         EventManager.OnSkillCellClicked?.Invoke(this);
     }
