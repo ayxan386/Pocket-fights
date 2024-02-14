@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class InventoryController : MonoBehaviour
 {
@@ -107,7 +109,35 @@ public class InventoryController : MonoBehaviour
     private void OnItemAddAsLoot(InventoryItem item, LootItemPanel panel)
     {
         OnItemAdd(item);
+        UpdateLootSelection(panel);
         Destroy(panel.gameObject);
+    }
+
+    private static void UpdateLootSelection(LootItemPanel panel)
+    {
+        var loots = panel.transform.parent;
+        print($"Number of loots: {loots.childCount}");
+        for (int i = 0; i < loots.childCount; i++)
+        {
+            print($"Checking {i + 1} panel");
+            if(loots.GetChild(i) == panel.transform) continue;
+            
+            print($"Selecting {i + 1} panel");
+            EventSystem.current.SetSelectedGameObject(loots.GetChild(i).gameObject);
+            return;
+        }
+        
+        print("Searching close button");
+        var allButtons = loots.parent.GetComponentsInChildren<Button>();
+        print($"Found {allButtons.Length} buttons");
+        foreach (var button in allButtons)
+        {
+            if(button.transform == panel.transform) continue;
+            
+            print($"Selecting {button.gameObject.name}");
+            button.Select();
+            return;
+        }
     }
 
     private void OnItemBought(InventoryItem boughtItem)

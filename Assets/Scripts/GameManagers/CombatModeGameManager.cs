@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class CombatModeGameManager : MonoBehaviour
@@ -205,8 +206,8 @@ public class CombatModeGameManager : MonoBehaviour
             var lootItemPanel = Instantiate(lootItemPanelPrefab, lootHolder);
             lootItemPanel.UpdateDisplay(newDrop);
         }
-
-
+        
+        EventSystem.current.SetSelectedGameObject(lootHolder.GetChild(0).gameObject);
         lootPanelAnimation.SetTrigger("open");
     }
 }
