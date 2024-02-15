@@ -22031,6 +22031,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6288170189855129938, guid: 9903153025cebd64d82db2065549fe87,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.00012207031
+      objectReference: {fileID: 0}
     - target: {fileID: 6298048840648724485, guid: 9903153025cebd64d82db2065549fe87,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -22769,6 +22774,16 @@ PrefabInstance:
     - target: {fileID: 8350575464313214448, guid: 9903153025cebd64d82db2065549fe87,
         type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8380835266098087377, guid: 9903153025cebd64d82db2065549fe87,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8380835266098087377, guid: 9903153025cebd64d82db2065549fe87,
+        type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8533793561258392446, guid: 9903153025cebd64d82db2065549fe87,
@@ -101235,6 +101250,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Main Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 652925243726052722, guid: dfc385a5ab05d164e926188b694e9e29,
+        type: 3}
+      propertyPath: m_ClearFlags
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 652925243726052722, guid: dfc385a5ab05d164e926188b694e9e29,
+        type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0.31132078
+      objectReference: {fileID: 0}
+    - target: {fileID: 652925243726052722, guid: dfc385a5ab05d164e926188b694e9e29,
+        type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0.24580961
+      objectReference: {fileID: 0}
+    - target: {fileID: 652925243726052722, guid: dfc385a5ab05d164e926188b694e9e29,
+        type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0.20412071
       objectReference: {fileID: 0}
     - target: {fileID: 652925243726052725, guid: dfc385a5ab05d164e926188b694e9e29,
         type: 3}
