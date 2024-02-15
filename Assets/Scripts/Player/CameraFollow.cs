@@ -13,7 +13,7 @@ public class CameraFollow : MonoBehaviour
         set => target = value;
     }
 
-    private void LateUpdate()
+    private void Update()
     {
         if (target == null) return;
         var desiredPosition = target.position + offset;

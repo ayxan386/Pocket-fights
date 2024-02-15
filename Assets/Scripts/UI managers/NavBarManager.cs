@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class NavBarManager : MonoBehaviour
 {
@@ -84,6 +85,7 @@ public class NavBarManager : MonoBehaviour
                 break;
             case "Save":
                 DataManager.Instance.SaveEventTrigger();
+                SceneManager.LoadScene("MainMenu");
                 break;
             case "Inventory":
                 InventoryController.Instance.UpdateDisplay();

@@ -581,7 +581,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   offset: {x: -6.28, y: 7.91, z: -8}
-  followSpeed: 5
+  followSpeed: 3
   allowedMaxDistance: 3
 --- !u!1 &2163032917718402799
 GameObject:

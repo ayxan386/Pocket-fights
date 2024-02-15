@@ -207,7 +207,8 @@ public class CombatModeGameManager : MonoBehaviour
             lootItemPanel.UpdateDisplay(newDrop);
         }
         
-        EventSystem.current.SetSelectedGameObject(lootHolder.GetChild(0).gameObject);
+        if(lootHolder.childCount > 0)
+            EventSystem.current.SetSelectedGameObject(lootHolder.GetChild(0).gameObject);
         lootPanelAnimation.SetTrigger("open");
     }
 }
