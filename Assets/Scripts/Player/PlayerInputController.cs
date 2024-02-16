@@ -25,6 +25,7 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
     [Header("Footsteps")] [SerializeField] private float spawnRate;
     [SerializeField] private Transform leftFoot, rightFoot;
     [SerializeField] private FadingSprite leftFootSprite, rightFootSprite;
+    [SerializeField] private LayerMask groundLayer;
 
 
     private CharacterController cc;
@@ -33,7 +34,7 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
     private Vector3 lastPosition;
     private Quaternion lastRotation;
 
-    private bool InUiMode => isPaused || State.isLookingAtQuests;
+    public bool InUiMode => isPaused || State.isLookingAtQuests;
     public bool UsingAction { get; set; }
 
     public bool isPaused { get; private set; }
@@ -47,7 +48,6 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
 
     private float lastSpawnTime;
     private bool isLeftFoot;
-    [SerializeField] private LayerMask groundLayer;
 
     private void Awake()
     {
