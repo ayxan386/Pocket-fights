@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -10,22 +9,20 @@ public class CombatModeGameManager : MonoBehaviour
     [SerializeField] private List<MobController> mobsInCombat;
     [SerializeField] private Button endTurnButton;
 
-    [Header("Entity scene placement")] [SerializeField]
-    private Transform playerStandPoint;
-
+    [Header("Entity scene placement")] 
+    [SerializeField] private Transform playerStandPoint;
     [SerializeField] private List<Transform> mobStandPoints;
 
-    [Header("Menus")] [SerializeField] private GameObject endingMenu;
-
+    [Header("Menus")] 
     [SerializeField] private GameObject loadingMenu;
 
-    [SerializeField] private TextMeshProUGUI endText;
-
-    [Header("Loot stuff")] [SerializeField]
-    private LootItemPanel lootItemPanelPrefab;
-
+    [Header("Loot stuff")] 
+    [SerializeField] private LootItemPanel lootItemPanelPrefab;
     [SerializeField] private Animator lootPanelAnimation;
     [SerializeField] private Transform lootHolder;
+
+    [field:Header("Effects")]
+    [field:SerializeField] public AudioSource SkillEffectsAudio { get; set; }
 
     public static CombatModeGameManager Instance { get; private set; }
     public MobController SelectedEnemy { get; private set; }

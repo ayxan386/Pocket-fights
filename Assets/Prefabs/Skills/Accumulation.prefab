@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2302918571034192609}
   - component: {fileID: 1305261482067810917}
   - component: {fileID: 3256843409782517739}
+  - component: {fileID: 3421383493542581361}
   m_Layer: 0
   m_Name: Accumulation
   m_TagString: Untagged
@@ -31,7 +32,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3442621363495594722}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -58,7 +60,7 @@ MonoBehaviour:
   - 1.15
   - 1.2
   - 1.4
-  activationPrice: 2
+  activationPrice: 0
   currentLevel: -1
   maxLevel: 3
   slotName: 1
@@ -83,6 +85,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: Skill, Assembly-CSharp
         m_MethodName: Disable
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3421383493542581361}
+        m_TargetAssemblyTypeName: BasicAction, Assembly-CSharp
+        m_MethodName: ApplyEffectToCaster
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -144,5 +158,82 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2302918571034192609}
+        m_TargetAssemblyTypeName: StatusApplyingAction, Assembly-CSharp
+        m_MethodName: ApplyEffectToCaster
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   animationName: openArms
   onCaster: 1
+--- !u!114 &3421383493542581361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184396450984925242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6f75bda6589eee4a92c38ad9e57a1ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delayNext: 0
+  usageEffects:
+    m_PersistentCalls:
+      m_Calls: []
+  soundEffect: {fileID: 4844038623744628243}
+--- !u!1 &1600975452129948601
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3442621363495594722}
+  - component: {fileID: 4844038623744628243}
+  m_Layer: 0
+  m_Name: SoundEffect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3442621363495594722
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1600975452129948601}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6739678855245900918}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4844038623744628243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1600975452129948601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a7a66622c7562445bb0edab9cc0afba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
+  clips:
+  - {fileID: 8300000, guid: 7a9de5c4d998126449cf964a6b27a8b0, type: 3}
+  random: 0

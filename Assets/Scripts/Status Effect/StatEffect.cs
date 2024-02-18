@@ -18,6 +18,7 @@ public class StatEffect : MonoBehaviour
     public DisplayDetails displayDetails;
     public StatusEffectDisplayManager RelatedDisplayManager;
     public UnityEvent<StatEffect, StatController> secondaryEffect;
+    public UnityEvent<StatEffect, StatController> triggerEffects;
 
     [ContextMenu("Add status")]
     public void AddPlayerStatusEffect()
@@ -72,10 +73,11 @@ public class StatEffect : MonoBehaviour
                 break;
             case StatusEffectType.Healing:
                 relatedStats.UpdateStatValue(StatValue.Health, (int)LastAmount);
+                triggerEffects?.Invoke(this, relatedStats);
                 break;
             case StatusEffectType.StatusGiving:
-                print("Triggered");
                 secondaryEffect?.Invoke(this, relatedStats);
+                triggerEffects?.Invoke(this, relatedStats);
                 break;
             default:
                 throw new ArgumentOutOfRangeException();

@@ -11,13 +11,18 @@ public class UiSoundEffect : MonoBehaviour
     {
         if (!PlayerInputController.Instance.InUiMode) return;
 
+        Play(audioSource);
+    }
+
+    public void Play(AudioSource audioSourcePassed)
+    {
         if (random)
         {
-            audioSource.PlayOneShot(clips[Random.Range(0, clips.Length)]);
+            audioSourcePassed.PlayOneShot(clips[Random.Range(0, clips.Length)]);
         }
         else
         {
-            audioSource.PlayOneShot(clips[currentIndex]);
+            audioSourcePassed.PlayOneShot(clips[currentIndex]);
             currentIndex = (currentIndex + 1) % clips.Length;
         }
     }
