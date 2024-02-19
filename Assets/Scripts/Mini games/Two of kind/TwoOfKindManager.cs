@@ -69,10 +69,15 @@ public class TwoOfKindManager : MonoBehaviour
             otherOption.Cover();
         }
 
-        if (pairCounter == maxPairChoice)
+        if (!CanOpen())
         {
             EndGame();
         }
+    }
+
+    public bool CanOpen()
+    {
+        return pairCounter < maxPairChoice;
     }
 
     private void StartGame()

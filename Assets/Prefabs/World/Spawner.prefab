@@ -245,6 +245,9 @@ MonoBehaviour:
   obstructionLayer:
     serializedVersion: 2
     m_Bits: 128
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
   boxAnimator: {fileID: 8798263416350155531}
   boxMainBody: {fileID: 8884399706130560751}
 --- !u!1 &8884399706247225313

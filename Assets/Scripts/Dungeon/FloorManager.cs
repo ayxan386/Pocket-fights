@@ -49,6 +49,7 @@ public class FloorManager : MonoBehaviour
         if (shouldFollow)
         {
             cameraRef.transform.eulerAngles = followAngles;
+            cameraRef.ResetOrtho();
         }
     }
 

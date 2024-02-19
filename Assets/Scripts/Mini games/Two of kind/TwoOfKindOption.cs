@@ -34,6 +34,7 @@ public class TwoOfKindOption : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Uncover();
+        if (Manager.CanOpen())
+            Uncover();
     }
 }

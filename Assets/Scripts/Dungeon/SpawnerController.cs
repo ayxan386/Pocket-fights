@@ -13,6 +13,7 @@ public class SpawnerController : MonoBehaviour
 
     [SerializeField] private List<MobController> spawnedMobs;
     [SerializeField] private LayerMask obstructionLayer;
+    [SerializeField] private LayerMask groundLayer;
 
     [SerializeField] private Animator boxAnimator;
     [SerializeField] private GameObject boxMainBody;
@@ -89,7 +90,10 @@ public class SpawnerController : MonoBehaviour
         var pos = transform.position;
         pos.x += offset.x;
         pos.z += offset.y;
-        return !Physics.CheckSphere(pos, 0.3f, obstructionLayer) ? pos : FindRandomPos(depth + 1);
+        return !Physics.CheckSphere(pos, 0.3f, obstructionLayer)
+               && Physics.CheckSphere(pos, 0.3f, groundLayer)
+            ? pos
+            : FindRandomPos(depth + 1);
     }
 
     private void OnDrawGizmosSelected()

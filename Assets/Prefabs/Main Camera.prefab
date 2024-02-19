@@ -135,3 +135,5 @@ MonoBehaviour:
   offset: {x: -6.28, y: 7.91, z: -8}
   followSpeed: 2.9
   allowedMaxDistance: 3
+  orthoSize: 6.8
+  camera: {fileID: 652925243726052722}

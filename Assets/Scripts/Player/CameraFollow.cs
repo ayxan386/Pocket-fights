@@ -6,11 +6,18 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private Vector3 offset = new Vector3(0f, 10f, -10f);
     [SerializeField] private float followSpeed = 5f;
     [SerializeField] private float allowedMaxDistance;
+    [SerializeField] private float orthoSize;
+    [SerializeField] private Camera camera;
 
     public Transform Target
     {
         get => target;
         set => target = value;
+    }
+
+    private void Awake()
+    {
+        orthoSize = camera.orthographicSize;
     }
 
     private void Update()
@@ -21,5 +28,10 @@ public class CameraFollow : MonoBehaviour
         {
             transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime * followSpeed);
         }
+    }
+
+    public void ResetOrtho()
+    {
+        camera.orthographicSize = orthoSize;
     }
 }
