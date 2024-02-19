@@ -100,7 +100,8 @@ public class SkillSelectionManager : MonoBehaviour
         display.icon.sprite = skill.displayDetails.icon;
         if (displayManaCost)
         {
-            display.slotNameText.text = display.slotNameText.text[0] + $" MP {skill.manaConsumption}";
+            // display.slotNameText.text = display.slotNameText.text[0] + $" MP {skill.manaConsumption}";
+            display.slotNameText.text = $"{skill.manaConsumption} MP";
             var currentMana = PlayerInputController.Instance.Stats.GetStatValue(StatValue.Mana).currentValue;
             var notEnoughMana = currentMana < skill.manaConsumption || !skill.canBeUsed;
             display.notEnoughManaImage.gameObject.SetActive(notEnoughMana);
