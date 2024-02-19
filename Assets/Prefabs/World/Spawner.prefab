@@ -240,7 +240,7 @@ MonoBehaviour:
   - {fileID: 8729943597482726947, guid: bc0537a753d30c946bbef80cc467fee6, type: 3}
   - {fileID: 8729943597482726947, guid: ac82e81aab1b3bc4ebbe32887c9ba878, type: 3}
   data: {fileID: 0}
-  activationRange: 5.85
+  activationRange: 15.31
   spawnedMobs: []
   obstructionLayer:
     serializedVersion: 2

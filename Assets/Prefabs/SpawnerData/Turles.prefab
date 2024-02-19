@@ -48,4 +48,4 @@ MonoBehaviour:
   - {fileID: 2616563055974944068, guid: c1096afd5a7a273499cc0bccb2ac346c, type: 3}
   numberOfMobsLeft: 0a000000
   spawnerRate: 15
-  maxNumberOfMobs: 2
+  maxNumberOfMobs: 9

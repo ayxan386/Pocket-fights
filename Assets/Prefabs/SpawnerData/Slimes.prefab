@@ -50,4 +50,4 @@ MonoBehaviour:
   - {fileID: 3305920741053015679, guid: df779cb9b6007ab4081802a57fd14cfe, type: 3}
   numberOfMobsLeft: 030000000200000002000000
   spawnerRate: 15
-  maxNumberOfMobs: 3
+  maxNumberOfMobs: 9

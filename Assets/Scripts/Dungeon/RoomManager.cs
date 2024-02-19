@@ -1,41 +1,26 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Cinemachine;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class RoomManager : MonoBehaviour
 {
-    [SerializeField] private CinemachineVirtualCamera roomCamera;
     [SerializeField] private List<TeleportPad> pads;
     [SerializeField] private Transform playerSpawnPoint;
     [SerializeField] private string comparisonName;
 
-    [Header("Floor generation")]
-    [SerializeField] private Transform floorGenerationPoint;
-
-    [SerializeField] private Transform capLayer;
+    [Header("Floor generation")] [SerializeField]
+    private Transform capLayer;
 
     [SerializeField] private Vector2Int dimensions;
-    [SerializeField] private Vector3 sizeOfCell;
     [SerializeField] private Vector3 offset;
 
-    [SerializeField] private List<BlockChance> blocks;
-    [SerializeField] private List<string> floorBlocks;
-    [SerializeField] private List<TopBottomPairs> topBottomPairsList;
     [SerializeField] private LayerMask obstructionLayer;
     [SerializeField] private float detectionRadius;
 
-    [Header("Game of life params")]
-    [SerializeField] private string joiningCellName = "water";
-
-    [SerializeField] private int cellNumberThreshold;
-    [SerializeField] private int deadCellCount = 1;
-    [SerializeField] private string deadCellName;
-
-    [Header("Room decor")]
-    [SerializeField] private List<BlockChance> decorPrefabs;
+    [Header("Room decor")] [SerializeField]
+    private List<BlockChance> decorPrefabs;
 
     [SerializeField] [Range(0, 1f)] private float density;
     [SerializeField] private Transform decorHolder;
@@ -46,13 +31,13 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private bool randomSeed;
     [SerializeField] private int currentSeed;
 
-    [Header("Room specialty")]
-    [SerializeField] private List<BlockChance> specialtyBlockPrefabs;
+    [Header("Room specialty")] [SerializeField]
+    private List<BlockChance> specialtyBlockPrefabs;
 
     [SerializeField] private List<Transform> specialtyBlockSpawnPoints;
 
-    [Header("Exit condition")]
-    [SerializeField] private ExitConditionType exitConditionType;
+    [Header("Exit condition")] [SerializeField]
+    private ExitConditionType exitConditionType;
 
     [SerializeField] private SpawnerController targetSpawner;
     [SerializeField] private int killCounter;
@@ -62,7 +47,6 @@ public class RoomManager : MonoBehaviour
     private bool isActive;
 
     public List<TeleportPad> Telepads => pads;
-
     public string ComparisonName => comparisonName;
     public Vector2Int GridSize => dimensions;
     public List<GridPoint> Grid => grid;
@@ -79,10 +63,10 @@ public class RoomManager : MonoBehaviour
 
     private void OnMobDeath(MobController obj)
     {
-        if(!isActive) return;
+        if (!isActive) return;
         killCounter--;
         CheckExitConditions();
-        
+
         exitConditionDisplayManager.UpdateDisplay(killCounter, CanExit);
     }
 
@@ -137,98 +121,6 @@ public class RoomManager : MonoBehaviour
     public bool HasUnlinkedTelepad()
     {
         return pads.Exists(pad => !pad.IsLinked);
-    }
-
-    [ContextMenu("Random bottom floor generation")]
-    public void GenerateFloor()
-    {
-        DeleteAllChildren(floorGenerationPoint);
-        floorBlocks.Clear();
-        offset.x = Random.Range(0, 10000);
-        offset.y = Random.Range(0, 10000);
-
-        for (int x = 0; x < dimensions.x; x++)
-        {
-            for (int y = 0; y < dimensions.y; y++)
-            {
-                var pos = floorGenerationPoint.position;
-                pos.x += sizeOfCell.x * x;
-                pos.z += sizeOfCell.z * y;
-                var block = GetRandomBlock(pos.x, pos.z, blocks);
-
-                // var newBlock = PrefabUtility.InstantiatePrefab(block.block) as GameObject;
-                // newBlock.transform.position = pos;
-                // newBlock.transform.rotation = Quaternion.identity;
-                // newBlock.transform.SetParent(floorGenerationPoint);
-                //
-                floorBlocks.Add(block.type);
-            }
-        }
-    }
-
-    [ContextMenu("Random upper floor generation")]
-    public void GenerateUpperFloor()
-    {
-        DeleteAllChildren(capLayer);
-        for (int x = 0; x < dimensions.x; x++)
-        {
-            for (int y = 0; y < dimensions.y; y++)
-            {
-                var pos = floorGenerationPoint.position;
-                pos.x += sizeOfCell.x * x;
-                pos.z += sizeOfCell.z * y;
-                pos.y += 1;
-                var bottomLayer = floorBlocks[GetIndex(y, x)];
-                var pair = topBottomPairsList.Find(pair => pair.bottomName == bottomLayer);
-
-                // var newBlock = PrefabUtility.InstantiatePrefab(pair.top) as GameObject;
-                // newBlock.transform.position = pos;
-                // newBlock.transform.rotation = Quaternion.identity;
-                // newBlock.transform.SetParent(capLayer);
-            }
-        }
-    }
-
-    public void GameOfLife()
-    {
-        var temp = new List<string>();
-        for (int y = 0; y < dimensions.y; y++)
-        {
-            for (int x = 0; x < dimensions.x; x++)
-            {
-                var index = GetIndex(y, x);
-                var bottomLayer = floorBlocks[index];
-                var numberOfWaterCells =
-                    IsWater(y, x + 1) + IsWater(y, x - 1) + IsWater(y + 1, x) + IsWater(y - 1, x)
-                    +IsWater(y+1, x + 1) + IsWater(y+1, x - 1) + IsWater(y - 1, x + 1) + IsWater(y - 1, x - 1);
-                if (bottomLayer != joiningCellName)
-                {
-                    temp.Add(numberOfWaterCells >= cellNumberThreshold ? joiningCellName : bottomLayer);
-                }
-                else
-                {
-                    temp.Add(numberOfWaterCells <= deadCellCount ? deadCellName : floorBlocks[index]);
-                }
-            }
-        }
-
-        floorBlocks = temp;
-
-        GenerateUpperFloor();
-    }
-
-    private int IsWater(int y, int x)
-    {
-        var index = GetIndex(y, x);
-
-        if (index < 0 || index >= floorBlocks.Count) return 0;
-
-        return floorBlocks[index] == joiningCellName ? 1 : 0;
-    }
-
-    private int GetIndex(int y, int x)
-    {
-        return y + x * dimensions.x;
     }
 
     [ContextMenu("Delete all children")]
@@ -307,6 +199,7 @@ public class RoomManager : MonoBehaviour
         }
     }
 
+    [ContextMenu("Place decors")]
     public void PlaceDecors()
     {
         DeleteAllChildren(decorHolder);
@@ -363,12 +256,13 @@ public class RoomManager : MonoBehaviour
             exitConditionDisplayManager.gameObject.SetActive(false);
             return;
         }
+
         if (allSpawners.Length == 1)
         {
             var spawnerData = allSpawners[0].SetSpawnerData();
             targetSpawner = allSpawners[0];
-            
-            killCounter = spawnerData.numberOfMobsLeft.Aggregate((num,sum) => sum + num);
+
+            killCounter = spawnerData.numberOfMobsLeft.Aggregate((num, sum) => sum + num);
             exitConditionType = ExitConditionType.SpawnerExhaust;
         }
         else
@@ -384,7 +278,7 @@ public class RoomManager : MonoBehaviour
             killCounter = maxAverage;
             exitConditionType = ExitConditionType.KillCounter;
         }
-        
+
         CanExit = false;
         exitConditionDisplayManager.UpdateDisplay(killCounter, CanExit);
     }

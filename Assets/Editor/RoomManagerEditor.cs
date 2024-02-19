@@ -1,12 +1,12 @@
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(RoomManager))]
-public class RoomManagerEditor : Editor
+[CustomEditor(typeof(GroundGenerator))]
+public class GroundGeneratorEditor : Editor
 {
     public override void OnInspectorGUI()
     {
-        var myTarget = (RoomManager)target;
+        var myTarget = (GroundGenerator)target;
 
         DrawDefaultInspector();
         if (GUILayout.Button("Generate"))
@@ -22,11 +22,6 @@ public class RoomManagerEditor : Editor
         if (GUILayout.Button("Join cells"))
         {
             myTarget.GameOfLife();
-        }
-
-        if (GUILayout.Button("Place decors"))
-        {
-            myTarget.PlaceDecors();
         }
     }
 }
