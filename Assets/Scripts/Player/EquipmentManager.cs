@@ -30,18 +30,20 @@ public class EquipmentManager : MonoBehaviour
 
     public void AddEquipment(EquippableItem equippableItem)
     {
+        var inventoryCell = GetSlotRef(equippableItem);
+        equippableItem.slotRef = inventoryCell;
         equippableItem.isEquipped = true;
-        equippableItem.isRight = CountEquippedType(equippableItem) % 2 == 1;
         equippableItem.referencePoint = equippableItem.isRight ? RightHandAttachmentPoint : LeftHandAttachmentPoint;
         equippableItem.PlaceInReferencePoint();
         equippedItems.Add(equippableItem);
-        GetSlotRef(equippableItem).UpdateDisplay(equippableItem, InventoryCellType.Equipment);
+        inventoryCell.UpdateDisplay(equippableItem, InventoryCellType.Equipment);
     }
 
     public void RemoveEquipment(EquippableItem equippableItem)
     {
         equippedItems.Remove(equippableItem);
-        GetSlotRef(equippableItem).SetNoItemState();
+        equippableItem.slotRef.SetNoItemState();
+        equippableItem.slotRef = null;
         EventManager.OnItemAdd?.Invoke(equippableItem);
     }
 
@@ -55,31 +57,37 @@ public class EquipmentManager : MonoBehaviour
 
     private InventoryCell GetSlotRef(EquippableItem equippableItem)
     {
-        var rl = CountEquippedType(equippableItem) % 2;
+        var equipmentSlotCells = InventoryController.Instance.EquipmentSlotCells;
         switch (equippableItem.equipmentType)
         {
             case EquipmentType.TwoHanded:
-                return InventoryController.Instance.EquipmentSlotCells.mainHand;
+                return equipmentSlotCells.mainHand;
             case EquipmentType.Helmet:
-                return InventoryController.Instance.EquipmentSlotCells.helmet;
+                return equipmentSlotCells.helmet;
             case EquipmentType.Chestplate:
-                return InventoryController.Instance.EquipmentSlotCells.chestplate;
+                return equipmentSlotCells.chestplate;
             case EquipmentType.Leggings:
-                return InventoryController.Instance.EquipmentSlotCells.leggings;
+                return equipmentSlotCells.leggings;
             case EquipmentType.Boots:
-                return InventoryController.Instance.EquipmentSlotCells.boots;
+                return equipmentSlotCells.boots;
             case EquipmentType.SingleHand:
-                return rl == 1
-                    ? InventoryController.Instance.EquipmentSlotCells.mainHand
-                    : InventoryController.Instance.EquipmentSlotCells.offHand;
+                var leftHand = equipmentSlotCells.mainHand.storedItem == null;
+                equippableItem.isRight = !leftHand;
+                return leftHand
+                    ? equipmentSlotCells.mainHand
+                    : equipmentSlotCells.offHand;
             case EquipmentType.Ring:
-                return rl == 1
-                    ? InventoryController.Instance.EquipmentSlotCells.leftRing
-                    : InventoryController.Instance.EquipmentSlotCells.rightRing;
+                var leftHandFinger = equipmentSlotCells.leftRing.storedItem == null;
+                equippableItem.isRight = !leftHandFinger;
+                return leftHandFinger
+                    ? equipmentSlotCells.leftRing
+                    : equipmentSlotCells.rightRing;
             case EquipmentType.Bracelet:
-                return rl == 1
-                    ? InventoryController.Instance.EquipmentSlotCells.leftBracelet
-                    : InventoryController.Instance.EquipmentSlotCells.rightBracelet;
+                var leftArm = equipmentSlotCells.leftBracelet.storedItem == null;
+                equippableItem.isRight = !leftArm;
+                return leftArm
+                    ? equipmentSlotCells.leftBracelet
+                    : equipmentSlotCells.rightBracelet;
             default:
                 throw new ArgumentOutOfRangeException();
         }

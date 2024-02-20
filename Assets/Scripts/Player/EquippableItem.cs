@@ -15,6 +15,7 @@ public class EquippableItem : InventoryItem
     public Vector3[] scale;
     public Transform referencePoint;
     public bool isRight;
+    public InventoryCell slotRef;
 
     public bool TryEquip()
     {
@@ -42,7 +43,7 @@ public class EquippableItem : InventoryItem
     public void PlaceInReferencePoint()
     {
         if (!isEquipped || equipmentType != EquipmentType.SingleHand) return;
-        
+
         inWorldObject.SetActive(true);
         var objectTransform = inWorldObject.transform;
         objectTransform.SetParent(referencePoint);
@@ -78,8 +79,9 @@ public class EquippableItem : InventoryItem
     public void TryUnEquip()
     {
         isEquipped = false;
-        displayInInventory = true;
+        referencePoint = null;
         inWorldObject.SetActive(false);
+        displayInInventory = true;
         ReverseEffect();
         EquipmentManager.Instance.RemoveEquipment(this);
     }
