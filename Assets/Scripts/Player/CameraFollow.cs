@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
@@ -15,8 +16,9 @@ public class CameraFollow : MonoBehaviour
         set => target = value;
     }
 
-    private void Awake()
+    private IEnumerator Start()
     {
+        yield return new WaitUntil(() => camera != null);
         orthoSize = camera.orthographicSize;
     }
 

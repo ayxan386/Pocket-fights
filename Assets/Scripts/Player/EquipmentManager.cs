@@ -7,6 +7,8 @@ public class EquipmentManager : MonoBehaviour
 {
     [SerializeField] private List<EquippableItem> equippedItems;
     [SerializeField] private List<EquippableItem> itemPrefabs;
+    [field: SerializeField] public Transform LeftHandAttachmentPoint { get; set; }
+    [field: SerializeField] public Transform RightHandAttachmentPoint { get; set; }
 
     public static EquipmentManager Instance { get; private set; }
 
@@ -29,6 +31,9 @@ public class EquipmentManager : MonoBehaviour
     public void AddEquipment(EquippableItem equippableItem)
     {
         equippableItem.isEquipped = true;
+        equippableItem.isRight = CountEquippedType(equippableItem) % 2 == 1;
+        equippableItem.referencePoint = equippableItem.isRight ? RightHandAttachmentPoint : LeftHandAttachmentPoint;
+        equippableItem.PlaceInReferencePoint();
         equippedItems.Add(equippableItem);
         GetSlotRef(equippableItem).UpdateDisplay(equippableItem, InventoryCellType.Equipment);
     }

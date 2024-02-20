@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class EquippableItem : InventoryItem
 {
@@ -8,6 +9,12 @@ public class EquippableItem : InventoryItem
     public int slotCount;
     public List<EquipmentStatEffect> statEffects;
     public bool isEquipped;
+    public GameObject inWorldObject;
+    public Vector3[] offset;
+    public Vector3[] rotation;
+    public Vector3[] scale;
+    public Transform referencePoint;
+    public bool isRight;
 
     public bool TryEquip()
     {
@@ -27,7 +34,23 @@ public class EquippableItem : InventoryItem
     private void Equip()
     {
         EquipmentManager.Instance.AddEquipment(this);
+        PlaceInReferencePoint();
         ApplyEffect();
+    }
+
+    [ContextMenu("Place in reference point")]
+    public void PlaceInReferencePoint()
+    {
+        if (!isEquipped || equipmentType != EquipmentType.SingleHand) return;
+        
+        inWorldObject.SetActive(true);
+        var objectTransform = inWorldObject.transform;
+        objectTransform.SetParent(referencePoint);
+
+        var index = isRight ? 1 : 0;
+        objectTransform.localScale = scale[index];
+        objectTransform.localEulerAngles = rotation[index];
+        objectTransform.localPosition = offset[index];
     }
 
     public void ApplyEffect(bool shouldUpdate = true)
@@ -56,6 +79,7 @@ public class EquippableItem : InventoryItem
     {
         isEquipped = false;
         displayInInventory = true;
+        inWorldObject.SetActive(false);
         ReverseEffect();
         EquipmentManager.Instance.RemoveEquipment(this);
     }
