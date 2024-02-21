@@ -36,6 +36,12 @@ public class InventoryItem : MonoBehaviour
     {
         return $"Item: {name} {count}";
     }
+
+    public virtual string GetDescription()
+    {
+        return description;
+    }
+    
 }
 
 public enum ItemType

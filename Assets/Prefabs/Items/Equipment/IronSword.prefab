@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 695a46ba6889aa44eae74eff781f666b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 5312d89aed841784abd508a0dbd32dc2, type: 3}
+  icon: {fileID: 21300000, guid: 8293621d8f993a3439fd41bfbeda935b, type: 3}
   name: Iron sword
   description: 
   stackSize: 1
@@ -80,6 +80,7 @@ MonoBehaviour:
   - {x: 0.38, y: 0.38, z: 0.38}
   referencePoint: {fileID: 0}
   isRight: 0
+  slotRef: {fileID: 0}
 --- !u!1001 &5148337707514783980
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -113,19 +114,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4195041647933860, guid: 7b29c71475739bd42a230d3cbf151948, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.965926
       objectReference: {fileID: 0}
     - target: {fileID: 4195041647933860, guid: 7b29c71475739bd42a230d3cbf151948, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.0000018099951
+      value: 0.000001737008
       objectReference: {fileID: 0}
     - target: {fileID: 4195041647933860, guid: 7b29c71475739bd42a230d3cbf151948, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.00000004371139
+      value: -0.00000051068247
       objectReference: {fileID: 0}
     - target: {fileID: 4195041647933860, guid: 7b29c71475739bd42a230d3cbf151948, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 7.9178634e-14
+      value: 0.2588186
       objectReference: {fileID: 0}
     - target: {fileID: 4195041647933860, guid: 7b29c71475739bd42a230d3cbf151948, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -137,7 +138,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4195041647933860, guid: 7b29c71475739bd42a230d3cbf151948, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 23818694143799944, guid: 7b29c71475739bd42a230d3cbf151948,
         type: 3}
@@ -4889,7 +4890,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 7
+  m_VersionIndex: 10
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []

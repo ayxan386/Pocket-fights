@@ -34,7 +34,7 @@ public class ItemDescriptionManager : MonoBehaviour
         if (item == null) return;
         icon.sprite = item.icon;
         title.text = item.name;
-        desc.text = item.description;
+        desc.text = item.GetDescription();
     }
 
     public void DisplaySkill(Skill skill)

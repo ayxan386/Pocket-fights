@@ -68,10 +68,10 @@ public class GroundGenerator : MonoBehaviour
                 var bottomLayer = floorBlocks[GetIndex(y, x)];
                 var pair = topBottomPairsList.Find(pair => pair.bottomName == bottomLayer);
 
-                var newBlock = PrefabUtility.InstantiatePrefab(pair.top) as GameObject;
-                newBlock.transform.position = pos;
-                newBlock.transform.rotation = Quaternion.identity;
-                newBlock.transform.SetParent(capLayer);
+                // var newBlock = PrefabUtility.InstantiatePrefab(pair.top) as GameObject;
+                // newBlock.transform.position = pos;
+                // newBlock.transform.rotation = Quaternion.identity;
+                // newBlock.transform.SetParent(capLayer);
             }
         }
     }

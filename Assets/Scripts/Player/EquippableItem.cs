@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Player;
 using UnityEngine;
 
 public class EquippableItem : InventoryItem
@@ -84,6 +85,20 @@ public class EquippableItem : InventoryItem
         displayInInventory = true;
         ReverseEffect();
         EquipmentManager.Instance.RemoveEquipment(this);
+    }
+
+    public override string GetDescription()
+    {
+        var res = base.GetDescription() + "\n";
+
+        foreach (var statEffect in statEffects)
+        {
+            res += $"{statEffect.statValue.StatValueName()}:" +
+                   $" {(statEffect.constantImprovement != 0 ? statEffect.constantImprovement.ToString("+#;-#;0") : "")}" +
+                   $" {(statEffect.fractionalImprovement != 0 ? ("|" + (statEffect.fractionalImprovement * 100).ToString("+#;-#;0") + "%") : "")}\n";
+        }
+
+        return res;
     }
 }
 

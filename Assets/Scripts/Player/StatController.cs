@@ -233,6 +233,7 @@ public class StatController : MonoBehaviour
         floatingText.transform.forward = transform.forward;
         floatingText.floatingText.text = $"-{receivedDamage:N0}HP";
     }
+
 }
 
 public enum StatTypes

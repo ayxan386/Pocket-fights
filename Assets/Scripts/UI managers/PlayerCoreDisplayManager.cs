@@ -16,11 +16,6 @@ public class PlayerCoreDisplayManager : MonoBehaviour
         EventManager.OnPlayerCoreUpdate -= OnPlayerCoreUpdate;
     }
 
-    private void OnEnable()
-    {
-        OnPlayerCoreUpdate(0);
-    }
-
     private void OnPlayerCoreUpdate(int newValue)
     {
         displayControllers[0].UpdateDisplay("LVL", PlayerInputController.Instance.Stats.Level.ToString());
