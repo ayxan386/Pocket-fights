@@ -34,6 +34,7 @@ public class CameraFollow : MonoBehaviour
 
     public void ResetOrtho()
     {
+        if (camera == null) return;
         camera.orthographicSize = orthoSize;
     }
 }

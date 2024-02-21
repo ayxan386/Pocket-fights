@@ -4873,11 +4873,11 @@ MonoBehaviour:
   description: 
   stackSize: 1
   count: 1
-  buyPrice: 10
+  buyPrice: 30
   displayInInventory: 1
   canBeSold: 1
-  sellPrice: 8
-  maxSellPrice: 8
+  sellPrice: 24
+  maxSellPrice: 24
   priceDropRate: 0.5
   type: 3
   onUseAction:

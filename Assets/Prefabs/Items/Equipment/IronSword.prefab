@@ -50,11 +50,11 @@ MonoBehaviour:
   description: 
   stackSize: 1
   count: 1
-  buyPrice: 20
+  buyPrice: 60
   displayInInventory: 1
   canBeSold: 1
-  sellPrice: 18
-  maxSellPrice: 18
+  sellPrice: 54
+  maxSellPrice: 54
   priceDropRate: 0.5
   type: 3
   onUseAction:

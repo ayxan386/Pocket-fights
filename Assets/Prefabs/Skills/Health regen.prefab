@@ -158,7 +158,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  animationName: openArms
+  animationName:
+  - openArms
   onCaster: 1
 --- !u!114 &2679450569582173034
 MonoBehaviour:

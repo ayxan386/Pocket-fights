@@ -53,3 +53,15 @@ MonoBehaviour:
       type: 3}
     chance: 1
     countRange: {x: 1, y: 2}
+  - itemRef: {fileID: -2524362128158772954, guid: dcff75731538c684aa566ca1e3a9c21f,
+      type: 3}
+    chance: 1
+    countRange: {x: 1, y: 2}
+  - itemRef: {fileID: -2524362128158772954, guid: a65255d315432994d95a18a9b2425195,
+      type: 3}
+    chance: 1
+    countRange: {x: 1, y: 2}
+  - itemRef: {fileID: -2524362128158772954, guid: fb32eb0e2218e644392ccba637c8915a,
+      type: 3}
+    chance: 1
+    countRange: {x: 1, y: 2}

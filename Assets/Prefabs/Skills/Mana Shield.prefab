@@ -158,7 +158,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  animationName: smackEarth
+  animationName:
+  - swordCasting
   onCaster: 1
 --- !u!114 &-7659396863107089460
 MonoBehaviour:

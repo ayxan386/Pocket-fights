@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 531278711742857563}
   - component: {fileID: -2524362128158772954}
   m_Layer: 0
-  m_Name: Wooden shield
+  m_Name: Metal shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 695a46ba6889aa44eae74eff781f666b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: b1c10e5a67e4a6c4c9724563f1f4db73, type: 3}
-  name: Wooden Shield
+  icon: {fileID: 21300000, guid: 149154ae687ffc0458ef04fce53c3073, type: 3}
+  name: Metallic shield
   description: 
   stackSize: 1
   count: 1
@@ -65,7 +65,7 @@ MonoBehaviour:
   slotCount: 1
   statEffects:
   - statValue: 3
-    constantImprovement: 5
+    constantImprovement: 15
     fractionalImprovement: 0
   isEquipped: 0
   inWorldObject: {fileID: 2117293988361091028}
@@ -144,17 +144,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: dbdcf36b6835e244e9fe8203bba93e6c, type: 2}
+      objectReference: {fileID: 2100000, guid: 7beb6523eb9f3824285c5c87c3570291, type: 2}
     - target: {fileID: 23324558664812138, guid: e390173ae3ebb2540bf63c2cf59b249a,
         type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
-      objectReference: {fileID: 2100000, guid: 81189fd872f5d57498de8ecd405a6ebc, type: 2}
+      objectReference: {fileID: 2100000, guid: fd02842a77247d346974334e13cb6d14, type: 2}
     - target: {fileID: 23324558664812138, guid: e390173ae3ebb2540bf63c2cf59b249a,
         type: 3}
       propertyPath: m_Materials.Array.data[3]
       value: 
-      objectReference: {fileID: 2100000, guid: e08a0f62289c369459009b3af05ec637, type: 2}
+      objectReference: {fileID: 2100000, guid: 5f856ca4341ffc749a01fb3724932f1f, type: 2}
     - target: {fileID: 23324558664812138, guid: e390173ae3ebb2540bf63c2cf59b249a,
         type: 3}
       propertyPath: m_SelectedEditorRenderState
@@ -5861,7 +5861,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 7
+  m_VersionIndex: 10
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []

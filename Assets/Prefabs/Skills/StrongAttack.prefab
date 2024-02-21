@@ -210,7 +210,10 @@ MonoBehaviour:
   usageEffects:
     m_PersistentCalls:
       m_Calls: []
-  animationName: attack01
+  animationName:
+  - attack02
+  - huricaneKick
+  - attack04
   onCaster: 1
 --- !u!114 &4170976348176524478
 MonoBehaviour:

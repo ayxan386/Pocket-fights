@@ -9825,11 +9825,11 @@ MonoBehaviour:
   description: 
   stackSize: 1
   count: 1
-  buyPrice: 45
+  buyPrice: 135
   displayInInventory: 1
   canBeSold: 1
-  sellPrice: 30
-  maxSellPrice: 30
+  sellPrice: 90
+  maxSellPrice: 90
   priceDropRate: 0.5
   type: 3
   onUseAction:

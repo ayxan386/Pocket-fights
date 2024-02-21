@@ -190,7 +190,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  animationName: attack01
+  animationName:
+  - attack01
+  - attack02
+  - attack03
+  - attack05
+  - attack06
   onCaster: 1
 --- !u!114 &6518301604970825851
 MonoBehaviour:

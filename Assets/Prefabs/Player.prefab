@@ -4111,9 +4111,10 @@ MonoBehaviour:
   - {fileID: 3337002340432959719, guid: 7ff3a8fc8a51b6a43a4b497297549136, type: 3}
   - {fileID: 3337002340432959719, guid: fd7389eff2aaccb488d74264e9423df1, type: 3}
   - {fileID: -2524362128158772954, guid: 729f847e8c2581248bfcd406f62b2209, type: 3}
-  - {fileID: -2524362128158772954, guid: a65255d315432994d95a18a9b2425195, type: 3}
+  - {fileID: -2524362128158772954, guid: b3c56b9e06e86c64c90805d345c5c228, type: 3}
   - {fileID: -2524362128158772954, guid: dcff75731538c684aa566ca1e3a9c21f, type: 3}
   - {fileID: -2524362128158772954, guid: a65255d315432994d95a18a9b2425195, type: 3}
+  - {fileID: -2524362128158772954, guid: fb32eb0e2218e644392ccba637c8915a, type: 3}
 --- !u!114 &4511991193206950191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4129,9 +4130,10 @@ MonoBehaviour:
   equippedItems: []
   itemPrefabs:
   - {fileID: -2524362128158772954, guid: 729f847e8c2581248bfcd406f62b2209, type: 3}
-  - {fileID: -2524362128158772954, guid: a65255d315432994d95a18a9b2425195, type: 3}
+  - {fileID: -2524362128158772954, guid: b3c56b9e06e86c64c90805d345c5c228, type: 3}
   - {fileID: -2524362128158772954, guid: dcff75731538c684aa566ca1e3a9c21f, type: 3}
   - {fileID: -2524362128158772954, guid: a65255d315432994d95a18a9b2425195, type: 3}
+  - {fileID: -2524362128158772954, guid: fb32eb0e2218e644392ccba637c8915a, type: 3}
   <LeftHandAttachmentPoint>k__BackingField: {fileID: 1895011788828664335}
   <RightHandAttachmentPoint>k__BackingField: {fileID: 3527400942987272838}
 --- !u!1 &8061449212600044658
