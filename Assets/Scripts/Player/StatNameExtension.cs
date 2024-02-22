@@ -19,8 +19,6 @@
                 default:
                     return statValue.ToString();
             }
-
-            return statValue.ToString();
         }
     }
 }
