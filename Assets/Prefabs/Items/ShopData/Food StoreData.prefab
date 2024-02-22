@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7733127733904305795}
   - component: {fileID: 6690144885515149150}
   m_Layer: 0
-  m_Name: ConvenienceShopData
+  m_Name: Food StoreData
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,15 +45,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   possibleItems:
-  - itemRef: {fileID: 3337002340432959719, guid: 7ff3a8fc8a51b6a43a4b497297549136,
+  - itemRef: {fileID: 3337002340432959719, guid: 6f99bb56e3770b84c80d825464e60cfb,
       type: 3}
     chance: 1
-    countRange: {x: 2, y: 6}
-  - itemRef: {fileID: 3337002340432959719, guid: d8c4ead981d22064387ceecd7dca7aad,
+    countRange: {x: 8, y: 15}
+  - itemRef: {fileID: 3337002340432959719, guid: 4576190068df2504e815c977dac47780,
       type: 3}
-    chance: 0.593
+    chance: 1
+    countRange: {x: 7, y: 12}
+  - itemRef: {fileID: 3337002340432959719, guid: 7222bca918065bf448cb624a06268fc2,
+      type: 3}
+    chance: 1
+    countRange: {x: 8, y: 12}
+  - itemRef: {fileID: 3337002340432959719, guid: 7757439f9efb53a4c83bb38a0084d773,
+      type: 3}
+    chance: 1
+    countRange: {x: 5, y: 10}
+  - itemRef: {fileID: 3337002340432959719, guid: 4e6825b44a0ba084ab02544e0001ad3a,
+      type: 3}
+    chance: 1
+    countRange: {x: 15, y: 20}
+  - itemRef: {fileID: 3337002340432959719, guid: 6f549ebcd95a6294b9944db52163e4ce,
+      type: 3}
+    chance: 1
+    countRange: {x: 1, y: 2}
+  - itemRef: {fileID: 3337002340432959719, guid: f2993c894af4f164381dcba0179fb6c2,
+      type: 3}
+    chance: 1
     countRange: {x: 1, y: 3}
-  - itemRef: {fileID: 3337002340432959719, guid: 749527997ddc8d34bba31c30a61d588c,
-      type: 3}
-    chance: 0.809
-    countRange: {x: 1, y: 4}

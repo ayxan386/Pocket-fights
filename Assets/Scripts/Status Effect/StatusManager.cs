@@ -84,6 +84,7 @@ public class StatusManager : MonoBehaviour
 
     public void AddStatusEffect(StatEffect effect)
     {
+        effect.transform.SetParent(transform);
         BoostByEffect(effect);
         if (isIterating)
         {
@@ -165,5 +166,6 @@ public class StatusManager : MonoBehaviour
         }
 
         removalPendingEffects.Clear();
+        statusDisplayParent.gameObject.SetActive(statusDisplayParent.childCount > 0);
     }
 }

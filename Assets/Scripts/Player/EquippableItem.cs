@@ -81,7 +81,8 @@ public class EquippableItem : InventoryItem
     {
         isEquipped = false;
         referencePoint = null;
-        inWorldObject.SetActive(false);
+        if (inWorldObject != null)
+            inWorldObject.SetActive(false);
         displayInInventory = true;
         ReverseEffect();
         EquipmentManager.Instance.RemoveEquipment(this);

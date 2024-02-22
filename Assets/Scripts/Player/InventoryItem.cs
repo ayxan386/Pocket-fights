@@ -8,6 +8,7 @@ public class InventoryItem : MonoBehaviour
 {
     public Sprite icon;
     public new string name;
+    [TextArea]
     public string description;
     public int stackSize;
     public int count;
