@@ -4,6 +4,7 @@ using UnityEngine;
 public class EventManager : MonoBehaviour
 {
     public static Action<bool> OnPlayerTurnEnd;
+    public static Action<bool> OnPlayerTurnStart;
     public static Action<float> OnBaseStatUpdate;
     public static Action<int> OnPlayerCoreUpdate;
     public static Action<StatValue, StatData> OnStatChanged;

@@ -48,9 +48,9 @@ public class ItemDescriptionManager : MonoBehaviour
     public void DisplayStatusEffect(StatEffect statEffect)
     {
         if (statEffect == null) return;
-        print($"Displaying {name}");
         icon.sprite = statEffect.displayDetails.icon;
-        title.text = statEffect.displayDetails.displayName;
+        title.text =
+            $"{statEffect.displayDetails.displayName} ({(statEffect.isDamageBased ? statEffect.DamageBuffer : statEffect.numberOfTurns)})";
         desc.text = statEffect.GetDescription();
     }
 

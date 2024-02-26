@@ -15,6 +15,7 @@ public class StatEffect : MonoBehaviour
     public float DamageBuffer;
     public bool isPositive;
     public bool needsToBeDeleted = false;
+    public bool checkAtTheEnd = true;
     public DisplayDetails displayDetails;
     public StatusEffectDisplayManager RelatedDisplayManager;
     public UnityEvent<StatEffect, StatController> secondaryEffect;

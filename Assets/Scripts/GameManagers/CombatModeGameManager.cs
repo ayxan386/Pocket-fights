@@ -102,6 +102,8 @@ public class CombatModeGameManager : MonoBehaviour
 
         IsPlayerTurn = true;
         endTurnButton.interactable = true;
+        
+        EventManager.OnPlayerTurnStart?.Invoke(true);
     }
 
     private void CheckPlayerHealth()

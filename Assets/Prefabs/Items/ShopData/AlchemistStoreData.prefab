@@ -45,15 +45,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   possibleItems:
-  - itemRef: {fileID: 3337002340432959719, guid: 7ff3a8fc8a51b6a43a4b497297549136,
-      type: 3}
-    chance: 1
-    countRange: {x: 2, y: 6}
   - itemRef: {fileID: 3337002340432959719, guid: d8c4ead981d22064387ceecd7dca7aad,
       type: 3}
-    chance: 0.593
-    countRange: {x: 1, y: 3}
+    chance: 0.899
+    countRange: {x: 3, y: 7}
   - itemRef: {fileID: 3337002340432959719, guid: 749527997ddc8d34bba31c30a61d588c,
       type: 3}
-    chance: 0.809
-    countRange: {x: 1, y: 4}
+    chance: 0.961
+    countRange: {x: 3, y: 7}
+  - itemRef: {fileID: 3337002340432959719, guid: 77e828a05a47dbd4cbf5ee84dc3a52ef,
+      type: 3}
+    chance: 1
+    countRange: {x: 3, y: 8}

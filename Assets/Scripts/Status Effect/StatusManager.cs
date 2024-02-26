@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,6 +24,7 @@ public class StatusManager : MonoBehaviour
     private void Start()
     {
         EventManager.OnPlayerTurnEnd += OnPlayerTurnEnd;
+        EventManager.OnPlayerTurnStart += OnPlayerTurnStart;
         EventManager.OnPlayerVictory += OnPlayerVictory;
         EventManager.OnBaseStatUpdate += OnBaseStatUpdate;
     }
@@ -30,12 +32,15 @@ public class StatusManager : MonoBehaviour
     private void OnDestroy()
     {
         EventManager.OnPlayerTurnEnd -= OnPlayerTurnEnd;
+        EventManager.OnPlayerTurnStart -= OnPlayerTurnStart;
         EventManager.OnPlayerVictory -= OnPlayerVictory;
         EventManager.OnBaseStatUpdate -= OnBaseStatUpdate;
     }
 
+
     private void OnPlayerVictory(bool obj)
     {
+        if (!gameObject.activeSelf) return;
         foreach (var statusEffect in statusEffects)
         {
             RemoveStatusEffect(statusEffect);
@@ -46,15 +51,28 @@ public class StatusManager : MonoBehaviour
 
     private void OnBaseStatUpdate(float obj)
     {
+        if (!gameObject.activeSelf) return;
         ReapplyAllEffect();
+    }
+
+    private void OnPlayerTurnStart(bool obj)
+    {
+        if (!gameObject.activeSelf) return;
+        UpdateStatusEffectTurns(effect => effect.checkAtTheEnd);
     }
 
     private void OnPlayerTurnEnd(bool obj)
     {
+        if (!gameObject.activeSelf) return;
+        UpdateStatusEffectTurns(effect => !effect.checkAtTheEnd);
+    }
+
+    private void UpdateStatusEffectTurns(Predicate<StatEffect> skippingValues)
+    {
         isIterating = true;
         foreach (var statusEffect in statusEffects)
         {
-            if (statusEffect.isDamageBased) continue;
+            if (statusEffect.isDamageBased || skippingValues(statusEffect)) continue;
 
             statusEffect.numberOfTurns--;
             statusEffect.TriggerEffect(RelatedStats);
@@ -166,6 +184,7 @@ public class StatusManager : MonoBehaviour
         }
 
         removalPendingEffects.Clear();
-        statusDisplayParent.gameObject.SetActive(statusDisplayParent.childCount > 0);
+        if (statusDisplayParent != null)
+            statusDisplayParent.gameObject.SetActive(statusDisplayParent.childCount > 0);
     }
 }
