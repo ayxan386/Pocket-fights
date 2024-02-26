@@ -4,6 +4,7 @@ using UnityEngine;
 public class ShopOpeningAction : MonoBehaviour
 {
     [SerializeField] private ShopItemsData shopItemsData;
+    [field: SerializeField] public string ShopName { get; set; }
     [field: SerializeField] public List<InventoryItem> StoredItems { get; private set; }
     public Dictionary<string, int> BougthItems { get; private set; }
 

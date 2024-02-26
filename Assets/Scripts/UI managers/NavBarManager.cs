@@ -105,7 +105,8 @@ public class NavBarManager : MonoBehaviour
     private void DefaultPostBehavior()
     {
         if (lastTabName is "Shop" or "Save") return;
-        if (ShopManager.Instance.IsShopOpen)
+        var stateCopy = ShopManager.Instance.IsShopOpen;
+        if (stateCopy)
             pauseMenuAnimator.SetTrigger("shopClose");
         EventManager.OnShopToggled?.Invoke(false);
     }

@@ -1,10 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ShopManager : MonoBehaviour
 {
     [SerializeField] private Transform itemCellHolder;
+    [SerializeField] private TextMeshProUGUI shopName;
     public static ShopManager Instance { get; private set; }
 
     private Dictionary<string, int> boughtItemCounts;
@@ -42,6 +45,7 @@ public class ShopManager : MonoBehaviour
         shopSource = stateSource;
         storedItems = stateSource.StoredItems;
         boughtItemCounts = stateSource.BougthItems;
+        shopName.text = stateSource.ShopName;
     }
 
     private void OnPauseMenuToggled(bool isPaused)
@@ -80,13 +84,5 @@ public class ShopManager : MonoBehaviour
         boughtItemCounts[soldItem.name] += count;
 
         shopSource.CheckBoughtItemCounts();
-    }
-
-    public int GetPrice(InventoryItem inventoryItem)
-    {
-        boughtItemCounts.TryGetValue(inventoryItem.name, out var count);
-        return (int)Mathf.Floor(inventoryItem.maxSellPrice *
-                                Mathf.Pow(inventoryItem.priceDropRate,
-                                    count / inventoryItem.stackSize));
     }
 }

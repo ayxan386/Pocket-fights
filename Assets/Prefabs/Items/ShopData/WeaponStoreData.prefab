@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3098353027907378745
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7733127733904305795}
+  - component: {fileID: 6690144885515149150}
+  m_Layer: 0
+  m_Name: WeaponStoreData
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7733127733904305795
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3098353027907378745}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1208.578, y: 1715.1371, z: 13.885185}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6690144885515149150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3098353027907378745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e5c7cc0cbe9798439ab8d1531e57248, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  possibleItems:
+  - itemRef: {fileID: -2524362128158772954, guid: b3c56b9e06e86c64c90805d345c5c228,
+      type: 3}
+    chance: 1
+    countRange: {x: 1, y: 2}
+  - itemRef: {fileID: -2524362128158772954, guid: 729f847e8c2581248bfcd406f62b2209,
+      type: 3}
+    chance: 1
+    countRange: {x: 1, y: 2}
+  - itemRef: {fileID: -2524362128158772954, guid: dcff75731538c684aa566ca1e3a9c21f,
+      type: 3}
+    chance: 1
+    countRange: {x: 1, y: 2}
+  - itemRef: {fileID: -2524362128158772954, guid: a65255d315432994d95a18a9b2425195,
+      type: 3}
+    chance: 1
+    countRange: {x: 1, y: 2}
+  - itemRef: {fileID: -2524362128158772954, guid: fb32eb0e2218e644392ccba637c8915a,
+      type: 3}
+    chance: 1
+    countRange: {x: 1, y: 2}
