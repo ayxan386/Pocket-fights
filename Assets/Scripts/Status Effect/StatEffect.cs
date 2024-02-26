@@ -80,11 +80,21 @@ public class StatEffect : MonoBehaviour
                 secondaryEffect?.Invoke(this, relatedStats);
                 triggerEffects?.Invoke(this, relatedStats);
                 break;
+            case StatusEffectType.TrueDamage:
+                relatedStats.UpdateStatValue(StatValue.Health,
+                    (int)GetAmount(relatedStats.GetStatValue(baseValue).currentValue));
+                triggerEffects?.Invoke(this, relatedStats);
+                break;
+            case StatusEffectType.DamageDealing:
+                relatedStats.ReceiveAttack(GetAmount(0));
+                triggerEffects?.Invoke(this, relatedStats);
+                break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
 
-        RelatedDisplayManager.UpdateDisplay(this);
+        if (RelatedDisplayManager != null)
+            RelatedDisplayManager.UpdateDisplay(this);
     }
 }
 
@@ -93,5 +103,7 @@ public enum StatusEffectType
     None,
     DamageBuffer,
     Healing,
-    StatusGiving
+    StatusGiving,
+    DamageDealing,
+    TrueDamage
 }

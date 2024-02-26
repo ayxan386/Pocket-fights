@@ -113,10 +113,13 @@ public class StatusManager : MonoBehaviour
             statusEffects.Add(effect);
         }
 
-        statusDisplayParent.gameObject.SetActive(true);
-        var statusEffectDisplayManager = Instantiate(statusEffectDisplayPrefab, statusDisplayParent);
-        statusEffectDisplayManager.UpdateDisplay(effect);
-        effect.RelatedDisplayManager = statusEffectDisplayManager;
+        if (statusDisplayParent != null)
+        {
+            statusDisplayParent.gameObject.SetActive(true);
+            var statusEffectDisplayManager = Instantiate(statusEffectDisplayPrefab, statusDisplayParent);
+            statusEffectDisplayManager.UpdateDisplay(effect);
+            effect.RelatedDisplayManager = statusEffectDisplayManager;
+        }
 
         RelatedStats.UpdateOverallDisplay();
     }
@@ -140,7 +143,8 @@ public class StatusManager : MonoBehaviour
         if (effect.needsToBeDeleted)
             removalPendingEffects.Add(effect);
 
-        statusDisplayParent.gameObject.SetActive(statusDisplayParent.childCount > 0);
+        if (statusDisplayParent != null)
+            statusDisplayParent.gameObject.SetActive(statusDisplayParent.childCount > 0);
     }
 
     public float CheckForDamage(float receivedDamage)
