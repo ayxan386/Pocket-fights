@@ -13,12 +13,15 @@ public class StatusEffectDisplayManager : MonoBehaviour, IPointerEnterHandler, I
 
     private StatEffect lastEffect;
 
+    public Color TextColor { get; set; } = Color.black;
+
     public void UpdateDisplay(StatEffect statEffect)
     {
         if (statEffect == null) return;
         lastEffect = statEffect;
         backgroundImage.color = statEffect.isPositive ? positiveEffectColor : negativeEffectColor;
 
+        remainingText.color = TextColor;
         remainingText.text = "" + (statEffect.isDamageBased ? statEffect.DamageBuffer : statEffect.numberOfTurns);
         iconImage.sprite = statEffect.displayDetails.icon;
     }

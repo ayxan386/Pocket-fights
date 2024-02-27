@@ -43,11 +43,6 @@ PrefabInstance:
       propertyPath: <SourceName>k__BackingField
       value: Slime
       objectReference: {fileID: 0}
-    - target: {fileID: 7537575747951249551, guid: 627262a31811c094f92d65ef57ba3c47,
-        type: 3}
-      propertyPath: <StatusManager>k__BackingField
-      value: 
-      objectReference: {fileID: 6800812044140278292}
     - target: {fileID: 7622230981891531222, guid: 627262a31811c094f92d65ef57ba3c47,
         type: 3}
       propertyPath: m_RootOrder
@@ -162,36 +157,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 627262a31811c094f92d65ef57ba3c47, type: 3}
---- !u!1 &3307368253057984341 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7624356310046074002, guid: 627262a31811c094f92d65ef57ba3c47,
-    type: 3}
-  m_PrefabInstance: {fileID: 4911463793011262407}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &-4071335433720291634
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3307368253057984341}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a577efa10af3e324f9308c5d3b8be2b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  statusEffects: []
-  statusDisplayParent: {fileID: 0}
-  statusEffectDisplayPrefab: {fileID: 0}
---- !u!114 &6800812044140278292 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1893852470456414675, guid: 627262a31811c094f92d65ef57ba3c47,
-    type: 3}
-  m_PrefabInstance: {fileID: 4911463793011262407}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3307368253057984341}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a577efa10af3e324f9308c5d3b8be2b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

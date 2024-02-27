@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3337002340432959712}
   - component: {fileID: 3337002340432959719}
+  - component: {fileID: 3803625903766746133}
   m_Layer: 0
-  m_Name: Rock skin potion (small)
+  m_Name: Weak potion of poison
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,12 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c452ab8d707fbaf41a9316301bcf37fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 6c6dba9f5527c01438c9dfedb24a0f91, type: 3}
-  name: Rock skin potion (small)
-  description: 'Makes skin as tough as rock, increasing defences.
-
-    +100% damage
-    reduction for 3 turns'
+  icon: {fileID: 21300000, guid: f293313977af3f44aae278c9a49ccd62, type: 3}
+  name: Weak potion of poison
+  description: Applyies 5 poison to selected target
   stackSize: 5
   count: 1
   buyPrice: 15
@@ -63,9 +61,9 @@ MonoBehaviour:
   onUseAction:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1407000089497618110}
-        m_TargetAssemblyTypeName: StatEffect, Assembly-CSharp
-        m_MethodName: AddPlayerStatusEffect
+      - m_Target: {fileID: 3803625903766746133}
+        m_TargetAssemblyTypeName: StatusGivingPotion, Assembly-CSharp
+        m_MethodName: AddStatusToTarget
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -75,6 +73,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &3803625903766746133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3337002340432959713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f19a8b3bca870894caa36f8acb8e0b16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effect: {fileID: 1407000089497618110}
 --- !u!1 &4746522317200917186
 GameObject:
   m_ObjectHideFlags: 0
@@ -85,6 +96,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6615800789921775368}
   - component: {fileID: 1407000089497618110}
+  - component: {fileID: 4005987284259556653}
   m_Layer: 0
   m_Name: Effect
   m_TagString: Untagged
@@ -119,27 +131,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 339773b3a1d3a9340b51823f6806f29e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfTurns: 3
+  numberOfTurns: 5
   isDamageBased: 0
-  amount: 1
-  isMult: 1
-  baseValue: 3
-  affectedValue: 3
-  effectType: 0
+  amount: -5
+  isMult: 0
+  baseValue: 5
+  affectedValue: 5
+  effectType: 5
   LastAmount: 0
   DamageBuffer: 0
-  isPositive: 1
-  needsToBeDeleted: 0
-  checkAtTheEnd: 0
+  isPositive: 0
+  needsToBeDeleted: 1
+  checkAtTheEnd: 1
+  isAdditive: 1
   displayDetails:
-    icon: {fileID: 21300000, guid: d473e35d9c998d443a00d04000f893e5, type: 3}
-    displayName: Skin of rock
-    descriptionBase: Boosts defences by 100%
+    icon: {fileID: 2047992146, guid: 080cb6d98b00c2645b2c41df5f69bc78, type: 3}
+    displayName: Poison
+    descriptionBase: Deals damage equal to duration
   RelatedDisplayManager: {fileID: 0}
   secondaryEffect:
     m_PersistentCalls:
       m_Calls: []
   triggerEffects:
     m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4005987284259556653}
+        m_TargetAssemblyTypeName: BaseTriggerEffect, Assembly-CSharp
+        m_MethodName: ApplyEffect
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  textColor: {r: 0, g: 0, b: 0, a: 1}
+--- !u!114 &4005987284259556653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4746522317200917186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92313b793d570564384b37f60e7c4be7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextEffectDelay: 0
+  nextTriggerEffect:
+    m_PersistentCalls:
       m_Calls: []
-  textColor: {r: 1, g: 1, b: 1, a: 1}
+  negate: 1

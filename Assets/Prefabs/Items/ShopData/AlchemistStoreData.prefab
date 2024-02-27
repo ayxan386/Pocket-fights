@@ -61,3 +61,7 @@ MonoBehaviour:
       type: 3}
     chance: 1
     countRange: {x: 3, y: 8}
+  - itemRef: {fileID: 3337002340432959719, guid: 173a52023648c9a4da0cc30df319bba8,
+      type: 3}
+    chance: 1
+    countRange: {x: 3, y: 8}

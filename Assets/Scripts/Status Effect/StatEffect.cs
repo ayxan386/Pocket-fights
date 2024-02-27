@@ -16,10 +16,12 @@ public class StatEffect : MonoBehaviour
     public bool isPositive;
     public bool needsToBeDeleted = false;
     public bool checkAtTheEnd = true;
+    public bool isAdditive = false;
     public DisplayDetails displayDetails;
     public StatusEffectDisplayManager RelatedDisplayManager;
     public UnityEvent<StatEffect, StatController> secondaryEffect;
     public UnityEvent<StatEffect, StatController> triggerEffects;
+    public Color textColor = Color.black;
 
     [ContextMenu("Add status")]
     public void AddPlayerStatusEffect()
@@ -57,6 +59,10 @@ public class StatEffect : MonoBehaviour
                 break;
             case StatusEffectType.StatusGiving:
                 break;
+            case StatusEffectType.DamageDealing:
+                break;
+            case StatusEffectType.TrueDamage:
+                break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
@@ -81,6 +87,7 @@ public class StatEffect : MonoBehaviour
                 triggerEffects?.Invoke(this, relatedStats);
                 break;
             case StatusEffectType.TrueDamage:
+                print("Reached");
                 relatedStats.UpdateStatValue(StatValue.Health,
                     (int)GetAmount(relatedStats.GetStatValue(baseValue).currentValue));
                 triggerEffects?.Invoke(this, relatedStats);

@@ -27,7 +27,10 @@ public class StatusManager : MonoBehaviour
         EventManager.OnPlayerTurnStart += OnPlayerTurnStart;
         EventManager.OnPlayerVictory += OnPlayerVictory;
         EventManager.OnBaseStatUpdate += OnBaseStatUpdate;
+
+        UpdateStatusPanelVisibility();
     }
+
 
     private void OnDestroy()
     {
@@ -69,6 +72,7 @@ public class StatusManager : MonoBehaviour
 
     private void UpdateStatusEffectTurns(Predicate<StatEffect> skippingValues)
     {
+        print($"Updating status effects for {gameObject.name}");
         isIterating = true;
         foreach (var statusEffect in statusEffects)
         {
@@ -104,6 +108,21 @@ public class StatusManager : MonoBehaviour
     {
         effect.transform.SetParent(transform);
         BoostByEffect(effect);
+
+        if (effect.isAdditive)
+        {
+            AddEffectOnTop(effect);
+        }
+        else
+        {
+            AddEffectAsNew(effect);
+        }
+
+        RelatedStats.UpdateOverallDisplay();
+    }
+
+    private void AddEffectAsNew(StatEffect effect)
+    {
         if (isIterating)
         {
             pendingEffects.Add(effect);
@@ -117,11 +136,26 @@ public class StatusManager : MonoBehaviour
         {
             statusDisplayParent.gameObject.SetActive(true);
             var statusEffectDisplayManager = Instantiate(statusEffectDisplayPrefab, statusDisplayParent);
+            statusEffectDisplayManager.TextColor = effect.textColor;
             statusEffectDisplayManager.UpdateDisplay(effect);
             effect.RelatedDisplayManager = statusEffectDisplayManager;
         }
+    }
 
-        RelatedStats.UpdateOverallDisplay();
+    private void AddEffectOnTop(StatEffect effect)
+    {
+        var existingEffect = statusEffects.Find(eff => eff.name == effect.name);
+        if (existingEffect != null)
+        {
+            existingEffect.numberOfTurns += effect.numberOfTurns;
+            existingEffect.triggerEffects?.Invoke(existingEffect, RelatedStats);
+            existingEffect.RelatedDisplayManager.UpdateDisplay(existingEffect);
+            Destroy(effect.gameObject);
+        }
+        else
+        {
+            AddEffectAsNew(effect);
+        }
     }
 
     private void BoostByEffect(StatEffect effect)
@@ -143,8 +177,7 @@ public class StatusManager : MonoBehaviour
         if (effect.needsToBeDeleted)
             removalPendingEffects.Add(effect);
 
-        if (statusDisplayParent != null)
-            statusDisplayParent.gameObject.SetActive(statusDisplayParent.childCount > 0);
+        UpdateStatusPanelVisibility();
     }
 
     public float CheckForDamage(float receivedDamage)
@@ -188,6 +221,11 @@ public class StatusManager : MonoBehaviour
         }
 
         removalPendingEffects.Clear();
+        UpdateStatusPanelVisibility();
+    }
+
+    private void UpdateStatusPanelVisibility()
+    {
         if (statusDisplayParent != null)
             statusDisplayParent.gameObject.SetActive(statusDisplayParent.childCount > 0);
     }

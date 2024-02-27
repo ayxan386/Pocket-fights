@@ -6,6 +6,6 @@ public class StatusGivingPotion : MonoBehaviour
 
     public void AddStatusToTarget()
     {
-        CombatModeGameManager.Instance.SelectedEnemy.Stats.StatusManager.AddStatusEffect(effect);
+        CombatModeGameManager.Instance.SelectedEnemy.Stats.StatusManager.AddStatusEffect(Instantiate(effect));
     }
 }

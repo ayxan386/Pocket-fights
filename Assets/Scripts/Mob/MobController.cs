@@ -65,7 +65,7 @@ public class MobController : MonoBehaviour, BaseEntityCallbacks
     {
         Id = Guid.NewGuid();
         animator.SetBool("move", false);
-        movementController.Navigate = false;
+        movementController.ToggleMovement(false);
 
         transform.SetPositionAndRotation(mobStandPoint.position, mobStandPoint.rotation);
 
@@ -76,7 +76,7 @@ public class MobController : MonoBehaviour, BaseEntityCallbacks
     public void DeactivateCombatMode()
     {
         combatUiRef.SetActive(false);
-        movementController.Navigate = true;
+        movementController.ToggleMovement(true);
         EventManager.OnPlayerTurnEnd -= OnPlayerTurnEnd;
     }
 
@@ -110,7 +110,6 @@ public class MobController : MonoBehaviour, BaseEntityCallbacks
     {
         var actionDetails = actions.Find(action => action.type == ActionType.ReceiveAttack);
         actionDetails.usageEffects?.Invoke(actionDetails, statController, null);
-        // animator.SetTrigger(actionDetails.animationName);
     }
 
     public void OnDeathCallback()

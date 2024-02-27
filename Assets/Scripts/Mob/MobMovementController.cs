@@ -37,6 +37,12 @@ public class MobMovementController : MonoBehaviour
         StartCoroutine(TargetMovement());
     }
 
+    public void ToggleMovement(bool shouldMove)
+    {
+        rb.isKinematic = !shouldMove;
+        Navigate = shouldMove;
+    }
+
     private IEnumerator TargetMovement()
     {
         yield return new WaitForSeconds(1);

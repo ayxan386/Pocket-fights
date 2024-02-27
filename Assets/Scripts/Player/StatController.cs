@@ -159,17 +159,20 @@ public class StatController : MonoBehaviour
         var currentValue = statValues[statType].currentValue + diff;
         statValues[statType].currentValue = Mathf.Clamp(currentValue, 0, statValues[statType].maxValue);
         EventManager.OnStatChanged?.Invoke(statType, statValues[statType]);
+        
+        if (statValues[StatValue.Health].currentValue <= 0)
+        {
+            AttachedEntity.OnDeathCallback();
+        }
+        
         UpdateOverallDisplay();
     }
 
     public void BoostStatValue(StatValue stat, float diff, bool shouldUpdate = false)
     {
         var statValue = statValues[stat];
-        if (stat != StatValue.Health || stat != StatValue.Mana)
-        {
-            statValue.currentValue += diff;
-            statValue.maxValue += diff;
-        }
+        statValue.currentValue += diff;
+        statValue.maxValue += diff;
 
         if (shouldUpdate)
             UpdateOverallDisplay();
