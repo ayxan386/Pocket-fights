@@ -23,7 +23,7 @@ public class Skill : MonoBehaviour
     public string Description => IsActive
         ? ($"{displayDetails.descriptionBase} \n Mana cost: {manaConsumption}" +
            $"\n Current effect: {multiplier}"
-           + (CanUpgrade ? $"-> {effects[currentLevel + 1]}" : "")
+           + (CanUpgrade ? $"-> {effects[currentLevel + 1]} {displayDetails.effectSuffix}" : "")
            + (CanUpgrade ? $" \n Upgrade cost: x{UpgradeCost}" : "\n Max LVL"))
         : $" {displayDetails.descriptionBase}\n Activation cost: x{activationPrice} \n Effect: x{effects[0]}";
 
@@ -62,6 +62,7 @@ public class DisplayDetails
     public Sprite icon;
     public string displayName;
     public string descriptionBase;
+    public string effectSuffix = "";
 }
 
 [Serializable]

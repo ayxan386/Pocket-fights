@@ -1,0 +1,335 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &184396450984925242
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6739678855245900918}
+  - component: {fileID: 6204179879270805217}
+  - component: {fileID: -5830009548996150611}
+  - component: {fileID: -7801569560349296450}
+  - component: {fileID: -5467086276545589996}
+  - component: {fileID: 2679450569582173034}
+  - component: {fileID: 476775821648316902}
+  m_Layer: 0
+  m_Name: Ring of Fire
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6739678855245900918
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184396450984925242}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8015696862771644101}
+  - {fileID: 3236943088570294468}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6204179879270805217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184396450984925242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0a2b06e9daa06b4c88dd4c5a1b2fbdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationName: openArms
+  manaConsumption: 15
+  type: 0
+  displayDetails:
+    icon: {fileID: 21300000, guid: 0d852f5493cecf94a90183f3f83ce947, type: 3}
+    displayName: Ring of fire
+    descriptionBase: Applies fire status to selected enemy for 3 turns
+    effectSuffix: DMG per turn
+  effects:
+  - 3
+  - 6
+  - 15
+  activationPrice: 2
+  currentLevel: -1
+  maxLevel: 3
+  slotName: 1
+  isSelected: 0
+  canBeUsed: 1
+  usageEffects:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -5467086276545589996}
+        m_TargetAssemblyTypeName: AnimationPlayingAction, Assembly-CSharp
+        m_MethodName: ApplyEffectToCaster
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2679450569582173034}
+        m_TargetAssemblyTypeName: BasicAction, Assembly-CSharp
+        m_MethodName: ApplyEffectToCaster
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &-5830009548996150611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184396450984925242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8413e014d00f9a34cb154391f007d87d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effect: {fileID: 3698831625056623739}
+  negate: 1
+--- !u!114 &-7801569560349296450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184396450984925242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 730b80d05b6f3ba4080a042c2a3e0ea1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-5467086276545589996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184396450984925242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d0e56a5d0c46e44c9bae9f01bc8ea86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delayNext: 0.6
+  usageEffects:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 476775821648316902}
+        m_TargetAssemblyTypeName: BasicAction, Assembly-CSharp
+        m_MethodName: ApplyEffectToCaster
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  animationName:
+  - openArms
+  onCaster: 1
+--- !u!114 &2679450569582173034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184396450984925242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6f75bda6589eee4a92c38ad9e57a1ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delayNext: 0
+  usageEffects:
+    m_PersistentCalls:
+      m_Calls: []
+  soundEffect: {fileID: 1453070342425624818}
+--- !u!114 &476775821648316902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184396450984925242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62f49e677ca0d0b45b23ce44d7b7d4ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delayNext: 0.4
+  usageEffects:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -7801569560349296450}
+        m_TargetAssemblyTypeName: UsageUnlockingAction, Assembly-CSharp
+        m_MethodName: ApplyEffectToCaster
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: -5830009548996150611}
+        m_TargetAssemblyTypeName: StatusApplyingAction, Assembly-CSharp
+        m_MethodName: ApplyEffectToTarget
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  objPrefab: {fileID: 7696213254281463193, guid: 2d3ece102ae74654c8a0f0bc8e00e81b,
+    type: 3}
+  lifespan: 2.5
+  offset: {x: 0, y: 0, z: 0}
+  onCaster: 0
+--- !u!1 &3132824027497646759
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3236943088570294468}
+  - component: {fileID: 3698831625056623739}
+  m_Layer: 0
+  m_Name: Effect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3236943088570294468
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3132824027497646759}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6739678855245900918}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3698831625056623739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3132824027497646759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 339773b3a1d3a9340b51823f6806f29e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfTurns: 3
+  isDamageBased: 0
+  amount: -1
+  isMult: 0
+  baseValue: 5
+  affectedValue: 5
+  effectType: 5
+  LastAmount: 0
+  DamageBuffer: 0
+  isPositive: 0
+  needsToBeDeleted: 1
+  checkAtTheEnd: 1
+  isAdditive: 1
+  displayDetails:
+    icon: {fileID: 695775810, guid: 080cb6d98b00c2645b2c41df5f69bc78, type: 3}
+    displayName: Burning damage
+    descriptionBase: Deals fixed damage each turn
+    effectSuffix: 
+  RelatedDisplayManager: {fileID: 0}
+  secondaryEffect:
+    m_PersistentCalls:
+      m_Calls: []
+  triggerEffects:
+    m_PersistentCalls:
+      m_Calls: []
+  textColor: {r: 0, g: 0, b: 0, a: 1}
+--- !u!1 &3812438598111176189
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8015696862771644101}
+  - component: {fileID: 1453070342425624818}
+  m_Layer: 0
+  m_Name: SoundEffect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8015696862771644101
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3812438598111176189}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6739678855245900918}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1453070342425624818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3812438598111176189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a7a66622c7562445bb0edab9cc0afba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
+  clips:
+  - {fileID: 8300000, guid: cfce0cea076109f478783201b2a9f57f, type: 3}
+  random: 0

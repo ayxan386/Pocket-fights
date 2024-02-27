@@ -3,16 +3,17 @@ using UnityEngine;
 public class StatusApplyingAction : MonoBehaviour
 {
     [SerializeField] private StatEffect effect;
+    [SerializeField] private bool negate = false;
 
     public void ApplyEffectToCaster(Skill usedSkill, StatController caster, StatController target)
     {
-        effect.amount = usedSkill.multiplier;
+        effect.amount = (negate ? -1 : 1) * usedSkill.multiplier;
         caster.StatusManager.AddStatusEffect(Instantiate(effect, transform));
     }
 
     public void ApplyEffectToTarget(Skill usedSkill, StatController caster, StatController target)
     {
-        effect.amount = usedSkill.multiplier;
+        effect.amount = (negate ? -1 : 1) * usedSkill.multiplier;
         target.StatusManager.AddStatusEffect(Instantiate(effect, transform));
     }
 
