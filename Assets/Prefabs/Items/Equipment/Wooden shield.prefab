@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 531278711742857563}
   - component: {fileID: -2524362128158772954}
   m_Layer: 0
-  m_Name: Wooden shield
+  m_Name: Wooden Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

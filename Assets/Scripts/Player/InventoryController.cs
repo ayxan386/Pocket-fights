@@ -38,6 +38,8 @@ public class InventoryController : MonoBehaviour
             itemCells[index].SetId(index);
         }
 
+        CheckItemPrefabNames();
+
         UpdateDisplay();
         EventManager.OnItemAdd += OnItemAdd;
         EventManager.OnItemAddAsLoot += OnItemAddAsLoot;
@@ -50,7 +52,6 @@ public class InventoryController : MonoBehaviour
         EventManager.OnItemAddAsLoot -= OnItemAddAsLoot;
         EventManager.OnItemRemove -= OnItemRemove;
     }
-
 
     public void UpdateDisplay()
     {
@@ -66,6 +67,21 @@ public class InventoryController : MonoBehaviour
                 itemCells[i].SetNoItemState();
             }
         }
+    }
+
+
+    private void CheckItemPrefabNames()
+    {
+        print("Checking item prefab name consistency...");
+        foreach (var itemPrefab in itemPrefabs)
+        {
+            if (itemPrefab.gameObject.name != itemPrefab.name)
+            {
+                Debug.LogError($"Item {itemPrefab.gameObject.name} names not matching");
+            }
+        }
+
+        print("...Checking item prefab name consistency -> DONE");
     }
 
     private void OnItemAdd(InventoryItem addedItem)
@@ -118,15 +134,15 @@ public class InventoryController : MonoBehaviour
         var loots = panel.transform.parent;
         for (int i = 0; i < loots.childCount; i++)
         {
-            if(loots.GetChild(i) == panel.transform) continue;
+            if (loots.GetChild(i) == panel.transform) continue;
             EventSystem.current.SetSelectedGameObject(loots.GetChild(i).gameObject);
             return;
         }
-        
+
         var allButtons = loots.parent.GetComponentsInChildren<Button>();
         foreach (var button in allButtons)
         {
-            if(button.transform == panel.transform) continue;
+            if (button.transform == panel.transform) continue;
             button.Select();
             return;
         }

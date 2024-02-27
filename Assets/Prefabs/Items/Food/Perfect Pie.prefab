@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: acd0d6ea6678e9246b3bb186d165c461, type: 3}
-  name: Perfect pie
+  name: Perfect Pie
   description: 'Eat to restore 15 HP and 30 MP.
 
     Gives 100% mana regen. status
@@ -184,6 +184,7 @@ MonoBehaviour:
   DamageBuffer: 0
   isPositive: 1
   needsToBeDeleted: 1
+  checkAtTheEnd: 1
   displayDetails:
     icon: {fileID: 21300000, guid: de629debbb984994daa432462e6cd525, type: 3}
     displayName: Mana regeneration boost

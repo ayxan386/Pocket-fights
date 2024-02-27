@@ -9,12 +9,14 @@ public class StatController : MonoBehaviour
 
     [field: Header("Core values")]
     [field: SerializeField] public int Level { get; set; }
+
     [field: SerializeField] public int FreePoints { get; private set; }
     [field: SerializeField] public int SkillPoints { get; private set; }
     [field: SerializeField] public string SourceName { get; private set; }
 
-    [Header("Starting stats")] 
+    [Header("Starting stats")]
     [SerializeField] private int startingVitality = 4;
+
     [SerializeField] private int startingStrength = 4;
     [SerializeField] private int startingMana = 4;
     [SerializeField] private int startingDefense = 4;
@@ -25,8 +27,9 @@ public class StatController : MonoBehaviour
 
     [SerializeField] [TextArea] private string statDebug;
 
-    [Header("Receive attack VFX")] 
+    [Header("Receive attack VFX")]
     [SerializeField] private FloatingTextManager damagePrefab;
+
     [field: SerializeField] public Transform animationPosition { get; set; }
 
     private Dictionary<StatTypes, StatData> baseStats;
@@ -34,7 +37,7 @@ public class StatController : MonoBehaviour
 
     public float Lsf => Mathf.Pow(1.03f, Level);
     public BaseEntityCallbacks AttachedEntity { get; set; }
-    
+
     public Animator Animator { get; set; }
 
     private void Awake()
@@ -161,9 +164,13 @@ public class StatController : MonoBehaviour
 
     public void BoostStatValue(StatValue stat, float diff, bool shouldUpdate = false)
     {
-        print($"Boosting {stat} by {diff}");
-        statValues[stat].currentValue += diff;
-        statValues[stat].maxValue = Mathf.Max(statValues[stat].currentValue, statValues[stat].maxValue);
+        var statValue = statValues[stat];
+        if (stat != StatValue.Health || stat != StatValue.Mana)
+        {
+            statValue.currentValue += diff;
+            statValue.maxValue += diff;
+        }
+
         if (shouldUpdate)
             UpdateOverallDisplay();
 
@@ -233,7 +240,6 @@ public class StatController : MonoBehaviour
         floatingText.transform.forward = transform.forward;
         floatingText.floatingText.text = $"-{receivedDamage:N0}HP";
     }
-
 }
 
 public enum StatTypes

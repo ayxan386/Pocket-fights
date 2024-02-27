@@ -23,7 +23,7 @@ public class EquipmentManager : MonoBehaviour
     public int CountEquippedType(EquippableItem item)
     {
         return equippedItems
-            .FindAll(equippedItem => item.equipmentGroup == equippedItem.equipmentGroup)
+            .FindAll(equippedItem => item.equipmentType == equippedItem.equipmentType)
             .ConvertAll(i => i.slotCount)
             .Sum();
     }

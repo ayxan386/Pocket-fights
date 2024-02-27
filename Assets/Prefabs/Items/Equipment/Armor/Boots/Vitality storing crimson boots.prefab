@@ -4869,7 +4869,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 86d0020fc2f114f4ab9fa1d5a5a34c6a, type: 3}
-  name: Mana drawing cloth boots
+  name: Vitality storing crimson boots
   description: 
   stackSize: 1
   count: 1

@@ -4883,7 +4883,7 @@ MonoBehaviour:
   onUseAction:
     m_PersistentCalls:
       m_Calls: []
-  equipmentType: 5
+  equipmentType: 3
   equipmentGroup: 1
   slotCount: 2
   statEffects:
