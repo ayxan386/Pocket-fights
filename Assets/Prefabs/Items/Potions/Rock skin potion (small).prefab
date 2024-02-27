@@ -47,7 +47,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 6c6dba9f5527c01438c9dfedb24a0f91, type: 3}
   name: Rock skin potion (small)
-  description: Makes skin as tough as rock, increasing defences.
+  description: 'Makes skin as tough as rock, increasing defences.
+
+    +100% damage
+    reduction for 3 turns'
   stackSize: 5
   count: 1
   buyPrice: 15
@@ -116,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 339773b3a1d3a9340b51823f6806f29e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfTurns: 5
+  numberOfTurns: 3
   isDamageBased: 0
   amount: 1
   isMult: 1
