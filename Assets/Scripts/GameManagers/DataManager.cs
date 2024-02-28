@@ -15,10 +15,12 @@ public class DataManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        print($"Attached game object: {gameObject.name}");
     }
 
     public void OnStatSave(StatController toSave)
     {
+        print("Saving player stats...");
         var basePath = PreSaveProcess("player_stats_");
 
         var statSaveData = new StatSaveData();
@@ -28,6 +30,10 @@ public class DataManager : MonoBehaviour
         statSaveData.sourceName = toSave.SourceName;
         statSaveData.baseStats = new SerializedDictionary<StatTypes, StatData>();
         statSaveData.statValues = new SerializedDictionary<StatValue, StatData>();
+        print($"LVL: {statSaveData.level}");
+        print($"Free points: {statSaveData.freePoints}");
+        print($"Skill points: {statSaveData.skillPoints}");
+        print($"Source name: {statSaveData.sourceName}");
         foreach (var statType in Enum.GetValues(typeof(StatTypes)).Cast<StatTypes>())
         {
             var baseStat = toSave.GetBaseStat(statType);
@@ -65,7 +71,8 @@ public class DataManager : MonoBehaviour
         var basePath = PreSaveProcess("inventory");
 
         var json = JsonUtility.ToJson(instanceOwnedItem);
-
+        print("Saving inventory...");
+        print($"Gold amount: {instanceOwnedItem.goldAmount}");
         File.WriteAllText(basePath, json);
     }
 
@@ -167,8 +174,9 @@ public class DataManager : MonoBehaviour
     }
 
     [ContextMenu("Load player")]
-    public void LoadPlayer()
+    public void LoadPlayer(string caller)
     {
+        print($"Loading player data: {caller}");
         LoadPlayerStats();
         LoadInventory();
         LoadEquipment();
@@ -177,9 +185,9 @@ public class DataManager : MonoBehaviour
     }
 
     [ContextMenu("Save trigger")]
-    public void SaveEventTrigger()
+    public void SaveEventTrigger(string caller)
     {
-        print($"Saving everything to {Application.persistentDataPath}");
+        print($"{caller} -> Saving everything to {Application.persistentDataPath}");
         OnStatSave(PlayerInputController.Instance.Stats);
         SaveInventory();
         SaveEquippment();

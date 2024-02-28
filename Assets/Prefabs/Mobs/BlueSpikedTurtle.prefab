@@ -122,13 +122,13 @@ MonoBehaviour:
   - inWorldDisplayItem: {fileID: 0}
     itemPrefab: {fileID: 3337002340432959719, guid: 407cd09bed077b2439addf797101809b,
       type: 3}
-    chance: 0.905
-    count: {x: 1, y: 5}
+    chance: 1
+    count: {x: 1, y: 3}
   - inWorldDisplayItem: {fileID: 0}
     itemPrefab: {fileID: 3337002340432959719, guid: fd7389eff2aaccb488d74264e9423df1,
       type: 3}
-    chance: 0.905
-    count: {x: 3, y: 10}
+    chance: 0.786
+    count: {x: 3, y: 5}
   combatUiRef: {fileID: 2893728941982123151}
   selectionIndicators: {fileID: 5545137670216957671}
   <DisplayData>k__BackingField:
@@ -434,7 +434,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5545137670216957671}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.033, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

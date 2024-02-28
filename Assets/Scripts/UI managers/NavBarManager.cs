@@ -84,8 +84,8 @@ public class NavBarManager : MonoBehaviour
 
                 break;
             case "Save":
-                DataManager.Instance.SaveEventTrigger();
-                SceneManager.LoadScene("MainMenu");
+                DataManager.Instance.SaveEventTrigger("Navbar");
+                Invoke(nameof(LoadMainMenu), 1.5f);
                 break;
             case "Inventory":
                 InventoryController.Instance.UpdateDisplay();
@@ -100,6 +100,11 @@ public class NavBarManager : MonoBehaviour
                 QuestManager.Instance.OpenUi(questHolder, true);
                 break;
         }
+    }
+
+    private void LoadMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 
     private void DefaultPostBehavior()

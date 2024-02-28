@@ -769,13 +769,13 @@ MonoBehaviour:
   - inWorldDisplayItem: {fileID: 0}
     itemPrefab: {fileID: 3337002340432959719, guid: 407cd09bed077b2439addf797101809b,
       type: 3}
-    chance: 0.905
-    count: {x: 1, y: 5}
+    chance: 1
+    count: {x: 1, y: 2}
   - inWorldDisplayItem: {fileID: 0}
     itemPrefab: {fileID: 3337002340432959719, guid: fd7389eff2aaccb488d74264e9423df1,
       type: 3}
-    chance: 0.905
-    count: {x: 3, y: 10}
+    chance: 0.692
+    count: {x: 3, y: 4}
   - inWorldDisplayItem: {fileID: 0}
     itemPrefab: {fileID: 3337002340432959719, guid: aebb7f363d5dcc84c8a3e22adc27fc76,
       type: 3}

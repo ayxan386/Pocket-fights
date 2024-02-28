@@ -51,7 +51,7 @@ MonoBehaviour:
   description: Deals 5 HP damage to selected target for 3 turns
   stackSize: 5
   count: 1
-  buyPrice: 12
+  buyPrice: 16
   displayInInventory: 1
   canBeSold: 1
   sellPrice: 7
@@ -142,10 +142,12 @@ MonoBehaviour:
   isPositive: 1
   needsToBeDeleted: 0
   checkAtTheEnd: 1
+  isAdditive: 0
   displayDetails:
     icon: {fileID: 21300000, guid: d473e35d9c998d443a00d04000f893e5, type: 3}
     displayName: Skin of rock
     descriptionBase: Boosts defences by 100%
+    effectSuffix: 
   RelatedDisplayManager: {fileID: 0}
   secondaryEffect:
     m_PersistentCalls:
@@ -153,3 +155,4 @@ MonoBehaviour:
   triggerEffects:
     m_PersistentCalls:
       m_Calls: []
+  textColor: {r: 0, g: 0, b: 0, a: 1}

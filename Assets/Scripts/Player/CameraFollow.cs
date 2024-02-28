@@ -26,9 +26,12 @@ public class CameraFollow : MonoBehaviour
     {
         if (target == null) return;
         var desiredPosition = target.position + offset;
-        if (Vector3.Distance(transform.position, desiredPosition) > allowedMaxDistance)
+        var distance = Vector3.Distance(transform.position, desiredPosition);
+        if (distance > allowedMaxDistance)
         {
-            transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime * followSpeed);
+            transform.position =
+                Vector3.Lerp(transform.position, desiredPosition,
+                    Time.deltaTime * followSpeed * distance / allowedMaxDistance);
         }
     }
 

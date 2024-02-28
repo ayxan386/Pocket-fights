@@ -995,7 +995,7 @@ MonoBehaviour:
   manaBarIndicator: {fileID: 6356805335538947302}
   <Level>k__BackingField: 1
   <FreePoints>k__BackingField: 3
-  <SkillPoints>k__BackingField: 0
+  <SkillPoints>k__BackingField: 1
   <SourceName>k__BackingField: Player
   startingVitality: 4
   startingStrength: 4
@@ -1018,8 +1018,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f23d29becfc8a540a86632deafdca0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathName: saves
-  filename: test.json
+  pathName: saves/prod
+  filename: prod.json
   testJson: 
 --- !u!1 &194681513598323843
 GameObject:
@@ -6867,6 +6867,18 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 1840547751194471090, guid: 83fac06495c758a43a8ac8cbb506e52c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 83fac06495c758a43a8ac8cbb506e52c, type: 3}
+--- !u!114 &1359948359360741963 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1326665222103964315, guid: 83fac06495c758a43a8ac8cbb506e52c,
+    type: 3}
+  m_PrefabInstance: {fileID: 51443049369016528}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7222240726146972785 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7245252223730771105, guid: 83fac06495c758a43a8ac8cbb506e52c,
@@ -28042,6 +28054,11 @@ PrefabInstance:
       propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3081935565367527732, guid: f396e0c1bf33fc44f9dfd986cae47d6b,
+        type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 1359948359360741963}
     - target: {fileID: 4152425804651369839, guid: f396e0c1bf33fc44f9dfd986cae47d6b,
         type: 3}
       propertyPath: m_Name
@@ -28192,6 +28209,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0.032020673
       objectReference: {fileID: 0}
+    - target: {fileID: 7730289112076088766, guid: f396e0c1bf33fc44f9dfd986cae47d6b,
+        type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 1359948359360741963}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f396e0c1bf33fc44f9dfd986cae47d6b, type: 3}
 --- !u!224 &1900913137891737317 stripped

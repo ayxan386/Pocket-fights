@@ -127,13 +127,13 @@ public class PlayerCombatInitiation : MonoBehaviour
 
     public void UnloadCombatScene()
     {
-        DataManager.Instance.SaveEventTrigger();
         SceneManager.UnloadSceneAsync("CombatScene");
         StartCoroutine(WaitThenLoad());
     }
 
     private IEnumerator WaitThenLoad()
     {
+        DataManager.Instance.SaveEventTrigger("Combat mode initiator");
         unloadingScreen.SetActive(true);
         EventManager.OnCombatSceneLoading?.Invoke(false);
         wholeScene.SetActive(true);

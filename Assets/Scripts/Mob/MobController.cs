@@ -40,7 +40,7 @@ public class MobController : MonoBehaviour, BaseEntityCallbacks
 
         statController.AttachedEntity = this;
         statController.Animator = animator;
-        statController.Level += PlayerInputController.Instance.Stats.Level;
+        statController.Level += PlayerInputController.Instance.Stats.Level - 1;
         var statsToAllocate = statController.Level * statScalingFactor;
         foreach (var statType in Enum.GetValues(typeof(StatTypes)).Cast<StatTypes>())
         {

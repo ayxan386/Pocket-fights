@@ -581,8 +581,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   offset: {x: -6.28, y: 7.91, z: -8}
-  followSpeed: 3
+  followSpeed: 0.5
   allowedMaxDistance: 3
+  orthoSize: 6.8
+  camera: {fileID: 2163032917579677017}
 --- !u!1 &2163032917718402799
 GameObject:
   m_ObjectHideFlags: 0

@@ -3891,7 +3891,6 @@ GameObject:
   - component: {fileID: 1799696658}
   - component: {fileID: 1799696659}
   - component: {fileID: 1799696660}
-  - component: {fileID: 1799696661}
   m_Layer: 0
   m_Name: GameManagers
   m_TagString: Untagged
@@ -3962,21 +3961,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab6f915343d443f4392ce7e7049e20e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1799696661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1799696657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f23d29becfc8a540a86632deafdca0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pathName: /saves
-  filename: data_v1_test.json
-  testJson: '{"baseStats":{"m_Keys":[0,1,2,3],"m_Values":[{"maxValue":4.0,"currentValue":4.0},{"maxValue":4.0,"currentValue":4.0},{"maxValue":4.0,"currentValue":4.0},{"maxValue":4.0,"currentValue":4.0}]}}'
 --- !u!1001 &1800969095
 PrefabInstance:
   m_ObjectHideFlags: 0

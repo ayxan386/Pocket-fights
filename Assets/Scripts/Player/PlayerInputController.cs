@@ -67,7 +67,7 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
         statController.Animator = animator;
         loadingScreen.SetActive(true);
         yield return new WaitForSeconds(0.2f);
-        DataManager.Instance.LoadPlayer();
+        DataManager.Instance.LoadPlayer("Player input controller");
         yield return new WaitForSeconds(0.1f);
         loadingScreen.SetActive(false);
     }

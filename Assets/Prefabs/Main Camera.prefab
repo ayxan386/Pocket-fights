@@ -133,7 +133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   offset: {x: -6.28, y: 7.91, z: -8}
-  followSpeed: 2.9
+  followSpeed: 0.5
   allowedMaxDistance: 3
   orthoSize: 6.8
   camera: {fileID: 652925243726052722}

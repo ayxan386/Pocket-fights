@@ -37,7 +37,6 @@ public class GlobalGameManager : MonoBehaviour
     private void OnExitPortalDetected(bool isExitPortal)
     {
         CurrentFloorNumber++;
-        DataManager.Instance.SaveEventTrigger();
         if (CurrentFloorNumber >= totalNumberOfFloors)
         {
             EndDungeon();
@@ -51,13 +50,13 @@ public class GlobalGameManager : MonoBehaviour
     [ContextMenu("End dungeon")]
     public void EndDungeon()
     {
-        DataManager.Instance.SaveEventTrigger();
         StartCoroutine(DungeonComplete());
     }
 
     private IEnumerator FloorComplete()
     {
-        DataManager.Instance.SaveEventTrigger();
+        DataManager.Instance.SaveEventTrigger("Global game manager FloorComplete");
+        yield return new WaitForSeconds(1.5f);
         PlayerPrefs.SetInt(CurrentFloor, CurrentFloorNumber);
         yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene(floorSceneName);
@@ -65,7 +64,8 @@ public class GlobalGameManager : MonoBehaviour
 
     private IEnumerator DungeonComplete()
     {
-        yield return new WaitForSeconds(1.0f);
+        DataManager.Instance.SaveEventTrigger("Global game manager Dungeon complete");
+        yield return new WaitForSeconds(1.5f);
         PlayerPrefs.DeleteKey(CurrentFloor);
         yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene(endSceneName);
