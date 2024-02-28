@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 1407000089497618110}
   - component: {fileID: 4005987284259556653}
   m_Layer: 0
-  m_Name: Effect
+  m_Name: Poison Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -148,6 +148,7 @@ MonoBehaviour:
     icon: {fileID: 2047992146, guid: 080cb6d98b00c2645b2c41df5f69bc78, type: 3}
     displayName: Poison
     descriptionBase: Deals damage equal to duration
+    effectSuffix: 
   RelatedDisplayManager: {fileID: 0}
   secondaryEffect:
     m_PersistentCalls:

@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 0.59
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: cede08c9fc471e64884909cd4bbeaf59, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 8a45c6094c8d6184f82fccb03d315981, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.283
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.41994974, g: 0.20808779, b: 0.08709112, a: 0.283}
+  m_IndirectSpecularColor: {r: 0.022419281, g: 0.036679722, b: 0.10751072, a: 0.283}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -130,10 +130,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 719243055}
     m_Modifications:
+    - target: {fileID: 3406499118600237492, guid: b84103262dbd8cd48a0d67046bee6366,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4096449574246004291, guid: b84103262dbd8cd48a0d67046bee6366,
         type: 3}
       propertyPath: m_Name
       value: Tree 2 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4096449574246004291, guid: b84103262dbd8cd48a0d67046bee6366,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8250593785596600116, guid: b84103262dbd8cd48a0d67046bee6366,
         type: 3}
@@ -190,6 +200,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8334845288077981084, guid: b84103262dbd8cd48a0d67046bee6366,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b84103262dbd8cd48a0d67046bee6366, type: 3}
 --- !u!4 &36670533 stripped
@@ -209,6 +224,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Corridor (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7201703376174859072, guid: 6926de92152d59848912f204ff718cac,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7201703376174859073, guid: 6926de92152d59848912f204ff718cac,
         type: 3}
@@ -295,10 +315,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 719243055}
     m_Modifications:
+    - target: {fileID: 3406499118600237492, guid: b84103262dbd8cd48a0d67046bee6366,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4096449574246004291, guid: b84103262dbd8cd48a0d67046bee6366,
         type: 3}
       propertyPath: m_Name
       value: Tree 2 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4096449574246004291, guid: b84103262dbd8cd48a0d67046bee6366,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8250593785596600116, guid: b84103262dbd8cd48a0d67046bee6366,
         type: 3}
@@ -369,6 +399,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334845288077981084, guid: b84103262dbd8cd48a0d67046bee6366,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b84103262dbd8cd48a0d67046bee6366, type: 3}
@@ -475,10 +510,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 719243055}
     m_Modifications:
+    - target: {fileID: 3406499118600237492, guid: b84103262dbd8cd48a0d67046bee6366,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4096449574246004291, guid: b84103262dbd8cd48a0d67046bee6366,
         type: 3}
       propertyPath: m_Name
       value: Tree 2 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4096449574246004291, guid: b84103262dbd8cd48a0d67046bee6366,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8250593785596600116, guid: b84103262dbd8cd48a0d67046bee6366,
         type: 3}
@@ -534,6 +579,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334845288077981084, guid: b84103262dbd8cd48a0d67046bee6366,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b84103262dbd8cd48a0d67046bee6366, type: 3}
@@ -924,10 +974,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 719243055}
     m_Modifications:
+    - target: {fileID: 3406499118600237492, guid: b84103262dbd8cd48a0d67046bee6366,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4096449574246004291, guid: b84103262dbd8cd48a0d67046bee6366,
         type: 3}
       propertyPath: m_Name
       value: Tree 2 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4096449574246004291, guid: b84103262dbd8cd48a0d67046bee6366,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8250593785596600116, guid: b84103262dbd8cd48a0d67046bee6366,
         type: 3}
@@ -999,6 +1059,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8334845288077981084, guid: b84103262dbd8cd48a0d67046bee6366,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b84103262dbd8cd48a0d67046bee6366, type: 3}
 --- !u!4 &482182838 stripped
@@ -1014,10 +1079,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 719243055}
     m_Modifications:
+    - target: {fileID: 3406499118600237492, guid: b84103262dbd8cd48a0d67046bee6366,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4096449574246004291, guid: b84103262dbd8cd48a0d67046bee6366,
         type: 3}
       propertyPath: m_Name
       value: Tree 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4096449574246004291, guid: b84103262dbd8cd48a0d67046bee6366,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8250593785596600116, guid: b84103262dbd8cd48a0d67046bee6366,
         type: 3}
@@ -1089,6 +1164,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8334845288077981084, guid: b84103262dbd8cd48a0d67046bee6366,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b84103262dbd8cd48a0d67046bee6366, type: 3}
 --- !u!4 &533963079 stripped
@@ -1126,8 +1206,8 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.745283, g: 0.715723, b: 0.63559985, a: 1}
-  m_Intensity: 0.69
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1.1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1184,14 +1264,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 540345804}
-  m_LocalRotation: {x: 0.36697286, y: 0.6014365, z: -0.36137944, w: 0.6107455}
+  m_LocalRotation: {x: -0.7699647, y: 0.21243685, z: -0.5084697, w: -0.32168853}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 62, y: 89.12, z: 0}
+  m_LocalEulerAnglesHint: {x: -225.35, y: -66.88, z: 0}
 --- !u!114 &540345807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1219,10 +1299,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 719243055}
     m_Modifications:
+    - target: {fileID: -6242013576549731550, guid: e8d2ccbee098ec94a954a38c4f953c91,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2698073402067275308, guid: e8d2ccbee098ec94a954a38c4f953c91,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3312683397505606994, guid: e8d2ccbee098ec94a954a38c4f953c91,
         type: 3}
       propertyPath: m_Name
       value: Grass (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3312683397505606994, guid: e8d2ccbee098ec94a954a38c4f953c91,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 5011000548567438112, guid: e8d2ccbee098ec94a954a38c4f953c91,
         type: 3}
@@ -1294,10 +1389,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 719243055}
     m_Modifications:
+    - target: {fileID: -6242013576549731550, guid: e8d2ccbee098ec94a954a38c4f953c91,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2698073402067275308, guid: e8d2ccbee098ec94a954a38c4f953c91,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3312683397505606994, guid: e8d2ccbee098ec94a954a38c4f953c91,
         type: 3}
       propertyPath: m_Name
       value: Grass
+      objectReference: {fileID: 0}
+    - target: {fileID: 3312683397505606994, guid: e8d2ccbee098ec94a954a38c4f953c91,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 5011000548567438112, guid: e8d2ccbee098ec94a954a38c4f953c91,
         type: 3}
@@ -1376,7 +1486,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &719243055
 Transform:
@@ -1767,10 +1877,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 719243055}
     m_Modifications:
+    - target: {fileID: -6242013576549731550, guid: e8d2ccbee098ec94a954a38c4f953c91,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2698073402067275308, guid: e8d2ccbee098ec94a954a38c4f953c91,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3312683397505606994, guid: e8d2ccbee098ec94a954a38c4f953c91,
         type: 3}
       propertyPath: m_Name
       value: Grass (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3312683397505606994, guid: e8d2ccbee098ec94a954a38c4f953c91,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 5011000548567438112, guid: e8d2ccbee098ec94a954a38c4f953c91,
         type: 3}
@@ -2218,10 +2343,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 719243055}
     m_Modifications:
+    - target: {fileID: -6242013576549731550, guid: e8d2ccbee098ec94a954a38c4f953c91,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2698073402067275308, guid: e8d2ccbee098ec94a954a38c4f953c91,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3312683397505606994, guid: e8d2ccbee098ec94a954a38c4f953c91,
         type: 3}
       propertyPath: m_Name
       value: Grass (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3312683397505606994, guid: e8d2ccbee098ec94a954a38c4f953c91,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 5011000548567438112, guid: e8d2ccbee098ec94a954a38c4f953c91,
         type: 3}
@@ -3463,10 +3603,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 719243055}
     m_Modifications:
+    - target: {fileID: 3406499118600237492, guid: b84103262dbd8cd48a0d67046bee6366,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4096449574246004291, guid: b84103262dbd8cd48a0d67046bee6366,
         type: 3}
       propertyPath: m_Name
       value: Tree 2 (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4096449574246004291, guid: b84103262dbd8cd48a0d67046bee6366,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8250593785596600116, guid: b84103262dbd8cd48a0d67046bee6366,
         type: 3}
@@ -3523,6 +3673,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8334845288077981084, guid: b84103262dbd8cd48a0d67046bee6366,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b84103262dbd8cd48a0d67046bee6366, type: 3}
 --- !u!4 &1559525846 stripped
@@ -3531,50 +3686,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1559525845}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1577463216
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1577463217}
-  - component: {fileID: 1577463218}
-  m_Layer: 0
-  m_Name: cm
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1577463217
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1577463216}
-  m_LocalRotation: {x: -0, y: -0.38268343, z: -0, w: 0.92387956}
-  m_LocalPosition: {x: -0.9475231, y: -1.98, z: 20.421242}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2011681619}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1577463218
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1577463216}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1592981410
 GameObject:
   m_ObjectHideFlags: 0
@@ -3968,10 +4079,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 719243055}
     m_Modifications:
+    - target: {fileID: -6242013576549731550, guid: e8d2ccbee098ec94a954a38c4f953c91,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2698073402067275308, guid: e8d2ccbee098ec94a954a38c4f953c91,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3312683397505606994, guid: e8d2ccbee098ec94a954a38c4f953c91,
         type: 3}
       propertyPath: m_Name
       value: Grass (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3312683397505606994, guid: e8d2ccbee098ec94a954a38c4f953c91,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 5011000548567438112, guid: e8d2ccbee098ec94a954a38c4f953c91,
         type: 3}
@@ -4043,10 +4169,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 719243055}
     m_Modifications:
+    - target: {fileID: -6242013576549731550, guid: e8d2ccbee098ec94a954a38c4f953c91,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2698073402067275308, guid: e8d2ccbee098ec94a954a38c4f953c91,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3312683397505606994, guid: e8d2ccbee098ec94a954a38c4f953c91,
         type: 3}
       propertyPath: m_Name
       value: Grass (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3312683397505606994, guid: e8d2ccbee098ec94a954a38c4f953c91,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 5011000548567438112, guid: e8d2ccbee098ec94a954a38c4f953c91,
         type: 3}
@@ -4296,7 +4437,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1882260625
 Transform:
   m_ObjectHideFlags: 0
@@ -4460,10 +4601,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 719243055}
     m_Modifications:
+    - target: {fileID: 3406499118600237492, guid: b84103262dbd8cd48a0d67046bee6366,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4096449574246004291, guid: b84103262dbd8cd48a0d67046bee6366,
         type: 3}
       propertyPath: m_Name
       value: Tree 2 (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4096449574246004291, guid: b84103262dbd8cd48a0d67046bee6366,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8250593785596600116, guid: b84103262dbd8cd48a0d67046bee6366,
         type: 3}
@@ -4520,6 +4671,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8334845288077981084, guid: b84103262dbd8cd48a0d67046bee6366,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b84103262dbd8cd48a0d67046bee6366, type: 3}
 --- !u!4 &1935626395 stripped
@@ -4535,10 +4691,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 719243055}
     m_Modifications:
+    - target: {fileID: -6242013576549731550, guid: e8d2ccbee098ec94a954a38c4f953c91,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2698073402067275308, guid: e8d2ccbee098ec94a954a38c4f953c91,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3312683397505606994, guid: e8d2ccbee098ec94a954a38c4f953c91,
         type: 3}
       propertyPath: m_Name
       value: Grass (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3312683397505606994, guid: e8d2ccbee098ec94a954a38c4f953c91,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 5011000548567438112, guid: e8d2ccbee098ec94a954a38c4f953c91,
         type: 3}
@@ -4610,10 +4781,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 719243055}
     m_Modifications:
+    - target: {fileID: 3406499118600237492, guid: b84103262dbd8cd48a0d67046bee6366,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4096449574246004291, guid: b84103262dbd8cd48a0d67046bee6366,
         type: 3}
       propertyPath: m_Name
       value: Tree 2 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4096449574246004291, guid: b84103262dbd8cd48a0d67046bee6366,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8250593785596600116, guid: b84103262dbd8cd48a0d67046bee6366,
         type: 3}
@@ -4670,6 +4851,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8334845288077981084, guid: b84103262dbd8cd48a0d67046bee6366,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b84103262dbd8cd48a0d67046bee6366, type: 3}
 --- !u!4 &1958227313 stripped
@@ -4695,7 +4881,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1966389800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4835,6 +5021,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Corridor (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7201703376174859072, guid: 6926de92152d59848912f204ff718cac,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7201703376174859073, guid: 6926de92152d59848912f204ff718cac,
         type: 3}
@@ -4995,8 +5186,7 @@ Transform:
   m_LocalPosition: {x: -13.77, y: 1.98, z: -15.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1577463217}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
@@ -5040,10 +5230,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 719243055}
     m_Modifications:
+    - target: {fileID: 3406499118600237492, guid: b84103262dbd8cd48a0d67046bee6366,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4096449574246004291, guid: b84103262dbd8cd48a0d67046bee6366,
         type: 3}
       propertyPath: m_Name
       value: Tree 2 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4096449574246004291, guid: b84103262dbd8cd48a0d67046bee6366,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8250593785596600116, guid: b84103262dbd8cd48a0d67046bee6366,
         type: 3}
@@ -5099,6 +5299,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334845288077981084, guid: b84103262dbd8cd48a0d67046bee6366,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b84103262dbd8cd48a0d67046bee6366, type: 3}

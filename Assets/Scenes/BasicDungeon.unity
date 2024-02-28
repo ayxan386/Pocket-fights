@@ -195,6 +195,21 @@ PrefabInstance:
       propertyPath: autoGenerate
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2163032916832805613, guid: 28e62865603927a4bb37d4f12c93f9f8,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 0.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 2163032917718402576, guid: 28e62865603927a4bb37d4f12c93f9f8,
+        type: 3}
+      propertyPath: m_UseColorTemperature
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2163032917718402577, guid: 28e62865603927a4bb37d4f12c93f9f8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -225.35
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28e62865603927a4bb37d4f12c93f9f8, type: 3}
 --- !u!4 &221410874 stripped
