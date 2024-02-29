@@ -19813,6 +19813,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Accumulation
       objectReference: {fileID: 0}
+    - target: {fileID: 6204179879270805217, guid: e2c03cd9988d3964e9f7e286d46aa674,
+        type: 3}
+      propertyPath: activationPrice
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6739678855245900918, guid: e2c03cd9988d3964e9f7e286d46aa674,
         type: 3}
       propertyPath: m_RootOrder

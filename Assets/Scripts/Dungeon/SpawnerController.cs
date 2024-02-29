@@ -7,7 +7,6 @@ using Random = UnityEngine.Random;
 
 public class SpawnerController : MonoBehaviour
 {
-    [SerializeField] private List<SpawnerData> possibleSpawnPatterns;
     [SerializeField] private SpawnerData data;
     [SerializeField] private float activationRange;
 
@@ -28,6 +27,7 @@ public class SpawnerController : MonoBehaviour
 
     public SpawnerData SetSpawnerData()
     {
+        var possibleSpawnPatterns = FloorManager.Instance.SpanwerData;
         data = Instantiate(possibleSpawnPatterns[Random.Range(0, possibleSpawnPatterns.Count)], transform);
         return data;
     }
@@ -49,6 +49,7 @@ public class SpawnerController : MonoBehaviour
             );
 
             var count = spawnedMobs.Count(mob => mob.gameObject.activeSelf);
+            var levelRange = FloorManager.Instance.LevelRange;
             for (int mobCount = count; mobCount < data.maxNumberOfMobs;)
             {
                 var index = Random.Range(0, data.mobs.Count);
@@ -57,6 +58,7 @@ public class SpawnerController : MonoBehaviour
                     mobCount++;
                     var pos = FindRandomPos(0);
                     var newMob = Instantiate(data.mobs[index], pos, Quaternion.identity, mobParent.transform);
+                    newMob.SetLevel(Random.Range(levelRange.x, levelRange.y));
                     spawnedMobs.Add(newMob);
                     data.numberOfMobsLeft[index]--;
                 }

@@ -78,7 +78,7 @@ public class StatController : MonoBehaviour
 
     private void CalculateStatValues()
     {
-        statValues[StatValue.Health].baseValue = baseStats[StatTypes.Vitality].maxValue * 10 * Lsf;
+        statValues[StatValue.Health].baseValue = baseStats[StatTypes.Vitality].maxValue * 15 * Lsf;
         statValues[StatValue.Health].maxValue = statValues[StatValue.Health].baseValue;
         statValues[StatValue.Mana].baseValue = baseStats[StatTypes.Mana].maxValue * 10 * Lsf;
         statValues[StatValue.Mana].maxValue = statValues[StatValue.Mana].baseValue;

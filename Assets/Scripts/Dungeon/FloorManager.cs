@@ -6,6 +6,8 @@ using UnityEngine;
 public class FloorManager : MonoBehaviour
 {
     [SerializeField] private List<RoomManager> roomPrefabs;
+    [field: SerializeField] public List<SpawnerData> SpanwerData { get; set; }
+    [field: SerializeField] public Vector2Int LevelRange { get; set; }
     [SerializeField] private RoomManager endRoom;
     [SerializeField] private List<RoomManager> roomInstances;
     [SerializeField] private Vector2 distanceBetweenRooms;

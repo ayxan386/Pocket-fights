@@ -31,16 +31,23 @@ public class MobController : MonoBehaviour, BaseEntityCallbacks
     private IEnumerator Start()
     {
         yield return new WaitUntil(() => PlayerCombatInitiation.Instance != null);
+        statController.AttachedEntity = this;
+        statController.Animator = animator;
+        if (!PlayerCombatInitiation.Instance.IsCombatScene)
+        {
+            DeactivateCombatMode();
+        }
+    }
 
+    public void SetLevel(int level)
+    {
         var totalSumOfStats = 0f;
         foreach (var statType in Enum.GetValues(typeof(StatTypes)).Cast<StatTypes>())
         {
             totalSumOfStats += statController.GetBaseStat(statType).baseValue;
         }
 
-        statController.AttachedEntity = this;
-        statController.Animator = animator;
-        statController.Level += PlayerInputController.Instance.Stats.Level - 1;
+        statController.Level += level;
         var statsToAllocate = statController.Level * statScalingFactor;
         foreach (var statType in Enum.GetValues(typeof(StatTypes)).Cast<StatTypes>())
         {
@@ -50,10 +57,6 @@ public class MobController : MonoBehaviour, BaseEntityCallbacks
 
         statController.UpdateStatValue(StatValue.Mana, (int)statController.GetStatValue(StatValue.Mana).maxValue);
         statController.UpdateStatValue(StatValue.Health, (int)statController.GetStatValue(StatValue.Health).maxValue);
-        if (!PlayerCombatInitiation.Instance.IsCombatScene)
-        {
-            DeactivateCombatMode();
-        }
     }
 
     private void OnDestroy()
