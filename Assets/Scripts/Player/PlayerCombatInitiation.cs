@@ -51,6 +51,12 @@ public class PlayerCombatInitiation : MonoBehaviour
                     MobDescriptionManager.Instance.DisplayMob(displayedMob);
                     break;
                 }
+
+                if (mob.transform.TryGetComponent(out InteractableDescriptionData data))
+                {
+                    MobDescriptionManager.Instance.DisplayGeneric(data.title, data.icon, data.smallIcons);
+                    break;
+                }
             }
 
             yield return new WaitForSeconds(0.1f);

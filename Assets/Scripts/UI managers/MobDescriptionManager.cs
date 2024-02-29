@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -48,6 +49,24 @@ public class MobDescriptionManager : MonoBehaviour
         for (int i = k; i < dropListItems.Length; i++)
         {
             dropListItems[i].gameObject.SetActive(false);
+        }
+    }
+
+    public void DisplayGeneric(string passedTitle, Sprite passedIcon, List<Sprite> smallIcons)
+    {
+        menuRef.SetActive(true);
+        title.text = passedTitle;
+        icon.sprite = passedIcon;
+
+        foreach (var item in dropListItems)
+        {
+            item.gameObject.SetActive(false);
+        }
+
+        for (var i = 0; i < smallIcons.Count; i++)
+        {
+            dropListItems[i].gameObject.SetActive(true);
+            dropListItems[i].sprite = smallIcons[i];
         }
     }
 }

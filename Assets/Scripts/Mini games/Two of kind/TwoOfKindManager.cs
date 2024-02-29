@@ -59,9 +59,12 @@ public class TwoOfKindManager : MonoBehaviour
             prevOpennedOption.enabled = false;
             otherOption.enabled = false;
 
-            var newDrop = Instantiate(prevOpennedOption.PrizeName.itemPrefab);
-            newDrop.count = prevOpennedOption.PrizeName.count.y;
-            EventManager.OnItemAdd?.Invoke(newDrop);
+            if (prevOpennedOption.PrizeName.itemPrefab != null)
+            {
+                var newDrop = Instantiate(prevOpennedOption.PrizeName.itemPrefab);
+                newDrop.count = prevOpennedOption.PrizeName.count.y;
+                EventManager.OnItemAdd?.Invoke(newDrop);
+            }
         }
         else
         {

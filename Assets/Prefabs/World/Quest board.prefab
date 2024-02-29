@@ -261,6 +261,7 @@ GameObject:
   - component: {fileID: 4902082706515781769}
   - component: {fileID: 7925514472142935068}
   - component: {fileID: 6544779590044140192}
+  - component: {fileID: 9209345235069611224}
   m_Layer: 6
   m_Name: Quest board
   m_TagString: Untagged
@@ -343,6 +344,21 @@ CapsuleCollider:
   m_Height: 2.07
   m_Direction: 1
   m_Center: {x: 0, y: 0.75, z: 0}
+--- !u!114 &9209345235069611224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2884068748073550996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b323b860a2b10f649bd41ce14421996f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Quest board
+  icon: {fileID: 21300000, guid: 3385a2a3209e6c8498a8de8c7e6745a7, type: 3}
+  smallIcons: []
 --- !u!1 &6018269753589191860
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,6 +495,7 @@ MonoBehaviour:
   appearLocation: {x: 0, y: 0, z: 0}
   disappearLocation: {x: -1445, y: 0, z: 0}
   duration: 1.2
+  appearanceSelection: {fileID: 0}
 --- !u!114 &6108741470074657530
 MonoBehaviour:
   m_ObjectHideFlags: 0

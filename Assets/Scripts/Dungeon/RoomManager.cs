@@ -10,7 +10,7 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private Transform playerSpawnPoint;
     [SerializeField] private string comparisonName;
 
-    [Header("Floor generation")] [SerializeField]
+    [Header("Obstruction detection")] [SerializeField]
     private Transform capLayer;
 
     [SerializeField] private Vector2Int dimensions;
@@ -153,16 +153,15 @@ public class RoomManager : MonoBehaviour
     {
         if (!showGizmos) return;
 
-        GenerateDecorPositions();
-
-        Gizmos.color = Color.cyan;
-        foreach (var pos in decorPosition)
+        foreach (var gridPoint in grid)
         {
-            Gizmos.DrawSphere(pos, 0.4f);
+            Gizmos.color = gridPoint.isObstructed ? Color.red : Color.cyan;
+            Gizmos.DrawSphere(gridPoint.pos, 0.3f);
         }
     }
 
-    private void GenerateDecorPositions()
+    [ContextMenu("Generate decor positions")]
+    public void GenerateDecorPositions()
     {
         decorPosition = new List<Vector3>();
         if (randomSeed)
@@ -263,7 +262,7 @@ public class RoomManager : MonoBehaviour
             targetSpawner = allSpawners[0];
 
             killCounter = spawnerData.numberOfMobsLeft.Aggregate((num, sum) => sum + num);
-            exitConditionType = ExitConditionType.SpawnerExhaust;
+            exitConditionType = ExitConditionType.KillCounter;
         }
         else
         {

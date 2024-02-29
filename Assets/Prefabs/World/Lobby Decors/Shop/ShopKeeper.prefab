@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8701532729577449175}
   - component: {fileID: 8701532729577449179}
   - component: {fileID: 8701532729577449176}
+  - component: {fileID: 5086733377074757480}
   m_Layer: 6
   m_Name: ShopKeeper
   m_TagString: Untagged
@@ -93,7 +94,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shopItemsData: {fileID: 6690144885515149150, guid: f43b23d82e53daa43a1f29e811d8b514,
     type: 3}
+  <ShopName>k__BackingField: 
   <StoredItems>k__BackingField: []
+--- !u!114 &5086733377074757480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8701532729577449174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b323b860a2b10f649bd41ce14421996f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: 
+  icon: {fileID: 21300000, guid: 036b4e205c3ee8943a9cc66b9e6d51c1, type: 3}
+  smallIcons: []
 --- !u!1001 &1595201122345857684
 PrefabInstance:
   m_ObjectHideFlags: 0

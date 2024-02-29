@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5098299629364764806}
   - component: {fileID: 5108228347956560902}
   - component: {fileID: 5094295357394479689}
-  m_Layer: 7
+  m_Layer: 4
   m_Name: Cap - water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,6 +109,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Water 01
       objectReference: {fileID: 0}
+    - target: {fileID: 1640771308685042, guid: ff78edb367a079b4a8f8ae2d128c581f, type: 3}
+      propertyPath: m_Layer
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4115408997890500, guid: ff78edb367a079b4a8f8ae2d128c581f, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -157,6 +161,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 23990411449202740, guid: ff78edb367a079b4a8f8ae2d128c581f,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 65677426015555730, guid: ff78edb367a079b4a8f8ae2d128c581f, type: 3}
