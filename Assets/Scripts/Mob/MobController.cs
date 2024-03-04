@@ -13,6 +13,7 @@ public class MobController : MonoBehaviour, BaseEntityCallbacks
     [SerializeField] private List<PossibleLoot> possibleDrops;
     [SerializeField] private GameObject combatUiRef;
     [SerializeField] private GameObject selectionIndicators;
+    [SerializeField] private IntentIndicator intentIndicator;
     [field: SerializeField] public MobDisplayData DisplayData { get; private set; }
     [field: SerializeField] public List<string> Tags { get; private set; }
 
@@ -20,6 +21,7 @@ public class MobController : MonoBehaviour, BaseEntityCallbacks
     private MobMovementController movementController;
 
     [SerializeField] private float statScalingFactor;
+    private int randomAction;
 
     public Guid Id { get; private set; }
     public List<PossibleLoot> PossibleLoots => possibleDrops;
@@ -69,18 +71,20 @@ public class MobController : MonoBehaviour, BaseEntityCallbacks
         Id = Guid.NewGuid();
         animator.SetBool("move", false);
         movementController.ToggleMovement(false);
-
         transform.SetPositionAndRotation(mobStandPoint.position, mobStandPoint.rotation);
+        intentIndicator.gameObject.SetActive(true);
 
         EventManager.OnPlayerTurnEnd += OnPlayerTurnEnd;
+        EventManager.OnPlayerTurnStart += OnPlayerTurnStart;
     }
-
 
     public void DeactivateCombatMode()
     {
         combatUiRef.SetActive(false);
         movementController.ToggleMovement(true);
+        intentIndicator.gameObject.SetActive(false);
         EventManager.OnPlayerTurnEnd -= OnPlayerTurnEnd;
+        EventManager.OnPlayerTurnStart -= OnPlayerTurnStart;
     }
 
     private void OnPlayerTurnEnd(bool obj)
@@ -88,15 +92,16 @@ public class MobController : MonoBehaviour, BaseEntityCallbacks
         statController.RegenMana();
     }
 
+    private void OnPlayerTurnStart(bool obj)
+    {
+        ChooseAndSetRandomActions();
+        var action = actions[randomAction];
+        var canUseSkill = action.manaConsumption < statController.GetStatValue(StatValue.Mana).currentValue;
+        intentIndicator.UpdateIntent(canUseSkill ? action.type : ActionType.Passive);
+    }
+
     public void AttackPlayer()
     {
-        var randomAction = Random.Range(0, actions.Count);
-        while (actions[randomAction].type != ActionType.Attack)
-        {
-            randomAction = Random.Range(0, actions.Count);
-        }
-
-
         var actionDetails = actions[randomAction];
         var usedAction = statController.UsedAction(actionDetails.manaConsumption);
         if (usedAction)
@@ -107,6 +112,16 @@ public class MobController : MonoBehaviour, BaseEntityCallbacks
         }
 
         IsDoneAttack = true;
+    }
+
+    private void ChooseAndSetRandomActions()
+    {
+        randomAction = Random.Range(0, actions.Count);
+        while (actions[randomAction].type == ActionType.Passive ||
+               actions[randomAction].type == ActionType.ReceiveAttack)
+        {
+            randomAction = Random.Range(0, actions.Count);
+        }
     }
 
     public void OnReceiveAttack(float receivedDamage)

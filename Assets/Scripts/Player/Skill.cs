@@ -70,5 +70,7 @@ public enum ActionType
 {
     Attack,
     Passive,
-    ReceiveAttack
+    ReceiveAttack,
+    Defense,
+    Buff
 }

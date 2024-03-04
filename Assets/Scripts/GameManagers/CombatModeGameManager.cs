@@ -76,6 +76,7 @@ public class CombatModeGameManager : MonoBehaviour
 
         IsCombatGoing = isLoaded;
         FindNextSelectedMobs();
+        EventManager.OnPlayerTurnStart?.Invoke(true);
     }
 
     public void EndPlayerTurn()
