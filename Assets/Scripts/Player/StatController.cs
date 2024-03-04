@@ -59,7 +59,7 @@ public class StatController : MonoBehaviour
     private void InitiateStatValues()
     {
         statValues[StatValue.Health] = new(baseStats[StatTypes.Vitality].maxValue * 10 * Lsf,
-            baseStats[StatTypes.Vitality].currentValue * 10 * Lsf);
+            baseStats[StatTypes.Vitality].currentValue * 15 * Lsf);
         statValues[StatValue.Mana] = new(baseStats[StatTypes.Mana].maxValue * 10 * Lsf,
             baseStats[StatTypes.Mana].currentValue * 10 * Lsf);
         statValues[StatValue.BaseAttack] = new(baseStats[StatTypes.Strength].maxValue * 5 * Lsf,

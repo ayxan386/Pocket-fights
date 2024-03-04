@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mobs:
-  - {fileID: 7622900003042665912, guid: 627262a31811c094f92d65ef57ba3c47, type: 3}
+  - {fileID: 5552176048489052677, guid: a135652fe216f7c4c9a2d37b5fbd0ac1, type: 3}
   - {fileID: 6035873303232719145, guid: 201380938058a6d4aab357bb120d716e, type: 3}
   - {fileID: 3305920741053015679, guid: df779cb9b6007ab4081802a57fd14cfe, type: 3}
   numberOfMobsLeft: 030000000200000002000000

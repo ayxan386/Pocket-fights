@@ -58,10 +58,13 @@ MonoBehaviour:
   DamageBuffer: 0
   isPositive: 0
   needsToBeDeleted: 1
+  checkAtTheEnd: 1
+  isAdditive: 0
   displayDetails:
     icon: {fileID: 21300000, guid: e7d29a79bc7fae248887c8a08a160303, type: 3}
     displayName: Mana shield
-    descriptionBase: 
+    descriptionBase: Blocks damage equal to part of your HP
+    effectSuffix: 
   RelatedDisplayManager: {fileID: 0}
   secondaryEffect:
     m_PersistentCalls:
@@ -81,6 +84,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  textColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!114 &4325834422610068843
 MonoBehaviour:
   m_ObjectHideFlags: 0

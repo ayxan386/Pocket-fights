@@ -7,8 +7,9 @@ public class StatusApplyingAction : MonoBehaviour
 
     public void ApplyEffectToCaster(Skill usedSkill, StatController caster, StatController target)
     {
-        effect.amount = (negate ? -1 : 1) * usedSkill.multiplier;
-        caster.StatusManager.AddStatusEffect(Instantiate(effect, transform));
+        var statEffect = Instantiate(effect, transform);
+        statEffect.amount = (negate ? -1 : 1) * usedSkill.multiplier;
+        caster.StatusManager.AddStatusEffect(statEffect);
     }
 
     public void ApplyEffectToTarget(Skill usedSkill, StatController caster, StatController target)

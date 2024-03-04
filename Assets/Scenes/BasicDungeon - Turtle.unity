@@ -208,13 +208,25 @@ PrefabInstance:
     - target: {fileID: 2163032915953893512, guid: 28e62865603927a4bb37d4f12c93f9f8,
         type: 3}
       propertyPath: <SpanwerData>k__BackingField.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2163032915953893512, guid: 28e62865603927a4bb37d4f12c93f9f8,
         type: 3}
       propertyPath: <SpanwerData>k__BackingField.Array.data[0]
       value: 
       objectReference: {fileID: 8729943597482726947, guid: ac82e81aab1b3bc4ebbe32887c9ba878,
+        type: 3}
+    - target: {fileID: 2163032915953893512, guid: 28e62865603927a4bb37d4f12c93f9f8,
+        type: 3}
+      propertyPath: <SpanwerData>k__BackingField.Array.data[1]
+      value: 
+      objectReference: {fileID: 8729943597482726947, guid: bc0537a753d30c946bbef80cc467fee6,
+        type: 3}
+    - target: {fileID: 2163032915953893512, guid: 28e62865603927a4bb37d4f12c93f9f8,
+        type: 3}
+      propertyPath: <SpanwerData>k__BackingField.Array.data[2]
+      value: 
+      objectReference: {fileID: 8729943597482726947, guid: 6d96c4697006b164cab12afc3927451e,
         type: 3}
     - target: {fileID: 2163032916832805613, guid: 28e62865603927a4bb37d4f12c93f9f8,
         type: 3}

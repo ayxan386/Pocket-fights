@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mobs:
-  - {fileID: 2616563055974944068, guid: c1096afd5a7a273499cc0bccb2ac346c, type: 3}
+  - {fileID: 1626563071309187616, guid: 1b8bee36805979e4794053c5709562ca, type: 3}
   numberOfMobsLeft: 0a000000
   spawnerRate: 15
   maxNumberOfMobs: 9
