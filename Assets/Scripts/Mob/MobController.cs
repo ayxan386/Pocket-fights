@@ -3,17 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class MobController : MonoBehaviour, BaseEntityCallbacks
 {
     [SerializeField] private Animator animator;
-    [SerializeField] private List<Skill> actions;
     [SerializeField] private StatController statController;
     [SerializeField] private List<PossibleLoot> possibleDrops;
     [SerializeField] private GameObject combatUiRef;
     [SerializeField] private GameObject selectionIndicators;
-    [SerializeField] private IntentIndicator intentIndicator;
+    [SerializeField] private MobActionManager actionManager;
     [field: SerializeField] public MobDisplayData DisplayData { get; private set; }
     [field: SerializeField] public List<string> Tags { get; private set; }
 
@@ -27,7 +25,7 @@ public class MobController : MonoBehaviour, BaseEntityCallbacks
     public List<PossibleLoot> PossibleLoots => possibleDrops;
 
     public StatController Stats => statController;
-    public bool IsDoneAttack { get; private set; }
+    public bool IsDoneAttack;
 
 
     private IEnumerator Start()
@@ -72,7 +70,7 @@ public class MobController : MonoBehaviour, BaseEntityCallbacks
         animator.SetBool("move", false);
         movementController.ToggleMovement(false);
         transform.SetPositionAndRotation(mobStandPoint.position, mobStandPoint.rotation);
-        intentIndicator.gameObject.SetActive(true);
+        actionManager.ShowIntentPanel();
 
         EventManager.OnPlayerTurnEnd += OnPlayerTurnEnd;
         EventManager.OnPlayerTurnStart += OnPlayerTurnStart;
@@ -82,7 +80,6 @@ public class MobController : MonoBehaviour, BaseEntityCallbacks
     {
         combatUiRef.SetActive(false);
         movementController.ToggleMovement(true);
-        intentIndicator.gameObject.SetActive(false);
         EventManager.OnPlayerTurnEnd -= OnPlayerTurnEnd;
         EventManager.OnPlayerTurnStart -= OnPlayerTurnStart;
     }
@@ -94,40 +91,18 @@ public class MobController : MonoBehaviour, BaseEntityCallbacks
 
     private void OnPlayerTurnStart(bool obj)
     {
-        ChooseAndSetRandomActions();
-        var action = actions[randomAction];
-        var canUseSkill = action.manaConsumption < statController.GetStatValue(StatValue.Mana).currentValue;
-        intentIndicator.UpdateIntent(canUseSkill ? action.type : ActionType.Passive);
+        actionManager.NextTurn();
     }
 
     public void AttackPlayer()
     {
-        var actionDetails = actions[randomAction];
-        var usedAction = statController.UsedAction(actionDetails.manaConsumption);
-        if (usedAction)
-        {
-            // animator.SetTrigger(actionDetails.animationName);
-            actionDetails.usageEffects?.Invoke(actionDetails, statController, PlayerInputController.Instance.Stats);
-            EventManager.OnSkillUsedByPlayer?.Invoke(actionDetails, false);
-        }
-
-        IsDoneAttack = true;
-    }
-
-    private void ChooseAndSetRandomActions()
-    {
-        randomAction = Random.Range(0, actions.Count);
-        while (actions[randomAction].type == ActionType.Passive ||
-               actions[randomAction].type == ActionType.ReceiveAttack)
-        {
-            randomAction = Random.Range(0, actions.Count);
-        }
+        IsDoneAttack = false;
+        actionManager.UseAttack(statController, res => IsDoneAttack = res);
     }
 
     public void OnReceiveAttack(float receivedDamage)
     {
-        var actionDetails = actions.Find(action => action.type == ActionType.ReceiveAttack);
-        actionDetails.usageEffects?.Invoke(actionDetails, statController, null);
+        actionManager.AttackReceived(statController, receivedDamage);
     }
 
     public void OnDeathCallback()

@@ -1,26 +1,27 @@
-using System;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class IntentIndicator : MonoBehaviour
 {
     [SerializeField] private Image icon;
-    [SerializeField] private List<IntentMapping> intents;
+    [SerializeField] private TextMeshPro attackTitle;
 
-    public void UpdateIntent(ActionType type)
+    public void UpdateIntent(MobTurnSequence turn)
     {
-        var intent = intents.Find(intent => intent.type == type);
-
-        icon.sprite = intent.icon;
-        icon.color = intent.color;
+        icon.sprite = turn.intentIcon;
+        icon.color = turn.intentColor;
     }
-}
 
-[Serializable]
-public class IntentMapping
-{
-    public ActionType type;
-    public Sprite icon;
-    public Color color = Color.white;
+    public void UpdateTitle(MobTurnSequence turn)
+    {
+        attackTitle.gameObject.SetActive(true);
+        attackTitle.text = turn.attackTitle;
+        attackTitle.color = turn.titleColor;
+    }
+
+    public void HideTitle()
+    {
+        attackTitle.gameObject.SetActive(false);
+    }
 }

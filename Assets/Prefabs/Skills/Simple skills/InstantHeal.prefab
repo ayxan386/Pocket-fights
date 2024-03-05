@@ -10,12 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6739678855245900918}
   - component: {fileID: 6204179879270805217}
-  - component: {fileID: -5356253794290313981}
-  - component: {fileID: 1117245306228900475}
-  - component: {fileID: 3404131745049422036}
-  - component: {fileID: 6518301604970825851}
+  - component: {fileID: 2679450569582173034}
+  - component: {fileID: -3814629836517645697}
   m_Layer: 0
-  m_Name: BasicAttack
+  m_Name: InstantHeal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +31,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5108844924831289669}
+  - {fileID: 8015696862771644101}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -49,42 +47,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0a2b06e9daa06b4c88dd4c5a1b2fbdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationName: attack01
-  manaConsumption: 10
-  type: 0
+  animationName: openArms
+  manaConsumption: 5
+  type: 4
   displayDetails:
-    icon: {fileID: 21300000, guid: 5fd50594014b70e48bd6993443d46b32, type: 3}
-    displayName: Basic attack
-    descriptionBase: Simple swing on the sword
+    icon: {fileID: 21300000, guid: 2e350bcef09f70943ba03de78d8c063a, type: 3}
+    displayName: Accelerated healing
+    descriptionBase: Heal portion of your HP for 3 turns
     effectSuffix: 
   effects:
   - 1
-  - 1.2
-  - 1.4
-  - 1.6
-  - 1.8
-  activationPrice: 0
+  - 2
+  - 3
+  activationPrice: 99
   currentLevel: 0
-  maxLevel: 5
+  maxLevel: 3
   slotName: 1
-  isSelected: 1
+  isSelected: 0
   canBeUsed: 1
   usageEffects:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3404131745049422036}
-        m_TargetAssemblyTypeName: AnimationPlayingAction, Assembly-CSharp
-        m_MethodName: ApplyEffectToCaster
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1117245306228900475}
+      - m_Target: {fileID: 2679450569582173034}
         m_TargetAssemblyTypeName: BasicAction, Assembly-CSharp
         m_MethodName: ApplyEffectToCaster
         m_Mode: 0
@@ -96,96 +80,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: -5356253794290313981}
-        m_TargetAssemblyTypeName: StdDamageDealingAction, Assembly-CSharp
-        m_MethodName: ApplyEffect
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &-5356253794290313981
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 184396450984925242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bac9c99086602f04da324e826d05a79e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1117245306228900475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 184396450984925242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7551bc6b817e7e40ab6e9f128f5f5e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  delayNext: 0.8
-  usageEffects:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UsageUnlockingAction, Assembly-CSharp
-        m_MethodName: ApplyEffectToCaster
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  duration: 0.8
-  offset: {x: 0, y: 0, z: 0}
---- !u!114 &3404131745049422036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 184396450984925242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d0e56a5d0c46e44c9bae9f01bc8ea86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  delayNext: 0.1
-  usageEffects:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6518301604970825851}
-        m_TargetAssemblyTypeName: BasicAction, Assembly-CSharp
-        m_MethodName: ApplyEffectToCaster
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  animationName:
-  - attack01
-  - attack02
-  - attack03
-  - attack05
-  - attack06
-  onCaster: 1
---- !u!114 &6518301604970825851
+--- !u!114 &2679450569582173034
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -197,12 +92,102 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6f75bda6589eee4a92c38ad9e57a1ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  delayNext: 1.2
+  usageEffects:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -3814629836517645697}
+        m_TargetAssemblyTypeName: BasicAction, Assembly-CSharp
+        m_MethodName: ApplyEffectToCaster
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  soundEffect: {fileID: 1453070342425624818}
+--- !u!114 &-3814629836517645697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184396450984925242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 034d858f71252ba4dac8a5ebb6c2efdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   delayNext: 0
   usageEffects:
     m_PersistentCalls:
-      m_Calls: []
-  soundEffect: {fileID: 7381203888192137032}
---- !u!1 &1393614598919958627
+      m_Calls:
+      - m_Target: {fileID: 6204179879270805217}
+        m_TargetAssemblyTypeName: Skill, Assembly-CSharp
+        m_MethodName: set_Lock
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
+        m_MethodName: Stop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
+        m_MethodName: Stop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  affectedValue: 0
+  mult: 10
+--- !u!1 &3812438598111176189
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -210,8 +195,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5108844924831289669}
-  - component: {fileID: 7381203888192137032}
+  - component: {fileID: 8015696862771644101}
+  - component: {fileID: 1453070342425624818}
   m_Layer: 0
   m_Name: SoundEffect
   m_TagString: Untagged
@@ -219,14 +204,14 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5108844924831289669
+--- !u!4 &8015696862771644101
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1393614598919958627}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_GameObject: {fileID: 3812438598111176189}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -234,13 +219,13 @@ Transform:
   m_Father: {fileID: 6739678855245900918}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7381203888192137032
+--- !u!114 &1453070342425624818
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1393614598919958627}
+  m_GameObject: {fileID: 3812438598111176189}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a7a66622c7562445bb0edab9cc0afba, type: 3}
@@ -248,5 +233,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSource: {fileID: 0}
   clips:
-  - {fileID: 8300000, guid: fd25a15f9797641458336cccfb445343, type: 3}
+  - {fileID: 8300000, guid: cfce0cea076109f478783201b2a9f57f, type: 3}
   random: 0
