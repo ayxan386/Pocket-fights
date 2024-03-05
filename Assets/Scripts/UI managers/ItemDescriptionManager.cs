@@ -50,7 +50,7 @@ public class ItemDescriptionManager : MonoBehaviour
         if (statEffect == null) return;
         icon.sprite = statEffect.displayDetails.icon;
         title.text =
-            $"{statEffect.displayDetails.displayName} ({(statEffect.isDamageBased ? statEffect.DamageBuffer : statEffect.numberOfTurns)})";
+            $"{statEffect.displayDetails.displayName} ({(statEffect.isDamageBased ? statEffect.DamageBuffer : statEffect.numberOfTurns):N0})";
         desc.text = statEffect.GetDescription();
     }
 

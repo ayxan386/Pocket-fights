@@ -42,6 +42,7 @@ public class MobController : MonoBehaviour, BaseEntityCallbacks
     public void SetLevel(int level)
     {
         var totalSumOfStats = 0f;
+        actionManager.UpdateSkillLevels(level);
         foreach (var statType in Enum.GetValues(typeof(StatTypes)).Cast<StatTypes>())
         {
             totalSumOfStats += statController.GetBaseStat(statType).baseValue;

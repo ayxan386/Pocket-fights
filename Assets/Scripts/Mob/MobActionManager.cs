@@ -37,6 +37,9 @@ public class MobActionManager : MonoBehaviour
         var playerStats = PlayerInputController.Instance.Stats;
         foreach (var skill in turn.actionToUse)
         {
+            var success = stats.UsedAction(skill.manaConsumption);
+            if (!success) continue;
+
             skill.Lock = true;
             skill.usageEffects?.Invoke(skill, stats, playerStats);
             yield return new WaitUntil(() => !skill.Lock);
@@ -49,6 +52,17 @@ public class MobActionManager : MonoBehaviour
     public void AttackReceived(StatController statController, float receivedDamage)
     {
         damagedSkill.usageEffects?.Invoke(damagedSkill, statController, null);
+    }
+
+    public void UpdateSkillLevels(int level)
+    {
+        foreach (var turn in turnSequences)
+        {
+            foreach (var skill in turn.actionToUse)
+            {
+                skill.currentLevel = Mathf.Min(level / 5, skill.maxLevel);
+            }
+        }
     }
 }
 

@@ -184,7 +184,7 @@ PrefabInstance:
         type: 3}
       propertyPath: turnSequences.Array.data[1].intentIcon
       value: 
-      objectReference: {fileID: 21300000, guid: 5312d89aed841784abd508a0dbd32dc2,
+      objectReference: {fileID: 21300000, guid: bcc137cf7538b0547aebe50b52669200,
         type: 3}
     - target: {fileID: 8049342860169459915, guid: 627262a31811c094f92d65ef57ba3c47,
         type: 3}

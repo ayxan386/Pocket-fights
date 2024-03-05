@@ -22,7 +22,8 @@ public class StatusEffectDisplayManager : MonoBehaviour, IPointerEnterHandler, I
         backgroundImage.color = statEffect.isPositive ? positiveEffectColor : negativeEffectColor;
 
         remainingText.color = TextColor;
-        remainingText.text = "" + (statEffect.isDamageBased ? statEffect.DamageBuffer : statEffect.numberOfTurns);
+        remainingText.text =
+            "" + (statEffect.isDamageBased ? statEffect.DamageBuffer : statEffect.numberOfTurns).ToString("N0");
         iconImage.sprite = statEffect.displayDetails.icon;
     }
 

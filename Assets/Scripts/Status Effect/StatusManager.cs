@@ -189,6 +189,7 @@ public class StatusManager : MonoBehaviour
             if (receivedDamage <= 0) break;
             var diff = Mathf.Min(receivedDamage, statusEffect.DamageBuffer);
             statusEffect.DamageBuffer -= diff;
+            statusEffect.RelatedDisplayManager.UpdateDisplay(statusEffect);
 
             if (statusEffect.effectType == StatusEffectType.DamageBuffer)
                 receivedDamage -= diff;

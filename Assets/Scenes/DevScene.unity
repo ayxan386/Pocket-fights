@@ -4538,7 +4538,7 @@ PrefabInstance:
         type: 3}
       propertyPath: <SpanwerData>k__BackingField.Array.data[0]
       value: 
-      objectReference: {fileID: 8729943597482726947, guid: 6d96c4697006b164cab12afc3927451e,
+      objectReference: {fileID: 8729943597482726947, guid: ac82e81aab1b3bc4ebbe32887c9ba878,
         type: 3}
     - target: {fileID: 2163032916832805611, guid: 28e62865603927a4bb37d4f12c93f9f8,
         type: 3}

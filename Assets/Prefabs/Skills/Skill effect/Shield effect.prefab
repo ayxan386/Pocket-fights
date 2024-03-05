@@ -61,7 +61,7 @@ MonoBehaviour:
   checkAtTheEnd: 1
   isAdditive: 0
   displayDetails:
-    icon: {fileID: 21300000, guid: e7d29a79bc7fae248887c8a08a160303, type: 3}
+    icon: {fileID: 21300000, guid: 08f1fe348c0d93949b71f35e7eb9cab5, type: 3}
     displayName: Mana shield
     descriptionBase: Blocks damage equal to part of your HP
     effectSuffix: 
@@ -161,41 +161,6 @@ PrefabInstance:
     - target: {fileID: 7696213254281463192, guid: 630db7935f3ffc04b81c64e6a96f2833,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7696213254281463192, guid: 630db7935f3ffc04b81c64e6a96f2833,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7696213254281463192, guid: 630db7935f3ffc04b81c64e6a96f2833,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7696213254281463192, guid: 630db7935f3ffc04b81c64e6a96f2833,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7696213254281463192, guid: 630db7935f3ffc04b81c64e6a96f2833,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7696213254281463192, guid: 630db7935f3ffc04b81c64e6a96f2833,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7696213254281463192, guid: 630db7935f3ffc04b81c64e6a96f2833,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7696213254281463192, guid: 630db7935f3ffc04b81c64e6a96f2833,
-        type: 3}
-      propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7696213254281463192, guid: 630db7935f3ffc04b81c64e6a96f2833,
