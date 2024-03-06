@@ -17,6 +17,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3043827897674853796, guid: 627262a31811c094f92d65ef57ba3c47,
+        type: 3}
+      propertyPath: m_Name
+      value: Slime drop table
+      objectReference: {fileID: 0}
+    - target: {fileID: 3043827897674853797, guid: 627262a31811c094f92d65ef57ba3c47,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 3779885953339427246, guid: 627262a31811c094f92d65ef57ba3c47,
         type: 3}
       propertyPath: m_RootOrder

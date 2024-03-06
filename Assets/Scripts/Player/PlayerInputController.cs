@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,10 +19,8 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
     [SerializeField] private GameObject inGameUiRef;
     [SerializeField] private GameObject loadingScreen;
 
-    [Header("Leveling")] [SerializeField] private float currentXp;
-    [SerializeField] private AnimationCurve xpRequirements;
-    [SerializeField] private float xpMultiplier;
-    [SerializeField] private int maxLevel;
+    [Header("Leveling")]
+    [SerializeField] private float currentXp;
 
     [Header("Footsteps")] [SerializeField] private float spawnRate;
     [SerializeField] private Transform leftFoot, rightFoot;
@@ -48,6 +48,7 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
 
     private float lastSpawnTime;
     private bool isLeftFoot;
+    private List<int> xpReqList;
 
     private void Awake()
     {
@@ -66,11 +67,13 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
         statController.AttachedEntity = this;
         statController.Animator = animator;
         loadingScreen.SetActive(true);
+        LoadXpRequirements();
         yield return new WaitForSeconds(0.2f);
         DataManager.Instance.LoadPlayer("Player input controller");
         yield return new WaitForSeconds(0.1f);
         loadingScreen.SetActive(false);
     }
+
 
     private void OnDestroy()
     {
@@ -109,6 +112,18 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
                 SpawnFootstep();
             }
         }
+    }
+
+    private void LoadXpRequirements()
+    {
+        xpReqList = Resources.Load<TextAsset>("xp_requirements").text.Split("\n")
+            .ToList()
+            .ConvertAll(row => row.Split(", "))
+            .ConvertAll(split =>
+            {
+                print($"{split[0]} {split[1]}");
+                return int.Parse(split[1]);
+            });
     }
 
     private void SpawnFootstep()
@@ -231,22 +246,20 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
         }
     }
 
-
     private float CalculateXpRequirements()
     {
-        return xpRequirements.Evaluate(1f * Stats.Level / maxLevel) * xpMultiplier;
+        return xpReqList[Stats.Level - 1];
     }
 
     public void AddXp(float xpAmount)
     {
         currentXp += xpAmount;
         var xpRequired = CalculateXpRequirements();
-        print("Xp required: " + xpRequired);
         while (currentXp >= xpRequired)
         {
-            currentXp -= xpRequired;
-            xpRequired = CalculateXpRequirements();
+            // currentXp -= xpRequired;
             Stats.UpdateLevel(1);
+            xpRequired = CalculateXpRequirements();
         }
     }
 

@@ -35,8 +35,9 @@ public class TeleportPad : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (linkedPad != null
-            && Physics.CheckSphere(transform.position, distance, playerLayer))
+        if (linkedPad != null && !LinkedRoom.CanExit || linkedPad.OnCooldown || OnCooldown) return;
+
+        if (Physics.CheckSphere(transform.position, distance, playerLayer))
         {
             teleportRoutine = StartCoroutine(TeleportPlayer());
         }
@@ -48,7 +49,6 @@ public class TeleportPad : MonoBehaviour
 
     private IEnumerator TeleportPlayer()
     {
-        if (!LinkedRoom.CanExit || linkedPad.OnCooldown || OnCooldown) yield break;
         OnCooldown = true;
 
         teleportParticles.Play();
@@ -60,6 +60,12 @@ public class TeleportPad : MonoBehaviour
         PlayerInputController.Instance.PlacePlayer(linkedPad.teleportPoint);
         StartCoroutine(CooldownPeriod());
         linkedPad.StartCoroutine(linkedPad.CooldownPeriod());
+    }
+
+    [ContextMenu("Teleport player")]
+    public void Debug_TeleportPlayer()
+    {
+        StartCoroutine(TeleportPlayer());
     }
 
     private IEnumerator CooldownPeriod()

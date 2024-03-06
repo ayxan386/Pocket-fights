@@ -920,41 +920,6 @@ MonoBehaviour:
   inGameUiRef: {fileID: 1859134730400753552}
   loadingScreen: {fileID: 1279386198914878401}
   currentXp: 0
-  xpRequirements:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.1986118
-      value: 0.09893203
-      inSlope: 0.00071991247
-      outSlope: 0.00071991247
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.17662029
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  xpMultiplier: 50000
-  maxLevel: 100
   spawnRate: 0.5
   leftFoot: {fileID: 4347414629876872255}
   rightFoot: {fileID: 2907674603271585198}
@@ -1918,7 +1883,7 @@ MonoBehaviour:
   targetCount: 4
   singleGoldPrefab: {fileID: 3337002340432959719, guid: fd7389eff2aaccb488d74264e9423df1,
     type: 3}
-  expStarPrefab: {fileID: 3337002340432959719, guid: 407cd09bed077b2439addf797101809b,
+  expStarPrefab: {fileID: 3337002340432959719, guid: d581a5646f600c940b7838991d8ba08c,
     type: 3}
 --- !u!1 &2284436981320805670
 GameObject:
@@ -24569,6 +24534,16 @@ PrefabInstance:
       propertyPath: offset.y
       value: 0.4
       objectReference: {fileID: 0}
+    - target: {fileID: 1117245306228900475, guid: ab9902901cce7b64ab6ac08888f0d628,
+        type: 3}
+      propertyPath: usageEffects.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8256085609864524926}
+    - target: {fileID: 1117245306228900475, guid: ab9902901cce7b64ab6ac08888f0d628,
+        type: 3}
+      propertyPath: usageEffects.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ApplyEffectToCaster
+      objectReference: {fileID: 0}
     - target: {fileID: 6739678855245900918, guid: ab9902901cce7b64ab6ac08888f0d628,
         type: 3}
       propertyPath: m_RootOrder
@@ -24632,3 +24607,21 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 9196614039701063565}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &9020697022995111863 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 184396450984925242, guid: ab9902901cce7b64ab6ac08888f0d628,
+    type: 3}
+  m_PrefabInstance: {fileID: 9196614039701063565}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8256085609864524926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9020697022995111863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 730b80d05b6f3ba4080a042c2a3e0ea1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

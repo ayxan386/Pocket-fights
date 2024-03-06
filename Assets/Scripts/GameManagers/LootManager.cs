@@ -15,7 +15,7 @@ public static class LootManager
             {
                 if (roll >= 1 - possibleLoot.chance)
                 {
-                    var dropCount = Random.Range(possibleLoot.count.x, possibleLoot.count.y);
+                    var dropCount = Random.Range(possibleLoot.count.x, possibleLoot.count.y + 1);
                     var index = res.FindIndex(item => item.Item1.name == possibleLoot.itemPrefab.name);
                     if (index >= 0)
                     {

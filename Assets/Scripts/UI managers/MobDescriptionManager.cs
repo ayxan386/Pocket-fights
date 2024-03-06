@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -40,7 +41,8 @@ public class MobDescriptionManager : MonoBehaviour
 
         var k = 0;
 
-        foreach (var loot in mobController.PossibleLoots)
+        var loots = mobController.PossibleLoots.DistinctBy(loot => loot.itemPrefab.name);
+        foreach (var loot in loots)
         {
             dropListItems[k].gameObject.SetActive(true);
             dropListItems[k++].sprite = loot.itemPrefab.icon;

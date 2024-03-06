@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3337002340432959719}
   - component: {fileID: 6985502362223682020}
   m_Layer: 0
-  m_Name: XP star
+  m_Name: XP drop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,9 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c452ab8d707fbaf41a9316301bcf37fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 645626868, guid: 7bb12e1a1363c514bb9ee72a9acafce2, type: 3}
-  name: XP star
-  description: Gives player 50 xp
+  icon: {fileID: 21300000, guid: 9a1217514ffc91e42a20823aba674e44, type: 3}
+  name: XP drop
+  description: 'Gives player 5 xp '
   stackSize: 99
   count: 10
   buyPrice: 5
@@ -84,4 +84,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd8215ebf72c4508a13d9883946bb0a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amount: 50
+  amount: 5

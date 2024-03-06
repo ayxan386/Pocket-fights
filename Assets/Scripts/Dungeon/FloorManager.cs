@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class FloorManager : MonoBehaviour
 {
@@ -31,6 +33,7 @@ public class FloorManager : MonoBehaviour
     {
         if (autoGenerate)
         {
+            Random.InitState(Guid.NewGuid().GetHashCode());
             yield return new WaitForSeconds(0.15f);
             GenerateFloor();
             yield return new WaitForSeconds(0.15f);

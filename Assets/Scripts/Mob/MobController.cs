@@ -2,13 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Mob;
 using UnityEngine;
 
 public class MobController : MonoBehaviour, BaseEntityCallbacks
 {
     [SerializeField] private Animator animator;
     [SerializeField] private StatController statController;
-    [SerializeField] private List<PossibleLoot> possibleDrops;
+    [SerializeField] private LootTable possibleDrops;
     [SerializeField] private GameObject combatUiRef;
     [SerializeField] private GameObject selectionIndicators;
     [SerializeField] private MobActionManager actionManager;
@@ -22,7 +23,11 @@ public class MobController : MonoBehaviour, BaseEntityCallbacks
     private int randomAction;
 
     public Guid Id { get; private set; }
-    public List<PossibleLoot> PossibleLoots => possibleDrops;
+
+    public List<PossibleLoot> PossibleLoots =>
+        possibleDrops.entries
+            .Find(entry => Stats.Level >= entry.levelRange.x && Stats.Level < entry.levelRange.y)
+            .loots;
 
     public StatController Stats => statController;
     public bool IsDoneAttack;
