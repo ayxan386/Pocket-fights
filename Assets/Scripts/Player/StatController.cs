@@ -156,15 +156,15 @@ public class StatController : MonoBehaviour
 
     public void UpdateStatValue(StatValue statType, int diff)
     {
-        var currentValue = statValues[statType].currentValue + diff;
+        var currentValue = Mathf.Round(statValues[statType].currentValue + diff);
         statValues[statType].currentValue = Mathf.Clamp(currentValue, 0, statValues[statType].maxValue);
         EventManager.OnStatChanged?.Invoke(statType, statValues[statType]);
-        
+
         if (statValues[StatValue.Health].currentValue <= 0)
         {
             AttachedEntity.OnDeathCallback();
         }
-        
+
         UpdateOverallDisplay();
     }
 
@@ -173,6 +173,8 @@ public class StatController : MonoBehaviour
         var statValue = statValues[stat];
         statValue.currentValue += diff;
         statValue.maxValue += diff;
+
+        statValue.RoundDown();
 
         if (shouldUpdate)
             UpdateOverallDisplay();
@@ -221,10 +223,12 @@ public class StatController : MonoBehaviour
         var receivedDamage = Mathf.Max(baseDmg - statValues[StatValue.DamageReduction].currentValue, 0);
         receivedDamage = StatusManager.CheckForDamage(receivedDamage);
 
-        statValues[StatValue.Health].currentValue -= receivedDamage;
+        var healthStat = statValues[StatValue.Health];
+        healthStat.currentValue -= receivedDamage;
+        healthStat.RoundDown();
         SpawnDamageIndicator(receivedDamage);
 
-        if (statValues[StatValue.Health].currentValue <= 0)
+        if (healthStat.currentValue <= 0)
         {
             AttachedEntity.OnDeathCallback();
         }
@@ -233,7 +237,7 @@ public class StatController : MonoBehaviour
             AttachedEntity.OnReceiveAttack(receivedDamage);
         }
 
-        healthBarIndicator.UpdateDisplay(statValues[StatValue.Health]);
+        healthBarIndicator.UpdateDisplay(healthStat);
     }
 
     private void SpawnDamageIndicator(float receivedDamage)
@@ -291,5 +295,14 @@ public class StatData
         maxValue = newBase;
         currentValue += newBase - baseValue;
         baseValue = newBase;
+
+        RoundDown();
+    }
+
+    public void RoundDown()
+    {
+        maxValue = Mathf.Round(maxValue);
+        currentValue = Mathf.Round(currentValue);
+        baseValue = Mathf.Round(baseValue);
     }
 }

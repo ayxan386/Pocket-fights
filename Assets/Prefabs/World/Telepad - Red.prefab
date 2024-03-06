@@ -278,8 +278,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   linkedPad: {fileID: 0}
-  duration: 3
-  cooldownPeriod: 5
+  duration: 2
+  cooldownPeriod: 4
   teleportPoint: {fileID: 552789896346441444}
   color: 1
   teleportParticles: {fileID: 7246786502603832714}

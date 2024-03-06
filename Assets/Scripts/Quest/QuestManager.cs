@@ -65,7 +65,7 @@ public class QuestManager : MonoBehaviour
 
         foreach (var quest in quests)
         {
-            if (deadMob.Tags.Contains(quest.targetName) &&
+            if (deadMob.Tags.Contains(quest.targetName) && quest.inProgress &&
                 quest.currentProgress + quest.pendingProgress < quest.goalCount)
             {
                 quest.pendingProgress++;

@@ -35,6 +35,7 @@ public class StatEffect : MonoBehaviour
             ? val * amount
             : amount;
         if (baseValue == StatValue.None) LastAmount = amount;
+        LastAmount = Mathf.Round(LastAmount);
         if (isDamageBased) DamageBuffer = LastAmount;
         return LastAmount;
     }
