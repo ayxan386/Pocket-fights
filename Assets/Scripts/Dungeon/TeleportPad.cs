@@ -35,7 +35,8 @@ public class TeleportPad : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (linkedPad != null && !LinkedRoom.CanExit || linkedPad.OnCooldown || OnCooldown) return;
+        if (linkedPad == null || LinkedRoom == null) return;
+        if (!LinkedRoom.CanExit || linkedPad.OnCooldown || OnCooldown) return;
 
         if (Physics.CheckSphere(transform.position, distance, playerLayer))
         {

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6204179879270805217}
   - component: {fileID: 6155719195952606668}
   - component: {fileID: 7815383205871269192}
-  - component: {fileID: 2135367735489920370}
   m_Layer: 0
   m_Name: Mana Breathing
   m_TagString: Untagged
@@ -54,6 +53,7 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 0f62342fef8e8a341b4579680dbfbe6f, type: 3}
     displayName: Breath of Mana
     descriptionBase: Regulate your breathing to improve mana circulation
+    effectSuffix: 
   effects:
   - 1.15
   - 1.2
@@ -67,8 +67,20 @@ MonoBehaviour:
   usageEffects:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2135367735489920370}
-        m_TargetAssemblyTypeName: AnimationPlayingAction, Assembly-CSharp
+      - m_Target: {fileID: 6155719195952606668}
+        m_TargetAssemblyTypeName: StatValueUpgradeAction, Assembly-CSharp
+        m_MethodName: ApplyEffect
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7815383205871269192}
+        m_TargetAssemblyTypeName: UsageUnlockingAction, Assembly-CSharp
         m_MethodName: ApplyEffectToCaster
         m_Mode: 0
         m_Arguments:
@@ -104,45 +116,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 730b80d05b6f3ba4080a042c2a3e0ea1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2135367735489920370
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 184396450984925242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d0e56a5d0c46e44c9bae9f01bc8ea86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  delayNext: 0.3
-  usageEffects:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7815383205871269192}
-        m_TargetAssemblyTypeName: UsageUnlockingAction, Assembly-CSharp
-        m_MethodName: ApplyEffectToCaster
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 6155719195952606668}
-        m_TargetAssemblyTypeName: StatValueUpgradeAction, Assembly-CSharp
-        m_MethodName: ApplyEffect
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  animationName: attack01
-  onCaster: 1
