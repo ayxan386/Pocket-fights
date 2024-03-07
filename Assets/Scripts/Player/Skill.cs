@@ -6,13 +6,12 @@ using UnityEngine.Events;
 [Serializable]
 public class Skill : MonoBehaviour
 {
-    public string animationName;
     public float multiplier => effects[currentLevel];
     public float manaConsumption;
     public ActionType type;
     public DisplayDetails displayDetails;
     public List<float> effects;
-    public int activationPrice;
+    public List<int> upgradeCost;
     public int currentLevel;
     public int maxLevel;
     public string slotName;
@@ -20,16 +19,18 @@ public class Skill : MonoBehaviour
     public bool canBeUsed;
     public UnityEvent<Skill, StatController, StatController> usageEffects;
 
+
     public string Description => IsActive
         ? ($"{displayDetails.descriptionBase} \n Mana cost: {manaConsumption}" +
            $"\n Current effect: {multiplier}"
            + (CanUpgrade ? $"-> {effects[currentLevel + 1]} {displayDetails.effectSuffix}" : "")
            + (CanUpgrade ? $" \n Upgrade cost: x{UpgradeCost}" : "\n Max LVL"))
-        : $" {displayDetails.descriptionBase}\n Activation cost: x{activationPrice} \n Effect: x{effects[0]}";
+        : $" {displayDetails.descriptionBase}\n Activation cost: x{ActivationPrice} \n Effect: x{effects[0]}";
 
     public bool IsActive => currentLevel >= 0;
 
-    public int UpgradeCost => IsActive ? (currentLevel + 1) : activationPrice;
+    public int UpgradeCost => IsActive ? upgradeCost[currentLevel + 1] : ActivationPrice;
+    public int ActivationPrice => upgradeCost[0];
 
     public bool CanUpgrade => currentLevel + 1 < maxLevel;
 

@@ -47,8 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: cdbfd037111f82142b7e62b7c72ed086, type: 3}
   name: XP orb
-  description: 'Gives player 5 xp '
-  stackSize: 99
+  description: 'Gives player 20 xp '
+  stackSize: 25
   count: 10
   buyPrice: 5
   displayInInventory: 1

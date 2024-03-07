@@ -48,7 +48,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 9a1217514ffc91e42a20823aba674e44, type: 3}
   name: XP drop
   description: 'Gives player 5 xp '
-  stackSize: 99
+  stackSize: 25
   count: 10
   buyPrice: 5
   displayInInventory: 1

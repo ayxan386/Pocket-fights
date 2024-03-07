@@ -20,7 +20,8 @@ public class SkillsDisplayManager : MonoBehaviour
     private IEnumerator Start()
     {
         yield return new WaitUntil(() => PlayerActionManager.Instance != null
-                                         && PlayerActionManager.Instance.AllSkills.Count > 0);
+                                         && PlayerActionManager.Instance.AllSkills.Count > 0
+                                         && DataManager.Instance.HasLoaded);
         FillSkillCells();
 
         EventManager.OnSkillCellSelected += OnSkillCellSelected;

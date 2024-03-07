@@ -49,7 +49,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0a2b06e9daa06b4c88dd4c5a1b2fbdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationName: attack01
   manaConsumption: 10
   type: 0
   displayDetails:
@@ -63,7 +62,7 @@ MonoBehaviour:
   - 1.4
   - 1.6
   - 1.8
-  activationPrice: 0
+  upgradeCost: 0000000002000000020000000200000002000000
   currentLevel: 0
   maxLevel: 5
   slotName: 1

@@ -49,18 +49,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0a2b06e9daa06b4c88dd4c5a1b2fbdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationName: openArms
   manaConsumption: 30
   type: 0
   displayDetails:
     icon: {fileID: 21300000, guid: 31af4c11b0228d142b71af2d3940bbcb, type: 3}
     displayName: Accumulation
     descriptionBase: Compress your mana for a turn.\n Increase your damage next turn
+    effectSuffix: 
   effects:
   - 1.15
-  - 1.2
-  - 1.4
-  activationPrice: 0
+  - 1.5
+  - 2
+  upgradeCost: 020000000300000004000000
+  activationPrice: 2
   currentLevel: -1
   maxLevel: 3
   slotName: 1
@@ -118,6 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effect: {fileID: 2040261291136945368, guid: cbf7ec5a4adc29f4db22383d775a4611, type: 3}
+  negate: 0
 --- !u!114 &1305261482067810917
 MonoBehaviour:
   m_ObjectHideFlags: 0

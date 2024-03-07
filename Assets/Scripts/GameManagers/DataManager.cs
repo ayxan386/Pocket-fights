@@ -10,6 +10,7 @@ public class DataManager : MonoBehaviour
     [SerializeField] private string filename;
     [SerializeField] [TextArea] private string testJson;
 
+    public bool HasLoaded { get; private set; }
     public static DataManager Instance { get; private set; }
 
     private void Awake()
@@ -184,6 +185,8 @@ public class DataManager : MonoBehaviour
         LoadEquipment();
         LoadSkills();
         LoadQuests();
+
+        HasLoaded = true;
         
         EventManager.OnPlayerCoreUpdate?.Invoke(0);
         EventManager.OnBaseStatUpdate?.Invoke(0);
