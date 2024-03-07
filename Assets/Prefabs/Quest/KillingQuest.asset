@@ -16,10 +16,10 @@ MonoBehaviour:
   - title: Defeat any slimes
     goalRange: {x: 3, y: 6}
     targetName: slime
-    goldAmount: 25
+    goldAmount: 5
     expAmount: 2
   - title: Defeat sandy spiders
     goalRange: {x: 1, y: 3}
     targetName: Sandy spider
-    goldAmount: 45
+    goldAmount: 5
     expAmount: 4

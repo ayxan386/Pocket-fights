@@ -4876,7 +4876,7 @@ MonoBehaviour:
   buyPrice: 25
   displayInInventory: 1
   canBeSold: 1
-  sellPrice: 24
+  sellPrice: 20
   maxSellPrice: 20
   priceDropRate: 0.5
   type: 3
