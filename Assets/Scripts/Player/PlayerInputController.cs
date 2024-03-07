@@ -46,9 +46,17 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
 
     public PlayerState State { get; private set; }
 
+    public float CurrentXp
+    {
+        get => currentXp;
+        set => currentXp = value;
+    }
+
+    public float LevelUpProgress => currentXp / levelDatas[Stats.Level - 1].xpRequired;
+
     private float lastSpawnTime;
     private bool isLeftFoot;
-    private List<LevelData> playerLevelDatas;
+    private List<LevelData> levelDatas;
 
     private void Awake()
     {
@@ -61,17 +69,17 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
 
     private IEnumerator Start()
     {
-        EventManager.OnCombatSceneLoading += OnCombatSceneLoading;
-        EventManager.OnPauseMenuToggled += OnPauseMenuToggled;
-        EventManager.OnPlayerTurnEnd += OnPlayerTurnEnd;
+        LoadXpRequirements();
         statController.AttachedEntity = this;
         statController.Animator = animator;
         loadingScreen.SetActive(true);
-        LoadXpRequirements();
         yield return new WaitForSeconds(0.2f);
         DataManager.Instance.LoadPlayer("Player input controller");
         yield return new WaitForSeconds(0.1f);
         loadingScreen.SetActive(false);
+        EventManager.OnCombatSceneLoading += OnCombatSceneLoading;
+        EventManager.OnPauseMenuToggled += OnPauseMenuToggled;
+        EventManager.OnPlayerTurnEnd += OnPlayerTurnEnd;
     }
 
 
@@ -116,15 +124,11 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
 
     private void LoadXpRequirements()
     {
-        playerLevelDatas = Resources.Load<TextAsset>("xp_requirements").text.Split("\n")
+        levelDatas = Resources.Load<TextAsset>("xp_requirements").text.Split("\n")
             .ToList()
             .ConvertAll(row => row.Split(", "))
-            .ConvertAll(split =>
-            {
-                print($"{split[0]}, {split[1]}, {split[2]}, {split[3]}");
-                return new LevelData(int.Parse(split[1]),
-                    int.Parse(split[2]), int.Parse(split[3]));
-            });
+            .ConvertAll(split => new LevelData(int.Parse(split[1]),
+                int.Parse(split[2]), int.Parse(split[3])));
     }
 
     private void SpawnFootstep()
@@ -250,13 +254,14 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
     public void AddXp(float xpAmount)
     {
         currentXp += xpAmount;
-        var levelData = playerLevelDatas[Stats.Level - 1];
+        EventManager.OnPlayerCoreUpdate((int)currentXp);
+        var levelData = levelDatas[Stats.Level - 1];
         while (currentXp >= levelData.xpRequired)
         {
             currentXp -= levelData.xpRequired;
             Stats.UpdateLevel(1);
             Stats.UpdatePoints(levelData.freePointsGained, levelData.skillPointsGained);
-            levelData = playerLevelDatas[Stats.Level - 1];
+            levelData = levelDatas[Stats.Level - 1];
         }
     }
 

@@ -3,12 +3,11 @@ using UnityEngine;
 
 public class PlayerCoreDisplayManager : MonoBehaviour
 {
-    [SerializeField] private List<StatInfoDisplayController> displayControllers;
+    [SerializeField] private List<InfoBlockBundle> infoBlocks;
 
     private void Start()
     {
         EventManager.OnPlayerCoreUpdate += OnPlayerCoreUpdate;
-        OnPlayerCoreUpdate(0);
     }
 
     private void OnDestroy()
@@ -18,11 +17,16 @@ public class PlayerCoreDisplayManager : MonoBehaviour
 
     private void OnPlayerCoreUpdate(int newValue)
     {
-        displayControllers[0].UpdateDisplay("LVL", PlayerInputController.Instance.Stats.Level.ToString());
-        displayControllers[1].UpdateDisplay("Lsf", PlayerInputController.Instance.Stats.Lsf.ToString("N2"));
-        displayControllers[2].UpdateDisplay("Free Points", PlayerInputController.Instance.Stats.FreePoints.ToString());
-        displayControllers[3]
-            .UpdateDisplay("Skill Points", PlayerInputController.Instance.Stats.SkillPoints.ToString());
-        displayControllers[4].UpdateDisplay("Gold", InventoryController.Instance.Gold.ToString());
+        var player = PlayerInputController.Instance;
+        var stats = player.Stats;
+        for (int i = 0; i < infoBlocks.Count; i++)
+        {
+            infoBlocks[i].lvl.UpdateDisplay("LVL", stats.Level.ToString());
+            infoBlocks[i].lsf.UpdateDisplay("Lsf", stats.Lsf.ToString("N2"));
+            infoBlocks[i].freePoints.UpdateDisplay("Free Points", stats.FreePoints.ToString());
+            infoBlocks[i].skillPoints.UpdateDisplay("Skill Points", stats.SkillPoints.ToString());
+            infoBlocks[i].gold.UpdateDisplay("Gold", InventoryController.Instance.Gold.ToString());
+            infoBlocks[i].xp.UpdateDisplay("XP", (player.LevelUpProgress * 100).ToString("N1") + "%");
+        }
     }
 }

@@ -64,6 +64,8 @@ public class NavBarManager : MonoBehaviour
             nextTab.SetActive(true);
         }
 
+        EventManager.OnPlayerCoreUpdate?.Invoke(0);
+
         lastTabName = tabName;
 
         UpdateTabContent(tabName);

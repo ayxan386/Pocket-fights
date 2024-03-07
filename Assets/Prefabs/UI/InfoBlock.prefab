@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.2528, y: 34.8}
-  m_SizeDelta: {x: 153.2332, y: 45.0609}
+  m_AnchoredPosition: {x: -0.3291, y: 34.8}
+  m_SizeDelta: {x: 133.4503, y: 45.0609}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7633647602055223446
 CanvasRenderer:
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 8.43
+  m_fontSizeMin: 6.6
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
@@ -171,8 +171,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.6644, y: -29}
-  m_SizeDelta: {x: 172.02, y: 45.0609}
+  m_AnchoredPosition: {x: 0.61379, y: -29}
+  m_SizeDelta: {x: 135.34, y: 45.0609}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7633647602460236870
 CanvasRenderer:
@@ -309,8 +309,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.0039, y: -1.9801}
-  m_SizeDelta: {x: 177.3449, y: 131.2007}
+  m_AnchoredPosition: {x: 0.000005722, y: -1}
+  m_SizeDelta: {x: 144.8521, y: 131.2007}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7633647602565075260
 CanvasRenderer:
@@ -377,7 +377,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7633647602626555121}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.34}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -388,7 +388,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 208.1352, y: 160.8435}
+  m_SizeDelta: {x: 172.3422, y: 160.8435}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7633647602626555134
 CanvasRenderer:
@@ -412,7 +412,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:

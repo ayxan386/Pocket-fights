@@ -28,6 +28,7 @@ public class DataManager : MonoBehaviour
         statSaveData.freePoints = toSave.FreePoints;
         statSaveData.skillPoints = toSave.SkillPoints;
         statSaveData.sourceName = toSave.SourceName;
+        statSaveData.currentXp = Mathf.Floor(PlayerInputController.Instance.CurrentXp);
         statSaveData.baseStats = new SerializedDictionary<StatTypes, StatData>();
         statSaveData.statValues = new SerializedDictionary<StatValue, StatData>();
         print($"LVL: {statSaveData.level}");
@@ -122,6 +123,7 @@ public class DataManager : MonoBehaviour
         if (statSaveData.sourceName == "Player")
         {
             PlayerInputController.Instance.Stats.LoadData(statSaveData);
+            PlayerInputController.Instance.CurrentXp = statSaveData.currentXp;
         }
     }
 
@@ -182,6 +184,9 @@ public class DataManager : MonoBehaviour
         LoadEquipment();
         LoadSkills();
         LoadQuests();
+        
+        EventManager.OnPlayerCoreUpdate?.Invoke(0);
+        EventManager.OnBaseStatUpdate?.Invoke(0);
     }
 
     [ContextMenu("Save trigger")]
@@ -203,6 +208,7 @@ public class StatSaveData
     public int level;
     public int freePoints;
     public int skillPoints;
+    public float currentXp;
 
     public SerializedDictionary<StatTypes, StatData> baseStats;
     public SerializedDictionary<StatValue, StatData> statValues;
