@@ -140,7 +140,7 @@ public class StatController : MonoBehaviour
     {
         if (FreePoints > 0)
         {
-            UpdateFreePoints(-diff);
+            UpdatePoints(-diff, 0);
             UpgradeBaseStat(statType, diff);
         }
     }
@@ -182,9 +182,10 @@ public class StatController : MonoBehaviour
         EventManager.OnPlayerCoreUpdate?.Invoke(FreePoints);
     }
 
-    private void UpdateFreePoints(int diff)
+    public void UpdatePoints(int freePointsDiff, int skillPointsDiff)
     {
-        FreePoints += diff;
+        FreePoints += freePointsDiff;
+        SkillPoints += skillPointsDiff;
         EventManager.OnPlayerCoreUpdate?.Invoke(FreePoints);
     }
 
@@ -204,9 +205,6 @@ public class StatController : MonoBehaviour
     public void UpdateLevel(int increment)
     {
         Level += increment;
-        SkillPoints += Mathf.Max(Level / 2, 1);
-        UpdateFreePoints(Level);
-        EventManager.OnPlayerCoreUpdate?.Invoke(FreePoints);
     }
 
     public void UseSkillPoints(int usedPointsAmount)
@@ -214,8 +212,7 @@ public class StatController : MonoBehaviour
         if (usedPointsAmount > SkillPoints)
             throw new ArgumentException("Cannot use more than owned amount");
 
-        SkillPoints -= usedPointsAmount;
-        EventManager.OnPlayerCoreUpdate?.Invoke(SkillPoints);
+        UpdatePoints(0, -usedPointsAmount);
     }
 
     public void ReceiveAttack(float baseDmg)

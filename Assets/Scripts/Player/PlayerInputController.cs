@@ -48,7 +48,7 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
 
     private float lastSpawnTime;
     private bool isLeftFoot;
-    private List<int> xpReqList;
+    private List<LevelData> playerLevelDatas;
 
     private void Awake()
     {
@@ -116,13 +116,14 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
 
     private void LoadXpRequirements()
     {
-        xpReqList = Resources.Load<TextAsset>("xp_requirements").text.Split("\n")
+        playerLevelDatas = Resources.Load<TextAsset>("xp_requirements").text.Split("\n")
             .ToList()
             .ConvertAll(row => row.Split(", "))
             .ConvertAll(split =>
             {
-                print($"{split[0]} {split[1]}");
-                return int.Parse(split[1]);
+                print($"{split[0]}, {split[1]}, {split[2]}, {split[3]}");
+                return new LevelData(int.Parse(split[1]),
+                    int.Parse(split[2]), int.Parse(split[3]));
             });
     }
 
@@ -246,20 +247,16 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
         }
     }
 
-    private float CalculateXpRequirements()
-    {
-        return xpReqList[Stats.Level - 1];
-    }
-
     public void AddXp(float xpAmount)
     {
         currentXp += xpAmount;
-        var xpRequired = CalculateXpRequirements();
-        while (currentXp >= xpRequired)
+        var levelData = playerLevelDatas[Stats.Level - 1];
+        while (currentXp >= levelData.xpRequired)
         {
-            // currentXp -= xpRequired;
+            currentXp -= levelData.xpRequired;
             Stats.UpdateLevel(1);
-            xpRequired = CalculateXpRequirements();
+            Stats.UpdatePoints(levelData.freePointsGained, levelData.skillPointsGained);
+            levelData = playerLevelDatas[Stats.Level - 1];
         }
     }
 
@@ -286,4 +283,19 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
 public class PlayerState
 {
     public bool isLookingAtQuests;
+}
+
+[Serializable]
+public class LevelData
+{
+    public int xpRequired;
+    public int freePointsGained;
+    public int skillPointsGained;
+
+    public LevelData(int xpRequired, int freePointsGained, int skillPointsGained)
+    {
+        this.xpRequired = xpRequired;
+        this.freePointsGained = freePointsGained;
+        this.skillPointsGained = skillPointsGained;
+    }
 }
