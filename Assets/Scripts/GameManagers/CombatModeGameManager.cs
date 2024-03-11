@@ -186,6 +186,7 @@ public class CombatModeGameManager : MonoBehaviour
 
     private void ChangeSelectedEnemy(MobController mob)
     {
+        DetailDisplayManager.Instance.TurnOff();
         SelectedEnemy?.Selected(false);
         SelectedEnemy = mob;
         SelectedEnemy.Selected(true);
