@@ -197,9 +197,6 @@ public class StatController : MonoBehaviour
         baseStats = savedData.baseStats;
         InitiateStatValues();
         statValues = savedData.statValues;
-
-        EventManager.OnBaseStatUpdate?.Invoke(baseStats[StatTypes.Vitality].maxValue);
-        EventManager.OnPlayerCoreUpdate?.Invoke(FreePoints);
     }
 
     public void UpdateLevel(int increment)

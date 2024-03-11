@@ -22,11 +22,6 @@ public class GlobalGameManager : MonoBehaviour
     {
         EventManager.OnExitPortalDetected += OnExitPortalDetected;
         CurrentFloorNumber = PlayerPrefs.GetInt(CurrentFloor, 0);
-
-        // if (CurrentFloorNumber == 0)
-        // {
-        //     DataManager.Instance.LoadPlayer();
-        // }
     }
 
     private void OnDestroy()

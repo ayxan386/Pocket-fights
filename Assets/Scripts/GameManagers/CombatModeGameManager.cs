@@ -117,7 +117,7 @@ public class CombatModeGameManager : MonoBehaviour
         if (currentHealth <= 0)
         {
             IsCombatGoing = false;
-            player.AddXp(player.CurrentXp * FloorManager.Instance.DeathPenalty);
+            FloorManager.Instance.PenalizePlayerDeath();
             EndOfCombat();
             GlobalGameManager.Instance.EndDungeon();
         }

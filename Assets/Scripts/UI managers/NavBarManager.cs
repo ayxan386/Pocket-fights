@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,6 +9,7 @@ public class NavBarManager : MonoBehaviour
     [SerializeField] private List<GameObject> tabs;
     [SerializeField] private Animator pauseMenuAnimator;
     [SerializeField] private Transform questHolder;
+    [SerializeField] private GameObject loadingScreen;
 
     public static NavBarManager Instance { get; private set; }
     private bool lastPauseState;
@@ -86,8 +88,7 @@ public class NavBarManager : MonoBehaviour
 
                 break;
             case "Save":
-                DataManager.Instance.SaveEventTrigger("Navbar");
-                Invoke(nameof(LoadMainMenu), 1.5f);
+                StartCoroutine(LoadMainMenu());
                 break;
             case "Inventory":
                 InventoryController.Instance.UpdateDisplay();
@@ -104,9 +105,16 @@ public class NavBarManager : MonoBehaviour
         }
     }
 
-    private void LoadMainMenu()
+    private IEnumerator LoadMainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        loadingScreen.SetActive(true);
+        if (FloorManager.Instance != null)
+            FloorManager.Instance.PenalizePlayerDeath();
+        var con = SceneManager.LoadSceneAsync("MainMenu");
+        DataManager.Instance.SaveEventTrigger("Navbar");
+        con.allowSceneActivation = false;
+        yield return new WaitForSeconds(1.1f);
+        con.allowSceneActivation = true;
     }
 
     private void DefaultPostBehavior()

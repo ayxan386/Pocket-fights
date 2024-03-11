@@ -65,6 +65,13 @@ public class FloorManager : MonoBehaviour
         roomInstances[0].Activate();
     }
 
+    public void PenalizePlayerDeath()
+    {
+        if (GlobalGameManager.Instance == null) return;
+        var player = PlayerInputController.Instance;
+        player.AddXp(-player.CurrentXp * DeathPenalty);
+    }
+
     [ContextMenu("Normalize level ranges")]
     public void NormalizeLevelRanges()
     {
