@@ -49,7 +49,6 @@ public class SpawnerController : MonoBehaviour
             );
 
             var count = spawnedMobs.Count(mob => mob.gameObject.activeSelf);
-            var levelRange = FloorManager.Instance.LevelRange;
             for (int mobCount = count; mobCount < data.maxNumberOfMobs;)
             {
                 var index = Random.Range(0, data.mobs.Count);
@@ -58,6 +57,7 @@ public class SpawnerController : MonoBehaviour
                     mobCount++;
                     var pos = FindRandomPos(0);
                     var newMob = Instantiate(data.mobs[index], pos, Quaternion.identity, mobParent.transform);
+                    var levelRange = FloorManager.Instance.GetRandomLevel();
                     newMob.SetLevel(Random.Range(levelRange.x, levelRange.y));
                     spawnedMobs.Add(newMob);
                     data.numberOfMobsLeft[index]--;

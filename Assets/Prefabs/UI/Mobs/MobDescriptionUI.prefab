@@ -149,6 +149,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6971157141884744235}
+  - component: {fileID: 3038551967025825591}
   m_Layer: 6
   m_Name: MobDescriptionUI
   m_TagString: Untagged
@@ -177,6 +178,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &3038551967025825591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3077461480738356122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36e5a661403267b4c9da0795b4848f6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuRef: {fileID: 2782708326499820870}
+  icon: {fileID: 6551967555873292651}
+  title: {fileID: 4353873343240999737}
+  dropList: {fileID: 6961332077888266320}
 --- !u!1 &5939833246452711622
 GameObject:
   m_ObjectHideFlags: 0

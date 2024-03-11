@@ -20,7 +20,7 @@ PrefabInstance:
     - target: {fileID: 3779885953339427246, guid: 627262a31811c094f92d65ef57ba3c47,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5311283937630544735, guid: 627262a31811c094f92d65ef57ba3c47,
         type: 3}
@@ -38,6 +38,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8339762821915644875, guid: 55eacaae333f49f4991b756644b68496,
         type: 3}
+    - target: {fileID: 7537575747951249551, guid: 627262a31811c094f92d65ef57ba3c47,
+        type: 3}
+      propertyPath: startingDefense
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7537575747951249551, guid: 627262a31811c094f92d65ef57ba3c47,
         type: 3}
       propertyPath: startingVitality
@@ -117,7 +122,7 @@ PrefabInstance:
     - target: {fileID: 7622900003042665912, guid: 627262a31811c094f92d65ef57ba3c47,
         type: 3}
       propertyPath: statScalingFactor
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7622900003042665912, guid: 627262a31811c094f92d65ef57ba3c47,
         type: 3}
@@ -153,7 +158,7 @@ PrefabInstance:
     - target: {fileID: 7622900003042665912, guid: 627262a31811c094f92d65ef57ba3c47,
         type: 3}
       propertyPath: <DisplayData>k__BackingField.displayName
-      value: Acidic green slime (small)
+      value: Acidic green slime
       objectReference: {fileID: 0}
     - target: {fileID: 7624356310046074002, guid: 627262a31811c094f92d65ef57ba3c47,
         type: 3}

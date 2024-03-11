@@ -13,7 +13,6 @@ public class PlayerCombatInitiation : MonoBehaviour
     [SerializeField] private GameObject unloadingScreen;
 
     public bool IsCombatScene;
-    private GameObject mobParent;
     private Coroutine initiationCorr;
     public List<MobController> mobs { get; private set; }
 
@@ -29,7 +28,6 @@ public class PlayerCombatInitiation : MonoBehaviour
         var color = colorSource.color;
         color.a = 0;
         colorSource.color = color;
-        mobParent = GameObject.FindWithTag("MobParent");
         StartCoroutine(MobCheck());
     }
 
@@ -38,32 +36,28 @@ public class PlayerCombatInitiation : MonoBehaviour
         while (PlayerInputController.Instance != null)
         {
             var allMobs = Physics.SphereCastAll(transform.position, checkRadius, Vector3.forward, 0, mobLayer);
+            var displayManager = DetailDisplayManager.Instance;
             if (allMobs.Length == 0)
             {
-                MobDescriptionManager.Instance.TurnOff();
             }
 
+            displayManager.TurnOff();
             MobController displayedMob = null;
             foreach (var mob in allMobs)
             {
                 if (mob.transform.TryGetComponent(out displayedMob))
                 {
-                    MobDescriptionManager.Instance.DisplayMob(displayedMob);
-                    break;
+                    displayManager.DisplayNextMob(displayedMob);
                 }
 
                 if (mob.transform.TryGetComponent(out InteractableDescriptionData data))
                 {
-                    MobDescriptionManager.Instance.DisplayGeneric(data.title, data.icon, data.smallIcons);
-                    break;
+                    displayManager.DisplayGeneric(data.title, data.icon, data.smallIcons);
                 }
             }
 
-            yield return new WaitForSeconds(0.1f);
-            yield return new WaitUntil(() =>
-                !IsCombatScene && (
-                    displayedMob == null
-                    || Vector3.Distance(transform.position, displayedMob.transform.position) > checkRadius));
+            yield return new WaitForSeconds(0.2f);
+            yield return new WaitUntil(() => !IsCombatScene);
         }
     }
 

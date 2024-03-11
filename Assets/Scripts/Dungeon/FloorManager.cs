@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Cinemachine;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -9,7 +10,11 @@ public class FloorManager : MonoBehaviour
 {
     [SerializeField] private List<RoomManager> roomPrefabs;
     [field: SerializeField] public List<SpawnerData> SpanwerData { get; set; }
-    [field: SerializeField] public Vector2Int LevelRange { get; set; }
+    [field: SerializeField] public List<Vector3> LevelRange { get; set; }
+
+    [field: Range(0, 1f)]
+    [field: SerializeField] public float DeathPenalty { get; set; } = 0.1f;
+
     [SerializeField] private RoomManager endRoom;
     [SerializeField] private List<RoomManager> roomInstances;
     [SerializeField] private Vector2 distanceBetweenRooms;
@@ -23,6 +28,19 @@ public class FloorManager : MonoBehaviour
     public static FloorManager Instance { get; private set; }
 
     public List<RoomManager> Rooms => roomInstances;
+
+    public Vector2Int GetRandomLevel()
+    {
+        var roll = Random.value;
+        var k = -1;
+        while (roll > 0)
+        {
+            k++;
+            roll -= LevelRange[k].z;
+        }
+
+        return new Vector2Int((int)LevelRange[k].x, (int)LevelRange[k].y);
+    }
 
     private void Awake()
     {
@@ -39,11 +57,23 @@ public class FloorManager : MonoBehaviour
             yield return new WaitForSeconds(0.15f);
         }
 
+        NormalizeLevelRanges();
         yield return new WaitUntil(() => PlayerInputController.Instance != null);
         cameraRef.Target = PlayerInputController.Instance.transform;
         ToggleFollowCamera(true);
         roomInstances[0].PlacePlayer();
         roomInstances[0].Activate();
+    }
+
+    [ContextMenu("Normalize level ranges")]
+    public void NormalizeLevelRanges()
+    {
+        var sum = LevelRange.Sum(level => level.z);
+        foreach (var level in LevelRange)
+        {
+            print($"Weight {level.z / sum}");
+            level.Set(level.x, level.y, level.z / sum);
+        }
     }
 
     public void ToggleFollowCamera(bool shouldFollow)

@@ -4,20 +4,14 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MobDescriptionManager : MonoBehaviour
+public class MobDescriptionDisplay : MonoBehaviour
 {
     [SerializeField] private GameObject menuRef;
     [SerializeField] private Image icon;
     [SerializeField] private TextMeshProUGUI title;
     [SerializeField] private Transform dropList;
-    public static MobDescriptionManager Instance { get; private set; }
 
     private Image[] dropListItems;
-
-    private void Awake()
-    {
-        Instance = this;
-    }
 
     private void Start()
     {

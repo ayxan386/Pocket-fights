@@ -89,6 +89,10 @@ MonoBehaviour:
   - {fileID: 4282307684779486102, guid: 61eeb1d735ab21447ab9451411e18e08, type: 3}
   - {fileID: 1419417744967704818, guid: 1bab13041b8aa194f93c10f9083ada06, type: 3}
   <SpanwerData>k__BackingField: []
+  <LevelRange>k__BackingField:
+  - {x: 1, y: 3, z: 75}
+  - {x: 3, y: 5, z: 20}
+  - {x: 4, y: 6, z: 5}
   endRoom: {fileID: 3694069855595287759, guid: 91114934c4992ee4098f27c76b16afef, type: 3}
   roomInstances:
   - {fileID: 0}

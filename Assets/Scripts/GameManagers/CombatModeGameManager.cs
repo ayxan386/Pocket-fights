@@ -9,20 +9,22 @@ public class CombatModeGameManager : MonoBehaviour
     [SerializeField] private List<MobController> mobsInCombat;
     [SerializeField] private Button endTurnButton;
 
-    [Header("Entity scene placement")] 
+    [Header("Entity scene placement")]
     [SerializeField] private Transform playerStandPoint;
+
     [SerializeField] private List<Transform> mobStandPoints;
 
-    [Header("Menus")] 
+    [Header("Menus")]
     [SerializeField] private GameObject loadingMenu;
 
-    [Header("Loot stuff")] 
+    [Header("Loot stuff")]
     [SerializeField] private LootItemPanel lootItemPanelPrefab;
+
     [SerializeField] private Animator lootPanelAnimation;
     [SerializeField] private Transform lootHolder;
 
-    [field:Header("Effects")]
-    [field:SerializeField] public AudioSource SkillEffectsAudio { get; set; }
+    [field: Header("Effects")]
+    [field: SerializeField] public AudioSource SkillEffectsAudio { get; set; }
 
     public static CombatModeGameManager Instance { get; private set; }
     public MobController SelectedEnemy { get; private set; }
@@ -103,17 +105,19 @@ public class CombatModeGameManager : MonoBehaviour
 
         IsPlayerTurn = true;
         endTurnButton.interactable = true;
-        
+
         EventManager.OnPlayerTurnStart?.Invoke(true);
     }
 
     private void CheckPlayerHealth()
     {
-        var currentHealth = PlayerInputController.Instance.Stats.GetStatValue(StatValue.Health).currentValue;
+        var player = PlayerInputController.Instance;
+        var currentHealth = player.Stats.GetStatValue(StatValue.Health).currentValue;
 
         if (currentHealth <= 0)
         {
             IsCombatGoing = false;
+            player.AddXp(player.CurrentXp * FloorManager.Instance.DeathPenalty);
             EndOfCombat();
             GlobalGameManager.Instance.EndDungeon();
         }
@@ -206,8 +210,8 @@ public class CombatModeGameManager : MonoBehaviour
             var lootItemPanel = Instantiate(lootItemPanelPrefab, lootHolder);
             lootItemPanel.UpdateDisplay(newDrop);
         }
-        
-        if(lootHolder.childCount > 0)
+
+        if (lootHolder.childCount > 0)
             EventSystem.current.SetSelectedGameObject(lootHolder.GetChild(0).gameObject);
         lootPanelAnimation.SetTrigger("open");
     }

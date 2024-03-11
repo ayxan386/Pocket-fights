@@ -42,6 +42,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7537575747951249551, guid: 627262a31811c094f92d65ef57ba3c47,
+        type: 3}
+      propertyPath: startingDefense
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7622230981891531222, guid: 627262a31811c094f92d65ef57ba3c47,
         type: 3}
       propertyPath: m_RootOrder
@@ -102,6 +107,16 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 5201981743491511903}
+    - target: {fileID: 7622900003042665912, guid: 627262a31811c094f92d65ef57ba3c47,
+        type: 3}
+      propertyPath: statScalingFactor
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7622900003042665912, guid: 627262a31811c094f92d65ef57ba3c47,
+        type: 3}
+      propertyPath: <DisplayData>k__BackingField.displayName
+      value: Fiery red slime
+      objectReference: {fileID: 0}
     - target: {fileID: 7622900003174534928, guid: 627262a31811c094f92d65ef57ba3c47,
         type: 3}
       propertyPath: m_IsActive

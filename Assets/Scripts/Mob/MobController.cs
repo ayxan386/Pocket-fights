@@ -32,7 +32,6 @@ public class MobController : MonoBehaviour, BaseEntityCallbacks
     public StatController Stats => statController;
     public bool IsDoneAttack;
 
-
     private IEnumerator Start()
     {
         yield return new WaitUntil(() => PlayerCombatInitiation.Instance != null);
@@ -120,7 +119,7 @@ public class MobController : MonoBehaviour, BaseEntityCallbacks
     {
         if (isSelected)
         {
-            MobDescriptionManager.Instance.DisplayMob(this);
+            DetailDisplayManager.Instance.DisplayNextMob(this);
         }
 
         combatUiRef.SetActive(isSelected);
