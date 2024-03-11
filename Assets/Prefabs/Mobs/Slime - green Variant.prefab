@@ -51,7 +51,7 @@ PrefabInstance:
     - target: {fileID: 7537575747951249551, guid: 627262a31811c094f92d65ef57ba3c47,
         type: 3}
       propertyPath: <Level>k__BackingField
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7537575747951249551, guid: 627262a31811c094f92d65ef57ba3c47,
         type: 3}
@@ -122,7 +122,7 @@ PrefabInstance:
     - target: {fileID: 7622900003042665912, guid: 627262a31811c094f92d65ef57ba3c47,
         type: 3}
       propertyPath: statScalingFactor
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7622900003042665912, guid: 627262a31811c094f92d65ef57ba3c47,
         type: 3}

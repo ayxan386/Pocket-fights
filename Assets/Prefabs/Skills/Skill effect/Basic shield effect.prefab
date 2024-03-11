@@ -332,7 +332,7 @@ MonoBehaviour:
   effectType: 1
   LastAmount: 0
   DamageBuffer: 0
-  isPositive: 0
+  isPositive: 1
   needsToBeDeleted: 1
   checkAtTheEnd: 1
   isAdditive: 0

@@ -35,7 +35,7 @@ public class StatController : MonoBehaviour
     private Dictionary<StatTypes, StatData> baseStats;
     private Dictionary<StatValue, StatData> statValues;
 
-    public float Lsf => Mathf.Pow(1.03f, Level);
+    public float Lsf => Mathf.Pow(1.02f, Level);
     public BaseEntityCallbacks AttachedEntity { get; set; }
 
     public Animator Animator { get; set; }
