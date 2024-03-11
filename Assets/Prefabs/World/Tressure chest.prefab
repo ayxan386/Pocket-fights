@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 6806727347749564327}
   - component: {fileID: 6806727347749564312}
   - component: {fileID: 5787653143976022491}
+  - component: {fileID: 2069950607641740857}
   m_Layer: 6
   m_Name: Tressure chest
   m_TagString: Untagged
@@ -239,14 +240,46 @@ MonoBehaviour:
   lootItemPanelPrefab: {fileID: 8450918073623782735, guid: ce3eefdfdb17f6d44a4c5d0a7fef45d2,
     type: 3}
   possibleLoots:
-  - itemPrefab: {fileID: 3337002340432959719, guid: fd7389eff2aaccb488d74264e9423df1,
+  - inWorldDisplayItem: {fileID: 0}
+    itemPrefab: {fileID: 3337002340432959719, guid: fd7389eff2aaccb488d74264e9423df1,
       type: 3}
     chance: 0.866
-    count: {x: 2, y: 7}
-  - itemPrefab: {fileID: 3337002340432959719, guid: 7ff3a8fc8a51b6a43a4b497297549136,
+    count: {x: 5, y: 15}
+  - inWorldDisplayItem: {fileID: 0}
+    itemPrefab: {fileID: 3337002340432959719, guid: 9a33316ea364db84c871411775aabcf3,
       type: 3}
-    chance: 0.593
-    count: {x: 1, y: 3}
+    chance: 0.918
+    count: {x: 3, y: 5}
+  - inWorldDisplayItem: {fileID: 0}
+    itemPrefab: {fileID: 3337002340432959719, guid: 9a33316ea364db84c871411775aabcf3,
+      type: 3}
+    chance: 0.261
+    count: {x: 2, y: 4}
+  - inWorldDisplayItem: {fileID: 0}
+    itemPrefab: {fileID: 3337002340432959719, guid: fd7389eff2aaccb488d74264e9423df1,
+      type: 3}
+    chance: 0.493
+    count: {x: 4, y: 8}
+  - inWorldDisplayItem: {fileID: 0}
+    itemPrefab: {fileID: -2524362128158772954, guid: 1eaadaf82712ae74593d455032134e7a,
+      type: 3}
+    chance: 0.117
+    count: {x: 1, y: 2}
+  - inWorldDisplayItem: {fileID: 0}
+    itemPrefab: {fileID: -2524362128158772954, guid: f2bf509766184eb4ab7c6627fbb26fbb,
+      type: 3}
+    chance: 0.117
+    count: {x: 1, y: 2}
+  - inWorldDisplayItem: {fileID: 0}
+    itemPrefab: {fileID: -2524362128158772954, guid: 56f775b6257d8a849a0c52f390981436,
+      type: 3}
+    chance: 0.117
+    count: {x: 1, y: 2}
+  - inWorldDisplayItem: {fileID: 0}
+    itemPrefab: {fileID: -2524362128158772954, guid: 9ae606a22853b6f4c812d921394a1090,
+      type: 3}
+    chance: 0.117
+    count: {x: 1, y: 2}
 --- !u!95 &6806727347749564312
 Animator:
   serializedVersion: 5
@@ -282,3 +315,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   targetComponent: {fileID: 6806727347749564327}
+--- !u!114 &2069950607641740857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6777147077050129456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b323b860a2b10f649bd41ce14421996f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Treasure chest
+  icon: {fileID: 21300000, guid: 8ab0b2dfe4e8b9348a4fdda64caf25dc, type: 3}
+  smallIcons:
+  - {fileID: 21300000, guid: cdbfd037111f82142b7e62b7c72ed086, type: 3}
+  - {fileID: 1020037480, guid: 7bb12e1a1363c514bb9ee72a9acafce2, type: 3}
+  - {fileID: 21300000, guid: f7781d470d15f244ea5f6e2fe0666371, type: 3}
+  - {fileID: 21300000, guid: 04183d213bcf2e64399062987dccd1ea, type: 3}

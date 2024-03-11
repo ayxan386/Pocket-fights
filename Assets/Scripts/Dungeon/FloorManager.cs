@@ -78,7 +78,6 @@ public class FloorManager : MonoBehaviour
         var sum = LevelRange.Sum(level => level.z);
         foreach (var level in LevelRange)
         {
-            print($"Weight {level.z / sum}");
             level.Set(level.x, level.y, level.z / sum);
         }
     }
