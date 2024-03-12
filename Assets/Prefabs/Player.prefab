@@ -964,6 +964,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillHolder: {fileID: 5980132709683215314}
   actions: []
+  <SkillFragmentCountRequirement>k__BackingField: 5
 --- !u!114 &356217490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4212,6 +4213,14 @@ MonoBehaviour:
   - {fileID: 3337002340432959719, guid: 173a52023648c9a4da0cc30df319bba8, type: 3}
   - {fileID: 3337002340432959719, guid: d581a5646f600c940b7838991d8ba08c, type: 3}
   - {fileID: 3337002340432959719, guid: 9a33316ea364db84c871411775aabcf3, type: 3}
+  - {fileID: 3337002340432959719, guid: a9d91e0012ffb894e9a8453df44b62b2, type: 3}
+  - {fileID: 3337002340432959719, guid: 823bccf333fd9ea489541ba2f5a763b7, type: 3}
+  - {fileID: 3337002340432959719, guid: 1a17a373fd32a4c45ad6b7fe2ef8f07f, type: 3}
+  - {fileID: 3337002340432959719, guid: 265278530a20dfb49959bd09c43e5d46, type: 3}
+  - {fileID: 3337002340432959719, guid: 2518c1abb828511499dd59b3d4b896f2, type: 3}
+  - {fileID: 3337002340432959719, guid: 772efc3823a9d814fab274c8aee2476b, type: 3}
+  - {fileID: 3337002340432959719, guid: 9dff7272b35dd7a4f9d8b5514ffd6f4f, type: 3}
+  - {fileID: 3337002340432959719, guid: 0e991d8bf400920419915e705b8d1dcc, type: 3}
 --- !u!114 &4511991193206950191
 MonoBehaviour:
   m_ObjectHideFlags: 0
