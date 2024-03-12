@@ -38,6 +38,7 @@ public class MobDescriptionDisplay : MonoBehaviour
         var loots = mobController.PossibleLoots.DistinctBy(loot => loot.itemPrefab.name);
         foreach (var loot in loots)
         {
+            if (loot.itemPrefab.type == ItemType.SkillFragment) continue;
             dropListItems[k].gameObject.SetActive(true);
             dropListItems[k++].sprite = loot.itemPrefab.icon;
         }

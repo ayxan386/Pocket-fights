@@ -5,14 +5,15 @@ using Random = UnityEngine.Random;
 
 public static class LootManager
 {
-    public static List<(InventoryItem, int)> GenerateLoot(List<List<PossibleLoot>> possibleDrops)
+    public static List<(InventoryItem, int)> GenerateLoot(List<List<PossibleLoot>> possibleDrops, float rollBoost = 1)
     {
         var res = new List<(InventoryItem, int)>();
+        Debug.Log($"Generating loot with roll boost {rollBoost}");
         foreach (var mobLoots in possibleDrops)
         {
-            var roll = Random.value;
             foreach (var possibleLoot in mobLoots)
             {
+                var roll = Random.value * rollBoost;
                 if (roll >= 1 - possibleLoot.chance)
                 {
                     var dropCount = Random.Range(possibleLoot.count.x, possibleLoot.count.y + 1);

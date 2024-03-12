@@ -7,6 +7,7 @@ public class PlayerActionManager : MonoBehaviour
 {
     [SerializeField] private Transform skillHolder;
     [SerializeField] private List<Skill> actions;
+    [field: SerializeField] public int SkillFragmentCountRequirement { get; set; } = 5;
     public List<Skill> AllSkills => actions.FindAll(action => action.type != ActionType.ReceiveAttack);
 
     public SkillSaveDataWrapper SaveData => new SkillSaveDataWrapper(AllSkills);
@@ -30,9 +31,10 @@ public class PlayerActionManager : MonoBehaviour
     {
         var stat = PlayerInputController.Instance.Stats;
         var targetSkill = clickedCell.RelatedSkill;
-        if (targetSkill.CanUpgrade && stat.SkillPoints >= targetSkill.UpgradeCost)
+        if (CanUpgrade(targetSkill, stat))
         {
             stat.UseSkillPoints(targetSkill.UpgradeCost);
+            InventoryController.Instance.ConsumeSkillFragments(targetSkill);
             targetSkill.Upgrade();
 
             if (targetSkill.type == ActionType.Passive)
@@ -42,6 +44,13 @@ public class PlayerActionManager : MonoBehaviour
 
             EventManager.OnSkillUpgraded?.Invoke(clickedCell);
         }
+    }
+
+    public bool CanUpgrade(Skill targetSkill, StatController stat)
+    {
+        return targetSkill.CanUpgrade
+               && stat.SkillPoints >= targetSkill.UpgradeCost
+               && InventoryController.Instance.CheckSkillFragments(targetSkill);
     }
 
     public Skill GetAction(int actionIndex)

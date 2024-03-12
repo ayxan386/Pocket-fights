@@ -31,7 +31,7 @@ public class StatInfoManager : MonoBehaviour
         {
             var playerInputController = PlayerInputController.Instance;
             var baseStat = playerInputController.Stats.GetBaseStat(statType);
-            statBlocks[k].UpdateDisplay(statType.ToString(), baseStat.currentValue + "");
+            statBlocks[k].UpdateDisplay(statType.ToString(), $"{baseStat.currentValue}/{baseStat.maxValue}");
             statBlocks[k++].StatType = statType;
 
             if (k == statBlocks.Count) break;

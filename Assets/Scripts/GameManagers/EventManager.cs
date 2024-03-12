@@ -10,7 +10,7 @@ public class EventManager : MonoBehaviour
     public static Action<StatValue, StatData> OnStatChanged;
     public static Action<InventoryItem> OnItemAdd;
     public static Action<InventoryItem, LootItemPanel> OnItemAddAsLoot;
-    public static Action<InventoryItem> OnItemRemove;
+    public static Action<InventoryItem, int> OnItemRemove;
     public static Action<bool> OnCombatSceneLoading;
     public static Action<bool> OnPauseMenuToggled;
     public static Action<bool> OnShopToggled;

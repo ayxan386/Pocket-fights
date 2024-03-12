@@ -85,8 +85,8 @@ public class SkillsDisplayManager : MonoBehaviour
     {
         lastClickedCell = clickedCell;
         var relatedSkill = clickedCell.RelatedSkill;
-        upgradeOption.interactable = relatedSkill.CanUpgrade
-                                     && PlayerInputController.Instance.Stats.SkillPoints >= relatedSkill.UpgradeCost;
+        upgradeOption.interactable =
+            PlayerActionManager.Instance.CanUpgrade(relatedSkill, PlayerInputController.Instance.Stats);
 
         var canBeSelected = relatedSkill.type != ActionType.Passive && relatedSkill.IsActive;
 
@@ -112,7 +112,7 @@ public class SkillsDisplayManager : MonoBehaviour
         if (EventSystem.current.currentSelectedGameObject != null
             && EventSystem.current.currentSelectedGameObject.name.Contains("Option")) yield break;
 
-        DisableSkillOptions(); 
+        DisableSkillOptions();
     }
 
     private void OnSkillUpgraded(SkillCellManager toUpdate)

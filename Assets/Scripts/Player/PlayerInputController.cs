@@ -53,6 +53,7 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
     }
 
     public float LevelUpProgress => currentXp / levelDatas[Stats.Level - 1].xpRequired;
+    public LevelData LevelData => levelDatas[Stats.Level - 1];
 
     private float lastSpawnTime;
     private bool isLeftFoot;
@@ -77,6 +78,7 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
         DataManager.Instance.LoadPlayer("Player input controller");
         yield return new WaitForSeconds(0.1f);
         loadingScreen.SetActive(false);
+        Stats.SetBaseStatLimit(LevelData.statLimit);
         EventManager.OnCombatSceneLoading += OnCombatSceneLoading;
         EventManager.OnPauseMenuToggled += OnPauseMenuToggled;
         EventManager.OnPlayerTurnEnd += OnPlayerTurnEnd;
@@ -124,11 +126,12 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
 
     private void LoadXpRequirements()
     {
+        // LVL | XP | Free Point | Skill Point | Stat limit
         levelDatas = Resources.Load<TextAsset>("xp_requirements").text.Split("\n")
             .ToList()
             .ConvertAll(row => row.Split(", "))
             .ConvertAll(split => new LevelData(int.Parse(split[1]),
-                int.Parse(split[2]), int.Parse(split[3])));
+                int.Parse(split[2]), int.Parse(split[3]), int.Parse(split[4])));
     }
 
     private void SpawnFootstep()
@@ -261,6 +264,7 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
             currentXp -= levelData.xpRequired;
             Stats.UpdateLevel(1);
             Stats.UpdatePoints(levelData.freePointsGained, levelData.skillPointsGained);
+            Stats.SetBaseStatLimit(LevelData.statLimit);
             levelData = levelDatas[Stats.Level - 1];
         }
     }
@@ -296,11 +300,13 @@ public class LevelData
     public int xpRequired;
     public int freePointsGained;
     public int skillPointsGained;
+    public int statLimit;
 
-    public LevelData(int xpRequired, int freePointsGained, int skillPointsGained)
+    public LevelData(int xpRequired, int freePointsGained, int skillPointsGained, int statLimit)
     {
         this.xpRequired = xpRequired;
         this.freePointsGained = freePointsGained;
         this.skillPointsGained = skillPointsGained;
+        this.statLimit = statLimit;
     }
 }

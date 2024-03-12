@@ -52,7 +52,7 @@ MonoBehaviour:
   manaConsumption: 30
   type: 0
   displayDetails:
-    icon: {fileID: 21300000, guid: 2e350bcef09f70943ba03de78d8c063a, type: 3}
+    icon: {fileID: 21300000, guid: 89a7c2b9294dbaa4985085575713504f, type: 3}
     displayName: Accelerated healing
     descriptionBase: Heal portion of your HP for 3 turns
     effectSuffix: 
@@ -61,7 +61,6 @@ MonoBehaviour:
   - 0.2
   - 0.35
   upgradeCost: 020000000300000004000000
-  activationPrice: 2
   currentLevel: -1
   maxLevel: 3
   slotName: 1

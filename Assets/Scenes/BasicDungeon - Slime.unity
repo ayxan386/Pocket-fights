@@ -197,6 +197,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2163032915953893512, guid: 28e62865603927a4bb37d4f12c93f9f8,
         type: 3}
+      propertyPath: numberOfRooms.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2163032915953893512, guid: 28e62865603927a4bb37d4f12c93f9f8,
+        type: 3}
+      propertyPath: distanceBetweenRooms.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2163032915953893512, guid: 28e62865603927a4bb37d4f12c93f9f8,
+        type: 3}
+      propertyPath: distanceBetweenRooms.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2163032915953893512, guid: 28e62865603927a4bb37d4f12c93f9f8,
+        type: 3}
       propertyPath: <LevelRange>k__BackingField.x
       value: 1
       objectReference: {fileID: 0}
@@ -216,6 +231,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8729943597482726947, guid: 6d96c4697006b164cab12afc3927451e,
         type: 3}
+    - target: {fileID: 2163032915953893512, guid: 28e62865603927a4bb37d4f12c93f9f8,
+        type: 3}
+      propertyPath: <LevelRange>k__BackingField.Array.data[0].z
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 2163032915953893512, guid: 28e62865603927a4bb37d4f12c93f9f8,
+        type: 3}
+      propertyPath: <LevelRange>k__BackingField.Array.data[1].z
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 2163032916832805613, guid: 28e62865603927a4bb37d4f12c93f9f8,
         type: 3}
       propertyPath: m_Intensity

@@ -4059,6 +4059,7 @@ MonoBehaviour:
     type: 3}
   lootPanelAnimation: {fileID: 1699236695}
   lootHolder: {fileID: 1550578093}
+  rollBoostPerLevel: 2
   <SkillEffectsAudio>k__BackingField: {fileID: 234243827}
 --- !u!114 &1799696660
 MonoBehaviour:

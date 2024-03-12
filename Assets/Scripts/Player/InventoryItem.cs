@@ -21,6 +21,7 @@ public class InventoryItem : MonoBehaviour
 
     [Space(10)] public ItemType type;
     public UnityEvent onUseAction;
+    public string extraData;
 
     public void Use()
     {
@@ -50,5 +51,6 @@ public enum ItemType
     Useable,
     Consumable,
     Currency,
-    Equipment
+    Equipment,
+    SkillFragment
 }

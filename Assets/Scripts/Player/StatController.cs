@@ -58,13 +58,13 @@ public class StatController : MonoBehaviour
 
     private void InitiateStatValues()
     {
-        statValues[StatValue.Health] = new(baseStats[StatTypes.Vitality].maxValue * 10 * Lsf,
+        statValues[StatValue.Health] = new(baseStats[StatTypes.Vitality].currentValue * 10 * Lsf,
             baseStats[StatTypes.Vitality].currentValue * 15 * Lsf);
-        statValues[StatValue.Mana] = new(baseStats[StatTypes.Mana].maxValue * 10 * Lsf,
+        statValues[StatValue.Mana] = new(baseStats[StatTypes.Mana].currentValue * 10 * Lsf,
             baseStats[StatTypes.Mana].currentValue * 10 * Lsf);
-        statValues[StatValue.BaseAttack] = new(baseStats[StatTypes.Strength].maxValue * 5 * Lsf,
+        statValues[StatValue.BaseAttack] = new(baseStats[StatTypes.Strength].currentValue * 5 * Lsf,
             baseStats[StatTypes.Strength].currentValue * 5 * Lsf);
-        statValues[StatValue.DamageReduction] = new(baseStats[StatTypes.Defense].maxValue * 2 * Lsf,
+        statValues[StatValue.DamageReduction] = new(baseStats[StatTypes.Defense].currentValue * 2 * Lsf,
             baseStats[StatTypes.Defense].currentValue * 2 * Lsf);
         statValues[StatValue.ManaRegen] = new(10, 10);
         statValues[StatValue.None] = new(10, 10);
@@ -78,9 +78,9 @@ public class StatController : MonoBehaviour
 
     private void CalculateStatValues()
     {
-        statValues[StatValue.Health].baseValue = baseStats[StatTypes.Vitality].maxValue * 15 * Lsf;
+        statValues[StatValue.Health].baseValue = baseStats[StatTypes.Vitality].currentValue * 15 * Lsf;
         statValues[StatValue.Health].maxValue = statValues[StatValue.Health].baseValue;
-        statValues[StatValue.Mana].baseValue = baseStats[StatTypes.Mana].maxValue * 10 * Lsf;
+        statValues[StatValue.Mana].baseValue = baseStats[StatTypes.Mana].currentValue * 10 * Lsf;
         statValues[StatValue.Mana].maxValue = statValues[StatValue.Mana].baseValue;
 
         statValues[StatValue.BaseAttack].UpdateBaseValue(baseStats[StatTypes.Strength].currentValue * 5 * Lsf);
@@ -138,7 +138,8 @@ public class StatController : MonoBehaviour
 
     public void UpgradeStat(StatTypes statType, int diff = 1)
     {
-        if (FreePoints > 0)
+        var statLimit = PlayerInputController.Instance.LevelData.statLimit;
+        if (FreePoints > 0 && GetBaseStat(statType).currentValue < statLimit)
         {
             UpdatePoints(-diff, 0);
             UpgradeBaseStat(statType, diff);
@@ -147,7 +148,8 @@ public class StatController : MonoBehaviour
 
     public void UpgradeBaseStat(StatTypes statType, int diff)
     {
-        baseStats[statType].maxValue += diff;
+        var statLimit = PlayerInputController.Instance.LevelData.statLimit;
+        baseStats[statType].maxValue = statLimit;
         baseStats[statType].currentValue += diff;
         baseStats[statType].baseValue += diff;
         CalculateStatValues();
@@ -197,6 +199,14 @@ public class StatController : MonoBehaviour
         baseStats = savedData.baseStats;
         InitiateStatValues();
         statValues = savedData.statValues;
+    }
+
+    public void SetBaseStatLimit(int limit = 8)
+    {
+        foreach (var baseStat in baseStats.Keys)
+        {
+            baseStats[baseStat].maxValue = limit;
+        }
     }
 
     public void UpdateLevel(int increment)

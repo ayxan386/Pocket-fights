@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -22,6 +23,7 @@ public class CombatModeGameManager : MonoBehaviour
 
     [SerializeField] private Animator lootPanelAnimation;
     [SerializeField] private Transform lootHolder;
+    [SerializeField] private float rollBoostPerLevel;
 
     [field: Header("Effects")]
     [field: SerializeField] public AudioSource SkillEffectsAudio { get; set; }
@@ -201,9 +203,10 @@ public class CombatModeGameManager : MonoBehaviour
         EventManager.OnPlayerVictory?.Invoke(true);
 
         var allDrops = mobsInCombat.ConvertAll(mob => mob.PossibleLoots);
+        var rollBoost = mobsInCombat.Sum(mob => mob.Stats.Level) * rollBoostPerLevel / 100 + 1;
         var statController = PlayerInputController.Instance.Stats;
         statController.UpdateStatValue(StatValue.Mana, (int)statController.GetStatValue(StatValue.Mana).maxValue);
-        var generatedLoot = LootManager.GenerateLoot(allDrops);
+        var generatedLoot = LootManager.GenerateLoot(allDrops, rollBoost);
         foreach (var valueTuple in generatedLoot)
         {
             var newDrop = Instantiate(valueTuple.Item1);

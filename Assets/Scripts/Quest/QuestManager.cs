@@ -28,6 +28,7 @@ public class QuestManager : MonoBehaviour
     {
         yield return new WaitUntil(() => WrappedData != null);
 
+        RemoveUnclaimedQuests();
         potentialQuestSource.AddQuests(WrappedData.quests, targetCount);
 
         DataManager.Instance.SaveQuests();
@@ -35,6 +36,7 @@ public class QuestManager : MonoBehaviour
         EventManager.OnMobDeath += OnMobDeath;
         EventManager.OnPlayerVictory += OnPlayerVictory;
     }
+
 
     private void OnDestroy()
     {
@@ -137,6 +139,12 @@ public class QuestManager : MonoBehaviour
 
         WrappedData.quests.Remove(questRef);
         Destroy(questUi.gameObject);
+    }
+
+    private void RemoveUnclaimedQuests()
+    {
+        var quests = WrappedData.quests.FindAll(quest => quest.inProgress);
+        WrappedData.quests = quests;
     }
 }
 

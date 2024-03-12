@@ -177,7 +177,7 @@ public class InventoryController : MonoBehaviour
 
         if (soldItem.count <= 0)
         {
-            EventManager.OnItemRemove?.Invoke(soldItem);
+            EventManager.OnItemRemove?.Invoke(soldItem, 1);
         }
         else
         {
@@ -185,9 +185,9 @@ public class InventoryController : MonoBehaviour
         }
     }
 
-    private void OnItemRemove(InventoryItem removedItem)
+    private void OnItemRemove(InventoryItem removedItem, int count = 1)
     {
-        removedItem.count -= 1;
+        removedItem.count -= count;
 
         if (removedItem.count <= 0)
         {
@@ -207,7 +207,7 @@ public class InventoryController : MonoBehaviour
     [ContextMenu("Remove random item")]
     public void RemoveRandomItem()
     {
-        EventManager.OnItemRemove?.Invoke(randomItem);
+        EventManager.OnItemRemove?.Invoke(randomItem, randomItem.count);
     }
 
     public void ItemCellClicked(InventoryItem clickedItem, InventoryCellType cell)
@@ -238,7 +238,7 @@ public class InventoryController : MonoBehaviour
                 else
                 {
                     clickedItem.Use();
-                    EventManager.OnItemRemove?.Invoke(clickedItem);
+                    EventManager.OnItemRemove?.Invoke(clickedItem , 1);
                 }
 
                 break;
@@ -268,6 +268,37 @@ public class InventoryController : MonoBehaviour
     {
         gold += amount;
         EventManager.OnPlayerCoreUpdate?.Invoke(gold);
+    }
+
+    public bool CheckSkillFragments(Skill targetSkill)
+    {
+        foreach (var item in ownedItems)
+        {
+            if (IsSkillFragment(targetSkill, item))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private static bool IsSkillFragment(Skill targetSkill, InventoryItem item)
+    {
+        return item.type == ItemType.SkillFragment
+               && item.extraData == targetSkill.name
+               && item.count >= PlayerActionManager.Instance.SkillFragmentCountRequirement;
+    }
+
+    public void ConsumeSkillFragments(Skill targetSkill)
+    {
+        foreach (var item in ownedItems)
+        {
+            if (!IsSkillFragment(targetSkill, item)) continue;
+
+            EventManager.OnItemRemove?.Invoke(item, PlayerActionManager.Instance.SkillFragmentCountRequirement);
+            break;
+        }
     }
 }
 

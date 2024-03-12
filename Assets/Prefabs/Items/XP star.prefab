@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 645626868, guid: 7bb12e1a1363c514bb9ee72a9acafce2, type: 3}
   name: XP star
-  description: Gives player 50 xp
+  description: Gives player 75 xp
   stackSize: 25
   count: 10
   buyPrice: 5
@@ -84,4 +84,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd8215ebf72c4508a13d9883946bb0a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amount: 50
+  amount: 75
