@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: Accumulation
-  manaConsumption: 30
+  manaConsumption: 20
   type: 0
   displayDetails:
     icon: {fileID: 21300000, guid: 31af4c11b0228d142b71af2d3940bbcb, type: 3}

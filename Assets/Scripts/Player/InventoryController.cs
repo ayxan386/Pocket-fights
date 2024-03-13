@@ -38,7 +38,7 @@ public class InventoryController : MonoBehaviour
             itemCells[index].SetId(index);
         }
 
-        CheckItemPrefabNames();
+        // CheckItemPrefabNames();
 
         UpdateDisplay();
         EventManager.OnItemAdd += OnItemAdd;

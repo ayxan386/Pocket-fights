@@ -55,7 +55,7 @@ MonoBehaviour:
   displayDetails:
     icon: {fileID: 21300000, guid: 08f1fe348c0d93949b71f35e7eb9cab5, type: 3}
     displayName: Mana Shield
-    descriptionBase: Shield capable of blocking certain percentage of damage
+    descriptionBase: Blocks damage propotinal to player's HP
     effectSuffix: ( of HP)
   effects:
   - 0.3

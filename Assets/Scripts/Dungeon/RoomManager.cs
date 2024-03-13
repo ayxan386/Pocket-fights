@@ -34,12 +34,14 @@ public class RoomManager : MonoBehaviour
     [Header("Room specialty")] [SerializeField]
     private List<BlockChance> specialtyBlockPrefabs;
 
+    [Range(1f, 2f)]
+    [SerializeField] private float difficulty;
+
     [SerializeField] private List<Transform> specialtyBlockSpawnPoints;
 
     [Header("Exit condition")] [SerializeField]
     private ExitConditionType exitConditionType;
 
-    [SerializeField] private SpawnerController targetSpawner;
     [SerializeField] private int killCounter;
     [SerializeField] private ExitConditionDisplayManager exitConditionDisplayManager;
 
@@ -79,9 +81,6 @@ public class RoomManager : MonoBehaviour
                 return;
             case ExitConditionType.KillCounter:
                 if (killCounter <= 0) CanExit = true;
-                break;
-            case ExitConditionType.SpawnerExhaust:
-                if (targetSpawner.IsExhausted) CanExit = true;
                 break;
             default:
                 print("Unknown exit condition");
@@ -214,7 +213,7 @@ public class RoomManager : MonoBehaviour
 
     public void PlaceSpecialtyBlocks(float difficulty)
     {
-        var numberOfSpecialtyBlocks = Random.Range(0, specialtyBlockSpawnPoints.Count);
+        var numberOfSpecialtyBlocks = specialtyBlockSpawnPoints.Count * this.difficulty * Random.Range(0.3f, 0.8f);
         var usedPoints = new HashSet<int>();
         for (var i = 0; i < numberOfSpecialtyBlocks; i++)
         {
@@ -256,27 +255,16 @@ public class RoomManager : MonoBehaviour
             return;
         }
 
-        if (allSpawners.Length == 1)
+        var maxAverage = -1;
+        foreach (var spawner in allSpawners)
         {
-            var spawnerData = allSpawners[0].SetSpawnerData();
-            targetSpawner = allSpawners[0];
-
-            killCounter = spawnerData.numberOfMobsLeft.Aggregate((num, sum) => sum + num);
-            exitConditionType = ExitConditionType.KillCounter;
+            var spawnerData = spawner.SetSpawnerData();
+            spawnerData.numberOfMobsLeft = spawnerData.numberOfMobsLeft.ConvertAll(number => Mathf.RoundToInt(number * difficulty));
+            maxAverage += spawnerData.numberOfMobsLeft.Sum(data => data);
         }
-        else
-        {
-            var maxAverage = -1;
-            foreach (var spawner in allSpawners)
-            {
-                var spawnerData = spawner.SetSpawnerData();
-                var average = (int)spawnerData.numberOfMobsLeft.Average(data => data);
-                maxAverage = Mathf.Max(average, maxAverage);
-            }
 
-            killCounter = maxAverage;
-            exitConditionType = ExitConditionType.KillCounter;
-        }
+        killCounter = Mathf.FloorToInt(maxAverage * Random.Range(0.3f, 0.6f));
+        exitConditionType = ExitConditionType.KillCounter;
 
         CanExit = false;
         exitConditionDisplayManager.UpdateDisplay(killCounter, CanExit);

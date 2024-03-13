@@ -4716,12 +4716,12 @@ MonoBehaviour:
     type: 
     weight: {x: 0.5, y: 1}
     block: {fileID: 8884399706233035975, guid: 422a2403f59b8b242a8fce7c3ee01328, type: 3}
+  difficulty: 1.305
   specialtyBlockSpawnPoints:
   - {fileID: 4225162973768451692}
   - {fileID: 289225365149407077}
   - {fileID: 5721051034427215724}
   exitConditionType: 0
-  targetSpawner: {fileID: 0}
   killCounter: 0
   exitConditionDisplayManager: {fileID: 536500021815434832}
 --- !u!1 &6257951923481769607
