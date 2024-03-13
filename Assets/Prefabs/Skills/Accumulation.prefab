@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0a2b06e9daa06b4c88dd4c5a1b2fbdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: Accumulation
   manaConsumption: 30
   type: 0
   displayDetails:
@@ -61,7 +62,6 @@ MonoBehaviour:
   - 1.5
   - 2
   upgradeCost: 020000000300000004000000
-  activationPrice: 2
   currentLevel: -1
   maxLevel: 3
   slotName: 1

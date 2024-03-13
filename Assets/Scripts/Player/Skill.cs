@@ -6,6 +6,7 @@ using UnityEngine.Events;
 [Serializable]
 public class Skill : MonoBehaviour
 {
+    public string id;
     public float multiplier => effects[currentLevel];
     public float manaConsumption;
     public ActionType type;

@@ -48,17 +48,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0a2b06e9daa06b4c88dd4c5a1b2fbdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationName: receiveAttack
+  id: ReceiveAttack
   manaConsumption: 0
   type: 2
   displayDetails:
     icon: {fileID: 21300000, guid: 5fd50594014b70e48bd6993443d46b32, type: 3}
     displayName: Receiving attack
     descriptionBase: 
+    effectSuffix: 
   effects:
   - 1.5
   - 2.25
-  activationPrice: 0
+  upgradeCost: 
   currentLevel: 0
   maxLevel: 3
   slotName: 

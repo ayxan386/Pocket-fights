@@ -51,18 +51,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0a2b06e9daa06b4c88dd4c5a1b2fbdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationName: attack01
+  id: StrongAttack -Mobs
   manaConsumption: 25
   type: 0
   displayDetails:
     icon: {fileID: 21300000, guid: 719c2201c2f5f6c4aafffaeb5abdf5f9, type: 3}
     displayName: Strong attack
     descriptionBase: Attack carrying your body weight
+    effectSuffix: 
   effects:
   - 1.5
   - 2.25
   - 3
-  activationPrice: 0
+  upgradeCost: 
   currentLevel: 0
   maxLevel: 3
   slotName: 2
@@ -151,6 +152,7 @@ MonoBehaviour:
     type: 3}
   lifespan: 2
   offset: {x: 0, y: -0.3, z: 0}
+  onCaster: 1
 --- !u!114 &-7952066276243416848
 MonoBehaviour:
   m_ObjectHideFlags: 0

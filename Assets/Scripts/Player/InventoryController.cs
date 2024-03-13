@@ -286,7 +286,7 @@ public class InventoryController : MonoBehaviour
     private static bool IsSkillFragment(Skill targetSkill, InventoryItem item)
     {
         return item.type == ItemType.SkillFragment
-               && item.extraData == targetSkill.name
+               && item.extraData == targetSkill.id
                && item.count >= PlayerActionManager.Instance.SkillFragmentCountRequirement;
     }
 
