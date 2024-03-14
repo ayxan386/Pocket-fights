@@ -20,20 +20,20 @@ public class MobActionManager : MonoBehaviour
     {
         index = (index + 1) % turnSequences.Count;
 
-        var turn = turnSequences[index];
-        intentIndicator.UpdateIntent(turn);
+        UpdateIntent();
     }
 
     public void UseAttack(StatController stats, Action<bool> actionComplete)
     {
-        var turn = turnSequences[index];
-        intentIndicator.UpdateTitle(turn);
+        UpdateIntent();
 
+        var turn = turnSequences[index];
         StartCoroutine(ExecuteTurn(turn, stats, actionComplete));
     }
 
     private IEnumerator ExecuteTurn(MobTurnSequence turn, StatController stats, Action<bool> isTurnComplete)
     {
+        intentIndicator.UpdateTitle(turnSequences[index]);
         var playerStats = PlayerInputController.Instance.Stats;
         foreach (var skill in turn.actionToUse)
         {
@@ -63,6 +63,12 @@ public class MobActionManager : MonoBehaviour
                 skill.currentLevel = Mathf.Min(level / 5, skill.maxLevel);
             }
         }
+    }
+
+    public void UpdateIntent()
+    {
+        if (index < 0 || index >= turnSequences.Count) return;
+        intentIndicator.UpdateIntent(turnSequences[index]);
     }
 }
 

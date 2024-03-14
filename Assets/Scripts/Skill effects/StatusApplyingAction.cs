@@ -3,19 +3,20 @@ using UnityEngine;
 public class StatusApplyingAction : MonoBehaviour
 {
     [SerializeField] private StatEffect effect;
+    [SerializeField] private float convesionFactor = 1;
     [SerializeField] private bool negate = false;
 
     public void ApplyEffectToCaster(Skill usedSkill, StatController caster, StatController target)
     {
         var statEffect = Instantiate(effect, transform);
         statEffect.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
-        statEffect.amount = (negate ? -1 : 1) * usedSkill.multiplier;
+        statEffect.amount = (negate ? -1 : 1) * usedSkill.multiplier * convesionFactor;
         caster.StatusManager.AddStatusEffect(statEffect);
     }
 
     public void ApplyEffectToTarget(Skill usedSkill, StatController caster, StatController target)
     {
-        effect.amount = (negate ? -1 : 1) * usedSkill.multiplier;
+        effect.amount = (negate ? -1 : 1) * usedSkill.multiplier * convesionFactor;
         target.StatusManager.AddStatusEffect(Instantiate(effect, transform));
     }
 

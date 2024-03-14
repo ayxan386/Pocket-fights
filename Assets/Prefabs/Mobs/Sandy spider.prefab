@@ -22,6 +22,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1843960479243015538, guid: 627262a31811c094f92d65ef57ba3c47,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2537248868106862489, guid: 627262a31811c094f92d65ef57ba3c47,
         type: 3}
       propertyPath: m_Mesh
@@ -47,6 +52,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3043827897674853797, guid: 627262a31811c094f92d65ef57ba3c47,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3779885953339427246, guid: 627262a31811c094f92d65ef57ba3c47,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5311283937630544735, guid: 627262a31811c094f92d65ef57ba3c47,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -66,6 +81,11 @@ PrefabInstance:
         type: 3}
       propertyPath: startingVitality
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7537575747951249551, guid: 627262a31811c094f92d65ef57ba3c47,
+        type: 3}
+      propertyPath: conversionFactors.baseAttack
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7622230981891531222, guid: 627262a31811c094f92d65ef57ba3c47,
         type: 3}

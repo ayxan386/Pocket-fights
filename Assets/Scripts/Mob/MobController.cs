@@ -16,8 +16,8 @@ public class MobController : MonoBehaviour, BaseEntityCallbacks
     [field: SerializeField] public MobDisplayData DisplayData { get; private set; }
     [field: SerializeField] public List<string> Tags { get; private set; }
 
-    [Header("AI parameters")] [SerializeField]
-    private MobMovementController movementController;
+    [Header("AI parameters")]
+    [SerializeField] private MobMovementController movementController;
 
     [SerializeField] private float statScalingFactor;
     private int randomAction;
@@ -120,6 +120,7 @@ public class MobController : MonoBehaviour, BaseEntityCallbacks
         if (isSelected)
         {
             DetailDisplayManager.Instance.DisplayNextMob(this);
+            actionManager.UpdateIntent();
         }
 
         combatUiRef.SetActive(isSelected);

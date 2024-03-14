@@ -13,6 +13,7 @@ public class StatController : MonoBehaviour
     [field: SerializeField] public int FreePoints { get; private set; }
     [field: SerializeField] public int SkillPoints { get; private set; }
     [field: SerializeField] public string SourceName { get; private set; }
+    [SerializeField] private StatConversionFactors conversionFactors;
 
     [Header("Starting stats")]
     [SerializeField] private int startingVitality = 4;
@@ -29,6 +30,7 @@ public class StatController : MonoBehaviour
 
     [Header("Receive attack VFX")]
     [SerializeField] private FloatingTextManager damagePrefab;
+    [SerializeField] private Transform textSpawn;
 
     [field: SerializeField] public Transform animationPosition { get; set; }
 
@@ -58,14 +60,12 @@ public class StatController : MonoBehaviour
 
     private void InitiateStatValues()
     {
-        statValues[StatValue.Health] = new(baseStats[StatTypes.Vitality].currentValue * 10 * Lsf,
-            baseStats[StatTypes.Vitality].currentValue * 15 * Lsf);
-        statValues[StatValue.Mana] = new(baseStats[StatTypes.Mana].currentValue * 10 * Lsf,
-            baseStats[StatTypes.Mana].currentValue * 10 * Lsf);
-        statValues[StatValue.BaseAttack] = new(baseStats[StatTypes.Strength].currentValue * 5 * Lsf,
-            baseStats[StatTypes.Strength].currentValue * 5 * Lsf);
-        statValues[StatValue.DamageReduction] = new(baseStats[StatTypes.Defense].currentValue * 2 * Lsf,
-            baseStats[StatTypes.Defense].currentValue * 2 * Lsf);
+        statValues[StatValue.Health] = new(baseStats[StatTypes.Vitality].currentValue * conversionFactors.health * Lsf);
+        statValues[StatValue.Mana] = new(baseStats[StatTypes.Mana].currentValue * conversionFactors.mana * Lsf);
+        statValues[StatValue.BaseAttack] =
+            new(baseStats[StatTypes.Strength].currentValue * conversionFactors.baseAttack * Lsf);
+        statValues[StatValue.DamageReduction] =
+            new(baseStats[StatTypes.Defense].currentValue * conversionFactors.damageReduction * Lsf);
         statValues[StatValue.ManaRegen] = new(10, 10);
         statValues[StatValue.None] = new(10, 10);
     }
@@ -78,13 +78,13 @@ public class StatController : MonoBehaviour
 
     private void CalculateStatValues()
     {
-        statValues[StatValue.Health].baseValue = baseStats[StatTypes.Vitality].currentValue * 15 * Lsf;
+        statValues[StatValue.Health].baseValue = baseStats[StatTypes.Vitality].currentValue * conversionFactors.health * Lsf;
         statValues[StatValue.Health].maxValue = statValues[StatValue.Health].baseValue;
-        statValues[StatValue.Mana].baseValue = baseStats[StatTypes.Mana].currentValue * 10 * Lsf;
+        statValues[StatValue.Mana].baseValue = baseStats[StatTypes.Mana].currentValue * conversionFactors.mana * Lsf;
         statValues[StatValue.Mana].maxValue = statValues[StatValue.Mana].baseValue;
 
-        statValues[StatValue.BaseAttack].UpdateBaseValue(baseStats[StatTypes.Strength].currentValue * 5 * Lsf);
-        statValues[StatValue.DamageReduction].UpdateBaseValue(baseStats[StatTypes.Defense].currentValue * 2 * Lsf);
+        statValues[StatValue.BaseAttack].UpdateBaseValue(baseStats[StatTypes.Strength].currentValue * conversionFactors.baseAttack * Lsf);
+        statValues[StatValue.DamageReduction].UpdateBaseValue(baseStats[StatTypes.Defense].currentValue * conversionFactors.damageReduction * Lsf);
         statValues[StatValue.None].UpdateBaseValue(10);
 
         // EquipmentManager.Instance.ApplyAllEquipments();
@@ -246,7 +246,7 @@ public class StatController : MonoBehaviour
 
     private void SpawnDamageIndicator(float receivedDamage)
     {
-        var floatingText = Instantiate(damagePrefab, transform.position, Quaternion.identity, transform);
+        var floatingText = Instantiate(damagePrefab, textSpawn.position, Quaternion.identity, transform);
         floatingText.SetDirection(transform.eulerAngles.y > 200);
         floatingText.transform.forward = transform.forward;
         floatingText.floatingText.text = $"-{receivedDamage:N0}HP";
@@ -309,4 +309,13 @@ public class StatData
         currentValue = Mathf.Round(currentValue);
         baseValue = Mathf.Round(baseValue);
     }
+}
+
+[Serializable]
+public class StatConversionFactors
+{
+    public float health;
+    public float mana;
+    public float baseAttack;
+    public float damageReduction;
 }

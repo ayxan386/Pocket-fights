@@ -983,6 +983,11 @@ MonoBehaviour:
   <FreePoints>k__BackingField: 3
   <SkillPoints>k__BackingField: 1
   <SourceName>k__BackingField: Player
+  conversionFactors:
+    health: 15
+    mana: 10
+    baseAttack: 5
+    damageReduction: 2
   startingVitality: 4
   startingStrength: 4
   startingMana: 4
@@ -991,6 +996,7 @@ MonoBehaviour:
   statDebug: 
   damagePrefab: {fileID: 8339762821915644875, guid: 55eacaae333f49f4991b756644b68496,
     type: 3}
+  textSpawn: {fileID: 51443049420896151}
   <animationPosition>k__BackingField: {fileID: 8663734688596758236}
 --- !u!114 &5034688097186275782
 MonoBehaviour:

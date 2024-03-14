@@ -31,8 +31,10 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private bool randomSeed;
     [SerializeField] private int currentSeed;
 
-    [Header("Room specialty")] [SerializeField]
-    private List<BlockChance> specialtyBlockPrefabs;
+    [Header("Room specialty")]
+    [SerializeField] private List<BlockChance> specialtyBlockPrefabs;
+
+    [SerializeField] private int maxNumberOfSpecialtyBlocks = 2;
 
     [Range(1f, 2f)]
     [SerializeField] private float difficulty;
@@ -214,6 +216,7 @@ public class RoomManager : MonoBehaviour
     public void PlaceSpecialtyBlocks(float difficulty)
     {
         var numberOfSpecialtyBlocks = specialtyBlockSpawnPoints.Count * this.difficulty * Random.Range(0.3f, 0.8f);
+        numberOfSpecialtyBlocks = Mathf.Min(numberOfSpecialtyBlocks, maxNumberOfSpecialtyBlocks);
         var usedPoints = new HashSet<int>();
         for (var i = 0; i < numberOfSpecialtyBlocks; i++)
         {

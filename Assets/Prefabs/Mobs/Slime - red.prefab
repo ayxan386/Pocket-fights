@@ -52,6 +52,11 @@ PrefabInstance:
       propertyPath: startingStrength
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 7537575747951249551, guid: 627262a31811c094f92d65ef57ba3c47,
+        type: 3}
+      propertyPath: conversionFactors.damageReduction
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 7622230981891531222, guid: 627262a31811c094f92d65ef57ba3c47,
         type: 3}
       propertyPath: m_RootOrder

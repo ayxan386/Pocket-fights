@@ -65,13 +65,28 @@ public class SpawnerController : MonoBehaviour
 
                 if (!CheckIfThereMobsLeft())
                 {
-                    SpawnerFinished();
+                    StartCoroutine(SpawnBossMob());
                     yield break;
                 }
             }
 
             yield return new WaitForSeconds(data.spawnerRate);
         }
+    }
+
+    private IEnumerator SpawnBossMob()
+    {
+        if (data.bossMonster == null) yield break;
+
+        print("Waiting for count");
+        yield return new WaitUntil(() => spawnedMobs.Count(mob => mob.gameObject.activeSelf) < 3);
+        print("Spawning boss monster");
+        SpawnerFinished();
+        var pos = FindRandomPos(0);
+        var newMob = Instantiate(data.bossMonster, pos, Quaternion.identity, mobParent.transform);
+        var levelRange = FloorManager.Instance.GetRandomLevel();
+        newMob.SetLevel(Random.Range(levelRange.x, levelRange.y));
+        spawnedMobs.Add(newMob);
     }
 
     private void SpawnerFinished()

@@ -484,6 +484,7 @@ Transform:
   - {fileID: 3779885953339427246}
   - {fileID: 1843960479243015538}
   - {fileID: 3043827897674853797}
+  - {fileID: 2217267986087886564}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -533,6 +534,11 @@ MonoBehaviour:
   <FreePoints>k__BackingField: 0
   <SkillPoints>k__BackingField: 0
   <SourceName>k__BackingField: Slime
+  conversionFactors:
+    health: 18
+    mana: 10
+    baseAttack: 6
+    damageReduction: 3
   startingVitality: 6
   startingStrength: 3
   startingMana: 3
@@ -541,6 +547,7 @@ MonoBehaviour:
   statDebug: 
   damagePrefab: {fileID: 8339762821915644875, guid: 55eacaae333f49f4991b756644b68496,
     type: 3}
+  textSpawn: {fileID: 2217267986087886564}
   <animationPosition>k__BackingField: {fileID: 5311283937630544735}
 --- !u!114 &-2712961378370848657
 MonoBehaviour:
@@ -655,6 +662,37 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &7774282718615462181
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2217267986087886564}
+  m_Layer: 0
+  m_Name: TextSpawnPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2217267986087886564
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7774282718615462181}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7622230981891531222}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9100509022766243211
 GameObject:
   m_ObjectHideFlags: 0

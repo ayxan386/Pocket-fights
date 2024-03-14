@@ -23,10 +23,10 @@ public class Skill : MonoBehaviour
 
     public string Description => IsActive
         ? ($"{displayDetails.descriptionBase} \n Mana cost: {manaConsumption}" +
-           $"\n Current effect: {multiplier}"
+           $"\n Current effect: {multiplier} {displayDetails.effectSuffix}"
            + (CanUpgrade ? $"-> {effects[currentLevel + 1]} {displayDetails.effectSuffix}" : "")
            + (CanUpgrade ? $" \n Upgrade cost: x{UpgradeCost}" : "\n Max LVL"))
-        : $" {displayDetails.descriptionBase}\n Activation cost: x{ActivationPrice} \n Effect: x{effects[0]}";
+        : $" {displayDetails.descriptionBase}\n Activation cost: x{ActivationPrice} \n Effect: x{effects[0]} {displayDetails.effectSuffix}";
 
     public bool IsActive => currentLevel >= 0;
 
