@@ -1,0 +1,8 @@
+﻿Always check for related/new quests
+Don't rush to use all XP items as there is death penalty
+Sometimes sacrificing small amount of HP might be better option
+Enemies with "Elite" in their names, are A LOT more powerful
+Loot dropped depends on the total LVL of the enemies defeated
+HP and MP are restored each time player enters the dungeon
+MP is restored at the end of each battle
+Max value of base stats. are linked to the player level

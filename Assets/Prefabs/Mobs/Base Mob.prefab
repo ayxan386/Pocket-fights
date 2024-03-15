@@ -537,7 +537,7 @@ MonoBehaviour:
   conversionFactors:
     health: 18
     mana: 10
-    baseAttack: 6
+    baseAttack: 5
     damageReduction: 3
   startingVitality: 6
   startingStrength: 3

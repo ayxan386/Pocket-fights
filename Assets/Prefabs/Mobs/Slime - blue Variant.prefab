@@ -20,7 +20,7 @@ PrefabInstance:
     - target: {fileID: 1843960479243015538, guid: 627262a31811c094f92d65ef57ba3c47,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3779885953339427246, guid: 627262a31811c094f92d65ef57ba3c47,
         type: 3}
@@ -76,7 +76,7 @@ PrefabInstance:
     - target: {fileID: 7537575747951249551, guid: 627262a31811c094f92d65ef57ba3c47,
         type: 3}
       propertyPath: conversionFactors.damageReduction
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7622230981891531222, guid: 627262a31811c094f92d65ef57ba3c47,
         type: 3}
