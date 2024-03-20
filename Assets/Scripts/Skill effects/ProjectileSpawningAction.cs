@@ -15,7 +15,7 @@ public class ProjectileSpawningAction : BasicAction
             Quaternion.LookRotation(transformSource.forward),
             transformSource);
 
-        ins.MoveToward(target.transform);
+        ins.MoveToward(target.hitPosition);
 
         if (lifespan > 0)
         {

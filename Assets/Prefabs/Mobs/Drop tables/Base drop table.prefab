@@ -44,15 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69976e10e2854d2b80f07316669d9662, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items:
-  - {fileID: 3337002340432959719, guid: a9d91e0012ffb894e9a8453df44b62b2, type: 3}
-  - {fileID: 3337002340432959719, guid: 823bccf333fd9ea489541ba2f5a763b7, type: 3}
-  - {fileID: 3337002340432959719, guid: 1a17a373fd32a4c45ad6b7fe2ef8f07f, type: 3}
-  - {fileID: 3337002340432959719, guid: 265278530a20dfb49959bd09c43e5d46, type: 3}
-  - {fileID: 3337002340432959719, guid: 2518c1abb828511499dd59b3d4b896f2, type: 3}
-  - {fileID: 3337002340432959719, guid: 772efc3823a9d814fab274c8aee2476b, type: 3}
-  - {fileID: 3337002340432959719, guid: 9dff7272b35dd7a4f9d8b5514ffd6f4f, type: 3}
-  - {fileID: 3337002340432959719, guid: 0e991d8bf400920419915e705b8d1dcc, type: 3}
+  items: []
   entryIndex: 3
   chance: 0.05
   range: {x: 3, y: 11}
@@ -109,6 +101,11 @@ MonoBehaviour:
         type: 3}
       chance: 0.07
       count: {x: 1, y: 2}
+    - inWorldDisplayItem: {fileID: 0}
+      itemPrefab: {fileID: 3337002340432959719, guid: 1b25adb0ff689c540ae0b8f0a68962a6,
+        type: 3}
+      chance: 0.07
+      count: {x: 1, y: 2}
   - levelRange: {x: 5, y: 10}
     loots:
     - inWorldDisplayItem: {fileID: 0}
@@ -158,6 +155,11 @@ MonoBehaviour:
       count: {x: 1, y: 3}
     - inWorldDisplayItem: {fileID: 0}
       itemPrefab: {fileID: 3337002340432959719, guid: 9dff7272b35dd7a4f9d8b5514ffd6f4f,
+        type: 3}
+      chance: 0.10000001
+      count: {x: 1, y: 3}
+    - inWorldDisplayItem: {fileID: 0}
+      itemPrefab: {fileID: 3337002340432959719, guid: 0e991d8bf400920419915e705b8d1dcc,
         type: 3}
       chance: 0.10000001
       count: {x: 1, y: 3}
@@ -228,6 +230,11 @@ MonoBehaviour:
         type: 3}
       chance: 0.13000001
       count: {x: 1, y: 3}
+    - inWorldDisplayItem: {fileID: 0}
+      itemPrefab: {fileID: 3337002340432959719, guid: 1b25adb0ff689c540ae0b8f0a68962a6,
+        type: 3}
+      chance: 0.13000001
+      count: {x: 1, y: 3}
   - levelRange: {x: 15, y: 99}
     loots:
     - inWorldDisplayItem: {fileID: 0}
@@ -282,6 +289,11 @@ MonoBehaviour:
       count: {x: 2, y: 4}
     - inWorldDisplayItem: {fileID: 0}
       itemPrefab: {fileID: 3337002340432959719, guid: 0e991d8bf400920419915e705b8d1dcc,
+        type: 3}
+      chance: 0.15
+      count: {x: 2, y: 4}
+    - inWorldDisplayItem: {fileID: 0}
+      itemPrefab: {fileID: 3337002340432959719, guid: 1b25adb0ff689c540ae0b8f0a68962a6,
         type: 3}
       chance: 0.15
       count: {x: 2, y: 4}

@@ -33,6 +33,7 @@ public class StatController : MonoBehaviour
     [SerializeField] private Transform textSpawn;
 
     [field: SerializeField] public Transform animationPosition { get; set; }
+    [field: SerializeField] public Transform hitPosition { get; set; }
 
     private Dictionary<StatTypes, StatData> baseStats;
     private Dictionary<StatValue, StatData> statValues;

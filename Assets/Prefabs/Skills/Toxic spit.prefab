@@ -126,7 +126,7 @@ MonoBehaviour:
   usageEffects:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 7747204615425027509}
         m_TargetAssemblyTypeName: BasicAction, Assembly-CSharp
         m_MethodName: ApplyEffectToCaster
         m_Mode: 0
@@ -204,18 +204,6 @@ MonoBehaviour:
   usageEffects:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -7801569560349296450}
-        m_TargetAssemblyTypeName: UsageUnlockingAction, Assembly-CSharp
-        m_MethodName: ApplyEffectToCaster
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: -5830009548996150611}
         m_TargetAssemblyTypeName: StatusApplyingAction, Assembly-CSharp
         m_MethodName: ApplyEffectToTarget
@@ -240,11 +228,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: -7801569560349296450}
+        m_TargetAssemblyTypeName: UsageUnlockingAction, Assembly-CSharp
+        m_MethodName: ApplyEffectToCaster
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   objPrefab: {fileID: -5973424170998247769, guid: c2093e22d098f494aac2108fcc867940,
     type: 3}
   lifespan: 2
-  offset: {x: 0, y: 0, z: 0}
-  onCaster: 0
+  offset: {x: 0, y: 0, z: 0.878}
+  onCaster: 1
 --- !u!1 &3132824027497646759
 GameObject:
   m_ObjectHideFlags: 0

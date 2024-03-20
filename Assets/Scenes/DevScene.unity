@@ -1404,6 +1404,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2058620937158344094, guid: 9903153025cebd64d82db2065549fe87,
+        type: 3}
+      propertyPath: convesionFactor
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2076515678299333840, guid: 9903153025cebd64d82db2065549fe87,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3354,6 +3359,12 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6129988501100873894, guid: 9903153025cebd64d82db2065549fe87,
+        type: 3}
+      propertyPath: randomItem
+      value: 
+      objectReference: {fileID: 3337002340432959719, guid: 1b25adb0ff689c540ae0b8f0a68962a6,
+        type: 3}
     - target: {fileID: 6138863936648671084, guid: 9903153025cebd64d82db2065549fe87,
         type: 3}
       propertyPath: m_AnchorMax.y
