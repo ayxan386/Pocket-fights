@@ -10,19 +10,31 @@ namespace GameManagers
         [SerializeField] private SoundList soundSource;
 
         private AudioSource audioSource;
+        private bool isLastFinished = true;
 
         private void Awake()
         {
             audioSource = GetComponent<AudioSource>();
         }
 
-        private IEnumerator Start()
+        private void OnEnable()
+        {
+            StartCoroutine(ContinusMusic());
+        }
+
+        private IEnumerator ContinusMusic()
         {
             while (true)
             {
-                audioSource.clip = soundSource.GiveMeNext();
+                if (isLastFinished)
+                {
+                    audioSource.clip = soundSource.GiveMeNext();
+                    isLastFinished = false;
+                }
+
                 audioSource.Play();
-                yield return new WaitUntil(() => !audioSource.isPlaying);
+                yield return new WaitUntil(() => Application.isFocused && !audioSource.isPlaying);
+                isLastFinished = true;
             }
         }
     }

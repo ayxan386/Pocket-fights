@@ -26,6 +26,7 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
     [SerializeField] private Transform leftFoot, rightFoot;
     [SerializeField] private FadingSprite leftFootSprite, rightFootSprite;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private UiSoundEffect stepSfx;
 
 
     private CharacterController cc;
@@ -154,6 +155,7 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
         {
             Instantiate(leftFootSprite, hit.point + hit.normal * 0.05f,
                 Quaternion.LookRotation(origin.forward));
+            stepSfx.PlayWithoutCheck();
         }
     }
 

@@ -15,6 +15,10 @@ public class MobMovementController : MonoBehaviour
     [SerializeField] private Transform rayOrigin;
     [SerializeField] private bool drawGizmos;
 
+    [SerializeField] [Range(0, 1f)] private float sfxDensity = 0.1f;
+    [SerializeField] private int sfxRateLimiter;
+    [SerializeField] private UiSoundEffect motionSfx;
+
     [FormerlySerializedAs("currentTargetPoint")] [Header("Debug")] [SerializeField]
     private GridPoint finalTargetPoint;
 
@@ -70,6 +74,7 @@ public class MobMovementController : MonoBehaviour
 
 
             animator.SetBool("move", Navigate);
+            var rateCounter = 0;
             while (Navigate && gameObject.activeSelf)
             {
                 dir = path[currentIndex].pos - transform.position;
@@ -77,6 +82,11 @@ public class MobMovementController : MonoBehaviour
                 movementVector.y = 0;
                 rb.velocity = movementVector;
                 var distance = Vector3.Distance(path[currentIndex].pos, transform.position);
+
+                if(rateCounter == 0)
+                    TryAndMakeSound();
+
+                rateCounter = (rateCounter + 1) % sfxRateLimiter;
 
                 if (currentIndex + 1 >= path.Count)
                 {
@@ -93,6 +103,14 @@ public class MobMovementController : MonoBehaviour
 
                 yield return null;
             }
+        }
+    }
+
+    private void TryAndMakeSound()
+    {
+        if (Random.value <= sfxDensity)
+        {
+            motionSfx.PlayWithoutCheck();
         }
     }
 

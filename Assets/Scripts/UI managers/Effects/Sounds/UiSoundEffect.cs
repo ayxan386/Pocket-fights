@@ -26,4 +26,9 @@ public class UiSoundEffect : MonoBehaviour
             currentIndex = (currentIndex + 1) % clips.Length;
         }
     }
+
+    public void PlayWithoutCheck()
+    {
+        Play(audioSource);
+    }
 }

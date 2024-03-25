@@ -20,13 +20,28 @@ PrefabInstance:
     - target: {fileID: 1843960479243015538, guid: 627262a31811c094f92d65ef57ba3c47,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2021877622542959886, guid: 627262a31811c094f92d65ef57ba3c47,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 3779885953339427246, guid: 627262a31811c094f92d65ef57ba3c47,
         type: 3}
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 4802735566300260712, guid: 627262a31811c094f92d65ef57ba3c47,
+        type: 3}
+      propertyPath: clips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802735566300260712, guid: 627262a31811c094f92d65ef57ba3c47,
+        type: 3}
+      propertyPath: clips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 83997ac76714d5842a85c382e88f5241, type: 3}
     - target: {fileID: 5311283937630544735, guid: 627262a31811c094f92d65ef57ba3c47,
         type: 3}
       propertyPath: m_LocalPosition.z
