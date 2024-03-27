@@ -13,6 +13,13 @@ public class TwoOfKindManager : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera miniGameCamera;
     [SerializeField] private int maxPairChoice = 3;
 
+    [Header("SFX")]
+    [SerializeField] private AudioSource source;
+
+    [SerializeField] private AudioClip optionOpenedSound;
+    [SerializeField] private AudioClip pairMatchedSound;
+    [SerializeField] private AudioClip nonPairMatchedSound;
+
     private TwoOfKindOption prevOpennedOption;
     private bool isFirstOption = true;
 
@@ -48,7 +55,6 @@ public class TwoOfKindManager : MonoBehaviour
             return;
         }
 
-
         if (prevOpennedOption == otherOption) return;
 
         isFirstOption = true;
@@ -58,6 +64,8 @@ public class TwoOfKindManager : MonoBehaviour
         {
             prevOpennedOption.enabled = false;
             otherOption.enabled = false;
+
+            source.PlayOneShot(pairMatchedSound);
 
             if (prevOpennedOption.PrizeName.itemPrefab != null)
             {
@@ -70,12 +78,18 @@ public class TwoOfKindManager : MonoBehaviour
         {
             prevOpennedOption.Cover();
             otherOption.Cover();
+            source.PlayOneShot(nonPairMatchedSound);
         }
 
         if (!CanOpen())
         {
             EndGame();
         }
+    }
+
+    public void PlayUncoveringSfx()
+    {
+        source.PlayOneShot(optionOpenedSound);
     }
 
     public bool CanOpen()

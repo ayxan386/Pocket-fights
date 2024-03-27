@@ -24,6 +24,7 @@ public class TwoOfKindOption : MonoBehaviour
 
     public void Uncover()
     {
+        Manager.PlayUncoveringSfx();
         coverPivot.DORotate(targetRotation, rotationDuration).OnComplete(() => Manager.OptionOpened(this));
     }
 
