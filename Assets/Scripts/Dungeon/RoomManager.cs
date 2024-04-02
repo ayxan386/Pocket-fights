@@ -55,6 +55,7 @@ public class RoomManager : MonoBehaviour
     public Vector2Int GridSize => dimensions;
     public List<GridPoint> Grid => grid;
 
+    public bool IsActive => isActive;
     public bool CanExit { get; private set; } = true;
 
     private void Start()

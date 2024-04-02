@@ -108,7 +108,7 @@ public class MobMovementController : MonoBehaviour
 
     private void TryAndMakeSound()
     {
-        if (Random.value <= sfxDensity)
+        if (room.IsActive && Random.value <= sfxDensity)
         {
             motionSfx.PlayWithoutCheck();
         }
