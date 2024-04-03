@@ -6,11 +6,18 @@ using UnityEngine.SceneManagement;
 public class PlayerCombatInitiation : MonoBehaviour
 {
     [SerializeField] private Material colorSource;
+    [SerializeField] private Transform detectionBody;
     [SerializeField] private GameObject wholeScene;
     [SerializeField] private float checkRadius;
     [SerializeField] private LayerMask mobLayer;
     [SerializeField] private List<MobController> mobsToActivate;
     [SerializeField] private GameObject unloadingScreen;
+
+    [Header("Detection LVL co-relation")]
+    [SerializeField] private float conversionFactor;
+
+    [SerializeField] private float radiusIncrementRate = 1.01f;
+    [SerializeField] private float initialCheckRadius;
 
     public bool IsCombatScene;
     private Coroutine initiationCorr;
@@ -29,6 +36,12 @@ public class PlayerCombatInitiation : MonoBehaviour
         color.a = 0;
         colorSource.color = color;
         StartCoroutine(MobCheck());
+        EventManager.OnPlayerCoreUpdate += OnPlayerCoreUpdate;
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.OnPlayerCoreUpdate -= OnPlayerCoreUpdate;
     }
 
     private IEnumerator MobCheck()
@@ -149,6 +162,21 @@ public class PlayerCombatInitiation : MonoBehaviour
         DeactivateAllMobs();
         IsCombatScene = true;
         SceneManager.LoadScene("CombatScene", LoadSceneMode.Additive);
+    }
+
+    private void OnPlayerCoreUpdate(int obj)
+    {
+        checkRadius = initialCheckRadius * Mathf.Pow(radiusIncrementRate, PlayerInputController.Instance.Stats.Level);
+        UpdateDetectionBody();
+    }
+
+    [ContextMenu("Update detection body")]
+    public void UpdateDetectionBody()
+    {
+        var scale = detectionBody.localScale;
+        scale.x = checkRadius * conversionFactor;
+        scale.z = checkRadius * conversionFactor;
+        detectionBody.localScale = scale;
     }
 
     private void OnDrawGizmosSelected()
