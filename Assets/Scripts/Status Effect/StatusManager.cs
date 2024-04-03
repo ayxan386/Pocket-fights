@@ -41,9 +41,10 @@ public class StatusManager : MonoBehaviour
     }
 
 
-    private void OnPlayerVictory(bool obj)
+    private void OnPlayerVictory(bool isVictor)
     {
         if (!gameObject.activeSelf) return;
+        print($"Player victory triggered {isVictor}");
         foreach (var statusEffect in statusEffects)
         {
             RemoveStatusEffect(statusEffect);
@@ -167,6 +168,8 @@ public class StatusManager : MonoBehaviour
     private void RemoveStatusEffect(StatEffect effect)
     {
         if (effect == null || !statusEffects.Contains(effect)) return;
+
+        print($"Removing effect {effect.displayDetails.displayName}");
 
         RelatedStats.BoostStatValue(effect.affectedValue, -effect.CurrentEffect());
         RelatedStats.UpdateOverallDisplay();

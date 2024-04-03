@@ -120,9 +120,18 @@ public class CombatModeGameManager : MonoBehaviour
         {
             IsCombatGoing = false;
             FloorManager.Instance.PenalizePlayerDeath();
+            EventManager.OnPlayerVictory?.Invoke(false);
+            ResetPlayerStats(); 
             EndOfCombat();
             GlobalGameManager.Instance.EndDungeon();
         }
+    }
+
+    private void ResetPlayerStats()
+    {
+        var statController = PlayerInputController.Instance.Stats;
+        statController.UpdateStatValue(StatValue.Mana, (int)statController.GetStatValue(StatValue.Mana).maxValue);
+        statController.UpdateStatValue(StatValue.Health, (int)statController.GetStatValue(StatValue.Health).maxValue);
     }
 
     public void EndOfCombat()

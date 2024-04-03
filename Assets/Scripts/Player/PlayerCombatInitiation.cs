@@ -112,7 +112,7 @@ public class PlayerCombatInitiation : MonoBehaviour
         mobs = new List<MobController>();
         foreach (var mob in allMobs)
         {
-            if (mob.transform.TryGetComponent(out MobController controller))
+            if (mob.transform.TryGetComponent(out MobController controller) && mobs.Count < 6)
             {
                 mobs.Add(controller);
             }
