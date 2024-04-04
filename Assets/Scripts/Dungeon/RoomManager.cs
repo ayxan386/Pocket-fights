@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -155,10 +156,15 @@ public class RoomManager : MonoBehaviour
     {
         if (!showGizmos) return;
 
-        foreach (var gridPoint in grid)
+        // foreach (var gridPoint in grid)
+        // {
+        //     Gizmos.color = gridPoint.isObstructed ? Color.red : Color.cyan;
+        //     Gizmos.DrawSphere(gridPoint.pos, 0.3f);
+        // }
+        Gizmos.color = Color.green;
+        foreach (var pos in decorPosition)
         {
-            Gizmos.color = gridPoint.isObstructed ? Color.red : Color.cyan;
-            Gizmos.DrawSphere(gridPoint.pos, 0.3f);
+            Gizmos.DrawSphere(pos, 0.3f);
         }
     }
 
@@ -182,6 +188,7 @@ public class RoomManager : MonoBehaviour
             }
         }
     }
+
 
     private void FindAllHits()
     {
