@@ -146,6 +146,7 @@ public class PlayerCombatInitiation : MonoBehaviour
 
     private IEnumerator WaitThenLoad()
     {
+        yield return new WaitUntil(() => !PlayerInputController.Instance.Stats.UpdateInProcess);
         DataManager.Instance.SaveEventTrigger("Combat mode initiator");
         unloadingScreen.SetActive(true);
         EventManager.OnCombatSceneLoading?.Invoke(false);

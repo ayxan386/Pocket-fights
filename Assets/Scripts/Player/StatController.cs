@@ -42,6 +42,8 @@ public class StatController : MonoBehaviour
     public BaseEntityCallbacks AttachedEntity { get; set; }
 
     public Animator Animator { get; set; }
+    
+    public bool UpdateInProcess { get; set; }
 
     private void Awake()
     {

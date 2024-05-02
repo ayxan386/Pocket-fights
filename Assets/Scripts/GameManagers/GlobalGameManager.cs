@@ -50,6 +50,7 @@ public class GlobalGameManager : MonoBehaviour
 
     private IEnumerator FloorComplete()
     {
+        yield return new WaitUntil(() => !PlayerInputController.Instance.Stats.UpdateInProcess);
         DataManager.Instance.SaveEventTrigger("Global game manager FloorComplete");
         yield return new WaitForSeconds(1.5f);
         PlayerPrefs.SetInt(CurrentFloor, CurrentFloorNumber);
@@ -59,6 +60,7 @@ public class GlobalGameManager : MonoBehaviour
 
     private IEnumerator DungeonComplete()
     {
+        yield return new WaitUntil(() => !PlayerInputController.Instance.Stats.UpdateInProcess);
         DataManager.Instance.SaveEventTrigger("Global game manager Dungeon complete");
         yield return new WaitForSeconds(1.5f);
         PlayerPrefs.DeleteKey(CurrentFloor);

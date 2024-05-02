@@ -45,12 +45,14 @@ public class StatusManager : MonoBehaviour
     {
         if (!gameObject.activeSelf) return;
         print($"Player victory triggered {isVictor}");
+        RelatedStats.UpdateInProcess = true;
         foreach (var statusEffect in statusEffects)
         {
             RemoveStatusEffect(statusEffect);
         }
 
         RemoveUselessEffects();
+        RelatedStats.UpdateInProcess = false;
     }
 
     private void OnBaseStatUpdate(float obj)
