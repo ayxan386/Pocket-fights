@@ -149,8 +149,8 @@ public class PlayerCombatInitiation : MonoBehaviour
         yield return new WaitUntil(() => !PlayerInputController.Instance.Stats.UpdateInProcess);
         DataManager.Instance.SaveEventTrigger("Combat mode initiator");
         unloadingScreen.SetActive(true);
-        EventManager.OnCombatSceneLoading?.Invoke(false);
         wholeScene.SetActive(true);
+        EventManager.OnCombatSceneLoading?.Invoke(false);
         yield return new WaitForSeconds(0.5f);
         unloadingScreen.SetActive(false);
         mobsToActivate.ForEach(mob => mob.gameObject.SetActive(true));

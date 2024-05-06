@@ -294,6 +294,7 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
 public class PlayerState
 {
     public bool isLookingAtQuests;
+    public bool isDead;
 }
 
 [Serializable]

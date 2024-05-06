@@ -94,15 +94,17 @@ public class CombatModeGameManager : MonoBehaviour
 
     private IEnumerator AttackPlayer()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.0f);
         if (!IsCombatGoing) yield break;
         foreach (var mobController in mobsInCombat)
         {
             if (!mobController.IsAlive()) continue;
             mobController.AttackPlayer();
             yield return new WaitUntil(() => mobController.IsDoneAttack);
-            yield return new WaitForSeconds(1.4f);
+            yield return new WaitForSeconds(1.0f);
             CheckPlayerHealth();
+            if(PlayerInputController.Instance.State.isDead)
+                break;
         }
 
         IsPlayerTurn = true;
@@ -120,10 +122,10 @@ public class CombatModeGameManager : MonoBehaviour
         {
             IsCombatGoing = false;
             FloorManager.Instance.PenalizePlayerDeath();
+            player.State.isDead = true;
             EventManager.OnPlayerVictory?.Invoke(false);
             ResetPlayerStats(); 
             EndOfCombat();
-            GlobalGameManager.Instance.EndDungeon();
         }
     }
 

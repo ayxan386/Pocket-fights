@@ -21,12 +21,22 @@ public class GlobalGameManager : MonoBehaviour
     private void Start()
     {
         EventManager.OnExitPortalDetected += OnExitPortalDetected;
+        EventManager.OnCombatSceneLoading += OnCombatSceneLoading;
         CurrentFloorNumber = PlayerPrefs.GetInt(CurrentFloor, 0);
     }
+
 
     private void OnDestroy()
     {
         EventManager.OnExitPortalDetected -= OnExitPortalDetected;
+        EventManager.OnCombatSceneLoading -= OnCombatSceneLoading;
+    }
+
+
+    private void OnCombatSceneLoading(bool isLoaded)
+    {
+        if (PlayerInputController.Instance.State.isDead)
+            EndDungeon();
     }
 
     private void OnExitPortalDetected(bool isExitPortal)
@@ -61,6 +71,7 @@ public class GlobalGameManager : MonoBehaviour
     private IEnumerator DungeonComplete()
     {
         yield return new WaitUntil(() => !PlayerInputController.Instance.Stats.UpdateInProcess);
+        PlayerInputController.Instance.State.isDead = true;
         DataManager.Instance.SaveEventTrigger("Global game manager Dungeon complete");
         yield return new WaitForSeconds(1.5f);
         PlayerPrefs.DeleteKey(CurrentFloor);
