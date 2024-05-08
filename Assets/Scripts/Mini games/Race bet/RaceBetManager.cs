@@ -148,9 +148,10 @@ public class RaceBetManager : MonoBehaviour
 
     private void PlayerVictory()
     {
+        var awardAmount = (int)(bettingOptions[selectedChoice].returnRate * betAmount);
         awardElements.SetActive(true);
-        awardText.text = "You won";
-        InventoryController.Instance.AddGold((int)(bettingOptions[selectedChoice].returnRate * betAmount));
+        awardText.text = $"You won {awardAmount} gold";
+        InventoryController.Instance.AddGold(awardAmount);
     }
 }
 
