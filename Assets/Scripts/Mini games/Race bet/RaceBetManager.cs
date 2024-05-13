@@ -73,6 +73,7 @@ public class RaceBetManager : MonoBehaviour
         miniGameCamera.Priority = 15;
         FloorManager.Instance.ToggleFollowCamera(false);
         PlayerInputController.Instance.playerInput.DeactivateInput();
+        EventManager.OnUiReduced?.Invoke(true);
         choiceUIElements.SetActive(true);
     }
 
@@ -81,6 +82,7 @@ public class RaceBetManager : MonoBehaviour
         miniGameCamera.Priority = 5;
         FloorManager.Instance.ToggleFollowCamera(true);
         PlayerInputController.Instance.playerInput.ActivateInput();
+        EventManager.OnUiReduced?.Invoke(false);
         choiceUIElements.SetActive(false);
         awardElements.SetActive(false);
     }

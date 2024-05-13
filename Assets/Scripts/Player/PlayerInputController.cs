@@ -86,6 +86,7 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
     }
 
 
+
     private void OnDestroy()
     {
         EventManager.OnCombatSceneLoading -= OnCombatSceneLoading;
@@ -158,7 +159,6 @@ public class PlayerInputController : MonoBehaviour, BaseEntityCallbacks
             stepSfx.PlayWithoutCheck();
         }
     }
-
     private void OnPlayerTurnEnd(bool obj)
     {
         statController.RegenMana();

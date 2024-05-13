@@ -16,10 +16,28 @@ public class DetailDisplayManager : MonoBehaviour
         Instance = this;
     }
 
+    private void Start()
+    {
+        EventManager.OnUiReduced += OnUiReduced;
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.OnUiReduced -= OnUiReduced;
+    }
+
+    private void OnUiReduced(bool turnOff)
+    {
+        foreach (var display in displays)
+        {
+            display.gameObject.SetActive(!turnOff);
+        }
+    }
+
     public void TurnOff()
     {
         lastIndex = 0;
-        
+
         foreach (var display in displays)
         {
             display.TurnOff();

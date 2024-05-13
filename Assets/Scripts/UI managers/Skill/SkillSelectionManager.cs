@@ -10,6 +10,8 @@ public class SkillSelectionManager : MonoBehaviour
     [SerializeField] private List<SkillSelectionDisplay> skillDisplays;
     [SerializeField] private Sprite emptySlotIcon;
     [SerializeField] private bool displayManaCost;
+    [SerializeField] private bool reactToUiReduction;
+    [SerializeField] private GameObject wholeRef;
 
     public IEnumerator Start()
     {
@@ -20,6 +22,7 @@ public class SkillSelectionManager : MonoBehaviour
 
         EventManager.OnSkillUsedByPlayer += OnSkillUsedByPlayer;
         EventManager.OnSkillDisplayUpdate += OnSkillDisplayUpdate;
+        EventManager.OnUiReduced += OnUiReduced;
 
         UpdateUi();
     }
@@ -32,6 +35,7 @@ public class SkillSelectionManager : MonoBehaviour
 
         EventManager.OnSkillUsedByPlayer -= OnSkillUsedByPlayer;
         EventManager.OnSkillDisplayUpdate -= OnSkillDisplayUpdate;
+        EventManager.OnUiReduced -= OnUiReduced;
     }
 
     private void OnSkillUsedByPlayer(Skill usedSkill, bool isUsedByPlayer)
@@ -47,6 +51,12 @@ public class SkillSelectionManager : MonoBehaviour
         {
             UpdateUi();
         }
+    }
+
+    private void OnUiReduced(bool turnoff)
+    {
+        if (!reactToUiReduction) return;  
+        wholeRef.SetActive(!turnoff);
     }
 
     private void OnSkillDisplayUpdate(bool obj)

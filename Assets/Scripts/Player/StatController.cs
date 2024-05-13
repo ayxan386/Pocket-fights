@@ -30,6 +30,7 @@ public class StatController : MonoBehaviour
 
     [Header("Receive attack VFX")]
     [SerializeField] private FloatingTextManager damagePrefab;
+
     [SerializeField] private Transform textSpawn;
 
     [field: SerializeField] public Transform animationPosition { get; set; }
@@ -42,7 +43,7 @@ public class StatController : MonoBehaviour
     public BaseEntityCallbacks AttachedEntity { get; set; }
 
     public Animator Animator { get; set; }
-    
+
     public bool UpdateInProcess { get; set; }
 
     private void Awake()
@@ -59,6 +60,16 @@ public class StatController : MonoBehaviour
         StatusManager.RelatedStats = this;
         statValues = new Dictionary<StatValue, StatData>();
         InitiateStatValues();
+    }
+
+    private void Start()
+    {
+        EventManager.OnUiReduced += OnUiReduced;
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.OnUiReduced -= OnUiReduced;
     }
 
     private void InitiateStatValues()
@@ -81,13 +92,16 @@ public class StatController : MonoBehaviour
 
     private void CalculateStatValues()
     {
-        statValues[StatValue.Health].baseValue = baseStats[StatTypes.Vitality].currentValue * conversionFactors.health * Lsf;
+        statValues[StatValue.Health].baseValue =
+            baseStats[StatTypes.Vitality].currentValue * conversionFactors.health * Lsf;
         statValues[StatValue.Health].maxValue = statValues[StatValue.Health].baseValue;
         statValues[StatValue.Mana].baseValue = baseStats[StatTypes.Mana].currentValue * conversionFactors.mana * Lsf;
         statValues[StatValue.Mana].maxValue = statValues[StatValue.Mana].baseValue;
 
-        statValues[StatValue.BaseAttack].UpdateBaseValue(baseStats[StatTypes.Strength].currentValue * conversionFactors.baseAttack * Lsf);
-        statValues[StatValue.DamageReduction].UpdateBaseValue(baseStats[StatTypes.Defense].currentValue * conversionFactors.damageReduction * Lsf);
+        statValues[StatValue.BaseAttack]
+            .UpdateBaseValue(baseStats[StatTypes.Strength].currentValue * conversionFactors.baseAttack * Lsf);
+        statValues[StatValue.DamageReduction]
+            .UpdateBaseValue(baseStats[StatTypes.Defense].currentValue * conversionFactors.damageReduction * Lsf);
         statValues[StatValue.None].UpdateBaseValue(10);
 
         // EquipmentManager.Instance.ApplyAllEquipments();
@@ -253,6 +267,17 @@ public class StatController : MonoBehaviour
         floatingText.SetDirection(transform.eulerAngles.y > 200);
         floatingText.transform.forward = transform.forward;
         floatingText.floatingText.text = $"-{receivedDamage:N0}HP";
+    }
+
+    public void UpdateUiState(bool newState)
+    {
+        healthBarIndicator.gameObject.SetActive(newState);
+        manaBarIndicator.gameObject.SetActive(newState);
+    }
+
+    private void OnUiReduced(bool turnOff)
+    {
+        UpdateUiState(!turnOff);
     }
 }
 
