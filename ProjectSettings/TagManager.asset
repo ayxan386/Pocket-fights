@@ -8,6 +8,7 @@ TagManager:
   - PlayerHealthBar
   - PlayerManaBar
   - MobParent
+  - Sun
   layers:
   - Default
   - TransparentFX

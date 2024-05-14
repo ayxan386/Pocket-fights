@@ -41,6 +41,8 @@ public class MobDescriptionDisplay : MonoBehaviour
             if (loot.itemPrefab.type == ItemType.SkillFragment) continue;
             dropListItems[k].gameObject.SetActive(true);
             dropListItems[k++].sprite = loot.itemPrefab.icon;
+
+            if (k >= dropListItems.Length) break;
         }
 
         for (int i = k; i < dropListItems.Length; i++)

@@ -156,14 +156,16 @@ public class CombatModeGameManager : MonoBehaviour
 
     private IEnumerator MobDeath(MobController deadMob)
     {
-        yield return new WaitForSeconds(0.5f);
-        deadMob.gameObject.SetActive(false);
-        FindNextSelectedMobs();
-        EventManager.OnMobDeath?.Invoke(deadMob);
-        if (mobsInCombat.TrueForAll(mob => !mob.isActiveAndEnabled))
+        if (mobsInCombat.Count(mob => !mob.isActiveAndEnabled) == mobsInCombat.Count - 1)
         {
             PlayerVictory();
         }
+        
+        FindNextSelectedMobs();
+        yield return new WaitForSeconds(0.5f);
+        deadMob.gameObject.SetActive(false);
+        EventManager.OnMobDeath?.Invoke(deadMob);
+   
     }
 
     private void OnChangeSelection(float dirF)
@@ -214,7 +216,7 @@ public class CombatModeGameManager : MonoBehaviour
         EventManager.OnPlayerVictory?.Invoke(true);
 
         var allDrops = mobsInCombat.ConvertAll(mob => mob.PossibleLoots);
-        var rollBoost = mobsInCombat.Sum(mob => mob.Stats.Level) * rollBoostPerLevel / 100 + 1;
+        var rollBoost = mobsInCombat.Sum(mob => mob.Stats.Level * mob.RollBoost) * rollBoostPerLevel / 100 + 1;
         var statController = PlayerInputController.Instance.Stats;
         statController.UpdateStatValue(StatValue.Mana, (int)statController.GetStatValue(StatValue.Mana).maxValue);
         var generatedLoot = LootManager.GenerateLoot(allDrops, rollBoost);

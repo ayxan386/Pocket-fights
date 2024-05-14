@@ -20,6 +20,8 @@ public class MobController : MonoBehaviour, BaseEntityCallbacks
     [SerializeField] private MobMovementController movementController;
 
     [SerializeField] private float statScalingFactor;
+    [field: SerializeField] public int RollBoost { get; set; } = 1;
+
     private int randomAction;
 
     public Guid Id { get; private set; }
@@ -30,6 +32,8 @@ public class MobController : MonoBehaviour, BaseEntityCallbacks
             .loots;
 
     public StatController Stats => statController;
+
+
     public bool IsDoneAttack;
 
     private IEnumerator Start()

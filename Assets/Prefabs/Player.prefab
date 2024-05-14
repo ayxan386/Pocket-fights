@@ -823,6 +823,7 @@ Transform:
   - {fileID: 2262936717408233551}
   - {fileID: 3761831675952707294}
   - {fileID: 4127082085994552028}
+  - {fileID: 6338631729928694750}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2102,6 +2103,52 @@ Transform:
   m_Father: {fileID: 51443049420896151}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2933730143325984282
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6338631729928694750}
+  - component: {fileID: 964037821405223226}
+  m_Layer: 0
+  m_Name: Sun rotation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6338631729928694750
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2933730143325984282}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.88, y: -0.94933337, z: -137.72}
+  m_LocalScale: {x: 1.3333334, y: 1.3333334, z: 1.3333334}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 51443049420896151}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &964037821405223226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2933730143325984282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3862ede936375bb4d817a9f7a74d7ba6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fullRotationTime: 15
+  lightTagName: Sun
 --- !u!1 &3231682432258731594
 GameObject:
   m_ObjectHideFlags: 0
@@ -27599,6 +27646,11 @@ PrefabInstance:
         type: 3}
       propertyPath: offset.y
       value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1117245306228900475, guid: ab9902901cce7b64ab6ac08888f0d628,
+        type: 3}
+      propertyPath: delayNext
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1117245306228900475, guid: ab9902901cce7b64ab6ac08888f0d628,
         type: 3}

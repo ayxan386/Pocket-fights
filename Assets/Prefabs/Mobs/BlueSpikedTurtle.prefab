@@ -1277,7 +1277,7 @@ PrefabInstance:
     - target: {fileID: 1180233049798717352, guid: 627262a31811c094f92d65ef57ba3c47,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1180233049798717352, guid: 627262a31811c094f92d65ef57ba3c47,
         type: 3}
@@ -1412,6 +1412,11 @@ PrefabInstance:
     - target: {fileID: 7622900003042665912, guid: 627262a31811c094f92d65ef57ba3c47,
         type: 3}
       propertyPath: possibleDrops.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7622900003042665912, guid: 627262a31811c094f92d65ef57ba3c47,
+        type: 3}
+      propertyPath: <RollBoost>k__BackingField
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7622900003042665912, guid: 627262a31811c094f92d65ef57ba3c47,
