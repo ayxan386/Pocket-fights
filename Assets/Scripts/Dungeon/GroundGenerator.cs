@@ -15,9 +15,6 @@ public class GroundGenerator : MonoBehaviour
 
     [SerializeField] private List<BlockChance> blocks;
     [SerializeField] private List<string> floorBlocks;
-    [SerializeField] private List<TopBottomPairs> topBottomPairsList;
-    [SerializeField] private LayerMask obstructionLayer;
-    [SerializeField] private float detectionRadius;
 
     [Header("Game of life params")] [SerializeField]
     private string joiningCellName = "water";
@@ -43,10 +40,10 @@ public class GroundGenerator : MonoBehaviour
                 pos.z += sizeOfCell.z * y;
                 var block = GetRandomBlock(pos.x, pos.z, blocks);
 
-                // var newBlock = PrefabUtility.InstantiatePrefab(block.block) as GameObject;
-                // newBlock.transform.position = pos;
-                // newBlock.transform.rotation = Quaternion.identity;
-                // newBlock.transform.SetParent(floorGenerationPoint);
+                var newBlock = PrefabUtility.InstantiatePrefab(block.block) as GameObject;
+                newBlock.transform.position = pos;
+                newBlock.transform.rotation = Quaternion.identity;
+                newBlock.transform.SetParent(floorGenerationPoint);
 
                 floorBlocks.Add(block.type);
             }
@@ -66,12 +63,12 @@ public class GroundGenerator : MonoBehaviour
                 pos.z += sizeOfCell.z * y;
                 pos.y += 1;
                 var bottomLayer = floorBlocks[GetIndex(y, x)];
-                var pair = topBottomPairsList.Find(pair => pair.bottomName == bottomLayer);
+                var pair = blocks.Find(pair => pair.type == bottomLayer);
 
-                // var newBlock = PrefabUtility.InstantiatePrefab(pair.top) as GameObject;
-                // newBlock.transform.position = pos;
-                // newBlock.transform.rotation = Quaternion.identity;
-                // newBlock.transform.SetParent(capLayer);
+                var newBlock = PrefabUtility.InstantiatePrefab(pair.block) as GameObject;
+                newBlock.transform.position = pos;
+                newBlock.transform.rotation = Quaternion.identity;
+                newBlock.transform.SetParent(capLayer);
             }
         }
     }
@@ -141,7 +138,6 @@ public class GroundGenerator : MonoBehaviour
             }
         }
 
-        print($"Chance {chance}");
         return null;
     }
 }
