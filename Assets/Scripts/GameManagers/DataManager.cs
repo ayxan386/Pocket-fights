@@ -107,6 +107,7 @@ public class DataManager : MonoBehaviour
         if (!File.Exists(basePath)) return;
 
         var allJson = File.ReadAllText(basePath);
+        if(allJson.Length <= 1) return;
         var inventoryData = JsonUtility.FromJson<InventoryData>(allJson);
         print($"Loaded player inventory: inventory size {inventoryData.ownedItems.Count}");
         InventoryController.Instance.LoadData(inventoryData);
@@ -119,6 +120,7 @@ public class DataManager : MonoBehaviour
         if (!File.Exists(basePath)) return;
 
         var allJson = File.ReadAllText(basePath);
+        if(allJson.Length <= 1) return;
         var statSaveData = JsonUtility.FromJson<StatSaveData>(allJson);
         print($"Loaded player stats: lvl {statSaveData.level}");
         if (statSaveData.sourceName == "Player")
@@ -135,6 +137,7 @@ public class DataManager : MonoBehaviour
         if (!File.Exists(basePath)) return;
 
         var allJson = File.ReadAllText(basePath);
+        if(allJson.Length <= 1) return;
         var inventoryData = JsonUtility.FromJson<InventoryData>(allJson);
         EquipmentManager.Instance.LoadData(inventoryData);
     }
@@ -146,6 +149,7 @@ public class DataManager : MonoBehaviour
         if (!File.Exists(basePath)) return;
 
         var allJson = File.ReadAllText(basePath);
+        if(allJson.Length <= 1) return;
         var data = JsonUtility.FromJson<SkillSaveDataWrapper>(allJson);
         PlayerActionManager.Instance.LoadData(data);
     }
@@ -172,6 +176,11 @@ public class DataManager : MonoBehaviour
         }
 
         var allJson = File.ReadAllText(basePath);
+        if (allJson.Length <= 1)
+        {
+            QuestManager.Instance.WrappedData = new QuestDataWrapper();
+            return;
+        }
         var data = JsonUtility.FromJson<QuestDataWrapper>(allJson);
         QuestManager.Instance.WrappedData = data;
     }
@@ -201,6 +210,16 @@ public class DataManager : MonoBehaviour
         SaveEquippment();
         SaveSkills();
         SaveQuests();
+    }
+
+    [ContextMenu("Delete all data")]
+    public void DeleteAllData()
+    {
+        File.Delete(PreSaveProcess("quests_"));
+        File.Delete(PreSaveProcess("skills_") );
+        File.Delete(PreSaveProcess("equipment_") );
+        File.Delete(PreSaveProcess("inventory") );
+        File.Delete(PreSaveProcess("player_stats_") );
     }
 }
 

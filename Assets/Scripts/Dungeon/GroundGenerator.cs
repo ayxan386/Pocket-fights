@@ -40,10 +40,10 @@ public class GroundGenerator : MonoBehaviour
                 pos.z += sizeOfCell.z * y;
                 var block = GetRandomBlock(pos.x, pos.z, blocks);
 
-                var newBlock = PrefabUtility.InstantiatePrefab(block.block) as GameObject;
-                newBlock.transform.position = pos;
-                newBlock.transform.rotation = Quaternion.identity;
-                newBlock.transform.SetParent(floorGenerationPoint);
+                // var newBlock = PrefabUtility.InstantiatePrefab(block.block) as GameObject;
+                // newBlock.transform.position = pos;
+                // newBlock.transform.rotation = Quaternion.identity;
+                // newBlock.transform.SetParent(floorGenerationPoint);
 
                 floorBlocks.Add(block.type);
             }
@@ -65,10 +65,10 @@ public class GroundGenerator : MonoBehaviour
                 var bottomLayer = floorBlocks[GetIndex(y, x)];
                 var pair = blocks.Find(pair => pair.type == bottomLayer);
 
-                var newBlock = PrefabUtility.InstantiatePrefab(pair.block) as GameObject;
-                newBlock.transform.position = pos;
-                newBlock.transform.rotation = Quaternion.identity;
-                newBlock.transform.SetParent(capLayer);
+                // var newBlock = PrefabUtility.InstantiatePrefab(pair.block) as GameObject;
+                // newBlock.transform.position = pos;
+                // newBlock.transform.rotation = Quaternion.identity;
+                // newBlock.transform.SetParent(capLayer);
             }
         }
     }
